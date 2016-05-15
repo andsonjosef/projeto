@@ -88,7 +88,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 		 try {
 				
 				
-			 
+		 
 		 String cpf1 = "";
 			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 			    .prepareStatement("select cpf from loja.Cliente ");
@@ -129,14 +129,13 @@ public class ClienteDaoJdbc implements ClienteDao {
 			  }
 	}
 		 
-	public void BuscarCliente(Cliente c) {
+	public void BuscarCliente(Cliente c, String pesq) {
 		
-	    
 		  try {
 		    
 		PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 				 .prepareStatement("SELECT * FROM loja.cliente WHERE nome like ?");
-	   stmt.setString(1,c.getNome());
+	   stmt.setString(1,pesq);
   ResultSet rs = stmt.executeQuery();
   
    while(rs.next())

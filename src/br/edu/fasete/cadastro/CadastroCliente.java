@@ -40,8 +40,8 @@ public class CadastroCliente implements InterfaceCadastroCliente {
 	}
 
 	@Override
-	public void BuscarCliente(Cliente c) {
-		clienteDao.BuscarCliente(c);
+	public void BuscarCliente(Cliente c, String pesq) {
+		clienteDao.BuscarCliente(c,pesq);
 
 	}
 

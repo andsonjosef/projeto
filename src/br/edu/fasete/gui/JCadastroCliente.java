@@ -162,9 +162,9 @@ public class JCadastroCliente extends JInternalFrame {
 				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-
+String pesq = "";
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarCliente(c);
+				Fachada.getInstancia().BuscarCliente(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -420,6 +420,7 @@ lblestadoobri.setVisible(false);
 
 }if(enderecoField.getText().isEmpty()){
 lblenderecoobri.setVisible(true);
+
 }else{
 lblenderecoobri.setVisible(false);
 
@@ -496,13 +497,6 @@ if(ehNumero == false){
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								
-					
-					
-						
-						
-						
-						
 					}
 				});
 				
@@ -525,6 +519,7 @@ if(ehNumero == false){
 				JButton btnLimparTela = new JButton("Limpar tela");
 				btnLimparTela.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						JOptionPane.showMessageDialog(null, "teste");
 						nomeField.setText("");
 						cpfField.setText("");
 						rgField.setText("");
@@ -540,16 +535,6 @@ if(ehNumero == false){
 				btnLimparTela.setBounds(417, 537, 124, 34);
 				cadast.add(btnLimparTela);
 		
-	
-		
-		
-		
-		
-	
-		
-		
-		
-		
 		JPanel exibirpanel = new JPanel();
 		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
 		exibirpanel.setLayout(null);
@@ -559,9 +544,9 @@ if(ehNumero == false){
 			public void actionPerformed(ActionEvent e) {
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-
+String pesq = "";
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarCliente(c);
+				Fachada.getInstancia().BuscarCliente(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -730,11 +715,13 @@ if(ehNumero == false){
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//c.setCPF(Integer.parseInt((pesquisarField.getText())));
-				c.setNome(pesquisarField.getText());
-				Fachada.getInstancia().BuscarCliente(c);
-				nomeField2.setText(c.getNome());
+				
+				String pesq;
+				pesq = pesquisarField.getText();
+				Fachada.getInstancia().BuscarCliente(c,pesq);
+				
 				cpfField2.setText(""+c.getCPF());
+				nomeField2.setText(c.getNome());
 				rgField2.setText(c.getRG());
 				cidadeField2.setText(c.getCidade());
 				estadoField2.setText(c.getEstado());
