@@ -13,6 +13,7 @@ public interface ClienteDao {
 	 public void ExcluirCliente(Cliente c);
 	 public Vector<Cliente> listarClientes();
 	 public void AtualizarCliente(Cliente c, String cpf);
-	 public void BuscarCliente(Cliente c, String pesq);
+	 public void BuscarClientenome(Cliente c, String pesq);
+	 public void BuscarClienteCPF(Cliente c, String pesq);
 	
 }

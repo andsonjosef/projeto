@@ -7,7 +7,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
-
+import org.omg.CORBA.ExceptionList;
 
 import br.edu.fasete.principais.Cliente;
 
@@ -129,7 +129,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 			  }
 	}
 		 
-	public void BuscarCliente(Cliente c, String pesq) {
+	public void BuscarClientenome(Cliente c, String pesq) {
 		
 		  try {
 		    
@@ -152,29 +152,49 @@ public class ClienteDaoJdbc implements ClienteDao {
    c.setEndereco(rs.getString("endereco"));
    }
   
-    stmt =  (PreparedStatement) Conexao.getConnection()
-			 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ?");
- stmt.setString(1,c.getNome());
- rs = stmt.executeQuery();
-
-while(rs.next())
-{
-
-c.setNome(rs.getString("nome"));
-c.setCPF(rs.getString("CPF"));
-c.setRG(rs.getString("RG"));
-c.setTelefone(rs.getString("telefone"));
-c.setEstado(rs.getString("estado"));
-c.setCidade(rs.getString("cidade"));
-c.setBairro(rs.getString("bairro"));
-c.setNumero(rs.getString("numero"));
-c.setEndereco(rs.getString("endereco"));
-}
-
   
  }catch(Exception e){
-   JOptionPane.showMessageDialog(null,e);
+	 
+	
+	 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+  
  } 
+
+	}
+	
+	public void BuscarClienteCPF(Cliente c, String pesq) {
+		
+	
+	 
+	 try{
+		 PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ?");
+		 stmt.setString(1, pesq);
+		 ResultSet rs = stmt.executeQuery();
+
+		while(rs.next())
+		{
+
+		c.setNome(rs.getString("nome"));
+		c.setCPF(rs.getString("CPF"));
+		c.setRG(rs.getString("RG"));
+		c.setTelefone(rs.getString("telefone"));
+		c.setEstado(rs.getString("estado"));
+		c.setCidade(rs.getString("cidade"));
+		c.setBairro(rs.getString("bairro"));
+		c.setNumero(rs.getString("numero"));
+		c.setEndereco(rs.getString("endereco"));
+		}
+		if(rs.wasNull()){
+			
+			
+		}
+		 
+	 }catch(Exception es){
+	
+		 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+	 }
+	
 
 	}
 

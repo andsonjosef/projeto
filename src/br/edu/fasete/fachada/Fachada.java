@@ -43,8 +43,11 @@ public Vector<Cliente> listarClientes(){
 public void AtualizarCliente(Cliente c, String svalueCpf){
 	cadastroCliente.AtualizarCliente(c,svalueCpf);
 }
-public void BuscarCliente(Cliente c, String pesq){
-	cadastroCliente.BuscarCliente(c,pesq);
+public void BuscarClientenome(Cliente c, String pesq){
+	cadastroCliente.BuscarClientenome(c,pesq);
+}
+public void BuscarClienteCPF(Cliente c, String pesq){
+	cadastroCliente.BuscarClienteCPF(c,pesq);
 }
 
 //--------------------------------------

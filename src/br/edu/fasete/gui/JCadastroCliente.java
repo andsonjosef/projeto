@@ -69,6 +69,7 @@ public class JCadastroCliente extends JInternalFrame {
 	private JTextField pesquisarField;
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
+	private JFormattedTextField cpfpesqField;
 	/**
 	 * Launch the application.
 	 */
@@ -164,7 +165,7 @@ public class JCadastroCliente extends JInternalFrame {
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 String pesq = "";
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarCliente(c,pesq);
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -286,7 +287,15 @@ String pesq = "";
 					e1.printStackTrace();
 				}
 				 
+				try {
+					MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+					mascara.setPlaceholderCharacter('_');
+					
 				
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				try {
 					MaskFormatter mascara = new MaskFormatter("(##)####-####");
@@ -546,7 +555,7 @@ if(ehNumero == false){
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 String pesq = "";
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarCliente(c,pesq);
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -684,7 +693,7 @@ String pesq = "";
 		editPanel.add(estadoField2);
 		
 		JButton button = new JButton("Cancelar");
-		button.setBounds(281, 343, 89, 23);
+		button.setBounds(391, 305, 89, 23);
 		editPanel.add(button);
 		
 		JButton button_1 = new JButton("Salvar");
@@ -704,7 +713,7 @@ String pesq = "";
 				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
 			}
 		});
-		button_1.setBounds(403, 343, 89, 23);
+		button_1.setBounds(391, 368, 89, 23);
 		editPanel.add(button_1);
 		
 		pesquisarField = new JTextField();
@@ -718,7 +727,7 @@ String pesq = "";
 				
 				String pesq;
 				pesq = pesquisarField.getText();
-				Fachada.getInstancia().BuscarCliente(c,pesq);
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				
 				cpfField2.setText(""+c.getCPF());
 				nomeField2.setText(c.getNome());
@@ -730,12 +739,25 @@ String pesq = "";
 				bairroField2.setText(c.getBairro());
 				telefoneField2.setText(""+c.getTelefone());
 				
+				 c.setNome("");
+				 c.setCPF("");
+				 c.setRG("");
+				 c.setTelefone("");
+				 c.setEstado("");
+				 c.setCidade("");
+				 c.setBairro("");
+				 c.setNumero("");
+				 c.setEndereco("");
+				 if(nomeField2.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+				 }
+				
 			}
 		});
 		btnPesquisar.setBounds(271, 305, 100, 23);
 		editPanel.add(btnPesquisar);
 		
-		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome ou CPF");
+		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome");
 		lblPesquisarPorNome.setBounds(10, 281, 210, 14);
 		editPanel.add(lblPesquisarPorNome);
 		
@@ -754,8 +776,71 @@ String pesq = "";
 				pesquisarField.setText("");
 			}
 		});
-		btnLimpparTela.setBounds(381, 305, 111, 23);
+		btnLimpparTela.setBounds(338, 411, 111, 23);
 		editPanel.add(btnLimpparTela);
+		
+		
+		JLabel lblPesquisarPorCpf = new JLabel("Pesquisar por CPF");
+		lblPesquisarPorCpf.setBounds(10, 337, 129, 14);
+		editPanel.add(lblPesquisarPorCpf);
+		
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			cpfpesqField = new JFormattedTextField(mascara);
+			cpfpesqField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			cpfpesqField.setBounds(10, 367, 251, 20);
+			editPanel.add(cpfpesqField);
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		JButton btnPesquisar_1 = new JButton("Pesquisar");
+		btnPesquisar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pesq;
+				pesq = cpfpesqField.getText();
+				Fachada.getInstancia().BuscarClienteCPF(c,pesq);
+				
+				cpfField2.setText(""+c.getCPF());
+				nomeField2.setText(c.getNome());
+				rgField2.setText(c.getRG());
+				cidadeField2.setText(c.getCidade());
+				estadoField2.setText(c.getEstado());
+				enderecoField2.setText(c.getEndereco());
+				numeroField2.setText(""+c.getNumero());
+				bairroField2.setText(c.getBairro());
+				telefoneField2.setText(""+c.getTelefone());
+				 c.setNome("");
+				 c.setCPF("");
+				 c.setRG("");
+				 c.setTelefone("");
+				 c.setEstado("");
+				 c.setCidade("");
+				 c.setBairro("");
+				 c.setNumero("");
+				 c.setEndereco("");
+				 if(nomeField2.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+				 }
+			}
+		});
+		btnPesquisar_1.setBounds(271, 368, 100, 23);
+		editPanel.add(btnPesquisar_1);
 	
 
 	}

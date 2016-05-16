@@ -40,8 +40,13 @@ public class CadastroCliente implements InterfaceCadastroCliente {
 	}
 
 	@Override
-	public void BuscarCliente(Cliente c, String pesq) {
-		clienteDao.BuscarCliente(c,pesq);
+	public void BuscarClientenome(Cliente c, String pesq) {
+		clienteDao.BuscarClientenome(c,pesq);
+
+	}
+	
+	public void BuscarClienteCPF(Cliente c, String pesq) {
+		clienteDao.BuscarClienteCPF(c,pesq);
 
 	}
 
