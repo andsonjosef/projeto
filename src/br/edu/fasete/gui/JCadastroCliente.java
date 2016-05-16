@@ -162,9 +162,10 @@ public class JCadastroCliente extends JInternalFrame {
 				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 				c.setNome(svalueName);
-				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-String pesq = "";
-				if (opcao == 0){
+				
+				String pesq = "";
+				pesq = svalueName;
+				
 				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
@@ -176,7 +177,6 @@ String pesq = "";
 				bairroField2.setText(c.getBairro());
 				telefoneField2.setText(""+c.getTelefone());
 				tabbedPane.setSelectedIndex(2);
-			} }else {
 			
 			}
 			}
@@ -616,11 +616,13 @@ String pesq = "";
 		editPanel.add(nomelabel2);
 		
 		nomeField2 = new JTextField();
+		nomeField2.setEditable(false);
 		nomeField2.setColumns(10);
 		nomeField2.setBounds(10, 30, 482, 20);
 		editPanel.add(nomeField2);
 		
 		cpfField2 = new JTextField();
+		cpfField2.setEditable(false);
 		cpfField2.setColumns(10);
 		cpfField2.setBounds(10, 82, 230, 20);
 		editPanel.add(cpfField2);
@@ -634,6 +636,7 @@ String pesq = "";
 		editPanel.add(rglabel2);
 		
 		rgField2 = new JTextField();
+		rgField2.setEditable(false);
 		rgField2.setColumns(10);
 		rgField2.setBounds(262, 82, 230, 20);
 		editPanel.add(rgField2);
@@ -647,11 +650,13 @@ String pesq = "";
 		editPanel.add(cidadelabel2);
 		
 		cidadeField2 = new JTextField();
+		cidadeField2.setEditable(false);
 		cidadeField2.setColumns(10);
 		cidadeField2.setBounds(10, 138, 230, 20);
 		editPanel.add(cidadeField2);
 		
 		enderecoField2 = new JTextField();
+		enderecoField2.setEditable(false);
 		enderecoField2.setColumns(10);
 		enderecoField2.setBounds(10, 194, 383, 20);
 		editPanel.add(enderecoField2);
@@ -665,6 +670,7 @@ String pesq = "";
 		editPanel.add(bairrolabel2);
 		
 		bairroField2 = new JTextField();
+		bairroField2.setEditable(false);
 		bairroField2.setColumns(10);
 		bairroField2.setBounds(10, 250, 230, 20);
 		editPanel.add(bairroField2);
@@ -674,11 +680,13 @@ String pesq = "";
 		editPanel.add(numerolabel2);
 		
 		numeroField2 = new JTextField();
+		numeroField2.setEditable(false);
 		numeroField2.setColumns(10);
 		numeroField2.setBounds(418, 194, 74, 20);
 		editPanel.add(numeroField2);
 		
 		telefoneField2 = new JTextField();
+		telefoneField2.setEditable(false);
 		telefoneField2.setColumns(10);
 		telefoneField2.setBounds(262, 250, 230, 20);
 		editPanel.add(telefoneField2);
@@ -688,12 +696,27 @@ String pesq = "";
 		editPanel.add(telefonelabel2);
 		
 		estadoField2 = new JTextField();
+		estadoField2.setEditable(false);
 		estadoField2.setColumns(10);
 		estadoField2.setBounds(262, 138, 230, 20);
 		editPanel.add(estadoField2);
 		
 		JButton button = new JButton("Cancelar");
-		button.setBounds(391, 305, 89, 23);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				numeroField2.setEditable(false);
+				nomeField2.setEditable(false);
+				cpfField2.setEditable(false);
+				rgField2.setEditable(false);
+				cidadeField2.setEditable(false);
+				estadoField2.setEditable(false);
+				enderecoField2.setEditable(false);
+				bairroField2.setEditable(false);
+				telefoneField2.setEditable(false);
+				
+			}
+		});
+		button.setBounds(391, 337, 89, 23);
 		editPanel.add(button);
 		
 		JButton button_1 = new JButton("Salvar");
@@ -776,7 +799,7 @@ String pesq = "";
 				pesquisarField.setText("");
 			}
 		});
-		btnLimpparTela.setBounds(338, 411, 111, 23);
+		btnLimpparTela.setBounds(262, 402, 111, 23);
 		editPanel.add(btnLimpparTela);
 		
 		
@@ -841,6 +864,48 @@ String pesq = "";
 		});
 		btnPesquisar_1.setBounds(271, 368, 100, 23);
 		editPanel.add(btnPesquisar_1);
+		
+		JButton btnEditar_1 = new JButton("Editar");
+		btnEditar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				numeroField2.setEditable(true);
+				nomeField2.setEditable(true);
+				cpfField2.setEditable(true);
+				rgField2.setEditable(true);
+				cidadeField2.setEditable(true);
+				estadoField2.setEditable(true);
+				enderecoField2.setEditable(true);
+				bairroField2.setEditable(true);
+				telefoneField2.setEditable(true);
+				
+				
+			}
+		});
+		btnEditar_1.setBounds(391, 303, 89, 23);
+		editPanel.add(btnEditar_1);
+		
+		JButton btnExcluir2 = new JButton("Excluir");
+		btnExcluir2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+c.setCPF(svalueCpf);
+				
+				
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirCliente(c);
+					carregarTabela();
+				
+				} else {
+				   
+				}
+				
+				
+				
+			}
+		});
+		btnExcluir2.setBounds(391, 402, 89, 23);
+		editPanel.add(btnExcluir2);
 	
 
 	}
