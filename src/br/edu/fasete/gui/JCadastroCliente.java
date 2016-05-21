@@ -96,6 +96,7 @@ public class JCadastroCliente extends JInternalFrame {
 		setClosable(true);
 		setBounds(100, 100, 860, 640);
 		
+		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {

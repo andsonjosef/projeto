@@ -65,6 +65,20 @@ public class Principal extends JFrame {
 		});
 		menuCliente.add(menuCadastroCliente);
 		
+		JMenu menuRoupa = new JMenu("Roupa");
+		barraMenu.add(menuRoupa);
+		
+		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
+		menuCadastroRoupa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JCadastroRoupa janela = new JCadastroRoupa();
+				desktop.add(janela);
+				janela.setVisible(true);
+			}
+		});
+		menuRoupa.add(menuCadastroRoupa);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

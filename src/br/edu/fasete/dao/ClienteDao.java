@@ -1,9 +1,6 @@
 package br.edu.fasete.dao;
 
-import java.sql.SQLException;
 import java.util.Vector;
-
-import javax.swing.JTable;
 
 import br.edu.fasete.principais.Cliente;
 
