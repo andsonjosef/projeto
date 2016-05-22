@@ -22,6 +22,7 @@ import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
+import br.edu.fasete.principais.Lista;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
@@ -34,11 +35,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.format.TextStyle;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Panel;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.DropMode;
 import java.awt.Component;
@@ -51,6 +55,7 @@ public class JAluguel extends JInternalFrame {
 	int svaluecoder;
 	String svalueName;
 	String vazio;
+	Lista a = new Lista();
 	Cliente c = new Cliente();
 	Roupa r = new Roupa();
 	private JTextField nomeField;
@@ -63,6 +68,7 @@ public class JAluguel extends JInternalFrame {
 	private JTabbedPane tabbedPane;
 	private JTable tabelaCategoria;
 	private JTable tabelaRoupa;
+	private JTable tabelaRoupasele;
 	private JTextField nomeField2;
 	private JTextField cpfField2;
 	private JTextField rgField2;
@@ -117,6 +123,7 @@ public class JAluguel extends JInternalFrame {
 				//Carregar tabela sempre que alternar para aba de relatÃ³rios
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
+					carregarTabelaRoupasele();
 					
 				}
 				if(tabbedPane.isShowing()) {
@@ -301,85 +308,10 @@ public class JAluguel extends JInternalFrame {
 					
 					btnSalvar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-Cliente c = new Cliente();
-if(nomeField.getText().isEmpty()){
-
-
-}
-/*boolean ehNumero = true;
-
-try{
-    Integer.parseInt(telefoneField.getText());
-}catch(Exception e2){
-    ehNumero = false;
-}			
-
-if(ehNumero == false){
-	JOptionPane.showMessageDialog(null, "Somente números no campo telefone. ");
-}		*/
-
-
-							c.setNome(nomeField.getText()); 
-							c.setCPF(cpfField.getText());
-							c.setRG(rgField.getText());
-							c.setTelefone(telefoneField.getText());
-							c.setBairro(bairroField.getText());
-							c.setCidade(cidadeField.getText());
-							c.setEstado(estadoField.getText());
-							c.setNumero(numeroField.getText());
-							c.setEndereco(enderecoField.getText());
-							
-							
-							
-							 String cpf = "";
-								   PreparedStatement stmt;
-								try {
-									stmt = (PreparedStatement) Conexao.getConnection()
-									    .prepareStatement("select cpf from loja.Cliente ");
-							
-									ResultSet rs = stmt.executeQuery();
-									while(rs.next()) {
-										 cpf = rs.getString("CPF");
-										 
-										 
-										 if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-
-												if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
-													
-												}else{
-													
-													 
-													  cpf = "";
-														   
-														try {
-															stmt = (PreparedStatement) Conexao.getConnection()
-															    .prepareStatement("select cpf from loja.Cliente ");
-													
-															 rs = stmt.executeQuery();
-															while(rs.next()) {
-																 cpf = rs.getString("CPF");
-																
-															}	} catch (SQLException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
-															}
-															if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-													Fachada.getInstancia().InserirCliente(c);
-															}else{
-																JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");
-																
-															}
-												}
-									
-											}else{
-												JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido. ");
-												
-											}
-										
-									}	} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+							String pesq = c.getCPF();
+							Fachada.getInstancia().BuscarClienteCPF(c, pesq);
+							a.setCodCliente(c.getCodPessoa());
+							tabbedPane.setSelectedIndex(1);
 						}
 					});
 					
@@ -418,27 +350,31 @@ if(ehNumero == false){
 					});
 					
 		tabelaCategoria.addMouseListener(new MouseAdapter() {
+			
+			
 			public void mouseClicked(MouseEvent e) {
+				srow = tabelaCategoria.getSelectedRow();
+				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+				c.setNome(svalueName);
+				
+				String pesq = "";
+				pesq = svalueName;
+				
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
+				nomeField.setText(c.getNome());
+				cpfField.setText(""+c.getCPF());
+				rgField.setText(c.getRG());
+				cidadeField.setText(c.getCidade());
+				estadoField.setText(c.getEstado());
+				enderecoField.setText(c.getEndereco());
+				numeroField.setText(""+c.getNumero());
+				bairroField.setText(c.getBairro());
+				telefoneField.setText(""+c.getTelefone());
+				
+				
 					if(e.getClickCount() == 2) {
-					srow = tabelaCategoria.getSelectedRow();
-					svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
-					svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
-					c.setNome(svalueName);
 					
-					String pesq = "";
-					pesq = svalueName;
-					
-					Fachada.getInstancia().BuscarClientenome(c,pesq);
-					nomeField2.setText(c.getNome());
-					cpfField2.setText(""+c.getCPF());
-					rgField2.setText(c.getRG());
-					cidadeField2.setText(c.getCidade());
-					estadoField2.setText(c.getEstado());
-					enderecoField2.setText(c.getEndereco());
-					numeroField2.setText(""+c.getNumero());
-					bairroField2.setText(c.getBairro());
-					telefoneField2.setText(""+c.getTelefone());
-					tabbedPane.setSelectedIndex(2);
 			
 			}
 			}
@@ -531,8 +467,26 @@ if(ehNumero == false){
 		generoField.setBounds(430, 445, 377, 25);
 		exibirpanel.add(generoField);
 		
+		///
+		tabelaRoupasele = new JTable(new RoupaTableModel());
+		tabelaRoupasele.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent arg0) {
+				srow = tabelaRoupasele.getSelectedRow();
+				
+				svaluecoder = (int) tabelaRoupasele.getValueAt(srow, 0);
+				
+			}
+			
+		});
 		
+		tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupasele);
+		scrollPaneRoupasele.setBounds(430, 11, 380, 311);
+		exibirpanel.add(scrollPaneRoupasele);
+		scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
+		});
 		
+		////
 		
 		tabelaRoupa = new JTable(new RoupaTableModel());
 		tabelaRoupa.addMouseListener(new MouseAdapter() {
@@ -547,10 +501,32 @@ if(ehNumero == false){
 		
 		tabelaRoupa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa);
-		scrollPaneRoupa.setBounds(25, 11, 782, 344);
+		scrollPaneRoupa.setBounds(25, 11, 380, 311);
 		exibirpanel.add(scrollPaneRoupa);
+		
+		JButton btnSelecionar = new JButton("Selecionar");
+		btnSelecionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int n = 50; // tamanho do vetor
+			    int v[] = new int[n]; // declaração do vetor "v"
+			    int i = 0; // índice ou posição
+			    
+			// Entrada de Dados
+			   int linha = tabelaRoupa.getSelectedRow();
+			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
+			      v[i] = r.getCodRoupa();
+			      i++;
+			    while(i < 10){
+			    	JOptionPane.showMessageDialog(null, v[i]);
+			    	i++;
+			    }
+			}
+		});
+		btnSelecionar.setBounds(316, 337, 89, 23);
+		exibirpanel.add(btnSelecionar);
 		scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 		});
+		
 		
 		tabelaRoupa.addMouseListener(new MouseAdapter() {
 public void mouseClicked(MouseEvent e) {
@@ -892,6 +868,14 @@ c.setCPF(svalueCpf);
 	
 	public void carregarTabelaRoupa() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupa.getModel();
+		tableModel.setRowCount(0);
+		for(Roupa rou : Fachada.getInstancia().listarRoupas()) {
+			tableModel.adicionarCategoria(rou);
+		}
+	}
+	
+	public void carregarTabelaRoupasele() {
+		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
 		tableModel.setRowCount(0);
 		for(Roupa rou : Fachada.getInstancia().listarRoupas()) {
 			tableModel.adicionarCategoria(rou);

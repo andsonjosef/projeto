@@ -67,6 +67,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Cliente c = new Cliente();
+				
 				c.setNome(resultado.getString("nome"));
 				c.setCPF(resultado.getString("CPF"));
 				c.setRG(resultado.getString("RG"));
@@ -140,7 +141,7 @@ public class ClienteDaoJdbc implements ClienteDao {
   
    while(rs.next())
    {
-   
+   c.setCodPessoa(rs.getInt("codCliente"));
    c.setNome(rs.getString("nome"));
    c.setCPF(rs.getString("CPF"));
    c.setRG(rs.getString("RG"));
