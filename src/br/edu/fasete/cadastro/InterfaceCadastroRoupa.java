@@ -8,6 +8,7 @@ public interface InterfaceCadastroRoupa {
 	 public void InserirRoupa(Roupa r);
 	 public void ExcluirRoupa(Roupa r);
 	 public Vector<Roupa> listarRoupas();
+	 public Vector<Roupa> listarRoupasSele();
 	 public void AtualizarRoupa(Roupa r);
 	 public void BuscarRoupa(Roupa r);
 }

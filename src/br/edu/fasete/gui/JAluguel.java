@@ -507,22 +507,16 @@ public class JAluguel extends JInternalFrame {
 		JButton btnSelecionar = new JButton("Selecionar");
 		btnSelecionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int n = 50; // tamanho do vetor
-			    int v[] = new int[n]; // declaração do vetor "v"
-			    int i = 0; // índice ou posição
-			    
-			// Entrada de Dados
+			
 			   int linha = tabelaRoupa.getSelectedRow();
-			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
-			      v[i] = r.getCodRoupa();
-			      i++;
-			    while(i < 10){
-			    	JOptionPane.showMessageDialog(null, v[i]);
-			    	i++;
-			    }
+			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 6));  
+			   
+			   carregarTabelaRoupasele();
+			  
+			    
 			}
 		});
-		btnSelecionar.setBounds(316, 337, 89, 23);
+		btnSelecionar.setBounds(295, 337, 110, 23);
 		exibirpanel.add(btnSelecionar);
 		scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 		});
@@ -877,7 +871,7 @@ c.setCPF(svalueCpf);
 	public void carregarTabelaRoupasele() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupas()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupasSele()) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}

@@ -77,6 +77,32 @@ public class RoupaDaoJdbc implements RoupaDao {
 		}
 		return lista;
 	}
+	
+	public Vector<Roupa> listarRoupasSele() {
+		Vector<Roupa> lista = new Vector<Roupa>();
+		Roupa r = new Roupa();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("SELECT * FROM loja.roupa WHERE codRoupa = ?");
+			stmt.setInt(1,r.getCodRoupa());
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
 
 	@Override
 	public void AtualizarRoupa(Roupa r) {

@@ -69,6 +69,10 @@ public void ExcluirRoupa(Roupa r){
 public Vector<Roupa> listarRoupas(){
 	return cadastroRoupa.listarRoupas();
 }
+
+public Vector<Roupa> listarRoupasSele(){
+	return cadastroRoupa.listarRoupasSele();
+}
 public void AtualizarRoupa(Roupa r){
 	cadastroRoupa.AtualizarRoupa(r);
 }

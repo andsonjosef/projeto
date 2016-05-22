@@ -25,7 +25,11 @@ public class CadastroRoupa implements InterfaceCadastroRoupa {
 	public Vector<Roupa> listarRoupas() {
 		return roupaDao.listarRoupas();
 	}
-
+	
+	public Vector<Roupa> listarRoupasSele() {
+		return roupaDao.listarRoupasSele();
+	}
+	
 	@Override
 	public void AtualizarRoupa(Roupa r) {
 		roupaDao.AtualizarRoupa(r);
