@@ -11,18 +11,19 @@ public class RoupaTableModel extends DefaultTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String[] columnName = {"Tipo", "Modelo","Tamanho","Gênero","Cor","Disponibilidade","Preço"};
+	private String[] columnName = {"codigo","Tipo", "Modelo","Tamanho","Gênero","Cor","Preço"};
 	private Class[] columnClass = {Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class};
 	
 	
 	public void adicionarCategoria(Roupa r) {
 		Object[] row = new Object[getColumnCount()];
-		row[0] = r.getTipo();
-		row[1] = r.getModelo();
-		row[2] = r.getTamanho();
-		row[3] = r.getGenero();
-		row[4] = r.getCor();
-		row[5] = r.getDisponibilidade();
+		
+		row[0] = r.getCodRoupa();
+		row[1] = r.getTipo();
+		row[2] = r.getModelo();
+		row[3] = r.getTamanho();
+		row[4] = r.getGenero();
+		row[5] = r.getCor();
 		row[6] = r.getPreco();
 		
 		addRow(row);

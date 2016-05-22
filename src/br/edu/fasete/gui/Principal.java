@@ -79,6 +79,20 @@ public class Principal extends JFrame {
 		menuRoupa.add(menuCadastroRoupa);
 		
 		
+		JMenu menuAluguel = new JMenu("Aluguel");
+		barraMenu.add(menuAluguel);
+		
+		JMenuItem menuCadastroAluguel = new JMenuItem("Aluguel");
+		menuCadastroAluguel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JAluguel janela = new JAluguel();
+				desktop.add(janela);
+				janela.setVisible(true);
+			}
+		});
+		menuAluguel.add(menuCadastroAluguel);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

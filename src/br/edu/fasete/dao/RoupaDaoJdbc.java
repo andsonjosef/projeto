@@ -61,6 +61,8 @@ public class RoupaDaoJdbc implements RoupaDao {
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
 				r.setTipo(resultado.getString("tipo"));
 				r.setModelo(resultado.getString("modelo"));
 				r.setTamanho(resultado.getString("tamanho"));
