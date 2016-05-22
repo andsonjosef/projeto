@@ -39,4 +39,10 @@ public class CadastroRoupa implements InterfaceCadastroRoupa {
 	public void BuscarRoupa(Roupa r) {
 		roupaDao.BuscarRoupa(r);
 	}
+	public void limparTabela(){
+		roupaDao.limparTabela();
+	}
+	public void InserirRoupaSele(Roupa r){
+		roupaDao.InserirRoupaSele(r);
+	}
 }

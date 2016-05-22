@@ -114,7 +114,7 @@ public class JAluguel extends JInternalFrame {
 		setClosable(true);
 		setBounds(100, 100, 860, 640);
 		
-		
+		Fachada.getInstancia().limparTabela();
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -123,10 +123,13 @@ public class JAluguel extends JInternalFrame {
 				//Carregar tabela sempre que alternar para aba de relatórios
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
+					Fachada.getInstancia().limparTabela();
 					carregarTabelaRoupasele();
+					
 					
 				}
 				if(tabbedPane.isShowing()) {
+					Fachada.getInstancia().limparTabela();
 					carregarTabela();
 					
 				}
@@ -509,8 +512,8 @@ public class JAluguel extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			
 			   int linha = tabelaRoupa.getSelectedRow();
-			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 6));  
-			   
+			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
+			   Fachada.getInstancia().InserirRoupaSele(r);
 			   carregarTabelaRoupasele();
 			  
 			    

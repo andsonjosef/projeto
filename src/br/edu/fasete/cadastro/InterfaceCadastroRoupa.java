@@ -11,4 +11,6 @@ public interface InterfaceCadastroRoupa {
 	 public Vector<Roupa> listarRoupasSele();
 	 public void AtualizarRoupa(Roupa r);
 	 public void BuscarRoupa(Roupa r);
+	 public void limparTabela();
+	 public void InserirRoupaSele(Roupa r);
 }

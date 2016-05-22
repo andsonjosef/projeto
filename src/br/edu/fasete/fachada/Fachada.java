@@ -79,4 +79,10 @@ public void AtualizarRoupa(Roupa r){
 public void BuscarRoupa(Roupa r){
 	cadastroRoupa.BuscarRoupa(r);
 }
+public void limparTabela(){
+	cadastroRoupa.limparTabela();
+}
+public void InserirRoupaSele(Roupa r){
+	cadastroRoupa.InserirRoupaSele(r);
+}
 }

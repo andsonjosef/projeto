@@ -80,13 +80,11 @@ public class RoupaDaoJdbc implements RoupaDao {
 	
 	public Vector<Roupa> listarRoupasSele() {
 		Vector<Roupa> lista = new Vector<Roupa>();
-		Roupa r = new Roupa();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("SELECT * FROM loja.roupa WHERE codRoupa = ?");
-			stmt.setInt(1,r.getCodRoupa());
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa ");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
-				
+				Roupa r = new Roupa();
 				
 				r.setCodRoupa(resultado.getInt("codRoupa"));
 				r.setTipo(resultado.getString("tipo"));
@@ -168,5 +166,68 @@ public class RoupaDaoJdbc implements RoupaDao {
 			  JOptionPane.showMessageDialog(null,e);
 		  } 
 	}
+	
+	public void limparTabela() {
+	    
+		  try {
+		    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("DELETE FROM loja.roupasele");
+				 stmt.executeUpdate();
+			   
+		  
+					
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
+	}
+	public void InserirRoupaSele(Roupa r) {
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("SELECT * FROM loja.roupa WHERE codroupa = ?");
+			    stmt.setInt(1,r.getCodRoupa());
+			    ResultSet resultado = stmt.executeQuery();
+		  
+					  while(resultado.next()) {
+							r.setTipo(resultado.getString("tipo"));
+							r.setModelo(resultado.getString("modelo"));
+							r.setTamanho(resultado.getString("tamanho"));
+							r.setGenero(resultado.getString("genero"));
+							r.setCor(resultado.getString("cor"));
+							r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+							r.setPreco(resultado.getFloat("preco"));
+							r.setCodRoupa(resultado.getInt("codRoupa"));
+						}
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
+		
+		  try {
+			  PreparedStatement stmt;
+		  
+			   stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("insert into loja.Roupasele  (tipo,modelo,tamanho,genero,cor,disponibilidade,preco,codRoupa) values (?,?,?,?,?,?,?,?)") ;
+			   stmt.setString(1,r.getTipo());
+			   stmt.setString(2,r.getModelo());
+			   stmt.setString(3,r.getTamanho());
+			   stmt.setString(4,r.getGenero());
+			   stmt.setString(5,r.getCor());
+			   stmt.setBoolean(6,r.getDisponibilidade());
+			   stmt.setFloat(7,r.getPreco());
+			   stmt.setInt(8, r.getCodRoupa());
+			   stmt.executeUpdate();
+			   
+			   	 	  
+			
+			  
+			 
+	}catch(Exception es){
+		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  JOptionPane.showMessageDialog(null,es);
+	  }
+
+	}
+
 }
 
