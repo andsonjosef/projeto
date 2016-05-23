@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
 public class RoupaDaoJdbc implements RoupaDao {
@@ -81,7 +82,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public Vector<Roupa> listarRoupasSele() {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa ");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupasele ");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();
@@ -180,6 +181,22 @@ public class RoupaDaoJdbc implements RoupaDao {
 		  }catch(Exception e){
 			  JOptionPane.showMessageDialog(null,e);
 		  } 
+		  
+		  
+		  
+	}
+	
+	public void ExcluirRoupaSele(Roupa r) {
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement( "DELETE FROM loja.roupasele WHERE codRoupa = ?");
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
 	}
 	public void InserirRoupaSele(Roupa r) {
 		  try {
@@ -228,6 +245,29 @@ public class RoupaDaoJdbc implements RoupaDao {
 	  }
 
 	}
+	
+	
+	public void InserirLista(Roupa r, Cliente c) {
 
+		
+		  try {
+			  PreparedStatement stmt;
+		  
+			   stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("insert into loja.lista  (codCliente,codRoupa) values (?,?)") ;
+			   stmt.setInt(1, c.getCodPessoa());
+			   stmt.setInt(2, r.getCodRoupa());
+			   stmt.executeUpdate();
+			   
+			   	 	  
+			
+			  
+			 
+	}catch(Exception es){
+		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  JOptionPane.showMessageDialog(null,es);
+	  }
+
+	}
 }
 

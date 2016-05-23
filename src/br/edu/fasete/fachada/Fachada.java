@@ -85,4 +85,10 @@ public void limparTabela(){
 public void InserirRoupaSele(Roupa r){
 	cadastroRoupa.InserirRoupaSele(r);
 }
+public void ExcluirRoupaSele(Roupa r){
+	cadastroRoupa.ExcluirRoupaSele(r);
+}
+public void InserirLista(Roupa r, Cliente c){
+	cadastroRoupa.InserirLista(r, c);
+}
 }

@@ -398,6 +398,22 @@ public class JAluguel extends JInternalFrame {
 		exibirpanel.setLayout(null);
 		
 		JButton button_2 = new JButton("Salvar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int linha = 0;
+				
+				int linhat = tabelaRoupasele.getRowCount();
+				while(linha < linhat){
+				r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
+				linha++;
+				Fachada.getInstancia().InserirLista(r, c);
+				
+				}
+				
+				
+				
+			}
+		});
 		button_2.setBounds(683, 537, 124, 34);
 		exibirpanel.add(button_2);
 		
@@ -521,6 +537,19 @@ public class JAluguel extends JInternalFrame {
 		});
 		btnSelecionar.setBounds(295, 337, 110, 23);
 		exibirpanel.add(btnSelecionar);
+		
+		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				  int linha = tabelaRoupasele.getSelectedRow();
+				    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+				    Fachada.getInstancia().ExcluirRoupaSele(r);
+				    carregarTabelaRoupasele();
+			}
+		});
+		btnRemover.setBounds(440, 333, 89, 23);
+		exibirpanel.add(btnRemover);
 		scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 		});
 		
