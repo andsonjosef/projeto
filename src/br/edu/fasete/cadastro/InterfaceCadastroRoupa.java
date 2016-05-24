@@ -16,4 +16,6 @@ public interface InterfaceCadastroRoupa {
 	 public void InserirRoupaSele(Roupa r);
 	 public void ExcluirRoupaSele(Roupa r);
 	 public void InserirLista(Roupa r, Cliente c);
+	 public void limparLista();
+	 public Vector<Roupa> listarRoupaLista();
 }

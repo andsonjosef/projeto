@@ -52,4 +52,10 @@ public class CadastroRoupa implements InterfaceCadastroRoupa {
 	 public void InserirLista(Roupa r, Cliente c){
 		 roupaDao.InserirLista(r, c);
 	 }
+	 public void limparLista(){
+		 roupaDao.limparLista();
+	 }
+	 public Vector<Roupa> listarRoupaLista(){
+		 return roupaDao.listarRoupaLista();
+	 }
 }

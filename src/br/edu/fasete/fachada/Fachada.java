@@ -91,4 +91,10 @@ public void ExcluirRoupaSele(Roupa r){
 public void InserirLista(Roupa r, Cliente c){
 	cadastroRoupa.InserirLista(r, c);
 }
+public void limparLista(){
+	cadastroRoupa.limparLista();
+}
+public Vector<Roupa> listarRoupaLista(){
+	return cadastroRoupa.listarRoupaLista();
+}
 }

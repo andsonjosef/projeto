@@ -103,6 +103,30 @@ public class RoupaDaoJdbc implements RoupaDao {
 		return lista;
 	}
 
+	public Vector<Roupa> listarRoupaLista() {
+		Vector<Roupa> lista = new Vector<Roupa>();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.lista");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Roupa r = new Roupa();
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
 	@Override
 	public void AtualizarRoupa(Roupa r) {
 
@@ -171,19 +195,23 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public void limparTabela() {
 	    
 		  try {
-		    
 				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 				.prepareStatement("DELETE FROM loja.roupasele");
-				 stmt.executeUpdate();
-			   
-		  
-					
+				 stmt.executeUpdate();			
 		  }catch(Exception e){
 			  JOptionPane.showMessageDialog(null,e);
-		  } 
-		  
-		  
-		  
+		  }   
+	}
+	
+	public void limparLista() {
+	    
+		  try {
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("DELETE FROM loja.lista");
+				 stmt.executeUpdate();			
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  }   
 	}
 	
 	public void ExcluirRoupaSele(Roupa r) {

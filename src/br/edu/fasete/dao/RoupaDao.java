@@ -15,8 +15,11 @@ public interface RoupaDao {
 	 public void AtualizarRoupa(Roupa r);
 	 public void BuscarRoupa(Roupa r);
 	 public void limparTabela();
+	 public void limparLista();
 	 public void InserirRoupaSele(Roupa r);
 	 public void ExcluirRoupaSele(Roupa r);
 	 public void InserirLista(Roupa r, Cliente c); 
+	 public Vector<Roupa> listarRoupaLista();
+	 
 	
 }
