@@ -112,7 +112,7 @@ public class JAluguel extends JInternalFrame {
 		setBounds(100, 100, 860, 640);
 		
 		Fachada.getInstancia().limparTabela();
-		Fachada.getInstancia().limparLista();
+		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -122,14 +122,21 @@ public class JAluguel extends JInternalFrame {
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
 					Fachada.getInstancia().limparTabela();
-					Fachada.getInstancia().limparLista();
 					carregarTabelaRoupasele();
+					
+					
+				}
+				
+				if(tabbedPane.getSelectedIndex() == 2) {
+					carregarTabelaRoupa();
+					Fachada.getInstancia().limparTabela();
+					carregarTabelaRoupaLista();
 					
 					
 				}
 				if(tabbedPane.isShowing()) {
 					Fachada.getInstancia().limparTabela();
-					Fachada.getInstancia().limparLista();
+					
 					carregarTabela();
 					
 				}
@@ -313,7 +320,7 @@ public class JAluguel extends JInternalFrame {
 						public void actionPerformed(ActionEvent e) {
 							String pesq = c.getCPF();
 							Fachada.getInstancia().BuscarClienteCPF(c, pesq);
-							a.setCodCliente(c.getCodPessoa());
+							JOptionPane.showMessageDialog(null, c.getCodPessoa());
 							tabbedPane.setSelectedIndex(1);
 						}
 					});
@@ -401,16 +408,25 @@ public class JAluguel extends JInternalFrame {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int linha = 0;
-				carregarTabelaRoupaLista();
+				
 				int linhat = tabelaRoupasele.getRowCount();
+				JOptionPane.showMessageDialog(null, linhat);
 				while(linha < linhat){
 				r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
+				r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
+				r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
+				r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
+				r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
+				r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
+				r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
+		
 				linha++;
+			
 				Fachada.getInstancia().InserirLista(r, c);
 				
 				}
 				
-				tabbedPane.setSelectedIndex(2);
+				carregarTabelaRoupaLista();
 				
 			}
 		});
@@ -738,7 +754,7 @@ public void mouseClicked(MouseEvent e) {
 	}
 	
 	public void carregarTabelaRoupaLista() {
-		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
+		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupaAluguel.getModel();
 		tableModel.setRowCount(0);
 		for(Roupa rou : Fachada.getInstancia().listarRoupaLista()) {
 			tableModel.adicionarCategoria(rou);

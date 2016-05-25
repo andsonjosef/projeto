@@ -106,7 +106,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public Vector<Roupa> listarRoupaLista() {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.lista");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.lista ");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();
@@ -282,15 +282,18 @@ public class RoupaDaoJdbc implements RoupaDao {
 			  PreparedStatement stmt;
 		  
 			   stmt =  (PreparedStatement) Conexao.getConnection()
-			   .prepareStatement("insert into loja.lista  (codCliente,codRoupa) values (?,?)") ;
+			   .prepareStatement("insert into loja.lista  (codCliente,codRoupa,tipo,modelo,tamanho,genero,cor,disponibilidade,preco) values (?,?,?,?,?,?,?,?,?)") ;
 			   stmt.setInt(1, c.getCodPessoa());
 			   stmt.setInt(2, r.getCodRoupa());
+			   stmt.setString(3,r.getTipo());
+			   stmt.setString(4,r.getModelo());
+			   stmt.setString(5,r.getTamanho());
+			   stmt.setString(6,r.getGenero());
+			   stmt.setString(7,r.getCor());
+			   stmt.setBoolean(8,r.getDisponibilidade());
+			   stmt.setFloat(9,r.getPreco());
 			   stmt.executeUpdate();
 			   
-			   	 	  
-			
-			  
-			 
 	}catch(Exception es){
 		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
 		  JOptionPane.showMessageDialog(null,es);
