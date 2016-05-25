@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
@@ -105,6 +106,8 @@ public class RoupaDaoJdbc implements RoupaDao {
 
 	public Vector<Roupa> listarRoupaLista() {
 		Vector<Roupa> lista = new Vector<Roupa>();
+		
+		
 		try {
 			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.lista ");
 			ResultSet resultado = stmt.executeQuery();
@@ -125,7 +128,30 @@ public class RoupaDaoJdbc implements RoupaDao {
 			e.printStackTrace();
 		}
 		return lista;
+	
 	}
+	
+	public void SomaPreco(Aluguel a){
+		float sum = 0;
+		try {
+			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement("select SUM(preco) from loja.lista"); 
+						ResultSet rs = stmt.executeQuery();
+						while(rs.next()) {
+							float c = rs.getInt(1);
+						      sum = sum + c;
+						      a.setPreco(sum);
+							
+						}
+				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 
 	@Override
 	public void AtualizarRoupa(Roupa r) {

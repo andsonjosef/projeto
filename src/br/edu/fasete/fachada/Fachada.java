@@ -12,6 +12,7 @@ import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
 import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.RoupaDao;
 import br.edu.fasete.dao.RoupaDaoJdbc;
+import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
@@ -96,5 +97,8 @@ public void limparLista(){
 }
 public Vector<Roupa> listarRoupaLista(){
 	return cadastroRoupa.listarRoupaLista();
+}
+public void SomaPreco(Aluguel a){
+	cadastroRoupa.SomaPreco(a);
 }
 }

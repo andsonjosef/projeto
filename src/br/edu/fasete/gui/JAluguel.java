@@ -23,6 +23,7 @@ import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Lista;
+import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
@@ -57,9 +58,10 @@ public class JAluguel extends JInternalFrame {
 	int svaluecoder;
 	String svalueName;
 	String vazio;
-	Lista a = new Lista();
+	Lista l = new Lista();
 	Cliente c = new Cliente();
 	Roupa r = new Roupa();
+	Aluguel a = new Aluguel();
 	private JTextField nomeField;
 	private JTextField rgField;
 	private JTextField enderecoField;
@@ -80,10 +82,10 @@ public class JAluguel extends JInternalFrame {
 	private JTextField tipoField;
 	private JTextField modeloField;
 	private JTextField generoField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField dataLoca;
+	private JTextField DataDevo;
+	private JTextField precoFieldal;
+	private JTextField precoFieldFim;
 	/**
 	 * Launch the application.
 	 */
@@ -320,7 +322,7 @@ public class JAluguel extends JInternalFrame {
 						public void actionPerformed(ActionEvent e) {
 							String pesq = c.getCPF();
 							Fachada.getInstancia().BuscarClienteCPF(c, pesq);
-							JOptionPane.showMessageDialog(null, c.getCodPessoa());
+							
 							tabbedPane.setSelectedIndex(1);
 						}
 					});
@@ -410,7 +412,7 @@ public class JAluguel extends JInternalFrame {
 				int linha = 0;
 				
 				int linhat = tabelaRoupasele.getRowCount();
-				JOptionPane.showMessageDialog(null, linhat);
+				
 				while(linha < linhat){
 				r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
 				r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
@@ -427,7 +429,9 @@ public class JAluguel extends JInternalFrame {
 				}
 				
 				carregarTabelaRoupaLista();
-				
+				Fachada.getInstancia().SomaPreco(a);
+				precoFieldal.setText(""+a.getPreco());
+				tabbedPane.setSelectedIndex(2);
 			}
 		});
 		button_2.setBounds(683, 537, 124, 34);
@@ -670,29 +674,29 @@ public void mouseClicked(MouseEvent e) {
 		lblDataDeLocao.setBounds(554, 33, 97, 14);
 		editPanel.add(lblDataDeLocao);
 		
-		textField = new JTextField();
-		textField.setBounds(554, 58, 86, 20);
-		editPanel.add(textField);
-		textField.setColumns(10);
+		dataLoca = new JTextField();
+		dataLoca.setBounds(554, 58, 86, 20);
+		editPanel.add(dataLoca);
+		dataLoca.setColumns(10);
 		
 		JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
 		lblDataDeDevoluo.setBounds(697, 33, 132, 14);
 		editPanel.add(lblDataDeDevoluo);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(707, 58, 86, 20);
-		editPanel.add(textField_1);
-		textField_1.setColumns(10);
+		DataDevo = new JTextField();
+		DataDevo.setBounds(707, 58, 86, 20);
+		editPanel.add(DataDevo);
+		DataDevo.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(554, 123, 86, 20);
-		editPanel.add(textField_2);
-		textField_2.setColumns(10);
+		precoFieldal = new JTextField();
+		precoFieldal.setBounds(554, 123, 86, 20);
+		editPanel.add(precoFieldal);
+		precoFieldal.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(707, 123, 86, 20);
-		editPanel.add(textField_3);
-		textField_3.setColumns(10);
+		precoFieldFim = new JTextField();
+		precoFieldFim.setBounds(707, 123, 86, 20);
+		editPanel.add(precoFieldFim);
+		precoFieldFim.setColumns(10);
 		
 		JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
 		lblPreo_1.setBounds(554, 98, 46, 14);
