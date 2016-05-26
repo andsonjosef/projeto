@@ -14,40 +14,28 @@ public class CadastroCliente implements InterfaceCadastroCliente {
 	public CadastroCliente(ClienteDao clienteDao) {
 		this.clienteDao = clienteDao;
 	}
-
-
-	@Override
-	public void InserirCliente(Cliente c) {
-		clienteDao.InserirCliente(c);
-
-	}
-
-	@Override
-	public void ExcluirCliente(Cliente c) {
-		clienteDao.ExcluirCliente(c);
-
-	}
-
-	@Override
-	public Vector<Cliente> listarClientes(){
-		return clienteDao.listarClientes();
-	}
-
 	@Override
 	public void AtualizarCliente(Cliente c, String cpf) {
 		clienteDao.AtualizarCliente(c,cpf);
-
 	}
-
+	public void BuscarClienteCPF(Cliente c, String pesq) {
+		clienteDao.BuscarClienteCPF(c,pesq);
+	}
 	@Override
 	public void BuscarClientenome(Cliente c, String pesq) {
 		clienteDao.BuscarClientenome(c,pesq);
-
 	}
-	
-	public void BuscarClienteCPF(Cliente c, String pesq) {
-		clienteDao.BuscarClienteCPF(c,pesq);
-
+	@Override
+	public void ExcluirCliente(Cliente c) {
+		clienteDao.ExcluirCliente(c);
+	}	
+	@Override
+	public void InserirCliente(Cliente c) {
+		clienteDao.InserirCliente(c);
+	}
+	@Override
+	public Vector<Cliente> listarClientes(){
+		return clienteDao.listarClientes();
 	}
 
 }

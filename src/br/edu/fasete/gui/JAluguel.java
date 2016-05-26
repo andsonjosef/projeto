@@ -661,10 +661,11 @@ public void mouseClicked(MouseEvent e) {
 		JButton button_1 = new JButton("Salvar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
 
 				
-				String cpf = c.getCPF();
-				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
+				
 			}
 		});
 		button_1.setBounds(704, 261, 89, 23);

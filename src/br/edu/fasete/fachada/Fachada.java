@@ -5,10 +5,13 @@ import java.util.Vector;
 
 import javax.swing.JTable;
 
+import br.edu.fasete.cadastro.CadastroAluguel;
 import br.edu.fasete.cadastro.CadastroCliente;
 import br.edu.fasete.cadastro.CadastroRoupa;
+import br.edu.fasete.cadastro.InterfaceCadastroAluguel;
 import br.edu.fasete.cadastro.InterfaceCadastroCliente;
 import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
+import br.edu.fasete.dao.AluguelDaoJdbc;
 import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.RoupaDao;
 import br.edu.fasete.dao.RoupaDaoJdbc;
@@ -21,6 +24,7 @@ import br.edu.fasete.principais.Roupa;
 public class Fachada {
 private InterfaceCadastroCliente cadastroCliente;
 private InterfaceCadastroRoupa cadastroRoupa;
+private InterfaceCadastroAluguel cadastroAluguel;
 
 private static Fachada instancia;
 
@@ -33,72 +37,70 @@ public static Fachada getInstancia() {
 private Fachada() {
 	cadastroCliente = new CadastroCliente(new ClienteDaoJdbc());
 	cadastroRoupa = new CadastroRoupa(new RoupaDaoJdbc());
-	
+	cadastroAluguel = new CadastroAluguel(new AluguelDaoJdbc());
 }
 
 //------------Cliente----------------------
-
-public void InserirCliente(Cliente c){
-	cadastroCliente.InserirCliente(c);
-}
-
-public void ExcluirCliente(Cliente c){
-	cadastroCliente.ExcluirCliente(c);
-}
-public Vector<Cliente> listarClientes(){
-	return cadastroCliente.listarClientes();
-}
 public void AtualizarCliente(Cliente c, String svalueCpf){
 	cadastroCliente.AtualizarCliente(c,svalueCpf);
-}
-public void BuscarClientenome(Cliente c, String pesq){
-	cadastroCliente.BuscarClientenome(c,pesq);
 }
 public void BuscarClienteCPF(Cliente c, String pesq){
 	cadastroCliente.BuscarClienteCPF(c,pesq);
 }
+public void BuscarClientenome(Cliente c, String pesq){
+	cadastroCliente.BuscarClientenome(c,pesq);
+}
+public void ExcluirCliente(Cliente c){
+	cadastroCliente.ExcluirCliente(c);
+}
+public void InserirCliente(Cliente c){
+	cadastroCliente.InserirCliente(c);
+}
+public Vector<Cliente> listarClientes(){
+	return cadastroCliente.listarClientes();
+}
 
 //---------------Roupa-----------------------
-
-public void InserirRoupa(Roupa r){
-	cadastroRoupa.InserirRoupa(r);
-}
-
-public void ExcluirRoupa(Roupa r){
-	cadastroRoupa.ExcluirRoupa(r);
-}
-public Vector<Roupa> listarRoupas(){
-	return cadastroRoupa.listarRoupas();
-}
-
-public Vector<Roupa> listarRoupasSele(){
-	return cadastroRoupa.listarRoupasSele();
-}
 public void AtualizarRoupa(Roupa r){
 	cadastroRoupa.AtualizarRoupa(r);
 }
 public void BuscarRoupa(Roupa r){
 	cadastroRoupa.BuscarRoupa(r);
 }
-public void limparTabela(){
-	cadastroRoupa.limparTabela();
+public void ExcluirRoupa(Roupa r){
+	cadastroRoupa.ExcluirRoupa(r);
 }
-public void InserirRoupaSele(Roupa r){
-	cadastroRoupa.InserirRoupaSele(r);
+public void InserirRoupa(Roupa r){
+	cadastroRoupa.InserirRoupa(r);
 }
+public Vector<Roupa> listarRoupas(){
+	return cadastroRoupa.listarRoupas();
+}
+
+//---------------Aluguel-----------------------
 public void ExcluirRoupaSele(Roupa r){
-	cadastroRoupa.ExcluirRoupaSele(r);
+	cadastroAluguel.ExcluirRoupaSele(r);
 }
 public void InserirLista(Roupa r, Cliente c){
-	cadastroRoupa.InserirLista(r, c);
+	cadastroAluguel.InserirLista(r, c);
+}
+public void InserirRoupaSele(Roupa r){
+	cadastroAluguel.InserirRoupaSele(r);
 }
 public void limparLista(){
-	cadastroRoupa.limparLista();
+	cadastroAluguel.limparLista();
+}
+public void limparTabela(){
+	cadastroAluguel.limparTabela();
 }
 public Vector<Roupa> listarRoupaLista(){
-	return cadastroRoupa.listarRoupaLista();
+	return cadastroAluguel.listarRoupaLista();
+}
+public Vector<Roupa> listarRoupasSele(){
+	return cadastroAluguel.listarRoupasSele();
 }
 public void SomaPreco(Aluguel a){
-	cadastroRoupa.SomaPreco(a);
+	cadastroAluguel.SomaPreco(a);
 }
+
 }

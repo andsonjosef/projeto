@@ -9,57 +9,35 @@ import br.edu.fasete.principais.Roupa;
 
 public class CadastroRoupa implements InterfaceCadastroRoupa {
 	private RoupaDao roupaDao;
+	
 	public CadastroRoupa(RoupaDao roupaDao) {
 		this.roupaDao = roupaDao;
-	}
-	@Override
-	public void InserirRoupa(Roupa r){
-		roupaDao.InserirRoupa(r);
-	}
-
-	@Override
-	public void ExcluirRoupa(Roupa r) {
-		roupaDao.ExcluirRoupa(r);
-
-	}
-
-	@Override
-	public Vector<Roupa> listarRoupas() {
-		return roupaDao.listarRoupas();
-	}
-	
-	public Vector<Roupa> listarRoupasSele() {
-		return roupaDao.listarRoupasSele();
 	}
 	
 	@Override
 	public void AtualizarRoupa(Roupa r) {
 		roupaDao.AtualizarRoupa(r);
 	}
-
+	
 	@Override
 	public void BuscarRoupa(Roupa r) {
 		roupaDao.BuscarRoupa(r);
 	}
-	public void limparTabela(){
-		roupaDao.limparTabela();
+	
+	@Override
+	public void ExcluirRoupa(Roupa r) {
+		roupaDao.ExcluirRoupa(r);
+
 	}
-	public void InserirRoupaSele(Roupa r){
-		roupaDao.InserirRoupaSele(r);
+	@Override
+	public void InserirRoupa(Roupa r){
+		roupaDao.InserirRoupa(r);
 	}
-	 public void ExcluirRoupaSele(Roupa r){
-		 roupaDao.ExcluirRoupaSele(r);
-	 }
-	 public void InserirLista(Roupa r, Cliente c){
-		 roupaDao.InserirLista(r, c);
-	 }
-	 public void limparLista(){
-		 roupaDao.limparLista();
-	 }
-	 public Vector<Roupa> listarRoupaLista(){
-		 return roupaDao.listarRoupaLista();
-	 }
-	 public void SomaPreco(Aluguel a){
-		 roupaDao.SomaPreco(a);
-	 }
+	
+
+	@Override
+	public Vector<Roupa> listarRoupas() {
+		return roupaDao.listarRoupas();
+	}
+	
 }
