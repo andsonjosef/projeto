@@ -31,10 +31,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.TextStyle;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
@@ -49,6 +51,8 @@ import javax.swing.DropMode;
 import java.awt.Component;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.util.*;
+import java.text.*;
 
 public class JAluguel extends JInternalFrame {
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
@@ -86,6 +90,8 @@ public class JAluguel extends JInternalFrame {
 	private JTextField DataDevo;
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
+	java.util.Date x;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -126,28 +132,18 @@ public class JAluguel extends JInternalFrame {
 					carregarTabelaRoupa();
 					Fachada.getInstancia().limparTabela();
 					Fachada.getInstancia().limparLista();
-					carregarTabelaRoupasele();
-					
-					
+					carregarTabelaRoupasele();	
 				}
 				
 				if(tabbedPane.getSelectedIndex() == 2) {
 					carregarTabelaRoupa();
 					Fachada.getInstancia().limparTabela();
-				
 					carregarTabelaRoupaLista();
-					
-					
 				}
-				if(tabbedPane.isShowing()) {
-					
-					Fachada.getInstancia().limparTabela();
-					
-					carregarTabela();
-					
-				}
-				
-			
+				if(tabbedPane.isShowing()) {	
+					Fachada.getInstancia().limparTabela();	
+					carregarTabela();	
+				}	
 			}
 		});
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -665,10 +661,21 @@ public void mouseClicked(MouseEvent e) {
 		JButton button_1 = new JButton("Salvar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if(a.isErro()==true){
 				Fachada.getInstancia().InserirListaFinal(r, c);
+				}
+				a.setCodCliente(c.getCodPessoa());
+				a.setDataLoca(dataLoca.getText());
+				a.setDataEntre(DataDevo.getText());
+				a.setPreco(Float.parseFloat((precoFieldal.getText())));
+				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
+				Fachada.getInstancia().InserirRegistro(a);
+				
 				
 			}
 		});
+		
 		button_1.setBounds(704, 261, 89, 23);
 		editPanel.add(button_1);
 		
@@ -691,6 +698,7 @@ public void mouseClicked(MouseEvent e) {
 		DataDevo.setColumns(10);
 		
 		precoFieldal = new JTextField();
+		precoFieldal.setEditable(false);
 		precoFieldal.setBounds(554, 123, 86, 20);
 		editPanel.add(precoFieldal);
 		precoFieldal.setColumns(10);

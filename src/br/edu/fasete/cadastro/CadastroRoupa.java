@@ -3,8 +3,6 @@ package br.edu.fasete.cadastro;
 import java.util.Vector;
 
 import br.edu.fasete.dao.RoupaDao;
-import br.edu.fasete.principais.Aluguel;
-import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
 public class CadastroRoupa implements InterfaceCadastroRoupa {

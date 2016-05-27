@@ -1,19 +1,18 @@
 package br.edu.fasete.fachada;
 
-import java.sql.SQLException;
+
 import java.util.Vector;
-
-import javax.swing.JTable;
-
 import br.edu.fasete.cadastro.CadastroAluguel;
 import br.edu.fasete.cadastro.CadastroCliente;
 import br.edu.fasete.cadastro.CadastroRoupa;
+import br.edu.fasete.cadastro.CadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroAluguel;
 import br.edu.fasete.cadastro.InterfaceCadastroCliente;
+import br.edu.fasete.cadastro.InterfaceCadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
 import br.edu.fasete.dao.AluguelDaoJdbc;
 import br.edu.fasete.dao.ClienteDaoJdbc;
-import br.edu.fasete.dao.RoupaDao;
+import br.edu.fasete.dao.RegistroDaoJdbc;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
@@ -25,6 +24,7 @@ public class Fachada {
 private InterfaceCadastroCliente cadastroCliente;
 private InterfaceCadastroRoupa cadastroRoupa;
 private InterfaceCadastroAluguel cadastroAluguel;
+private InterfaceCadastroRegistro cadastroRegistro;
 
 private static Fachada instancia;
 
@@ -38,6 +38,7 @@ private Fachada() {
 	cadastroCliente = new CadastroCliente(new ClienteDaoJdbc());
 	cadastroRoupa = new CadastroRoupa(new RoupaDaoJdbc());
 	cadastroAluguel = new CadastroAluguel(new AluguelDaoJdbc());
+	cadastroRegistro = new CadastroRegistro(new RegistroDaoJdbc());
 }
 
 //------------Cliente----------------------
@@ -104,6 +105,11 @@ public Vector<Roupa> listarRoupasSele(){
 }
 public void SomaPreco(Aluguel a){
 	cadastroAluguel.SomaPreco(a);
+}
+//---------------Registro-----------------------
+
+public void InserirRegistro(Aluguel a){
+	 cadastroRegistro.InserirRegistro(a);
 }
 
 }

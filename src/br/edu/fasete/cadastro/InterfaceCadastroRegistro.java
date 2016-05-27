@@ -1,10 +1,9 @@
-package br.edu.fasete.dao;
+package br.edu.fasete.cadastro;
 
 import br.edu.fasete.principais.Aluguel;
 
-
-public interface RegistroDao {
-	
+public interface InterfaceCadastroRegistro {
 	public void InserirRegistro(Aluguel a);
+
 
 }

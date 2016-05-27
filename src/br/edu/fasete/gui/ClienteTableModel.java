@@ -6,7 +6,12 @@ import br.edu.fasete.principais.Cliente;
 
 
 public class ClienteTableModel extends DefaultTableModel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] columnName = {"nome", "CPF","telefone", "bairro","endereco","numero"};
+	@SuppressWarnings("rawtypes")
 	private Class[] columnClass = {Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class};
 	
 	

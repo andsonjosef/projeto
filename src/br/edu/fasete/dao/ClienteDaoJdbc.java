@@ -4,11 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
-
-import org.omg.CORBA.ExceptionList;
-
 import br.edu.fasete.principais.Cliente;
 
 

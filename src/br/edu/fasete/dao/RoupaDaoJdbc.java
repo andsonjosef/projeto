@@ -4,11 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
-
-import br.edu.fasete.principais.Aluguel;
-import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
 public class RoupaDaoJdbc implements RoupaDao {
