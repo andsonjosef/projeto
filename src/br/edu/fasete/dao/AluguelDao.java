@@ -11,6 +11,7 @@ public interface AluguelDao {
 	 public void InserirLista(Roupa r, Cliente c); 
 	 public void InserirRoupaSele(Roupa r);
 	 public void limparLista();
+	 public void InserirListaFinal(Roupa r, Cliente c);
 	 public void limparTabela();
 	 public Vector<Roupa> listarRoupaLista();
 	 public Vector<Roupa> listarRoupasSele();

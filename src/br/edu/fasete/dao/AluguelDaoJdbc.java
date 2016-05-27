@@ -53,7 +53,52 @@ public class AluguelDaoJdbc implements AluguelDao {
 
 	}
 	///
-	
+	public void InserirListaFinal(Roupa r, Cliente c) {
+		
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("SELECT * FROM loja.lista WHERE codCliente = ?");
+			    stmt.setInt(1,c.getCodPessoa());
+			    ResultSet resultado = stmt.executeQuery();
+		  
+					  while(resultado.next()) {
+							r.setTipo(resultado.getString("tipo"));
+							r.setModelo(resultado.getString("modelo"));
+							r.setTamanho(resultado.getString("tamanho"));
+							r.setGenero(resultado.getString("genero"));
+							r.setCor(resultado.getString("cor"));
+							r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+							r.setPreco(resultado.getFloat("preco"));
+							r.setCodRoupa(resultado.getInt("codRoupa"));
+							 try {
+								 
+								   stmt =  (PreparedStatement) Conexao.getConnection()
+								   .prepareStatement("insert into loja.listafinal  (tipo,modelo,tamanho,genero,cor,disponibilidade,preco,codRoupa,codCliente) values (?,?,?,?,?,?,?,?,?)") ;
+								   stmt.setString(1,r.getTipo());
+								   stmt.setString(2,r.getModelo());
+								   stmt.setString(3,r.getTamanho());
+								   stmt.setString(4,r.getGenero());
+								   stmt.setString(5,r.getCor());
+								   stmt.setBoolean(6,r.getDisponibilidade());
+								   stmt.setFloat(7,r.getPreco());
+								   stmt.setInt(8, r.getCodRoupa());
+								   stmt.setInt(9, c.getCodPessoa());
+								   stmt.executeUpdate();
+								  
+								 
+						}catch(Exception es){
+							  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+							  JOptionPane.showMessageDialog(null,es);
+						  }
+						}
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
+		
+		 
+	}
+	///
 	public void InserirRoupaSele(Roupa r) {
 		  try {
 			    

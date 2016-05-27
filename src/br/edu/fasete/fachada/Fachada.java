@@ -84,6 +84,9 @@ public void ExcluirRoupaSele(Roupa r){
 public void InserirLista(Roupa r, Cliente c){
 	cadastroAluguel.InserirLista(r, c);
 }
+public void InserirListaFinal(Roupa r, Cliente c){
+	cadastroAluguel.InserirListaFinal(r, c);
+}
 public void InserirRoupaSele(Roupa r){
 	cadastroAluguel.InserirRoupaSele(r);
 }

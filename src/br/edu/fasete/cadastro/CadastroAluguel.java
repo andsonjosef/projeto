@@ -25,7 +25,9 @@ public class CadastroAluguel implements InterfaceCadastroAluguel{
 		aluguelDao.InserirLista(r, c);
 		
 	}
-
+	public void InserirListaFinal(Roupa r, Cliente c){
+		aluguelDao.InserirListaFinal(r, c);
+	}
 	@Override
 	public void InserirRoupaSele(Roupa r) {
 		aluguelDao.InserirRoupaSele(r);

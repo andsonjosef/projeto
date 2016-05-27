@@ -114,6 +114,7 @@ public class JAluguel extends JInternalFrame {
 		setBounds(100, 100, 860, 640);
 		
 		Fachada.getInstancia().limparTabela();
+		Fachada.getInstancia().limparLista();
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new ChangeListener() {
@@ -124,6 +125,7 @@ public class JAluguel extends JInternalFrame {
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
 					Fachada.getInstancia().limparTabela();
+					Fachada.getInstancia().limparLista();
 					carregarTabelaRoupasele();
 					
 					
@@ -132,11 +134,13 @@ public class JAluguel extends JInternalFrame {
 				if(tabbedPane.getSelectedIndex() == 2) {
 					carregarTabelaRoupa();
 					Fachada.getInstancia().limparTabela();
+				
 					carregarTabelaRoupaLista();
 					
 					
 				}
 				if(tabbedPane.isShowing()) {
+					
 					Fachada.getInstancia().limparTabela();
 					
 					carregarTabela();
@@ -661,10 +665,7 @@ public void mouseClicked(MouseEvent e) {
 		JButton button_1 = new JButton("Salvar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-
-				
+				Fachada.getInstancia().InserirListaFinal(r, c);
 				
 			}
 		});
