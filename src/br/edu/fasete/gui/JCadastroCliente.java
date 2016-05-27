@@ -2,7 +2,6 @@ package br.edu.fasete.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,15 +14,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.MaskFormatter;
-
-import com.mysql.jdbc.StringUtils;
-
 import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Cliente;
-
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -32,16 +26,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.time.format.TextStyle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
-import javax.swing.DropMode;
+
 
 public class JCadastroCliente extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
 	int srow;
 	String svalueCpf;
@@ -90,6 +87,7 @@ public class JCadastroCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	
+	@SuppressWarnings("unused")
 	public JCadastroCliente() {
 		setIconifiable(true);
 		setMaximizable(true);
@@ -118,7 +116,7 @@ public class JCadastroCliente extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		 
@@ -130,7 +128,6 @@ public class JCadastroCliente extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -294,7 +291,7 @@ public class JCadastroCliente extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				
@@ -309,7 +306,7 @@ public class JCadastroCliente extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+				
 					e1.printStackTrace();
 					}
 				
@@ -396,6 +393,7 @@ public class JCadastroCliente extends JInternalFrame {
 				//------------------------SALVAR--------------------------------------
 				
 				btnSalvar.addActionListener(new ActionListener() {
+					@SuppressWarnings("resource")
 					public void actionPerformed(ActionEvent e) {
 Cliente c = new Cliente();
 if(nomeField.getText().isEmpty()){

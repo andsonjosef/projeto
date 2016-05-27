@@ -1,8 +1,6 @@
 package br.edu.fasete.gui;
 
 import javax.swing.table.DefaultTableModel;
-
-import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
 
 public class RoupaTableModel extends DefaultTableModel {
@@ -12,6 +10,7 @@ public class RoupaTableModel extends DefaultTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String[] columnName = {"codigo","Tipo", "Modelo","Tamanho","Gênero","Cor","Preço"};
+	@SuppressWarnings("rawtypes")
 	private Class[] columnClass = {Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class,Roupa.class};
 	
 	

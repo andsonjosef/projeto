@@ -17,7 +17,7 @@ public class RegistroDaoJdbc implements RegistroDao{
 			 stmt.setFloat(4,a.getPreco());
 			 stmt.setFloat(5, a.getPrecoTotal());
 			 stmt.executeUpdate();
-			 OptionPane.showMessageDialog(null,"Registro cadastrado!");
+			 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
 			 a.setErro(false);
 		}catch(Exception es){
 			a.setErro(true);

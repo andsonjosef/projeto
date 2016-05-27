@@ -1,7 +1,5 @@
 package br.edu.fasete.principais;
 
-import java.sql.Date;
-
 public class Aluguel {
 	int codAluguel;
 	int codCliente;

@@ -9,52 +9,36 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.MaskFormatter;
-
-import com.mysql.jdbc.StringUtils;
-
 import br.edu.fasete.dao.ClienteDaoJdbc;
-import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Lista;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.TextStyle;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
-
 import javax.swing.JFormattedTextField;
-import javax.swing.DropMode;
-import java.awt.Component;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.util.*;
-import java.text.*;
 
 public class JAluguel extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
 	RoupaDaoJdbc rou = new RoupaDaoJdbc();
 	int srow;
@@ -113,6 +97,7 @@ public class JAluguel extends JInternalFrame {
 	 * Create the frame.
 	 */
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JAluguel() {
 		setIconifiable(true);
 		setMaximizable(true);
@@ -149,6 +134,7 @@ public class JAluguel extends JInternalFrame {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
+		@SuppressWarnings("unused")
 		JTabbedPane PanelCadastro = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane);
 		
@@ -158,7 +144,7 @@ public class JAluguel extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+		
 			e1.printStackTrace();
 		}
 		 
@@ -170,7 +156,7 @@ public class JAluguel extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 				
@@ -181,7 +167,7 @@ public class JAluguel extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				 
@@ -191,7 +177,7 @@ public class JAluguel extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				
@@ -201,7 +187,7 @@ public class JAluguel extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 					}
 		
@@ -550,6 +536,7 @@ public class JAluguel extends JInternalFrame {
 		
 		tabelaRoupasele = new JTable(new RoupaTableModel());
 		tabelaRoupasele.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("unused")
 			public void tabelaRoupasele(MouseEvent arg0) {
 				srow = tabelaRoupaAluguel.getSelectedRow();
 				
@@ -623,6 +610,7 @@ public void mouseClicked(MouseEvent e) {
 		svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
 		r.setCodRoupa(svaluecoder);
 		
+		@SuppressWarnings("unused")
 		int pesq = svaluecoder;
 		
 		
@@ -727,7 +715,7 @@ public void mouseClicked(MouseEvent e) {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		 
@@ -737,7 +725,7 @@ public void mouseClicked(MouseEvent e) {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 	
