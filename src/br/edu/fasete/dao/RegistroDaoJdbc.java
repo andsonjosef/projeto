@@ -27,7 +27,7 @@ public class RegistroDaoJdbc implements RegistroDao{
 			a.setErro(true);
 							  JOptionPane.showMessageDialog(null,es);
 		}
-	/*try {
+	try {
 		 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
 				    .prepareStatement("update loja.cliente set registrado = ? where codCliente = ?");
 		 Cliente c = new Cliente();
@@ -44,23 +44,15 @@ public class RegistroDaoJdbc implements RegistroDao{
 	    JOptionPane.showMessageDialog(null,"Dados invalidos!");
 	  }
 	 
-	*/ 
+	
 	
 	}
 	
 	public void dispinibilidade( Roupa r){
-		try {
-		   
-			PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-			.prepareStatement("SELECT * FROM loja.listaFinal");
-		    
-		    ResultSet resultado = stmt.executeQuery();
-	  
-				  while(resultado.next()) {
-						r.setCodRoupa(resultado.getInt("codRoupa"));
+		
 						 try {
-							   stmt =  (PreparedStatement) Conexao.getConnection()
-									    .prepareStatement("update loja.cliente set disponibilidade = ? where codRoupa = ?");
+							 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
+									    .prepareStatement("update loja.roupa set disponibilidade = ? where codRoupa = ?");
 							 
 							 r.setDisponibilidade(true);
 						   stmt.setBoolean(1,r.isDisponibilidade());
@@ -68,14 +60,8 @@ public class RegistroDaoJdbc implements RegistroDao{
 						   r.setDisponibilidade(false);
 						   
 						   stmt.executeUpdate();
-							 JOptionPane.showMessageDialog(null,"Cliente editado!");
-						  
-						   
-						  }catch(Exception e){
-						    JOptionPane.showMessageDialog(null,"Dados invalidos!");
-						  }
-					}
-				 
+							 
+		
 	  }catch(Exception e){
 		  JOptionPane.showMessageDialog(null,e);
 	  } 

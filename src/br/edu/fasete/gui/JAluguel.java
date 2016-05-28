@@ -665,14 +665,16 @@ public void mouseClicked(MouseEvent e) {
 					
 					JOptionPane.showMessageDialog(null, r.getCodRoupa());
 					Fachada.getInstancia().InserirListaFinal(r, c);
+					Fachada.getInstancia().dispinibilidade(r);
 					i++;
 				}
+				
 				a.setCodCliente(c.getCodCliente());
 				a.setDataLoca(dataLoca.getText());
 				a.setDataEntre(DataDevo.getText());
 				a.setPreco(Float.parseFloat((precoFieldal.getText())));
 				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
-				
+				Fachada.getInstancia().InserirRegistro(a);
 				
 				
 				
