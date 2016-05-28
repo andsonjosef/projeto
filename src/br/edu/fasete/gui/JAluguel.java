@@ -647,6 +647,41 @@ public void mouseClicked(MouseEvent e) {
 		button.setBounds(554, 261, 89, 23);
 		editPanel.add(button);
 		
+		JButton button_1 = new JButton("Salvar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+				int i= 0;	
+				int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
+				while(i<tamanho){
+					r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
+					r.setTipo((String) tabelaRoupaAluguel.getValueAt(i, 1));
+					r.setModelo((String) tabelaRoupaAluguel.getValueAt(i, 2));
+					r.setTamanho((String) tabelaRoupaAluguel.getValueAt(i, 3));
+					r.setGenero((String) tabelaRoupaAluguel.getValueAt(i, 4));
+					r.setCor((String) tabelaRoupaAluguel.getValueAt(i, 5));
+					r.setPreco((float) tabelaRoupaAluguel.getValueAt(i, 6));
+					
+					JOptionPane.showMessageDialog(null, r.getCodRoupa());
+					Fachada.getInstancia().InserirListaFinal(r, c);
+					i++;
+				}
+				a.setCodCliente(c.getCodCliente());
+				a.setDataLoca(dataLoca.getText());
+				a.setDataEntre(DataDevo.getText());
+				a.setPreco(Float.parseFloat((precoFieldal.getText())));
+				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
+				
+				
+				
+				
+			}
+		});
+		
+		button_1.setBounds(704, 261, 89, 23);
+		editPanel.add(button_1);
+		
 		JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
 		lblDataDeLocao.setBounds(554, 33, 97, 14);
 		editPanel.add(lblDataDeLocao);
@@ -688,26 +723,6 @@ public void mouseClicked(MouseEvent e) {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
 		comboBox.setBounds(554, 177, 153, 20);
 		editPanel.add(comboBox);
-		
-		JButton btnSalvar_1 = new JButton("Salvar");
-		btnSalvar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				a.setCodCliente(c.getCodCliente());
-				a.setDataLoca(dataLoca.getText());
-				a.setDataEntre(DataDevo.getText());
-				a.setPreco(Float.parseFloat((precoFieldal.getText())));
-				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
-				Fachada.getInstancia().InserirRegistro(a);
-				int i= 0;	
-				int tamanho = tabelaRoupa.getModel().getRowCount();
-				JOptionPane.showMessageDialog(null, tamanho);
-				
-			
-			}
-		});
-		btnSalvar_1.setBounds(679, 261, 89, 23);
-		editPanel.add(btnSalvar_1);
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("###.###.###-##");

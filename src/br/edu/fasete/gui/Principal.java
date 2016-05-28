@@ -102,7 +102,7 @@ public class Principal extends JFrame {
 		
 	
 		
-	JMenu menuRegistro = new JMenu("Registro");
+	/*JMenu menuRegistro = new JMenu("Registro");
 	barraMenu.add(menuRegistro);
 	
 	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
@@ -122,6 +122,7 @@ public class Principal extends JFrame {
 	contentPane.setLayout(new BorderLayout(0, 0));
 	desktop = new JDesktopPane();
 	contentPane.add(desktop);
+*/
 }	
 			
 		

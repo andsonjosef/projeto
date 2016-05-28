@@ -58,15 +58,16 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 	 try {
 								 
 		 PreparedStatement   stmt =  (PreparedStatement) Conexao.getConnection()
-	    .prepareStatement("insert into loja.listafinal  (tipo,modelo,tamanho,genero,cor,preco,codRoupa,codCliente) values (?,?,?,?,?,?,?,?)") ;
+	    .prepareStatement("insert into loja.listafinal  (tipo,modelo,tamanho,genero,cor,disponibilidade,preco,codRoupa,codCliente) values (?,?,?,?,?,?,?,?,?)") ;
 		 stmt.setString(1,r.getTipo());
 		 stmt.setString(2,r.getModelo());
 		 stmt.setString(3,r.getTamanho());
 		 stmt.setString(4,r.getGenero());
 		 stmt.setString(5,r.getCor());
-		 stmt.setFloat(6,r.getPreco());
-		 stmt.setInt(7, r.getCodRoupa());
-		 stmt.setInt(8, c.getCodCliente());
+		 stmt.setBoolean(6,r.isDisponibilidade());
+		 stmt.setFloat(7,r.getPreco());
+		 stmt.setInt(8, r.getCodRoupa());
+		 stmt.setInt(9, c.getCodCliente());
 		 stmt.executeUpdate();
 								 
 						}catch(Exception es){
