@@ -8,12 +8,13 @@ public class Cliente {
 	protected String CPF;
 	private String RG;
 	private String telefone;
-	private int codPessoa;
+	private int codCliente;
 	private String estado;
 	private String cidade;
 	private String bairro;
 	private String endereco;
 	private String numero;
+	boolean registrado;
 	
 	
 	
@@ -21,17 +22,18 @@ public class Cliente {
 	
 	ArrayList<Cliente> pessoas = new ArrayList<Cliente>();
 	
-	public Cliente(String nome,String CPF, String RG,String telefone, int codPessoa,String estado, String cidade, String bairro, String endereco, String numero){
+	public Cliente(String nome,String CPF, String RG,String telefone, int codCliente,String estado, String cidade, String bairro, String endereco, String numero, boolean registrado){
 		this.nome = nome;
 		this.CPF = CPF;
 		this.RG = RG;
 		this.telefone = telefone;
-		this.codPessoa = codPessoa;
+		this.codCliente = codCliente;
 		this.estado = estado;
 		this.cidade = cidade;
 		this.bairro = bairro;
 		this.endereco = endereco;
 		this.numero = numero;
+		this.registrado = registrado;
 	}
 	
 	public String getNome() {
@@ -95,15 +97,23 @@ public class Cliente {
 	public void setPessoas(ArrayList<Cliente> pessoas) {
 		this.pessoas = pessoas;
 	}
-	public int getCodPessoa() {
-		return codPessoa;
+	public int getCodCliente() {
+		return codCliente;
 	}
-	public void setCodPessoa(int codPessoa) {
-		this.codPessoa = codPessoa;
+	public void setCodCliente(int codPessoa) {
+		this.codCliente = codPessoa;
 	}
 
 
 		
+	public boolean isRegistrado() {
+		return registrado;
+	}
+
+	public void setRegistrado(boolean registrado) {
+		this.registrado = registrado;
+	}
+
 	@Override
 	public String toString(){
 		return "nome: " + nome + " // " + "CPF: " + CPF + " // " + "RG: " + RG + " // " + "tel: " + telefone  ;

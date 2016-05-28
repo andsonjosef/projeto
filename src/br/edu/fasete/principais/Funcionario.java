@@ -13,8 +13,8 @@ public class Funcionario extends Cliente{
 	}
 
 	public Funcionario(String nome, String CPF, 
-					   String RG,  String telefone,int codPessoa,String estado, String cidade, String bairro, String endereco, String numero, int codFuncionario, String login, String senha,boolean acessar) {
-		super(nome, CPF, RG, telefone,codPessoa,estado,cidade,bairro,endereco,numero );
+					   String RG,  String telefone,int codCliente,String estado, String cidade, String bairro, String endereco, String numero, int codFuncionario, String login, String senha,boolean acessar,boolean registro) {
+		super(nome, CPF, RG, telefone,codCliente,estado,cidade,bairro,endereco,numero,registro );
 		this.codFuncionario = codFuncionario;
 		this.login = login;
 		this.senha = senha;

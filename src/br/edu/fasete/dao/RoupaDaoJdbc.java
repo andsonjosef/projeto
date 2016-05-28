@@ -30,7 +30,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 			   stmt.setString(3,r.getTamanho());
 			   stmt.setString(4,r.getGenero());
 			   stmt.setString(5,r.getCor());
-			   stmt.setBoolean(6,r.getDisponibilidade());
+			   stmt.setBoolean(6,r.isDisponibilidade());
 			   stmt.setFloat(7,r.getPreco());
 			   stmt.setInt(8, codRoupa);
 			   stmt.executeUpdate();
@@ -107,7 +107,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 			   stmt.setString(3,r.getTamanho());
 			   stmt.setString(4,r.getGenero());
 			   stmt.setString(5,r.getCor());
-			   stmt.setBoolean(6,r.getDisponibilidade());
+			   stmt.setBoolean(6,r.isDisponibilidade());
 			   stmt.setFloat(7,r.getPreco());
 			   stmt.executeUpdate();
 			   
@@ -128,7 +128,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public Vector<Roupa> listarRoupas() {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa ");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa where disponibilidade = 0 ");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();

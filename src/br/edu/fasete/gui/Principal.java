@@ -99,8 +99,30 @@ public class Principal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		desktop = new JDesktopPane();
 		contentPane.add(desktop);
-	}		
-				
+		
+	
+		
+	JMenu menuRegistro = new JMenu("Registro");
+	barraMenu.add(menuRegistro);
+	
+	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
+	menuCadastroRegistro.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			JRegistro janela = new JRegistro();
+			desktop.add(janela);
+			janela.setVisible(true);
+		}
+	});
+	menuRegistro.add(menuCadastroRegistro);
+	
+	
+	contentPane = new JPanel();
+	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	setContentPane(contentPane);
+	contentPane.setLayout(new BorderLayout(0, 0));
+	desktop = new JDesktopPane();
+	contentPane.add(desktop);
+}	
 			
 		
 	}

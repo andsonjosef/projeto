@@ -111,5 +111,7 @@ public void SomaPreco(Aluguel a){
 public void InserirRegistro(Aluguel a){
 	 cadastroRegistro.InserirRegistro(a);
 }
-
+public void dispinibilidade( Roupa r){
+	cadastroRegistro.dispinibilidade(r);
+}
 }

@@ -34,7 +34,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class JAluguel extends JInternalFrame {
+public class JRegistro extends JInternalFrame {
 	/**
 	 * 
 	 */
@@ -83,7 +83,7 @@ public class JAluguel extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JAluguel frame = new JAluguel();
+					JRegistro frame = new JRegistro();
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -98,7 +98,7 @@ public class JAluguel extends JInternalFrame {
 	 */
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public JAluguel() {
+	public JRegistro() {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
@@ -650,27 +650,17 @@ public void mouseClicked(MouseEvent e) {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				if(a.isErro()==true){
+				Fachada.getInstancia().InserirListaFinal(r, c);
+				}
 				a.setCodCliente(c.getCodCliente());
 				a.setDataLoca(dataLoca.getText());
 				a.setDataEntre(DataDevo.getText());
 				a.setPreco(Float.parseFloat((precoFieldal.getText())));
 				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
 				Fachada.getInstancia().InserirRegistro(a);
-				int i= 0;	
-				int tamanho = tabelaRoupa.getRowCount();
-				while(i < tamanho){
-
-					   
-					    r.setCodRoupa((int) tabelaRoupa.getValueAt(tamanho, 0));  
-					    r.setTipo((String) tabelaRoupa.getValueAt(tamanho, 1));
-					    r.setModelo((String) tabelaRoupa.getValueAt(tamanho, 2));
-					    r.setTamanho((String) tabelaRoupa.getValueAt(tamanho, 3));
-					    r.setGenero((String) tabelaRoupa.getValueAt(tamanho, 4));
-					    r.setCor((String) tabelaRoupa.getValueAt(tamanho, 5));
-					    r.setPreco((float) tabelaRoupa.getValueAt(tamanho, 6));
-					Fachada.getInstancia().InserirListaFinal(r, c);
-					i++;
-				}
+				
+				
 			}
 		});
 		

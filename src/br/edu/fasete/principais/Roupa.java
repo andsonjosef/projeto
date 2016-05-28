@@ -63,13 +63,14 @@ public class Roupa {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}	
-	public boolean getDisponibilidade() {
+	
+	
+	public boolean isDisponibilidade() {
 		return disponibilidade;
 	}
 	public void setDisponibilidade(boolean disponibilidade) {
 		this.disponibilidade = disponibilidade;
 	}
-	
 	public int getCodRoupa(){
 		return codRoupa;
 	}

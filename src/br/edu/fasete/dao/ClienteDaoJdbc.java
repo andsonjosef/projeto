@@ -93,7 +93,7 @@ ResultSet rs = stmt.executeQuery();
 
  while(rs.next())
  {
- c.setCodPessoa(rs.getInt("codCliente"));
+ c.setCodCliente(rs.getInt("codCliente"));
  c.setNome(rs.getString("nome"));
  c.setCPF(rs.getString("CPF"));
  c.setRG(rs.getString("RG"));
@@ -165,7 +165,7 @@ ResultSet rs = stmt.executeQuery();
 	public Vector<Cliente> listarClientes() {
 		Vector<Cliente> lista = new Vector<Cliente>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente ");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente where registrado = 0 ");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Cliente c = new Cliente();
