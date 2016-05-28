@@ -27,7 +27,7 @@ public class RegistroDaoJdbc implements RegistroDao{
 			a.setErro(true);
 							  JOptionPane.showMessageDialog(null,es);
 		}
-	 try {
+	/*try {
 		 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
 				    .prepareStatement("update loja.cliente set registrado = ? where codCliente = ?");
 		 Cliente c = new Cliente();
@@ -37,14 +37,14 @@ public class RegistroDaoJdbc implements RegistroDao{
 	   c.setRegistrado(false);
 	   
 	   stmt.executeUpdate();
-		 JOptionPane.showMessageDialog(null,"Cliente editado!");
+		 
 	  
 	   
 	  }catch(Exception e){
 	    JOptionPane.showMessageDialog(null,"Dados invalidos!");
 	  }
 	 
-	 
+	*/ 
 	
 	}
 	
