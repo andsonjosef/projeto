@@ -10,9 +10,9 @@ public class ClienteTableModel extends DefaultTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String[] columnName = {"nome", "CPF","telefone", "bairro","endereco","numero"};
+	private String[] columnName = {"nome", "CPF","telefone", "bairro","endereco","numero","codigo"};
 	@SuppressWarnings("rawtypes")
-	private Class[] columnClass = {Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class};
+	private Class[] columnClass = {Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class,Cliente.class};
 	
 	
 	public void adicionarCategoria(Cliente c) {
@@ -23,6 +23,7 @@ public class ClienteTableModel extends DefaultTableModel{
 		row[3] = c.getBairro();
 		row[4] = c.getEndereco();
 		row[5] = c.getNumero();
+		row[6] = c.getCodCliente();
 		
 		
 		addRow(row);

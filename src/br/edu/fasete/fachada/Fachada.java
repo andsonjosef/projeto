@@ -114,4 +114,10 @@ public void InserirRegistro(Aluguel a){
 public void dispinibilidade( Roupa r){
 	cadastroRegistro.dispinibilidade(r);
 }
+public Vector<Cliente> listarClientesReg(){
+	return cadastroRegistro.listarClientesReg();
+}
+public Vector<Roupa> listarRoupaListaFim(Cliente c){
+	return cadastroRegistro.listarRoupaListaFim(c);
+}
 }

@@ -88,7 +88,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 		    
 		PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 				 .prepareStatement("SELECT * FROM loja.cliente WHERE nome like ?");
-	   stmt.setString(1,pesq);
+	   stmt.setString(1,c.getNome());
 ResultSet rs = stmt.executeQuery();
 
  while(rs.next())

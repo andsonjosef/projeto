@@ -115,18 +115,17 @@ public class JRegistro extends JInternalFrame {
 				//Carregar tabela sempre que alternar para aba de relatórios
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
-					Fachada.getInstancia().limparTabela();
-					Fachada.getInstancia().limparLista();
+					
 					carregarTabelaRoupasele();	
 				}
 				
 				if(tabbedPane.getSelectedIndex() == 2) {
 					carregarTabelaRoupa();
-					Fachada.getInstancia().limparTabela();
-					carregarTabelaRoupaLista();
+					
+					
 				}
 				if(tabbedPane.isShowing()) {	
-					Fachada.getInstancia().limparTabela();	
+					
 					carregarTabela();	
 				}	
 			}
@@ -306,8 +305,9 @@ public class JRegistro extends JInternalFrame {
 					
 					btnSalvar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							String pesq = c.getCPF();
-							Fachada.getInstancia().BuscarClienteCPF(c, pesq);
+							nomeField2.setText(c.getNome());
+							
+							carregarTabelaRoupaLista();
 							
 							tabbedPane.setSelectedIndex(1);
 						}
@@ -345,6 +345,30 @@ public class JRegistro extends JInternalFrame {
 					scrollPane.setBounds(27, 11, 782, 253);
 					cadast.add(scrollPane);
 					scrollPane.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent e) {
+							
+							srow = tabelaCategoria.getSelectedRow();
+							c.setCodCliente((int) tabelaCategoria.getValueAt(srow, 6));
+							svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+							c.setNome(svalueName);
+							
+							String pesq = "";
+							pesq = svalueName;
+							
+							Fachada.getInstancia().BuscarClientenome(c,pesq);
+							nomeField.setText(c.getNome());
+							cpfField.setText(""+c.getCPF());
+							rgField.setText(c.getRG());
+							cidadeField.setText(c.getCidade());
+							estadoField.setText(c.getEstado());
+							enderecoField.setText(c.getEndereco());
+							numeroField.setText(""+c.getNumero());
+							bairroField.setText(c.getBairro());
+							telefoneField.setText(""+c.getTelefone());
+							
+						
+						
+						}
 					});
 					
 		tabelaCategoria.addMouseListener(new MouseAdapter() {
@@ -388,113 +412,9 @@ public class JRegistro extends JInternalFrame {
 			}
 			});
 		
-		JPanel exibirpanel = new JPanel();
-		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
-		exibirpanel.setLayout(null);
-		
-		JButton button_2 = new JButton("Salvar");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int linha = 0;
-				
-				int linhat = tabelaRoupasele.getRowCount();
-				
-				while(linha < linhat){
-				r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
-				r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
-				r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
-				r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
-				r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
-				r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
-				r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
-		
-				linha++;
-			
-				Fachada.getInstancia().InserirLista(r, c);
-				
-				}
-				
-				carregarTabelaRoupaLista();
-				Fachada.getInstancia().SomaPreco(a);
-				precoFieldal.setText(""+a.getPreco());
-				tabbedPane.setSelectedIndex(2);
-			}
-		});
-		button_2.setBounds(683, 537, 124, 34);
-		exibirpanel.add(button_2);
-		
-		JFormattedTextField precoField = new JFormattedTextField((Object) null);
-		precoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		precoField.setBounds(430, 495, 380, 25);
-		exibirpanel.add(precoField);
-		
-		JLabel lbltipo = new JLabel("Tipo");
-		lbltipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbltipo.setBounds(21, 378, 46, 14);
-		exibirpanel.add(lbltipo);
-		
-		JLabel lblModelo = new JLabel("Modelo");
-		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblModelo.setBounds(430, 378, 68, 14);
-		exibirpanel.add(lblModelo);
-		
-		JLabel lblCor = new JLabel("Cor");
-		lblCor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCor.setBounds(25, 475, 81, 14);
-		exibirpanel.add(lblCor);
-		
 		JPanel editPanel = new JPanel();
 		tabbedPane.addTab("Editar Clientes", null, editPanel, null);
 		editPanel.setLayout(null);
-		
-		tamanhoField = new JTextField();
-		tamanhoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tamanhoField.setColumns(10);
-		tamanhoField.setBounds(25, 445, 380, 25);
-		exibirpanel.add(tamanhoField);
-		
-		corField = new JTextField();
-		corField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		corField.setColumns(10);
-		corField.setBounds(25, 495, 380, 25);
-		exibirpanel.add(corField);
-		
-		JLabel lblTamanho = new JLabel("Tamanho");
-		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTamanho.setBounds(25, 422, 117, 20);
-		exibirpanel.add(lblTamanho);
-		
-		JLabel lblGenero = new JLabel("Genero");
-		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblGenero.setBounds(430, 425, 68, 14);
-		exibirpanel.add(lblGenero);
-		
-		tipoField = new JTextField();
-		tipoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tipoField.setColumns(10);
-		tipoField.setBounds(25, 395, 380, 25);
-		exibirpanel.add(tipoField);
-		
-		modeloField = new JTextField();
-		modeloField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		modeloField.setColumns(10);
-		modeloField.setBounds(430, 395, 377, 25);
-		exibirpanel.add(modeloField);
-		
-		JButton button_3 = new JButton("Cancelar");
-		button_3.setBounds(549, 537, 124, 34);
-		exibirpanel.add(button_3);
-		
-		JLabel lblPreo = new JLabel("Pre\u00E7o");
-		lblPreo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPreo.setBounds(430, 475, 68, 14);
-		exibirpanel.add(lblPreo);
-		
-		generoField = new JTextField();
-		generoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		generoField.setColumns(10);
-		generoField.setBounds(430, 445, 377, 25);
-		exibirpanel.add(generoField);
 		
 		///
 		tabelaRoupaAluguel = new JTable(new RoupaTableModel());
@@ -502,7 +422,6 @@ public class JRegistro extends JInternalFrame {
 			public void mouseReleased(MouseEvent arg0) {
 				srow = tabelaRoupaAluguel.getSelectedRow();
 				
-				svaluecoder = (int) tabelaRoupaAluguel.getValueAt(srow, 0);
 				
 			}
 			
@@ -517,111 +436,6 @@ public class JRegistro extends JInternalFrame {
 		editPanel.add(scrollPaneRoupasele);
 		scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 		});
-		
-		////
-		
-		tabelaRoupa = new JTable(new RoupaTableModel());
-		tabelaRoupa.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent arg0) {
-				srow = tabelaRoupa.getSelectedRow();
-				
-				svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
-				
-			}
-			
-		});
-		
-		
-		///
-		
-		tabelaRoupasele = new JTable(new RoupaTableModel());
-		tabelaRoupasele.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("unused")
-			public void tabelaRoupasele(MouseEvent arg0) {
-				srow = tabelaRoupaAluguel.getSelectedRow();
-				
-				svaluecoder = (int) tabelaRoupasele.getValueAt(srow, 0);
-				
-			}
-			
-		});
-		
-		tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
-		scrollPaneRoupaAluguel.setBounds(430, 11, 380, 311);
-		exibirpanel.add(scrollPaneRoupaAluguel);
-		scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
-		});
-		
-		////
-		
-		tabelaRoupa = new JTable(new RoupaTableModel());
-		tabelaRoupa.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent arg0) {
-				srow = tabelaRoupa.getSelectedRow();
-				
-				svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
-				
-			}
-			
-		});
-		
-		tabelaRoupa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa);
-		scrollPaneRoupa.setBounds(25, 11, 380, 311);
-		exibirpanel.add(scrollPaneRoupa);
-		
-		JButton btnSelecionar = new JButton("Selecionar");
-		btnSelecionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-			   int linha = tabelaRoupa.getSelectedRow();
-			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
-			   Fachada.getInstancia().InserirRoupaSele(r);
-			   carregarTabelaRoupasele();
-			  
-			    
-			}
-		});
-		btnSelecionar.setBounds(295, 337, 110, 23);
-		exibirpanel.add(btnSelecionar);
-		
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				  int linha = tabelaRoupasele.getSelectedRow();
-				    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-				    Fachada.getInstancia().ExcluirRoupaSele(r);
-				    carregarTabelaRoupasele();
-			}
-		});
-		btnRemover.setBounds(440, 333, 89, 23);
-		exibirpanel.add(btnRemover);
-		scrollPaneRoupa.addMouseListener(new MouseAdapter() {
-		});
-		
-		
-		tabelaRoupa.addMouseListener(new MouseAdapter() {
-public void mouseClicked(MouseEvent e) {
-		if(e.getClickCount() == 2) {
-		srow = tabelaRoupa.getSelectedRow();
-		
-		svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
-		r.setCodRoupa(svaluecoder);
-		
-		@SuppressWarnings("unused")
-		int pesq = svaluecoder;
-		
-		
-		Fachada.getInstancia().BuscarRoupa(r);
-		nomeField2.setText(c.getNome());
-		
-		tabbedPane.setSelectedIndex(2);
-
-}
-}
-});
 		
 		
 		
@@ -650,15 +464,7 @@ public void mouseClicked(MouseEvent e) {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(a.isErro()==true){
-				Fachada.getInstancia().InserirListaFinal(r, c);
-				}
-				a.setCodCliente(c.getCodCliente());
-				a.setDataLoca(dataLoca.getText());
-				a.setDataEntre(DataDevo.getText());
-				a.setPreco(Float.parseFloat((precoFieldal.getText())));
-				a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
-				Fachada.getInstancia().InserirRegistro(a);
+				
 				
 				
 			}
@@ -709,6 +515,213 @@ public void mouseClicked(MouseEvent e) {
 		comboBox.setBounds(554, 177, 153, 20);
 		editPanel.add(comboBox);
 		
+		JPanel exibirpanel = new JPanel();
+		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+		exibirpanel.setLayout(null);
+		
+		JButton button_2 = new JButton("Salvar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int linha = 0;
+				
+				int linhat = tabelaRoupasele.getRowCount();
+				
+				while(linha < linhat){
+				r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
+				r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
+				r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
+				r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
+				r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
+				r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
+				r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
+		
+				linha++;
+			
+				Fachada.getInstancia().InserirLista(r, c);
+				
+				}
+				
+				
+				Fachada.getInstancia().SomaPreco(a);
+				precoFieldal.setText(""+a.getPreco());
+				tabbedPane.setSelectedIndex(2);
+			}
+		});
+		button_2.setBounds(683, 537, 124, 34);
+		exibirpanel.add(button_2);
+		
+		JFormattedTextField precoField = new JFormattedTextField((Object) null);
+		precoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		precoField.setBounds(430, 495, 380, 25);
+		exibirpanel.add(precoField);
+		
+		JLabel lbltipo = new JLabel("Tipo");
+		lbltipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbltipo.setBounds(21, 378, 46, 14);
+		exibirpanel.add(lbltipo);
+		
+		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblModelo.setBounds(430, 378, 68, 14);
+		exibirpanel.add(lblModelo);
+		
+		JLabel lblCor = new JLabel("Cor");
+		lblCor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCor.setBounds(25, 475, 81, 14);
+		exibirpanel.add(lblCor);
+		
+		tamanhoField = new JTextField();
+		tamanhoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tamanhoField.setColumns(10);
+		tamanhoField.setBounds(25, 445, 380, 25);
+		exibirpanel.add(tamanhoField);
+		
+		corField = new JTextField();
+		corField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		corField.setColumns(10);
+		corField.setBounds(25, 495, 380, 25);
+		exibirpanel.add(corField);
+		
+		JLabel lblTamanho = new JLabel("Tamanho");
+		lblTamanho.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTamanho.setBounds(25, 422, 117, 20);
+		exibirpanel.add(lblTamanho);
+		
+		JLabel lblGenero = new JLabel("Genero");
+		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblGenero.setBounds(430, 425, 68, 14);
+		exibirpanel.add(lblGenero);
+		
+		tipoField = new JTextField();
+		tipoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tipoField.setColumns(10);
+		tipoField.setBounds(25, 395, 380, 25);
+		exibirpanel.add(tipoField);
+		
+		modeloField = new JTextField();
+		modeloField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		modeloField.setColumns(10);
+		modeloField.setBounds(430, 395, 377, 25);
+		exibirpanel.add(modeloField);
+		
+		JButton button_3 = new JButton("Cancelar");
+		button_3.setBounds(549, 537, 124, 34);
+		exibirpanel.add(button_3);
+		
+		JLabel lblPreo = new JLabel("Pre\u00E7o");
+		lblPreo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPreo.setBounds(430, 475, 68, 14);
+		exibirpanel.add(lblPreo);
+		
+		generoField = new JTextField();
+		generoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		generoField.setColumns(10);
+		generoField.setBounds(430, 445, 377, 25);
+		exibirpanel.add(generoField);
+		
+		////
+		
+		tabelaRoupa = new JTable(new RoupaTableModel());
+		tabelaRoupa.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent arg0) {
+				srow = tabelaRoupa.getSelectedRow();
+				
+				
+				
+			}
+			
+		});
+		
+		
+		///
+		
+		tabelaRoupasele = new JTable(new RoupaTableModel());
+		tabelaRoupasele.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("unused")
+			public void tabelaRoupasele(MouseEvent arg0) {
+				srow = tabelaRoupaAluguel.getSelectedRow();
+				
+				
+				
+			}
+			
+		});
+		
+		tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
+		scrollPaneRoupaAluguel.setBounds(430, 11, 380, 311);
+		exibirpanel.add(scrollPaneRoupaAluguel);
+		scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
+		});
+		
+		////
+		
+		tabelaRoupa = new JTable(new RoupaTableModel());
+		tabelaRoupa.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent arg0) {
+				srow = tabelaRoupa.getSelectedRow();
+				
+				
+				
+			}
+			
+		});
+		
+		tabelaRoupa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa);
+		scrollPaneRoupa.setBounds(25, 11, 380, 311);
+		exibirpanel.add(scrollPaneRoupa);
+		
+		JButton btnSelecionar = new JButton("Selecionar");
+		btnSelecionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			   int linha = tabelaRoupa.getSelectedRow();
+			    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
+			   Fachada.getInstancia().InserirRoupaSele(r);
+			   carregarTabelaRoupasele();
+			  
+			    
+			}
+		});
+		btnSelecionar.setBounds(295, 337, 110, 23);
+		exibirpanel.add(btnSelecionar);
+		
+		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				  int linha = tabelaRoupasele.getSelectedRow();
+				    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+				    Fachada.getInstancia().ExcluirRoupaSele(r);
+				    carregarTabelaRoupasele();
+			}
+		});
+		btnRemover.setBounds(440, 333, 89, 23);
+		exibirpanel.add(btnRemover);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		scrollPaneRoupa.addMouseListener(new MouseAdapter() {
+		});
+		
+		
+		tabelaRoupa.addMouseListener(new MouseAdapter() {
+public void mouseClicked(MouseEvent e) {
+		if(e.getClickCount() == 2) {
+		srow = tabelaRoupa.getSelectedRow();
+		
+		
+		
+		Fachada.getInstancia().BuscarRoupa(r);
+		nomeField2.setText(c.getNome());
+		
+		tabbedPane.setSelectedIndex(2);
+
+}
+}
+});
+		
 		try {
 			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
 			mascara.setPlaceholderCharacter('_');
@@ -734,7 +747,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
 		tableModel.setRowCount(0);
-		for(Cliente cat : Fachada.getInstancia().listarClientes()) {
+		for(Cliente cat : Fachada.getInstancia().listarClientesReg()) {
 			tableModel.adicionarCategoria(cat);
 		}
 	}
@@ -758,7 +771,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabelaRoupaLista() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupaAluguel.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupaLista()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupaListaFim(c)) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}

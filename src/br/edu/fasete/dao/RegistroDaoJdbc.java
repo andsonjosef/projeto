@@ -2,6 +2,8 @@ package br.edu.fasete.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import br.edu.fasete.principais.Aluguel;
@@ -66,6 +68,65 @@ public class RegistroDaoJdbc implements RegistroDao{
 		  JOptionPane.showMessageDialog(null,e);
 	  } 
 		
+	}
+
+	public Vector<Cliente> listarClientesReg() {
+		Vector<Cliente> lista = new Vector<Cliente>();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente where registrado = 1 ");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Cliente c = new Cliente();
+				
+				c.setNome(resultado.getString("nome"));
+				c.setCPF(resultado.getString("CPF"));
+				c.setRG(resultado.getString("RG"));
+				c.setTelefone(resultado.getString("telefone"));
+				c.setEstado(resultado.getString("estado"));
+				c.setCidade(resultado.getString("cidade"));
+				c.setBairro(resultado.getString("bairro"));
+				c.setEndereco(resultado.getString("endereco"));
+				c.setNumero(resultado.getString("numero"));
+				c.setCodCliente(resultado.getInt("codCliente"));
+				
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	public Vector<Roupa> listarRoupaListaFim(Cliente c) {
+		Vector<Roupa> lista = new Vector<Roupa>();
+		
+		
+		try {
+			
+			
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.listafinal WHERE codCliente = ?");
+			
+			    stmt.setInt(1,c.getCodCliente());
+			 
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Roupa r = new Roupa();
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	
 	}
 }
 
