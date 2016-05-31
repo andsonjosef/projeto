@@ -114,10 +114,17 @@ public void InserirRegistro(Aluguel a){
 public void dispinibilidade( Roupa r){
 	cadastroRegistro.dispinibilidade(r);
 }
+public void disponivel( Roupa r){
+	cadastroRegistro.disponivel(r);
+}
+public void ExcluirReg(Cliente c){
+	cadastroRegistro.ExcluirReg(c);
+}
 public Vector<Cliente> listarClientesReg(){
 	return cadastroRegistro.listarClientesReg();
 }
 public Vector<Roupa> listarRoupaListaFim(Cliente c){
 	return cadastroRegistro.listarRoupaListaFim(c);
 }
+
 }

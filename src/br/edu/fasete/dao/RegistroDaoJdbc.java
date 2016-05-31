@@ -66,10 +66,82 @@ public class RegistroDaoJdbc implements RegistroDao{
 		
 	  }catch(Exception e){
 		  JOptionPane.showMessageDialog(null,e);
-	  } 
+	  }
+	}
+						 ///
+						 
+						 
+	 public void disponivel( Roupa r){
+								
+							 try {
+								 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
+										    .prepareStatement("update loja.roupa set disponibilidade = ? where codRoupa = ?");
+								 
+								 r.setDisponibilidade(false);
+							   stmt.setBoolean(1,r.isDisponibilidade());
+							   stmt.setInt(2, r.getCodRoupa());
+							  
+							   
+							   stmt.executeUpdate();
+								 
+			
+			}catch(Exception e){
+	 } 
+							 try {
+								  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+								  .prepareStatement( "DELETE FROM loja.listafinal where codRoupa = ?");
+								  stmt.setInt(1,r.getCodRoupa());
+							      stmt.executeUpdate(); 
+							    
+							     
+							  }catch(Exception e){
+							    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+							  } 
+							 
 		
 	}
 
+	public void ExcluirReg(Cliente c) {
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement( "DELETE FROM loja.aluguel where codCliente = ?");
+			  stmt.setInt(1,c.getCodCliente());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+		 try {
+			 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement("update loja.Cliente set registrado = ? where codCliente= ?");
+			 
+			 c.setRegistrado(false);
+		   stmt.setBoolean(1,c.isRegistrado());
+		   stmt.setInt(2, c.getCodCliente());
+		   
+		   
+		   stmt.executeUpdate();
+			 
+
+}catch(Exception e){
+JOptionPane.showMessageDialog(null,e);
+} 
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement( "DELETE FROM loja.listafinal where codCliente =?");
+			  stmt.setInt(1,c.getCodCliente());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+		
+		
+	}
+	///
+	
 	public Vector<Cliente> listarClientesReg() {
 		Vector<Cliente> lista = new Vector<Cliente>();
 		try {

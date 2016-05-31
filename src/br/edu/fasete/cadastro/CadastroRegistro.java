@@ -20,6 +20,12 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	public void dispinibilidade( Roupa r){
 		registroDao.dispinibilidade(r);
 	}
+	public void ExcluirReg(Cliente c){
+		registroDao.ExcluirReg(c);
+	}
+	public void disponivel( Roupa r){
+		registroDao.disponivel(r);
+	}
 	public Vector<Cliente> listarClientesReg(){
 		return registroDao.listarClientesReg();
 	}

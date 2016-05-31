@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -310,6 +311,7 @@ public class JRegistro extends JInternalFrame {
 							carregarTabelaRoupaLista();
 							
 							tabbedPane.setSelectedIndex(1);
+							JOptionPane.showMessageDialog(null, c.getCodCliente());
 						}
 					});
 					
@@ -334,6 +336,7 @@ public class JRegistro extends JInternalFrame {
 							srow = tabelaCategoria.getSelectedRow();
 							svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 							svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+							
 							
 						}
 						
@@ -450,15 +453,24 @@ public class JRegistro extends JInternalFrame {
 		nomeField2.setBounds(10, 30, 482, 20);
 		editPanel.add(nomeField2);
 		
-		JButton button = new JButton("Cancelar");
-		button.addActionListener(new ActionListener() {
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int linha = tabelaRoupaAluguel.getRowCount();
 				
+				int i = 0 ;
+				while(i<linha){
+					r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
+					Fachada.getInstancia().disponivel(r);
+					i++;
+				}
 				
+				Fachada.getInstancia().ExcluirReg(c);
+				carregarTabelaRoupaLista();
 			}
 		});
-		button.setBounds(554, 261, 89, 23);
-		editPanel.add(button);
+		btnDeletar.setBounds(554, 261, 89, 23);
+		editPanel.add(btnDeletar);
 		
 		JButton button_1 = new JButton("Salvar");
 		button_1.addActionListener(new ActionListener() {

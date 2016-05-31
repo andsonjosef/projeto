@@ -9,8 +9,11 @@ import br.edu.fasete.principais.Roupa;
 public interface InterfaceCadastroRegistro {
 	public void InserirRegistro(Aluguel a);
 	public void dispinibilidade( Roupa r);
+	public void disponivel( Roupa r);
+	public void ExcluirReg(Cliente c);
 	public Vector<Cliente> listarClientesReg();
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
+	
 
 
 }
