@@ -487,16 +487,16 @@ public void actionPerformed(ActionEvent e) {
 		tabelaCategoria.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2) {
+					
+					
 				srow = tabelaCategoria.getSelectedRow();
 				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-
+				String pesq = svalueName;
 				if (opcao == 0){
-					String pesq;
-					pesq = cpfField.getText();
-					Fachada.getInstancia().BuscarClienteCPF(c,pesq);
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -506,10 +506,12 @@ public void actionPerformed(ActionEvent e) {
 				numeroField2.setText(""+c.getNumero());
 				bairroField2.setText(c.getBairro());
 				telefoneField2.setText(""+c.getTelefone());
-				tabbedPane.setSelectedIndex(2);
-			} }else {
 			
+				tabbedPane.setSelectedIndex(2);
+			} else {
+				   
 			}
+				}
 			}
 		});
 		scrollPane.setBounds(0, 11, 1249, 504);
@@ -525,15 +527,6 @@ public void actionPerformed(ActionEvent e) {
 			}
 			});
 		
-	
-		
-		
-		
-		
-	
-		
-		
-		
 		
 		JPanel exibirpanel = new JPanel();
 		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
@@ -544,7 +537,7 @@ public void actionPerformed(ActionEvent e) {
 			public void actionPerformed(ActionEvent e) {
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-				String pesq = "";
+				String pesq = svalueName;
 				if (opcao == 0){
 				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());

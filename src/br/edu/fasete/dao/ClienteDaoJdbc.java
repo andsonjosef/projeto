@@ -22,7 +22,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 				while(rs.next()) {
 					 cpf1 = rs.getString("CPF");				
 				}
-				if(cpf1 != c.getCPF() && c.getCPF().length() ==13 ){
+				if(cpf1 != c.getCPF()){
 		  try {
 			   stmt =  (PreparedStatement) Conexao.getConnection()
 					    .prepareStatement("update loja.cliente set nome = ?, cpf = ?, rg = ?,telefone = ?, estado = ?,cidade = ?,bairro = ?,numero = ?,endereco = ? where cpf = ?");
@@ -46,8 +46,27 @@ public class ClienteDaoJdbc implements ClienteDao {
 		    JOptionPane.showMessageDialog(null,"Dados invalidos!");
 		  }
 	}else{
-				
-				JOptionPane.showMessageDialog(null,"CPF já cadastrado ou invalido!");
+		try {
+			   stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement("update loja.cliente set nome = ?, rg = ?,telefone = ?, estado = ?,cidade = ?,bairro = ?,numero = ?,endereco = ? where cpf = ?");
+		 
+		   stmt.setString(1,c.getNome());
+		   stmt.setString(2,c.getRG());
+		   stmt.setString(3,c.getTelefone());
+		   stmt.setString(4,c.getEstado());
+		   stmt.setString(5,c.getCidade());
+		   stmt.setString(6,c.getBairro());
+		   stmt.setString(7,c.getNumero());
+		   stmt.setString(8,c.getEndereco());
+			 stmt.setString(9,cpf);
+		   
+		   stmt.executeUpdate();
+			 JOptionPane.showMessageDialog(null,"Cliente editado!");
+		  
+		   
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Dados invalidos!");
+		  }
 			}
 		 }catch(Exception e){
 			    JOptionPane.showMessageDialog(null,"Dados invalidos!");
@@ -88,7 +107,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 		    
 		PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 				 .prepareStatement("SELECT * FROM loja.cliente WHERE nome like ?");
-	   stmt.setString(1,c.getNome());
+	   stmt.setString(1,pesq);
 ResultSet rs = stmt.executeQuery();
 
  while(rs.next())
