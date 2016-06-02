@@ -67,6 +67,8 @@ public class JCadastroCliente2 extends JInternalFrame {
 	private JTextField pesquisarField;
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
+	private JFormattedTextField cpfpesqField;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -105,6 +107,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
+		@SuppressWarnings("unused")
 		JTabbedPane PanelCadastro = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane);
 		
@@ -114,7 +117,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		 
@@ -126,7 +129,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 				
@@ -137,7 +140,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+				
 					e1.printStackTrace();
 				}
 				 
@@ -149,7 +152,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 					}
 		
@@ -251,7 +254,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 					
 				
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				 
@@ -345,6 +348,7 @@ public class JCadastroCliente2 extends JInternalFrame {
 					//------------------------SALVAR--------------------------------------
 					
 btnSalvar.addActionListener(new ActionListener() {
+@SuppressWarnings("resource")
 public void actionPerformed(ActionEvent e) {
 							Cliente c = new Cliente();
 							if(nomeField.getText().isEmpty()){
@@ -705,10 +709,62 @@ public void actionPerformed(ActionEvent e) {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(lblNewLabel, "cell 0 12 3 1,alignx left,aligny bottom");
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		editPanel.add(formattedTextField, "cell 0 13 3 1,grow");
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			cpfpesqField = new JFormattedTextField(mascara);
+			cpfpesqField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			
+			editPanel.add(cpfpesqField, "cell 0 13 3 1,grow");
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		
 		
 		JButton btnPesquisarCPF = new JButton("Pesquisar");
+		btnPesquisarCPF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String pesq;
+				pesq = cpfpesqField.getText();
+				Fachada.getInstancia().BuscarClienteCPF(c,pesq);
+				
+				cpfField2.setText(""+c.getCPF());
+				nomeField2.setText(c.getNome());
+				rgField2.setText(c.getRG());
+				cidadeField2.setText(c.getCidade());
+				estadoField2.setText(c.getEstado());
+				enderecoField2.setText(c.getEndereco());
+				numeroField2.setText(""+c.getNumero());
+				bairroField2.setText(c.getBairro());
+				telefoneField2.setText(""+c.getTelefone());
+				 c.setNome("");
+				 c.setCPF("");
+				 c.setRG("");
+				 c.setTelefone("");
+				 c.setEstado("");
+				 c.setCidade("");
+				 c.setBairro("");
+				 c.setNumero("");
+				 c.setEndereco("");
+				 if(nomeField2.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+				 }
+			}
+		});
 		btnPesquisarCPF.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(btnPesquisarCPF, "cell 4 13,alignx left,growy");
 		
@@ -743,6 +799,7 @@ public void actionPerformed(ActionEvent e) {
 				c.setEstado(estadoField2.getText());
 				c.setNumero(numeroField2.getText());
 				c.setEndereco(enderecoField2.getText());
+				@SuppressWarnings("unused")
 				String cpf = c.getCPF();
 				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
 			}
