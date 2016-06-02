@@ -344,56 +344,47 @@ public class JCadastroCliente2 extends JInternalFrame {
 					
 					//------------------------SALVAR--------------------------------------
 					
-					btnSalvar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-Cliente c = new Cliente();
-if(nomeField.getText().isEmpty()){
-	lblNomeobri.setVisible(true);
-}else{
-	lblNomeobri.setVisible(false);
+btnSalvar.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+							Cliente c = new Cliente();
+							if(nomeField.getText().isEmpty()){
+								lblNomeobri.setVisible(true);
+							}else{
+								lblNomeobri.setVisible(false);
 
-}if(cpfField.getText().isEmpty()){
-lblcpfobri.setVisible(true);
-}else{
-lblcpfobri.setVisible(false);
+							}if(cpfField.getText().isEmpty()){
+							lblcpfobri.setVisible(true);
+							}else{
+							lblcpfobri.setVisible(false);
 
-}if(rgField.getText().isEmpty()){
-lblrgobri.setVisible(true);
-}else{
-lblrgobri.setVisible(false);
+							}if(rgField.getText().isEmpty()){
+							lblrgobri.setVisible(true);
+							}else{
+							lblrgobri.setVisible(false);
 
-}if(telefoneField.getText().isEmpty()){
-lbltelefoneobri.setVisible(true);
-}else{
-lbltelefoneobri.setVisible(false);
+							}if(telefoneField.getText().isEmpty()){
+							lbltelefoneobri.setVisible(true);
+							}else{
+							lbltelefoneobri.setVisible(false);
 
-}if(bairroField.getText().isEmpty()){
-lblBairroobri.setVisible(true);
-}else{
-lblBairroobri.setVisible(false);
+							}if(bairroField.getText().isEmpty()){
+							lblBairroobri.setVisible(true);
+							}else{
+							lblBairroobri.setVisible(false);
 
-}if(estadoField.getText().isEmpty()){
-lblestadoobri.setVisible(true);
-}else{
-lblestadoobri.setVisible(false);
+							}if(estadoField.getText().isEmpty()){
+							lblestadoobri.setVisible(true);
+							}else{
+							lblestadoobri.setVisible(false);
 
-}if(enderecoField.getText().isEmpty()){
-lblenderecoobri.setVisible(true);
-}else{
-lblenderecoobri.setVisible(false);
+							}if(enderecoField.getText().isEmpty()){
+							lblenderecoobri.setVisible(true);
 
-}
-/*boolean ehNumero = true;
+							}else{
+							lblenderecoobri.setVisible(false);
 
-try{
-    Integer.parseInt(telefoneField.getText());
-}catch(Exception e2){
-    ehNumero = false;
-}			
-
-if(ehNumero == false){
-	JOptionPane.showMessageDialog(null, "Somente números no campo telefone. ");
-}		*/
+							}
+							c.setRegistrado(false);
 							c.setNome(nomeField.getText()); 
 							c.setCPF(cpfField.getText());
 							c.setRG(rgField.getText());
@@ -403,65 +394,43 @@ if(ehNumero == false){
 							c.setEstado(estadoField.getText());
 							c.setNumero(numeroField.getText());
 							c.setEndereco(enderecoField.getText());
-							
-							
-							
-							 String cpf = "";
-								   PreparedStatement stmt;
-								try {
-									stmt = (PreparedStatement) Conexao.getConnection()
-									    .prepareStatement("select cpf from loja.Cliente ");
-							
-									ResultSet rs = stmt.executeQuery();
-									while(rs.next()) {
-										 cpf = rs.getString("CPF");
-										 
-										 
-										 if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-
-												if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
-													
-												}else{
-													
-													 
-													  cpf = "";
-														   
-														try {
-															stmt = (PreparedStatement) Conexao.getConnection()
-															    .prepareStatement("select cpf from loja.Cliente ");
-													
-															 rs = stmt.executeQuery();
-															while(rs.next()) {
-																 cpf = rs.getString("CPF");
-																
-															}	} catch (SQLException e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
-															}
-															if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-													Fachada.getInstancia().InserirCliente(c);
-															}else{
-																JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");
-																
-															}
-												}
-									
-											}else{
-												JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido. ");
-												
-											}
-										
-									}	} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
+							String cpf = "";
+							PreparedStatement stmt;
+							try {
+								stmt = (PreparedStatement) Conexao.getConnection()
+								.prepareStatement("select cpf from loja.Cliente ");
+								ResultSet rs = stmt.executeQuery();
+								while(rs.next()) {
+									 cpf = rs.getString("CPF");
+									 if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
+										if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
+										}else{								 
+											  cpf = "";																   
+											  try {
+												  stmt = (PreparedStatement) Conexao.getConnection()
+												  .prepareStatement("select cpf from loja.Cliente ");
+												  rs = stmt.executeQuery();
+												  while(rs.next()) {
+													 cpf = rs.getString("CPF");																		
+												  }
+											  }   catch (SQLException e1) {
+													e1.printStackTrace();
+												  }
+												  if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
+													 Fachada.getInstancia().InserirCliente(c);
+												  }else{
+														JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");																	
+												  }
+										}
+															
+									}else{
+										JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido. ");
 									}
-									
-						
-						
-							
-							
-							
-							
+																
+								}	
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+								}
 						}
 					});
 					
@@ -575,9 +544,9 @@ if(ehNumero == false){
 			public void actionPerformed(ActionEvent e) {
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-
+				String pesq = "";
 				if (opcao == 0){
-				//Fachada.getInstancia().BuscarCliente(c);
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
 				nomeField2.setText(c.getNome());
 				cpfField2.setText(""+c.getCPF());
 				rgField2.setText(c.getRG());
@@ -601,16 +570,11 @@ if(ehNumero == false){
 		btnExculir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.setCPF(svalueCpf);
-				
-				
 				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-
 				if (opcao == 0){
 					Fachada.getInstancia().ExcluirCliente(c);
 					carregarTabela();
-				
 				} else {
-				   
 				}
 				
 				
@@ -631,7 +595,7 @@ if(ehNumero == false){
 		
 		JPanel editPanel = new JPanel();
 		tabbedPane.addTab("Editar Clientes", null, editPanel, null);
-		editPanel.setLayout(new MigLayout("", "[89px][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][107px][50.00px][504.00px]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][52.00px]"));
+		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][107px][43.00px][][89px,grow]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][40.00px][33.00][]"));
 		
 		JLabel nomelabel2 = new JLabel("Nome");
 		nomelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -640,7 +604,7 @@ if(ehNumero == false){
 		nomeField2 = new JTextField();
 		nomeField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		nomeField2.setColumns(10);
-		editPanel.add(nomeField2, "cell 0 1 11 1,grow");
+		editPanel.add(nomeField2, "cell 0 1 12 1,grow");
 		
 		cpfField2 = new JTextField();
 		cpfField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -658,7 +622,7 @@ if(ehNumero == false){
 		rgField2 = new JTextField();
 		rgField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rgField2.setColumns(10);
-		editPanel.add(rgField2, "cell 6 3 5 1,grow");
+		editPanel.add(rgField2, "cell 6 3 6 1,grow");
 		
 		JLabel estadolabel2 = new JLabel("Estado");
 		estadolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -682,6 +646,11 @@ if(ehNumero == false){
 		enderecolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(enderecolabel2, "cell 0 6,growx,aligny bottom");
 		
+		numeroField2 = new JTextField();
+		numeroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		numeroField2.setColumns(10);
+		editPanel.add(numeroField2, "cell 10 7 2 1,alignx left,growy");
+		
 		JLabel bairrolabel2 = new JLabel("Bairro");
 		bairrolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(bairrolabel2, "cell 0 8,alignx left,aligny bottom");
@@ -693,17 +662,12 @@ if(ehNumero == false){
 		
 		JLabel numerolabel2 = new JLabel("numero");
 		numerolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(numerolabel2, "cell 10 6,alignx left,aligny bottom");
-		
-		numeroField2 = new JTextField();
-		numeroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		numeroField2.setColumns(10);
-		editPanel.add(numeroField2, "cell 10 7,alignx left,growy");
+		editPanel.add(numerolabel2, "cell 11 6,alignx left,aligny bottom");
 		
 		telefoneField2 = new JTextField();
 		telefoneField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		telefoneField2.setColumns(10);
-		editPanel.add(telefoneField2, "cell 8 9 3 1,alignx left,growy");
+		editPanel.add(telefoneField2, "cell 8 9 4 1,alignx left,growy");
 		
 		JLabel telefonelabel2 = new JLabel("Telefone");
 		telefonelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -712,15 +676,65 @@ if(ehNumero == false){
 		estadoField2 = new JTextField();
 		estadoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		estadoField2.setColumns(10);
-		editPanel.add(estadoField2, "cell 6 5 5 1,grow");
+		editPanel.add(estadoField2, "cell 6 5 6 1,grow");
 		
-		JButton button = new JButton("Cancelar");
-		button.addActionListener(new ActionListener() {
+		pesquisarField = new JTextField();
+		pesquisarField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(pesquisarField, "cell 0 11 3 1,grow");
+		pesquisarField.setColumns(10);
+		
+		JButton btnPesquisarNome = new JButton("Pesquisar");
+		btnPesquisarNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnPesquisarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//c.setCPF(Integer.parseInt((pesquisarField.getText())));
+				c.setNome(pesquisarField.getText());
+				//Fachada.getInstancia().BuscarCliente(c);
+				nomeField2.setText(c.getNome());
+				cpfField2.setText(""+c.getCPF());
+				rgField2.setText(c.getRG());
+				cidadeField2.setText(c.getCidade());
+				estadoField2.setText(c.getEstado());
+				enderecoField2.setText(c.getEndereco());
+				numeroField2.setText(""+c.getNumero());
+				bairroField2.setText(c.getBairro());
+				telefoneField2.setText(""+c.getTelefone());
+				
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(button, "cell 4 12,alignx left,aligny bottom");
+		editPanel.add(btnPesquisarNome, "cell 4 11,alignx left,growy");
+		
+		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome");
+		lblPesquisarPorNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(lblPesquisarPorNome, "cell 0 10 3 1,alignx left,aligny bottom");
+		
+		JLabel lblNewLabel = new JLabel("Pesquisar por CPF");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(lblNewLabel, "cell 0 12 3 1,alignx left,aligny bottom");
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		editPanel.add(formattedTextField, "cell 0 13 3 1,grow");
+		
+		JButton btnPesquisarCPF = new JButton("Pesquisar");
+		btnPesquisarCPF.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(btnPesquisarCPF, "cell 4 13,alignx left,growy");
+		
+		JButton btnLimpparTela = new JButton("Limpar tela");
+		btnLimpparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLimpparTela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				nomeField2.setText("");
+				cpfField2.setText("");
+				rgField2.setText("");
+				cidadeField2.setText("");
+				estadoField2.setText("");
+				enderecoField2.setText("");
+				numeroField2.setText("");
+				bairroField2.setText("");
+				telefoneField2.setText("");
+				pesquisarField.setText("");
+			}
+		});
 		
 		JButton button_1 = new JButton("Salvar");
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -740,55 +754,40 @@ if(ehNumero == false){
 				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
 			}
 		});
-		editPanel.add(button_1, "cell 0 12,growx,aligny bottom");
 		
-		pesquisarField = new JTextField();
-		pesquisarField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(pesquisarField, "cell 0 11 3 1,grow");
-		pesquisarField.setColumns(10);
-		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnPesquisar.addActionListener(new ActionListener() {
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//c.setCPF(Integer.parseInt((pesquisarField.getText())));
-				c.setNome(pesquisarField.getText());
-				//Fachada.getInstancia().BuscarCliente(c);
-				nomeField2.setText(c.getNome());
-				cpfField2.setText(""+c.getCPF());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
+				c.setCPF(svalueCpf);
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirCliente(c);
+					carregarTabela();} else {   
+				}
+			}
+		});
+		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(btnExcluir, "cell 6 13 2 1,alignx right,growy");
+		
+		JButton btnEditar_1 = new JButton("Editar");
+		btnEditar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
+					numeroField2.setEditable(true);
+					nomeField2.setEditable(true);
+					cpfField2.setEditable(true);
+					rgField2.setEditable(true);
+					cidadeField2.setEditable(true);
+					estadoField2.setEditable(true);
+					enderecoField2.setEditable(true);
+					bairroField2.setEditable(true);
+					telefoneField2.setEditable(true);
 			}
 		});
-		editPanel.add(btnPesquisar, "cell 4 11,alignx left,growy");
-		
-		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome ou CPF");
-		lblPesquisarPorNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(lblPesquisarPorNome, "cell 0 10 3 1,alignx left,aligny bottom");
-		
-		JButton btnLimpparTela = new JButton("Limpar tela");
-		btnLimpparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLimpparTela.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				nomeField2.setText("");
-				cpfField2.setText("");
-				rgField2.setText("");
-				cidadeField2.setText("");
-				estadoField2.setText("");
-				enderecoField2.setText("");
-				numeroField2.setText("");
-				bairroField2.setText("");
-				telefoneField2.setText("");
-				pesquisarField.setText("");
-			}
-		});
-		editPanel.add(btnLimpparTela, "cell 2 12,growx,aligny bottom");
+		btnEditar_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(btnEditar_1, "cell 8 13,alignx right,growy");
+		editPanel.add(button_1, "cell 10 13 2 1,alignx left,growy");
+		editPanel.add(btnLimpparTela, "cell 2 14,growx,aligny bottom");
 	
 
 	}

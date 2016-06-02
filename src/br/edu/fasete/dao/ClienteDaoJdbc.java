@@ -138,7 +138,7 @@ ResultSet rs = stmt.executeQuery();
 		  try {
 			  PreparedStatement stmt;
 			    stmt =  (PreparedStatement) Conexao.getConnection()
-			    .prepareStatement("insert into loja.Cliente  (nome,cpf,rg,telefone,estado,cidade,bairro,numero,endereco) values (?,?,?,?,?,?,?,?,?)") ;
+			    .prepareStatement("insert into loja.Cliente  (nome,cpf,rg,telefone,estado,cidade,bairro,numero,endereco,registrado) values (?,?,?,?,?,?,?,?,?,?)") ;
 			   stmt.setString(1,c.getNome());
 			   stmt.setString(2,c.getCPF());
 			   stmt.setString(3,c.getRG());
@@ -148,6 +148,7 @@ ResultSet rs = stmt.executeQuery();
 			   stmt.setString(7,c.getBairro());
 			   stmt.setString(8,c.getNumero());
 			   stmt.setString(9,c.getEndereco());
+			   stmt.setBoolean(10, c.isRegistrado());
 			   stmt.executeUpdate();
 			   	 	  
 			   JOptionPane.showMessageDialog(null,"Cliente cadastrado!");  

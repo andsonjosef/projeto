@@ -527,7 +527,6 @@ if(ehNumero == false){
 				JButton btnLimparTela = new JButton("Limpar tela");
 				btnLimparTela.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						JOptionPane.showMessageDialog(null, "teste");
 						nomeField.setText("");
 						cpfField.setText("");
 						rgField.setText("");
@@ -578,8 +577,6 @@ String pesq = "";
 		btnExculir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				c.setCPF(svalueCpf);
-				
-				
 				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 
 				if (opcao == 0){
@@ -886,7 +883,7 @@ String pesq = "";
 		JButton btnExcluir2 = new JButton("Excluir");
 		btnExcluir2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-c.setCPF(svalueCpf);
+				c.setCPF(svalueCpf);
 				
 				
 				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
