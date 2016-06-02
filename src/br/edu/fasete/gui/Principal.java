@@ -58,7 +58,7 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroCliente = new JMenuItem("Cliente");
 		menuCadastroCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JCadastroCliente janela = new JCadastroCliente();
+				JCadastroCliente2 janela = new JCadastroCliente2();
 				desktop.add(janela);
 				janela.setVisible(true);
 			}

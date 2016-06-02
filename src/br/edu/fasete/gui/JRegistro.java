@@ -775,7 +775,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabelaRoupasele() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupasSele()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupaListaFim(c)) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}
