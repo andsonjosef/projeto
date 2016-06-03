@@ -50,6 +50,13 @@ public class JCadastroRoupa2 extends JInternalFrame {
 	private JTable tabelaRoupa;
 	private JFormattedTextField telefoneField;
 	private JTextField ModeloField;
+	private JTextField tipoField2;
+	private JTextField modeloField2;
+	private JTextField generoField2;
+	private JTextField tamanhoField2;
+	private JTextField corField2;
+	private JTextField precoField2;
+	private JTextField pesqField;
 	
 	/**
 	 * Launch the application.
@@ -400,6 +407,87 @@ public void actionPerformed(ActionEvent e) {
 		});
 		btnAtualizar.setBounds(32, 556, 124, 34);
 		exibirpanel.add(btnAtualizar);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(new MigLayout("", "[84,grow][450px,grow][81][110][110][110][120.00px][84]", "[53][33px][130][33px][130][33px][130][33]"));
+		
+		JLabel lblTipo_1 = new JLabel("Tipo");
+		lblTipo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblTipo_1, "cell 1 0,aligny bottom");
+		
+		JLabel lblModelo_1 = new JLabel("Modelo");
+		lblModelo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblModelo_1, "cell 3 0,aligny bottom");
+		
+		tipoField2 = new JTextField();
+		tipoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tipoField2.setColumns(10);
+		panel.add(tipoField2, "cell 1 1,grow");
+		
+		modeloField2 = new JTextField();
+		modeloField2.setColumns(10);
+		panel.add(modeloField2, "cell 3 1 4 1,grow");
+		
+		JLabel lblGenero_1 = new JLabel("Genero");
+		lblGenero_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblGenero_1, "cell 1 2,aligny bottom");
+		
+		JLabel lblTamanho_1 = new JLabel("Tamanho");
+		lblTamanho_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblTamanho_1, "cell 3 2,aligny bottom");
+		
+		generoField2 = new JTextField();
+		generoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		generoField2.setColumns(10);
+		panel.add(generoField2, "cell 1 3,grow");
+		
+		tamanhoField2 = new JTextField();
+		tamanhoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tamanhoField2.setColumns(10);
+		panel.add(tamanhoField2, "cell 3 3 4 1,grow");
+		
+		JLabel lblCor_1 = new JLabel("Cor");
+		lblCor_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblCor_1, "cell 1 4,aligny bottom");
+		
+		JLabel lblPreco_1 = new JLabel("Preco");
+		lblPreco_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblPreco_1, "cell 3 4,aligny bottom");
+		
+		corField2 = new JTextField();
+		corField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		corField2.setColumns(10);
+		panel.add(corField2, "cell 1 5,grow");
+		
+		precoField2 = new JTextField();
+		precoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		precoField2.setColumns(10);
+		panel.add(precoField2, "cell 3 5 4 1,grow");
+		
+		JLabel lblPesquisar = new JLabel("Pesquisar");
+		lblPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		panel.add(lblPesquisar, "cell 1 6,aligny bottom");
+		
+		pesqField = new JTextField();
+		panel.add(pesqField, "cell 1 7,grow");
+		pesqField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(btnNewButton, "flowx,cell 3 7,alignx right,growy");
+		
+		JButton btnEditar_1 = new JButton("Editar");
+		btnEditar_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(btnEditar_1, "cell 4 7,alignx right,growy");
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(btnExcluir, "cell 5 7,alignx right,growy");
+		
+		JButton btnSalvar_1 = new JButton("Salvar");
+		btnSalvar_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(btnSalvar_1, "cell 6 7,alignx right,growy");
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
