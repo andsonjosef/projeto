@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -37,8 +38,8 @@ public class JCadastroRoupa2 extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
 	int srow;
-	String svalueCpf;
-	String svalueName;
+	String sValueNome;
+	int sValueCode;
 	String vazio;
 	Roupa r = new Roupa();
 	private JTextField tipoField;
@@ -184,9 +185,8 @@ public class JCadastroRoupa2 extends JInternalFrame {
 				tabelaRoupa.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent arg0) {
 						srow = tabelaRoupa.getSelectedRow();
-						svalueCpf = (String) tabelaRoupa.getValueAt(srow, 1);
-						svalueName = (String) tabelaRoupa.getValueAt(srow, 0);
-						
+						sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
+						sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
 					}
 					
 				});
@@ -195,13 +195,30 @@ public class JCadastroRoupa2 extends JInternalFrame {
 				tabelaRoupa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				JScrollPane scrollPane = new JScrollPane(tabelaRoupa);
 				scrollPane.addMouseListener(new MouseAdapter() {
+					
 				});
 				
 		tabelaRoupa.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount() == 2) {
+					srow = tabelaRoupa.getSelectedRow();
+					sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
+					sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
+					int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+					if (opcao == 0){	
+						r.setCodRoupa(sValueCode);
+						Fachada.getInstancia().BuscarRoupa(r);
+						tipoField2.setText(r.getTipo());
+						modeloField2.setText(r.getModelo());
+						corField2.setText(r.getCor());
+						precoField2.setText(""+r.getPreco());
+						generoField2.setText(r.getGenero());
+						tamanhoField2.setText(r.getTamanho());
+						tabbedPane.setSelectedIndex(2);
+						
 					}
 				}
+			}
 		});
 		scrollPane.setBounds(0, 11, 1249, 504);
 		
@@ -358,14 +375,8 @@ btnSalvar.addActionListener(new ActionListener() {
 @SuppressWarnings("resource")
 public void actionPerformed(ActionEvent e) {
 					Roupa r = new Roupa();
-					if(tipoField.getText().isEmpty()){
-						lblNomeobri.setVisible(true);
-					}else{
-						lblNomeobri.setVisible(false);
-					}
 
-					if(telefoneField.getText().isEmpty()){
-					}
+
 					
 					r.setTipo(tipoField.getText()); 
 					r.setModelo(ModeloField.getText());
@@ -373,7 +384,8 @@ public void actionPerformed(ActionEvent e) {
 					r.setGenero(generoField.getText());
 					r.setTamanho(tamanhoField.getText());
 					r.setCor(corField.getText());
-					
+					r.setDisponibilidade(false);
+					Fachada.getInstancia().InserirRoupa(r);
 				}
 			});
 		
@@ -385,6 +397,23 @@ public void actionPerformed(ActionEvent e) {
 		
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+					srow = tabelaRoupa.getSelectedRow();
+					sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
+					sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
+					int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+					if (opcao == 0){	
+						r.setCodRoupa(sValueCode);
+						Fachada.getInstancia().BuscarRoupa(r);
+						tipoField2.setText(r.getTipo());
+						modeloField2.setText(r.getModelo());
+						corField2.setText(r.getCor());
+						precoField2.setText(""+r.getPreco());
+						generoField2.setText(r.getGenero());
+						tamanhoField2.setText(r.getTamanho());
+						tabbedPane.setSelectedIndex(2);
+						
+					}
 				}
 		});
 		btnEditar.setBounds(400, 556, 124, 34);
@@ -393,6 +422,13 @@ public void actionPerformed(ActionEvent e) {
 		
 		btnExculir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
+				r.setCodRoupa(sValueCode);
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirRoupa(r);
+					carregarTabela();} else { 
+						
+					}
 				
 			}
 		});
@@ -474,6 +510,19 @@ public void actionPerformed(ActionEvent e) {
 		pesqField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				r.setCodRoupa(Integer.parseInt((pesqField.getText())));
+				Fachada.getInstancia().BuscarRoupa(r);
+				tipoField2.setText(r.getTipo());
+				modeloField2.setText(r.getModelo());
+				corField2.setText(r.getCor());
+				precoField2.setText(""+r.getPreco());
+				generoField2.setText(r.getGenero());
+				tamanhoField2.setText(r.getTamanho());
+				tabbedPane.setSelectedIndex(2);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(btnNewButton, "flowx,cell 3 7,alignx right,growy");
 		
@@ -482,10 +531,34 @@ public void actionPerformed(ActionEvent e) {
 		panel.add(btnEditar_1, "cell 4 7,alignx right,growy");
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirRoupa(r);
+					carregarTabela();} else { 
+						
+					}
+			}
+		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(btnExcluir, "cell 5 7,alignx right,growy");
 		
 		JButton btnSalvar_1 = new JButton("Salvar");
+		btnSalvar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				r.setTipo(tipoField2.getText()); 
+				r.setModelo(modeloField2.getText());
+				r.setPreco(Float.parseFloat((precoField2.getText())));
+				r.setGenero(generoField2.getText());
+				r.setTamanho(tamanhoField2.getText());
+				r.setCor(corField2.getText());
+				r.setDisponibilidade(false);
+				Fachada.getInstancia().AtualizarRoupa(r);
+				
+				
+			}
+		});
 		btnSalvar_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(btnSalvar_1, "cell 6 7,alignx right,growy");
 		

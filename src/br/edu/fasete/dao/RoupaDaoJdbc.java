@@ -11,18 +11,10 @@ public class RoupaDaoJdbc implements RoupaDao {
 	
 	@Override
 	public void AtualizarRoupa(Roupa r) {
-
-		try {			 
-		 int codRoupa = 0;
-			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-			    .prepareStatement("select codroupa from loja.roupa"); 
-				ResultSet rs = stmt.executeQuery();
-				while(rs.next()) {
-					 codRoupa = rs.getInt("codroupa");
-				}
-				if(codRoupa == r.getCodRoupa()){
+		 
+		 
 		  try {
-			   stmt =  (PreparedStatement) Conexao.getConnection()
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 			   .prepareStatement("update loja.roupa set tipo = ?, modelo = ?, tamanho = ?,genero = ?, cor = ?,disponibilidade = ?,preco = ? where codRoupa = ?");
 		 
 			   stmt.setString(1,r.getTipo());
@@ -32,7 +24,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 			   stmt.setString(5,r.getCor());
 			   stmt.setBoolean(6,r.isDisponibilidade());
 			   stmt.setFloat(7,r.getPreco());
-			   stmt.setInt(8, codRoupa);
+			   stmt.setInt(8, r.getCodRoupa());
 			   stmt.executeUpdate();
 		   
 			 JOptionPane.showMessageDialog(null,"Roupa editada!");
@@ -41,13 +33,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 		  }catch(Exception e){
 		    JOptionPane.showMessageDialog(null,"Dados invalidos!");
 		  }
-	}else{
-				
-				JOptionPane.showMessageDialog(null,"Código já cadastrado ou invalido!");
-			}
-		 }catch(Exception e){
-			    JOptionPane.showMessageDialog(null,"Dados invalidos!");
-			  }
+
 	}
 	
 	////
