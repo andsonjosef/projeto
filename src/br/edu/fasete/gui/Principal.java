@@ -71,7 +71,7 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
 		menuCadastroRoupa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JCadastroRoupa janela = new JCadastroRoupa();
+				JCadastroRoupa2 janela = new JCadastroRoupa2();
 				desktop.add(janela);
 				janela.setVisible(true);
 			}
