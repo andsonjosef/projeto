@@ -123,8 +123,8 @@ public void ExcluirReg(Cliente c){
 public Vector<Cliente> listarClientesReg(){
 	return cadastroRegistro.listarClientesReg();
 }
-public Vector<Roupa> ListarRoupaEdi(Roupa r){
-	return cadastroRegistro.ListarRoupaEdi(r);
+public Vector<Roupa> ListarRoupaEdi(Roupa r,Cliente c){
+	return cadastroRegistro.ListarRoupaEdi(r,c);
 }
 public Vector<Roupa> listarRoupaListaFim(Cliente c){
 	return cadastroRegistro.listarRoupaListaFim(c);

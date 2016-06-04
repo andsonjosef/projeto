@@ -12,7 +12,7 @@ public interface InterfaceCadastroRegistro {
 	public void disponivel( Roupa r);
 	public void ExcluirReg(Cliente c);
 	public Vector<Cliente> listarClientesReg();
-	public Vector<Roupa> ListarRoupaEdi(Roupa r);
+	public Vector<Roupa> ListarRoupaEdi(Roupa r,Cliente c);
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
 	public void ListarRegistro(Cliente c, Aluguel a);
 	

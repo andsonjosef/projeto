@@ -168,13 +168,15 @@ JOptionPane.showMessageDialog(null,e);
 		}
 		return lista;
 	}
-	public  Vector<Roupa> ListarRoupaEdi(Roupa r){
+	public  Vector<Roupa> ListarRoupaEdi(Roupa r, Cliente c){
 		
 		Vector<Roupa> lista = new Vector<Roupa>();
-		Cliente c = new Cliente();
+		 
 		
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.listafinal ");
+		
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.listafinal where codCliente = ?");
+			stmt.setInt(1, c.getCodCliente());
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				

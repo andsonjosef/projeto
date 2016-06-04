@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -45,6 +46,7 @@ public class JRegistro2 extends JInternalFrame {
 	int srow;
 	String svalueCpf;
 	int svaluecoder;
+	int svaluecodCli;
 	String svalueName;
 	String vazio;
 	Lista l = new Lista();
@@ -122,9 +124,16 @@ public class JRegistro2 extends JInternalFrame {
 				
 				if(tabbedPane.getSelectedIndex() == 2) {
 					carregarTabelaRoupa();
+					carregarTabelaRoupasele();
 					
 					
 				}
+				if(tabbedPane.getSelectedIndex() == 3) {
+					
+					
+					
+				}
+				
 				if(tabbedPane.isShowing()) {	
 					
 					carregarTabela();	
@@ -304,7 +313,7 @@ public class JRegistro2 extends JInternalFrame {
 						public void actionPerformed(ActionEvent e) {
 							
 								nomeField2.setText(c.getNome());
-								
+								c.setCodCliente(svaluecodCli);
 								carregarTabelaRoupaLista();
 								Fachada.getInstancia().ListarRegistro(c, a);
 								dataLoca.setText(a.getDataLoca());
@@ -336,7 +345,7 @@ public class JRegistro2 extends JInternalFrame {
 							srow = tabelaCategoria.getSelectedRow();
 							svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 							svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
-							
+							svaluecodCli=(int) tabelaCategoria.getValueAt(srow, 6);
 						}
 						
 					});
@@ -355,7 +364,7 @@ public class JRegistro2 extends JInternalFrame {
 						public void mouseReleased(MouseEvent arg0) {
 							srow = tabelaRoupaAluguel.getSelectedRow();
 							
-							svaluecoder = (int) tabelaRoupaAluguel.getValueAt(srow, 0);
+							svaluecodCli = (int) tabelaRoupaAluguel.getValueAt(srow, 6);
 							
 						}
 						
@@ -395,9 +404,10 @@ public class JRegistro2 extends JInternalFrame {
 					btnEditar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) 
 						{
-							
-							Fachada.getInstancia().ListarRoupaEdi(r);
-							
+							c.setCodCliente(svaluecodCli);
+							Fachada.getInstancia().ListarRoupaEdi(r,c);
+							carregarTabelaRoupasele();
+							tabbedPane.setSelectedIndex(2);
 							
 						}
 					});
@@ -704,7 +714,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabelaRoupasele() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupaListaFim(c)) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupaLista()){
 			tableModel.adicionarCategoria(rou);
 		}
 	}
