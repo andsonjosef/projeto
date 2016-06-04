@@ -107,10 +107,10 @@ public void SomaPreco(Aluguel a){
 	cadastroAluguel.SomaPreco(a);
 }
 //---------------Registro-----------------------
-
-public void InserirRegistro(Aluguel a){
-	 cadastroRegistro.InserirRegistro(a);
+public void BuscarRoupaEd(Roupa r){
+	cadastroRegistro.BuscarRoupaEd(r);
 }
+
 public void dispinibilidade( Roupa r){
 	cadastroRegistro.dispinibilidade(r);
 }
@@ -120,11 +120,23 @@ public void disponivel( Roupa r){
 public void ExcluirReg(Cliente c){
 	cadastroRegistro.ExcluirReg(c);
 }
+public void ExcluirRoupaSeleEdi(Roupa r){
+	cadastroRegistro.ExcluirRoupaSeleEdi(r);
+}
+public void InserirRegistro(Aluguel a){
+	 cadastroRegistro.InserirRegistro(a);
+}
+public void InserirRoupaEdi(Roupa r,Cliente c){
+	cadastroRegistro.InserirRoupaEdi(r, c);
+}
 public Vector<Cliente> listarClientesReg(){
 	return cadastroRegistro.listarClientesReg();
 }
 public Vector<Roupa> ListarRoupaEdi(Roupa r,Cliente c){
 	return cadastroRegistro.ListarRoupaEdi(r,c);
+}
+public Vector<Roupa> listarRoupasSeleEdi(){
+	return cadastroRegistro.listarRoupasSeleEdi();
 }
 public Vector<Roupa> listarRoupaListaFim(Cliente c){
 	return cadastroRegistro.listarRoupaListaFim(c);

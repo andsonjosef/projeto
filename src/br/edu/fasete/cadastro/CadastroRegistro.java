@@ -9,19 +9,29 @@ import br.edu.fasete.principais.Roupa;
 
 public class CadastroRegistro implements InterfaceCadastroRegistro {
 	private RegistroDao registroDao;
-
+	
 	public CadastroRegistro(RegistroDao registroDao){
 		this.registroDao = registroDao;
 		
 	}
-	public void InserirRegistro(Aluguel a){
-		registroDao.InserirRegistro(a);
+	
+	public void BuscarRoupaEd(Roupa r){
+		registroDao.BuscarRoupaEd(r);
 	}
 	public void dispinibilidade( Roupa r){
 		registroDao.dispinibilidade(r);
 	}
 	public void ExcluirReg(Cliente c){
 		registroDao.ExcluirReg(c);
+	}
+	public void ExcluirRoupaSeleEdi(Roupa r){
+		registroDao.ExcluirRoupaSeleEdi(r);
+	}
+	public void InserirRegistro(Aluguel a){
+		registroDao.InserirRegistro(a);
+	}
+	public void InserirRoupaEdi(Roupa r,Cliente c){
+		registroDao.InserirRoupaEdi(r, c);
 	}
 	public void disponivel( Roupa r){
 		registroDao.disponivel(r);
@@ -31,6 +41,9 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	}
 	public Vector<Roupa> ListarRoupaEdi(Roupa r,Cliente c){
 		return registroDao.ListarRoupaEdi(r,c);
+	}
+	public Vector<Roupa> listarRoupasSeleEdi(){
+		return registroDao.listarRoupasSeleEdi();
 	}
 	public Vector<Roupa> listarRoupaListaFim(Cliente c){
 		return registroDao.listarRoupaListaFim(c);

@@ -13,43 +13,54 @@ import br.edu.fasete.principais.Roupa;
 
 public class RegistroDaoJdbc implements RegistroDao{
 
-	public void InserirRegistro(Aluguel a) {		   
-	try {											  
-		PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-		  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal) values (?,?,?,?,?)") ;
-			 stmt.setInt(1, a.getCodCliente());
-			 stmt.setString(2, a.getDataLoca());
-			 stmt.setString(3,a.getDataEntre());
-			 stmt.setFloat(4,a.getPreco());
-			 stmt.setFloat(5, a.getPrecoTotal());
-			 stmt.executeUpdate();
-			 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
-			 a.setErro(false);
-		}catch(Exception es){
-			a.setErro(true);
+	
+	public void BuscarRoupaEd(Roupa r) {
+	    
+		  try {
+		    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("SELECT * FROM loja.roupa");
+			    
+			    ResultSet resultado = stmt.executeQuery();
+		  
+					  while(resultado.next()) {
+							r.setTipo(resultado.getString("tipo"));
+							r.setModelo(resultado.getString("modelo"));
+							r.setTamanho(resultado.getString("tamanho"));
+							r.setGenero(resultado.getString("genero"));
+							r.setCor(resultado.getString("cor"));
+							r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+							r.setPreco(resultado.getFloat("preco"));
+							r.setCodRoupa(resultado.getInt("codRoupa"));
+							
+							try {
+								  
+							  
+								   stmt =  (PreparedStatement) Conexao.getConnection()
+								   .prepareStatement("insert into loja.Roupasele  (tipo,modelo,tamanho,genero,cor,disponibilidade,preco,codRoupa) values (?,?,?,?,?,?,?,?)") ;
+								   stmt.setString(1,r.getTipo());
+								   stmt.setString(2,r.getModelo());
+								   stmt.setString(3,r.getTamanho());
+								   stmt.setString(4,r.getGenero());
+								   stmt.setString(5,r.getCor());
+								   stmt.setBoolean(6,r.isDisponibilidade());
+								   stmt.setFloat(7,r.getPreco());
+								   stmt.setInt(8, r.getCodRoupa());
+								   stmt.executeUpdate();
+								   
+								   	 	  
+								 
+								  
+								 
+						}catch(Exception es){
+							  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
 							  JOptionPane.showMessageDialog(null,es);
-		}
-	try {
-		 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-				    .prepareStatement("update loja.cliente set registrado = ? where codCliente = ?");
-		 Cliente c = new Cliente();
-		 c.setRegistrado(true);
-	   stmt.setBoolean(1,c.isRegistrado());
-	   stmt.setInt(2, a.getCodCliente());
-	   c.setRegistrado(false);
-	   
-	   stmt.executeUpdate();
-		 
-	  
-	   
-	  }catch(Exception e){
-	    JOptionPane.showMessageDialog(null,"Dados invalidos!");
-	  }
-	 
-	
-	
+						  }
+						}
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
 	}
-	
 	public void dispinibilidade( Roupa r){
 		
 						 try {
@@ -140,8 +151,117 @@ JOptionPane.showMessageDialog(null,e);
 		
 		
 	}
-	///
 	
+	public void ExcluirRoupaSeleEdi(Roupa r) {
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement( "DELETE FROM loja.lista WHERE codRoupa = ?");
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+		try {
+			
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement("update loja.roupasele set disponibilidade = 0 where codRoupa = ?");
+			  
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+		
+	}
+	
+	public void InserirRoupaEdi(Roupa r,Cliente c) {
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("SELECT * FROM loja.roupa WHERE codroupa = ?");
+			    stmt.setInt(1,r.getCodRoupa());
+			    ResultSet resultado = stmt.executeQuery();
+		  
+					  while(resultado.next()) {
+							r.setTipo(resultado.getString("tipo"));
+							r.setModelo(resultado.getString("modelo"));
+							r.setTamanho(resultado.getString("tamanho"));
+							r.setGenero(resultado.getString("genero"));
+							r.setCor(resultado.getString("cor"));
+							r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+							r.setPreco(resultado.getFloat("preco"));
+							r.setCodRoupa(resultado.getInt("codRoupa"));
+						}
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
+		
+		  try {
+			  PreparedStatement stmt;
+		  
+			   stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("insert into loja.lista  (tipo,modelo,tamanho,genero,cor,disponibilidade,preco,codRoupa,codCliente) values (?,?,?,?,?,?,?,?,?)") ;
+			   stmt.setString(1,r.getTipo());
+			   stmt.setString(2,r.getModelo());
+			   stmt.setString(3,r.getTamanho());
+			   stmt.setString(4,r.getGenero());
+			   stmt.setString(5,r.getCor());
+			   stmt.setBoolean(6,r.isDisponibilidade());
+			   stmt.setFloat(7,r.getPreco());
+			   stmt.setInt(8, r.getCodRoupa());
+			   stmt.setInt(9,c.getCodCliente());
+			   stmt.executeUpdate();
+			   
+			   	 	  
+			
+			  
+			 
+	}catch(Exception es){
+		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  JOptionPane.showMessageDialog(null,es);
+	  }
+	}
+	///
+	public void InserirRegistro(Aluguel a) {		   
+		try {											  
+			PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal) values (?,?,?,?,?)") ;
+				 stmt.setInt(1, a.getCodCliente());
+				 stmt.setString(2, a.getDataLoca());
+				 stmt.setString(3,a.getDataEntre());
+				 stmt.setFloat(4,a.getPreco());
+				 stmt.setFloat(5, a.getPrecoTotal());
+				 stmt.executeUpdate();
+				 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
+				 a.setErro(false);
+			}catch(Exception es){
+				a.setErro(true);
+								  JOptionPane.showMessageDialog(null,es);
+			}
+		try {
+			 PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement("update loja.cliente set registrado = ? where codCliente = ?");
+			 Cliente c = new Cliente();
+			 c.setRegistrado(true);
+		   stmt.setBoolean(1,c.isRegistrado());
+		   stmt.setInt(2, a.getCodCliente());
+		   c.setRegistrado(false);
+		   
+		   stmt.executeUpdate();
+			 
+		  
+		   
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Dados invalidos!");
+		  }
+		 
+		
+		
+		}	
 	public Vector<Cliente> listarClientesReg() {
 		Vector<Cliente> lista = new Vector<Cliente>();
 		try {
@@ -217,6 +337,29 @@ JOptionPane.showMessageDialog(null,e);
 		}
 		return lista;
 		
+	}
+	public Vector<Roupa> listarRoupasSeleEdi() {
+		Vector<Roupa> lista = new Vector<Roupa>();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupasele where disponibilidade = 0");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Roupa r = new Roupa();
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 	public Vector<Roupa> listarRoupaListaFim(Cliente c) {
 		Vector<Roupa> lista = new Vector<Roupa>();

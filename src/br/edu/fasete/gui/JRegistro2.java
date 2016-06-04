@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -46,6 +45,7 @@ public class JRegistro2 extends JInternalFrame {
 	int srow;
 	String svalueCpf;
 	int svaluecoder;
+	int svaluecodigoRoupa;
 	int svaluecodCli;
 	String svalueName;
 	String vazio;
@@ -404,6 +404,8 @@ public class JRegistro2 extends JInternalFrame {
 					btnEditar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) 
 						{
+							Fachada.getInstancia().limparTabela();
+							Fachada.getInstancia().BuscarRoupaEd(r);
 							c.setCodCliente(svaluecodCli);
 							Fachada.getInstancia().ListarRoupaEdi(r,c);
 							carregarTabelaRoupasele();
@@ -453,29 +455,12 @@ public class JRegistro2 extends JInternalFrame {
 					button_2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					button_2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							int linha = 0;
 							
-							int linhat = tabelaRoupasele.getRowCount();
 							
-							while(linha < linhat){
-							r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
-							r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
-							r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
-							r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
-							r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
-							r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
-							r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
-					
-							linha++;
-						
-							Fachada.getInstancia().InserirLista(r, c);
-							
-							}
 							
 							carregarTabelaRoupaLista();
 							Fachada.getInstancia().SomaPreco(a);
-							precoFieldal.setText(""+a.getPreco());
-							tabbedPane.setSelectedIndex(2);
+						
 						}
 					});
 					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][133.00px][623px]", "[311px][23px][47.00px][25px][42.00px][25px][42.00px][25px][55.00px]"));
@@ -583,10 +568,11 @@ public class JRegistro2 extends JInternalFrame {
 					btnSelecionar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 						
-						   int linha = tabelaRoupa.getSelectedRow();
-						    r.setCodRoupa((int) tabelaRoupa.getValueAt(linha, 0));  
-						   Fachada.getInstancia().InserirRoupaSele(r);
-						   carregarTabelaRoupasele();
+							 int linha = tabelaRoupa_1.getSelectedRow();
+							    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+							   Fachada.getInstancia().InserirRoupaEdi(r, c);
+							   carregarTabelaRoupasele();
+							   carregarTabelaRoupa();
 						  
 						    
 						}
@@ -598,10 +584,11 @@ public class JRegistro2 extends JInternalFrame {
 					btnRemover.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							
-							  int linha = tabelaRoupasele.getSelectedRow();
-							    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-							    Fachada.getInstancia().ExcluirRoupaSele(r);
-							    carregarTabelaRoupasele();
+							int linha = tabelaRoupasele.getSelectedRow();
+						    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+						    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
+						    carregarTabelaRoupasele();
+						    carregarTabelaRoupa();
 						}
 					});
 					exibirpanel.add(btnRemover, "cell 5 1,alignx left,growy");
@@ -704,9 +691,9 @@ public void mouseClicked(MouseEvent e) {
 	}
 	
 	public void carregarTabelaRoupa() {
-		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupa.getModel();
+		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupa_1.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupas()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupasSeleEdi()) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}
