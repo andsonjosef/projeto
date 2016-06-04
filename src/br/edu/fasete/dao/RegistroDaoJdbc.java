@@ -244,8 +244,30 @@ JOptionPane.showMessageDialog(null,e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+				
 		return lista;
 	
+	}
+	public void ListarRegistro(Cliente c, Aluguel a){
+		try{
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.aluguel WHERE codCliente = ?");
+			 stmt.setInt(1,c.getCodCliente());
+				ResultSet resultado = stmt.executeQuery();
+				while(resultado.next()) {
+					
+					
+					a.setDataEntre(resultado.getString("dataDevo"));
+					a.setDataLoca(resultado.getString("dataLoca"));
+					a.setPrecoTotal(resultado.getFloat("precoFinal"));
+					a.setPreco(resultado.getFloat("preco"));
+				}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			
+		}
+		
 	}
 }
 

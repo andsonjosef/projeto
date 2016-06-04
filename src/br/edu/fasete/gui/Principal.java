@@ -71,7 +71,7 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
 		menuCadastroRoupa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JCadastroRoupa2 janela = new JCadastroRoupa2();
+				JCadastroRoupa janela = new JCadastroRoupa();
 				desktop.add(janela);
 				janela.setVisible(true);
 			}
@@ -85,7 +85,7 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroAluguel = new JMenuItem("Aluguel");
 		menuCadastroAluguel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JAluguel janela = new JAluguel();
+				JAluguel2 janela = new JAluguel2();
 				desktop.add(janela);
 				janela.setVisible(true);
 			}
@@ -108,7 +108,7 @@ public class Principal extends JFrame {
 	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
 	menuCadastroRegistro.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JRegistro janela = new JRegistro();
+			JRegistro2 janela = new JRegistro2();
 			desktop.add(janela);
 			janela.setVisible(true);
 		}

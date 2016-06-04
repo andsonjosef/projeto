@@ -35,4 +35,7 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	public Vector<Roupa> listarRoupaListaFim(Cliente c){
 		return registroDao.listarRoupaListaFim(c);
 	}
+	public void ListarRegistro(Cliente c, Aluguel a){
+		registroDao.ListarRegistro(c, a);
+	}
 }

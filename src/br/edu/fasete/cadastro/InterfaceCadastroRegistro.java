@@ -14,6 +14,7 @@ public interface InterfaceCadastroRegistro {
 	public Vector<Cliente> listarClientesReg();
 	public Vector<Roupa> ListarRoupaEdi(Roupa r);
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
+	public void ListarRegistro(Cliente c, Aluguel a);
 	
 
 

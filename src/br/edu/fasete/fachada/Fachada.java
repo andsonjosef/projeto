@@ -129,5 +129,8 @@ public Vector<Roupa> ListarRoupaEdi(Roupa r){
 public Vector<Roupa> listarRoupaListaFim(Cliente c){
 	return cadastroRegistro.listarRoupaListaFim(c);
 }
+public void ListarRegistro(Cliente c, Aluguel a){
+	cadastroRegistro.ListarRegistro(c, a);
+}
 
 }
