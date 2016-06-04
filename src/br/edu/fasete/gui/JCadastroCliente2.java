@@ -684,11 +684,13 @@ public void actionPerformed(ActionEvent e) {
 		btnPesquisarNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnPesquisarNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//c.setCPF(Integer.parseInt((pesquisarField.getText())));
-				c.setNome(pesquisarField.getText());
-				//Fachada.getInstancia().BuscarCliente(c);
-				nomeField2.setText(c.getNome());
+
+				String pesq;
+				pesq = pesquisarField.getText();
+				Fachada.getInstancia().BuscarClientenome(c,pesq);
+				
 				cpfField2.setText(""+c.getCPF());
+				nomeField2.setText(c.getNome());
 				rgField2.setText(c.getRG());
 				cidadeField2.setText(c.getCidade());
 				estadoField2.setText(c.getEstado());
@@ -696,6 +698,19 @@ public void actionPerformed(ActionEvent e) {
 				numeroField2.setText(""+c.getNumero());
 				bairroField2.setText(c.getBairro());
 				telefoneField2.setText(""+c.getTelefone());
+				
+				 c.setNome("");
+				 c.setCPF("");
+				 c.setRG("");
+				 c.setTelefone("");
+				 c.setEstado("");
+				 c.setCidade("");
+				 c.setBairro("");
+				 c.setNumero("");
+				 c.setEndereco("");
+				 if(nomeField2.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+				 }
 				
 			}
 		});

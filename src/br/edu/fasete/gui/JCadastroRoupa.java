@@ -370,7 +370,6 @@ public class JCadastroRoupa extends JInternalFrame {
 			//------------------------SALVAR--------------------------------------
 			
 btnSalvar.addActionListener(new ActionListener() {
-@SuppressWarnings("resource")
 public void actionPerformed(ActionEvent e) {
 					Roupa r = new Roupa();
 
@@ -440,7 +439,7 @@ public void actionPerformed(ActionEvent e) {
 		exibirpanel.add(btnAtualizar, "cell 0 1,growx,aligny bottom");
 		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
+		tabbedPane.addTab("Editar Roupa", null, panel, null);
 		panel.setLayout(new MigLayout("", "[637px][133px][45px][69px][41px][73px][53px][156px,grow]", "[90.00px][33px][84.00px][33px][80.00px][33px][82.00px][33px]"));
 		
 		JLabel lblTipo_1 = new JLabel("Tipo");

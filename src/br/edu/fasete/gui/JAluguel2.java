@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -106,7 +105,7 @@ public class JAluguel2 extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
-		
+
 		Fachada.getInstancia().limparTabela();
 		Fachada.getInstancia().limparLista();
 		
@@ -209,7 +208,7 @@ public class JAluguel2 extends JInternalFrame {
 		
 		JPanel cadast = new JPanel();
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.addTab("Cadastrar Aluguel", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
 		
@@ -343,7 +342,7 @@ public class JAluguel2 extends JInternalFrame {
 					cadast.add(scrollPane, "cell 0 0 9 1,grow");
 					
 					JPanel exibirpanel = new JPanel();
-					tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+					tabbedPane.addTab("Selecionar Roupas", null, exibirpanel, null);
 					
 					JButton button_2 = new JButton("Salvar");
 					button_2.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -527,7 +526,7 @@ public void mouseClicked(MouseEvent e) {
 });
 					
 					JPanel editPanel = new JPanel();
-					tabbedPane.addTab("Editar Clientes", null, editPanel, null);
+					tabbedPane.addTab("Concluir Aluguel", null, editPanel, null);
 					
 					///
 					tabelaRoupaAluguel = new JTable(new RoupaTableModel());
@@ -702,7 +701,7 @@ public void mouseClicked(MouseEvent e) {
 			e1.printStackTrace();
 		}
 	
-
+carregarTabela();
 	}
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();

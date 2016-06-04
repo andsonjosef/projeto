@@ -163,7 +163,7 @@ JOptionPane.showMessageDialog(null,e);
 		try {
 			
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-			  .prepareStatement("update loja.roupasele set disponibilidade = 0 where codRoupa = ?");
+			  .prepareStatement("update loja.roupa set disponibilidade = 0 where codRoupa = ?");
 			  
 			  stmt.setInt(1,r.getCodRoupa());
 		      stmt.executeUpdate(); 

@@ -214,7 +214,7 @@ public class JRegistro2 extends JInternalFrame {
 		
 		JPanel cadast = new JPanel();
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.addTab("Registros abertos", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
 		
@@ -355,7 +355,7 @@ public class JRegistro2 extends JInternalFrame {
 					cadast.add(scrollPane, "cell 0 0 9 1,grow");
 					
 					JPanel editPanel = new JPanel();
-					tabbedPane.addTab("Editar Clientes", null, editPanel, null);
+					tabbedPane.addTab("Visualizar registro", null, editPanel, null);
 					
 					///
 					tabelaRoupaAluguel = new JTable(new RoupaTableModel());
@@ -452,7 +452,7 @@ public class JRegistro2 extends JInternalFrame {
 					editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
 					
 					JPanel exibirpanel = new JPanel();
-					tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+					tabbedPane.addTab("Editar registro", null, exibirpanel, null);
 					exibirpanel.setLayout(new MigLayout("", "[38.00,grow][128px][42px][124px][168px][133.00px][58.00][495.00px,trailing][grow]", "[311px][23px][47.00px][25px][42.00px][42.00px][25px][55.00px]"));
 					
 					JLabel lbltipo = new JLabel("Data de loca\u00E7\u00E3o");
@@ -703,7 +703,7 @@ public void mouseClicked(MouseEvent e) {
 			e1.printStackTrace();
 		}
 	
-
+carregarTabela();
 	}
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
