@@ -587,7 +587,7 @@ public void mouseClicked(MouseEvent e) {
 								r.setCor((String) tabelaRoupaAluguel.getValueAt(i, 5));
 								r.setPreco((float) tabelaRoupaAluguel.getValueAt(i, 6));
 								
-								JOptionPane.showMessageDialog(null, r.getCodRoupa());
+								
 								Fachada.getInstancia().InserirListaFinal(r, c);
 								Fachada.getInstancia().dispinibilidade(r);
 								i++;

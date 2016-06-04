@@ -78,10 +78,7 @@ public class RegistroDaoJdbc implements RegistroDao{
 	  }catch(Exception e){
 		  JOptionPane.showMessageDialog(null,e);
 	  }
-	}
-						 ///
-						 
-						 
+	}					 
 	 public void disponivel( Roupa r){
 								
 							 try {
@@ -144,7 +141,7 @@ JOptionPane.showMessageDialog(null,e);
 			  stmt.setInt(1,c.getCodCliente());
 		      stmt.executeUpdate(); 
 		    
-		     
+		     JOptionPane.showMessageDialog(null, "Registro encerrado!");
 		  }catch(Exception e){
 		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
 		  } 
@@ -413,6 +410,26 @@ JOptionPane.showMessageDialog(null,e);
 			
 		}
 		
+	}
+	
+	public void SomaPrecoEdi(Aluguel a,Cliente c){
+		float sum = 0;
+		try {
+			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement("select SUM(preco) from loja.lista where codCliente = ?"); 
+			   stmt.setInt(1,c.getCodCliente());
+						ResultSet rs = stmt.executeQuery();
+						while(rs.next()) {
+							float t = rs.getInt(1);
+						      sum = sum + t;
+						      a.setPreco(sum);
+							
+						}
+				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

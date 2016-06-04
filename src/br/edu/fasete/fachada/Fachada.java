@@ -144,5 +144,8 @@ public Vector<Roupa> listarRoupaListaFim(Cliente c){
 public void ListarRegistro(Cliente c, Aluguel a){
 	cadastroRegistro.ListarRegistro(c, a);
 }
+public void SomaPrecoEdi(Aluguel a,Cliente c){
+	cadastroRegistro.SomaPrecoEdi(a,c);
+}
 
 }

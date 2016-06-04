@@ -69,11 +69,10 @@ public class JRegistro2 extends JInternalFrame {
 	private JTextField nomeField2;
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
-	private JTextField tamanhoField;
-	private JTextField corField;
-	private JTextField tipoField;
-	private JTextField modeloField;
-	private JTextField generoField;
+	private JTextField precoField2;
+	private JTextField datalocaField2;
+	private JTextField datadevoField2;
+	private JTextField precofimField2;
 	private JTextField dataLoca;
 	private JTextField DataDevo;
 	private JTextField precoFieldal;
@@ -410,6 +409,10 @@ public class JRegistro2 extends JInternalFrame {
 							Fachada.getInstancia().ListarRoupaEdi(r,c);
 							carregarTabelaRoupasele();
 							tabbedPane.setSelectedIndex(2);
+							Fachada.getInstancia().SomaPrecoEdi(a,c);
+							precoField2.setText(""+a.getPreco());
+							datadevoField2.setText(DataDevo.getText());
+							datalocaField2.setText(dataLoca.getText());
 							
 						}
 					});
@@ -450,78 +453,25 @@ public class JRegistro2 extends JInternalFrame {
 					
 					JPanel exibirpanel = new JPanel();
 					tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+					exibirpanel.setLayout(new MigLayout("", "[38.00,grow][128px][42px][124px][168px][133.00px][58.00][495.00px,trailing][grow]", "[311px][23px][47.00px][25px][42.00px][42.00px][25px][55.00px]"));
 					
-					JButton button_2 = new JButton("Salvar");
-					button_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					button_2.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
-							
-							
-							carregarTabelaRoupaLista();
-							Fachada.getInstancia().SomaPreco(a);
-						
-						}
-					});
-					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][133.00px][623px]", "[311px][23px][47.00px][25px][42.00px][25px][42.00px][25px][55.00px]"));
-					exibirpanel.add(button_2, "cell 0 8,growx,aligny bottom");
-					
-					JFormattedTextField precoField = new JFormattedTextField((Object) null);
-					precoField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(precoField, "cell 5 7,grow");
-					
-					JLabel lbltipo = new JLabel("Tipo");
+					JLabel lbltipo = new JLabel("Data de loca\u00E7\u00E3o");
 					lbltipo.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lbltipo, "cell 0 2 5 1,grow");
+					exibirpanel.add(lbltipo, "cell 1 2 5 1,growx,aligny bottom");
 					
-					JLabel lblModelo = new JLabel("Modelo");
+					JLabel lblModelo = new JLabel("Data de devolu\u00E7\u00E3o");
 					lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblModelo, "cell 5 2,grow");
+					exibirpanel.add(lblModelo, "cell 7 2,growx,aligny bottom");
 					
-					JLabel lblCor = new JLabel("Cor");
-					lblCor.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblCor, "cell 0 6 5 1,grow");
+					datalocaField2 = new JTextField();
+					datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					datalocaField2.setColumns(10);
+					exibirpanel.add(datalocaField2, "cell 1 3 5 1,grow");
 					
-					tamanhoField = new JTextField();
-					tamanhoField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					tamanhoField.setColumns(10);
-					exibirpanel.add(tamanhoField, "cell 0 5 5 1,grow");
-					
-					corField = new JTextField();
-					corField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					corField.setColumns(10);
-					exibirpanel.add(corField, "cell 0 7 5 1,grow");
-					
-					JLabel lblTamanho = new JLabel("Tamanho");
-					lblTamanho.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblTamanho, "cell 0 4 5 1,growx,aligny top");
-					
-					JLabel lblGenero = new JLabel("Genero");
-					lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblGenero, "cell 5 4,growx,aligny top");
-					
-					tipoField = new JTextField();
-					tipoField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					tipoField.setColumns(10);
-					exibirpanel.add(tipoField, "cell 0 3 5 1,grow");
-					
-					modeloField = new JTextField();
-					modeloField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					modeloField.setColumns(10);
-					exibirpanel.add(modeloField, "cell 5 3,grow");
-					
-					JButton button_3 = new JButton("Cancelar");
-					button_3.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(button_3, "cell 2 8,growx,aligny bottom");
-					
-					JLabel lblPreo = new JLabel("Pre\u00E7o");
-					lblPreo.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblPreo, "cell 5 6,grow");
-					
-					generoField = new JTextField();
-					generoField.setFont(new Font("Dialog", Font.PLAIN, 15));
-					generoField.setColumns(10);
-					exibirpanel.add(generoField, "cell 5 5,grow");
+					datadevoField2 = new JTextField();
+					datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					datadevoField2.setColumns(10);
+					exibirpanel.add(datadevoField2, "cell 7 3,grow");
 					
 					
 					///
@@ -541,7 +491,7 @@ public class JRegistro2 extends JInternalFrame {
 					
 					tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
-					exibirpanel.add(scrollPaneRoupaAluguel, "cell 5 0,grow");
+					exibirpanel.add(scrollPaneRoupaAluguel, "cell 7 0,grow");
 					scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
 					});
 					
@@ -561,7 +511,7 @@ public class JRegistro2 extends JInternalFrame {
 					
 					tabelaRoupa_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa_1);
-					exibirpanel.add(scrollPaneRoupa, "cell 0 0 5 1,grow");
+					exibirpanel.add(scrollPaneRoupa, "cell 1 0 5 1,grow");
 					
 					JButton btnSelecionar = new JButton("Selecionar");
 					btnSelecionar.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -573,11 +523,12 @@ public class JRegistro2 extends JInternalFrame {
 							   Fachada.getInstancia().InserirRoupaEdi(r, c);
 							   carregarTabelaRoupasele();
 							   carregarTabelaRoupa();
-						  
+							   Fachada.getInstancia().SomaPrecoEdi(a,c);
+							   precoField2.setText(""+a.getPreco());
 						    
 						}
 					});
-					exibirpanel.add(btnSelecionar, "cell 4 1,grow");
+					exibirpanel.add(btnSelecionar, "cell 5 1,grow");
 					
 					JButton btnRemover = new JButton("Remover");
 					btnRemover.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -589,9 +540,81 @@ public class JRegistro2 extends JInternalFrame {
 						    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
 						    carregarTabelaRoupasele();
 						    carregarTabelaRoupa();
+						    Fachada.getInstancia().SomaPrecoEdi(a,c);
+						    precoField2.setText(""+a.getPreco());
 						}
 					});
-					exibirpanel.add(btnRemover, "cell 5 1,alignx left,growy");
+					exibirpanel.add(btnRemover, "cell 7 1,alignx left,growy");
+					
+					JButton button_2 = new JButton("Salvar");
+					button_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					button_2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Fachada.getInstancia().ExcluirReg(c);
+							
+							int i= 0;	
+							int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
+							while(i<tamanho){
+								r.setCodRoupa((int) tabelaRoupasele.getValueAt(i, 0));
+								r.setTipo((String) tabelaRoupasele.getValueAt(i, 1));
+								r.setModelo((String) tabelaRoupasele.getValueAt(i, 2));
+								r.setTamanho((String) tabelaRoupasele.getValueAt(i, 3));
+								r.setGenero((String) tabelaRoupasele.getValueAt(i, 4));
+								r.setCor((String) tabelaRoupasele.getValueAt(i, 5));
+								r.setPreco((float) tabelaRoupasele.getValueAt(i, 6));
+								
+								
+								Fachada.getInstancia().InserirListaFinal(r, c);
+								Fachada.getInstancia().dispinibilidade(r);
+								i++;
+							}
+							
+							a.setCodCliente(c.getCodCliente());
+							a.setDataLoca(datalocaField2.getText());
+							a.setDataEntre(datadevoField2.getText());
+							a.setPreco(Float.parseFloat((precoField2.getText())));
+							a.setPrecoTotal(Float.parseFloat((precofimField2.getText())));
+							Fachada.getInstancia().InserirRegistro(a);
+							
+							carregarTabelaRoupaLista();
+							Fachada.getInstancia().SomaPreco(a);
+						
+						}
+					});
+					
+					JLabel lblTamanho = new JLabel("Pre\u00E7o");
+					lblTamanho.setFont(new Font("Dialog", Font.PLAIN, 15));
+					exibirpanel.add(lblTamanho, "cell 1 5,growx,aligny bottom");
+					
+					JLabel lblGenero = new JLabel("Pre\u00E7o final");
+					lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
+					exibirpanel.add(lblGenero, "cell 7 5,growx,aligny bottom");
+					
+					precoField2 = new JTextField();
+					precoField2.setEditable(false);
+					precoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					precoField2.setColumns(10);
+					exibirpanel.add(precoField2, "cell 1 6 5 1,grow");
+					
+					precofimField2 = new JTextField();
+					precofimField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					precofimField2.setColumns(10);
+					exibirpanel.add(precofimField2, "cell 7 6,grow");
+					
+					JButton button_3 = new JButton("Cancelar");
+					button_3.setFont(new Font("Dialog", Font.PLAIN, 15));
+					exibirpanel.add(button_3, "flowx,cell 7 7,alignx right,aligny bottom");
+					
+					JButton btnEncerrar = new JButton("Encerrar");
+					btnEncerrar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							
+							Fachada.getInstancia().ExcluirReg(c);
+						}
+					});
+					btnEncerrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+					exibirpanel.add(btnEncerrar, "cell 7 7,aligny bottom");
+					exibirpanel.add(button_2, "cell 7 7,alignx right,aligny bottom");
 					scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 					});
 					

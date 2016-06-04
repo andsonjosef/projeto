@@ -22,5 +22,6 @@ public interface RegistroDao {
 	public Vector<Roupa> listarRoupasSeleEdi();
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
 	public void ListarRegistro(Cliente c, Aluguel a);
+	public void SomaPrecoEdi(Aluguel a,Cliente c);
 
 }

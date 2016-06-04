@@ -51,4 +51,7 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	public void ListarRegistro(Cliente c, Aluguel a){
 		registroDao.ListarRegistro(c, a);
 	}
+	public void SomaPrecoEdi(Aluguel a,Cliente c){
+		registroDao.SomaPrecoEdi(a,c);
+	}
 }
