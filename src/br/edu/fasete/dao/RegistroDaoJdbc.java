@@ -168,7 +168,54 @@ JOptionPane.showMessageDialog(null,e);
 		}
 		return lista;
 	}
+	public  Vector<Roupa> ListarRoupaEdi(Roupa r){
+		
+		Vector<Roupa> lista = new Vector<Roupa>();
+		Cliente c = new Cliente();
+		
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.listafinal ");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+				
+				 try {
+					  					  
+					   stmt =  (PreparedStatement) Conexao.getConnection()
+					   .prepareStatement("insert into loja.lista  (codCliente,codRoupa,tipo,modelo,tamanho,genero,cor,disponibilidade,preco) values (?,?,?,?,?,?,?,?,?)") ;
+					   stmt.setInt(1, c.getCodCliente());
+					   stmt.setInt(2, r.getCodRoupa());
+					   stmt.setString(3,r.getTipo());
+					   stmt.setString(4,r.getModelo());
+					   stmt.setString(5,r.getTamanho());
+					   stmt.setString(6,r.getGenero());
+					   stmt.setString(7,r.getCor());
+					   stmt.setBoolean(8,r.isDisponibilidade());
+					   stmt.setFloat(9,r.getPreco());
+					   stmt.executeUpdate();
+					   
+			}catch(Exception es){
+				  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+				  JOptionPane.showMessageDialog(null,es);
+			  }
 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+		
+	}
 	public Vector<Roupa> listarRoupaListaFim(Cliente c) {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		

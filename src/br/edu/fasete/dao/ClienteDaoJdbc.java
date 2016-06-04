@@ -12,6 +12,7 @@ import br.edu.fasete.principais.Cliente;
 public class ClienteDaoJdbc implements ClienteDao {
 	
 	
+	@SuppressWarnings("resource")
 	public void AtualizarCliente(Cliente c, String cpf) {
 		 try {
 

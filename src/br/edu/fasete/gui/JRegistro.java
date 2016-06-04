@@ -476,7 +476,7 @@ public class JRegistro extends JInternalFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				Fachada.getInstancia().ListarRoupaEdi(r);
 				
 				
 			}

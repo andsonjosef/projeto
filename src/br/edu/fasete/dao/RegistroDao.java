@@ -14,6 +14,7 @@ public interface RegistroDao {
 	public void ExcluirReg(Cliente c);
 	public void disponivel( Roupa r);
 	public Vector<Cliente> listarClientesReg();
+	public Vector<Roupa> ListarRoupaEdi(Roupa r);
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
 
 }

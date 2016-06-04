@@ -372,7 +372,6 @@ public class JCadastroRoupa2 extends JInternalFrame {
 			//------------------------SALVAR--------------------------------------
 			
 btnSalvar.addActionListener(new ActionListener() {
-@SuppressWarnings("resource")
 public void actionPerformed(ActionEvent e) {
 					Roupa r = new Roupa();
 
