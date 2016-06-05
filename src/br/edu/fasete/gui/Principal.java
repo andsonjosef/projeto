@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -47,6 +48,7 @@ public class Principal extends JFrame {
 	public Principal(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
+		setExtendedState(MAXIMIZED_BOTH);
 		
 		
 		JMenuBar barraMenu = new JMenuBar();
@@ -58,9 +60,15 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroCliente = new JMenuItem("Cliente");
 		menuCadastroCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JCadastroCliente2 janela = new JCadastroCliente2();
+				JCadastroCliente janela = new JCadastroCliente();
 				desktop.add(janela);
 				janela.setVisible(true);
+				try {
+					janela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		menuCliente.add(menuCadastroCliente);
@@ -74,6 +82,12 @@ public class Principal extends JFrame {
 				JCadastroRoupa janela = new JCadastroRoupa();
 				desktop.add(janela);
 				janela.setVisible(true);
+				try {
+					janela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		menuRoupa.add(menuCadastroRoupa);
@@ -85,9 +99,15 @@ public class Principal extends JFrame {
 		JMenuItem menuCadastroAluguel = new JMenuItem("Aluguel");
 		menuCadastroAluguel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JAluguel2 janela = new JAluguel2();
+				JAluguel janela = new JAluguel();
 				desktop.add(janela);
 				janela.setVisible(true);
+				try {
+					janela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		menuAluguel.add(menuCadastroAluguel);
@@ -108,9 +128,15 @@ public class Principal extends JFrame {
 	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
 	menuCadastroRegistro.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JRegistro2 janela = new JRegistro2();
+			JRegistro janela = new JRegistro();
 			desktop.add(janela);
 			janela.setVisible(true);
+			try {
+				janela.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	});
 	menuRegistro.add(menuCadastroRegistro);

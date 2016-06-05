@@ -65,7 +65,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JCadastroRoupa2 frame = new JCadastroRoupa2();
+					JCadastroRoupa frame = new JCadastroRoupa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,7 +80,6 @@ public class JCadastroRoupa extends JInternalFrame {
 	
 	public JCadastroRoupa() {
 		setIconifiable(true);
-		setMaximizable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
 		
