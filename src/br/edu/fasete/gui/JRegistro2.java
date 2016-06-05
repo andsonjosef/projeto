@@ -553,7 +553,7 @@ public class JRegistro2 extends JInternalFrame {
 							Fachada.getInstancia().ExcluirReg(c);
 							
 							int i= 0;	
-							int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
+							int tamanho = tabelaRoupasele.getModel().getRowCount();
 							while(i<tamanho){
 								r.setCodRoupa((int) tabelaRoupasele.getValueAt(i, 0));
 								r.setTipo((String) tabelaRoupasele.getValueAt(i, 1));

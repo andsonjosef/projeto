@@ -235,7 +235,7 @@ public class JCadastroRoupa2 extends JInternalFrame {
 		
 		JPanel cadast = new JPanel();
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.addTab("Cadastrar Roupa", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[84px,grow][23px][46px][69px][160px][162.00px][81.00][71.00px][124px][54.00px][172.00][84,grow]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px]"));
 		
@@ -390,7 +390,7 @@ public void actionPerformed(ActionEvent e) {
 		
 		
 		JPanel exibirpanel = new JPanel();
-		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+		tabbedPane.addTab("Exibir Roupa", null, exibirpanel, null);
 		exibirpanel.setLayout(null);
 		exibirpanel.add(scrollPane);
 		
@@ -444,7 +444,7 @@ public void actionPerformed(ActionEvent e) {
 		exibirpanel.add(btnAtualizar);
 		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
+		tabbedPane.addTab("Editar Roupa", null, panel, null);
 		panel.setLayout(new MigLayout("", "[84,grow][450px,grow][81][110][110][110][120.00px][84]", "[53][33px][130][33px][130][33px][130][33]"));
 		
 		JLabel lblTipo_1 = new JLabel("Tipo");
