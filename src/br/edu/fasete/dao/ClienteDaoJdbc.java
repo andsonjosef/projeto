@@ -200,6 +200,7 @@ ResultSet rs = stmt.executeQuery();
 				c.setBairro(resultado.getString("bairro"));
 				c.setEndereco(resultado.getString("endereco"));
 				c.setNumero(resultado.getString("numero"));
+				c.setCodCliente(resultado.getInt("codCliente"));
 				lista.add(c);
 			}
 		} catch (SQLException e) {

@@ -110,6 +110,36 @@ public class RegistroDaoJdbc implements RegistroDao{
 	}
 
 	public void ExcluirReg(Cliente c) {
+		Roupa r = new Roupa();
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				.prepareStatement("SELECT codRoupa FROM loja.listafinal WHERE codCliente = ?");
+			    stmt.setInt(1,c.getCodCliente());
+			    ResultSet resultado = stmt.executeQuery();
+		  
+					  while(resultado.next()) {
+							
+							r.setCodRoupa(resultado.getInt("codRoupa"));
+							 try {
+								   stmt =  (PreparedStatement) Conexao.getConnection()
+										    .prepareStatement("update loja.Roupa set disponibilidade = 0 where codRoupa= ?");
+								 
+								 
+							   stmt.setInt(1,r.getCodRoupa());
+							  
+							   
+							   
+							   stmt.executeUpdate();
+								 
+
+					}catch(Exception e){
+					JOptionPane.showMessageDialog(null,e);
+					} 
+						}
+		  }catch(Exception e){
+			  JOptionPane.showMessageDialog(null,e);
+		  } 
 		try {
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 			  .prepareStatement( "DELETE FROM loja.aluguel where codCliente = ?");

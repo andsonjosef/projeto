@@ -464,6 +464,13 @@ public class JAluguel2 extends JInternalFrame {
 							srow = tabelaRoupa_1.getSelectedRow();
 							
 							svaluecoder = (int) tabelaRoupa_1.getValueAt(srow, 0);
+							Fachada.getInstancia().BuscarRoupa(r);
+							tipoField.setText(r.getTipo());
+							modeloField.setText(r.getModelo());
+							tamanhoField.setText(r.getTamanho());
+							corField.setText(r.getCor());
+							generoField.setText(r.getGenero());
+							
 							
 						}
 						
@@ -506,20 +513,18 @@ public class JAluguel2 extends JInternalFrame {
 					
 					tabelaRoupa_1.addMouseListener(new MouseAdapter() {
 public void mouseClicked(MouseEvent e) {
+	srow = tabelaRoupa_1.getSelectedRow();
+	
+	r.setCodRoupa( (int) tabelaRoupa_1.getValueAt(srow, 0));
+	Fachada.getInstancia().BuscarRoupa(r);
+	tipoField.setText(r.getTipo());
+	modeloField.setText(r.getModelo());
+	tamanhoField.setText(r.getTamanho());
+	corField.setText(r.getCor());
+	generoField.setText(r.getGenero());
+	precoField.setText(""+r.getPreco());
 					if(e.getClickCount() == 2) {
-					srow = tabelaRoupa.getSelectedRow();
 					
-					svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
-					r.setCodRoupa(svaluecoder);
-					
-					@SuppressWarnings("unused")
-					int pesq = svaluecoder;
-					
-					
-					Fachada.getInstancia().BuscarRoupa(r);
-					nomeField2.setText(c.getNome());
-					
-					tabbedPane.setSelectedIndex(2);
 
 }
 }
