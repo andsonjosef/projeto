@@ -233,17 +233,6 @@ public class JCadastroCliente extends JInternalFrame {
 		
 			e1.printStackTrace();
 			}
-				
-					
-					
-					
-		
-				JButton btnSalvar = new JButton("");
-				btnSalvar.setSelectedIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 2.png")));
-				btnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 2.png")));
-				btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 6));
-				
-				cadast.add(btnSalvar, "flowy,cell 5 10 2 1,aligny bottom");
 				nomeField = new JTextField();
 				nomeField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				cadast.add(nomeField, "cell 0 1 12 1,grow");
@@ -348,101 +337,6 @@ public class JCadastroCliente extends JInternalFrame {
 						}
 					});
 					
-	
-					
-					//------------------------SALVAR--------------------------------------
-					
-btnSalvar.addActionListener(new ActionListener() {
-@SuppressWarnings("resource")
-public void actionPerformed(ActionEvent e) {
-							Cliente c = new Cliente();
-							if(nomeField.getText().isEmpty()){
-								lblNomeobri.setVisible(true);
-							}else{
-								lblNomeobri.setVisible(false);
-
-							}if(cpfField.getText().isEmpty()){
-							lblcpfobri.setVisible(true);
-							}else{
-							lblcpfobri.setVisible(false);
-
-							}if(rgField.getText().isEmpty()){
-							lblrgobri.setVisible(true);
-							}else{
-							lblrgobri.setVisible(false);
-
-							}if(telefoneField.getText().isEmpty()){
-							lbltelefoneobri.setVisible(true);
-							}else{
-							lbltelefoneobri.setVisible(false);
-
-							}if(bairroField.getText().isEmpty()){
-							lblBairroobri.setVisible(true);
-							}else{
-							lblBairroobri.setVisible(false);
-
-							}if(estadoField.getText().isEmpty()){
-							lblestadoobri.setVisible(true);
-							}else{
-							lblestadoobri.setVisible(false);
-
-							}if(enderecoField.getText().isEmpty()){
-							lblenderecoobri.setVisible(true);
-
-							}else{
-							lblenderecoobri.setVisible(false);
-
-							}
-							c.setRegistrado(false);
-							c.setNome(nomeField.getText()); 
-							c.setCPF(cpfField.getText());
-							c.setRG(rgField.getText());
-							c.setTelefone(telefoneField.getText());
-							c.setBairro(bairroField.getText());
-							c.setCidade(cidadeField.getText());
-							c.setEstado(estadoField.getText());
-							c.setNumero(numeroField.getText());
-							c.setEndereco(enderecoField.getText());
-							String cpf = "";
-							PreparedStatement stmt;
-							try {
-								stmt = (PreparedStatement) Conexao.getConnection()
-								.prepareStatement("select cpf from loja.Cliente ");
-								ResultSet rs = stmt.executeQuery();
-								while(rs.next()) {
-									 cpf = rs.getString("CPF");
-									 if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-										if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
-										}else{								 
-											  cpf = "";																   
-											  try {
-												  stmt = (PreparedStatement) Conexao.getConnection()
-												  .prepareStatement("select cpf from loja.Cliente ");
-												  rs = stmt.executeQuery();
-												  while(rs.next()) {
-													 cpf = rs.getString("CPF");																		
-												  }
-											  }   catch (SQLException e1) {
-													e1.printStackTrace();
-												  }
-												  if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-													 Fachada.getInstancia().InserirCliente(c);
-												  }else{
-														JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");																	
-												  }
-										}
-															
-									}else{
-										JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido. ");
-									}
-																
-								}	
-							} catch (SQLException e1) {
-								e1.printStackTrace();
-								}
-						}
-					});
-					
 					
 					JButton btnCancelar = new JButton("Cancelar");
 					btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -471,10 +365,11 @@ public void actionPerformed(ActionEvent e) {
 					cadast.add(lblTelefone, "flowx,cell 10 8 2 1,alignx left,aligny bottom");
 					
 					JLabel lblbtnsalvar = new JLabel("");
+					lblbtnsalvar.setHorizontalAlignment(SwingConstants.CENTER);
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 3.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
 							Cliente c = new Cliente();
 							if(nomeField.getText().isEmpty()){
 								lblNomeobri.setVisible(true);
@@ -564,21 +459,21 @@ public void actionPerformed(ActionEvent e) {
 						
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 2.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar2.png")));
 							
 						}
 						@Override
 						public void mouseExited(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 							
 						}
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 						}
 					});
-					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar 1.png")));
-					cadast.add(lblbtnsalvar, "cell 5 10");
+					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+					cadast.add(lblbtnsalvar, "cell 5 10,alignx left,aligny bottom");
 					
 		
 		JButton btnExculir = new JButton("Exculir");
