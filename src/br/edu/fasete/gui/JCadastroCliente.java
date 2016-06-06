@@ -93,6 +93,8 @@ public class JCadastroCliente extends JInternalFrame {
 	 */
 	
 	public JCadastroCliente() {
+		setBackground(Color.BLACK);
+		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
@@ -159,25 +161,28 @@ public class JCadastroCliente extends JInternalFrame {
 					}
 		
 		JPanel cadast = new JPanel();
+		cadast.setBackground(Color.DARK_GRAY);
 		
 		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[84px][23px][46px][69px][160px][85px][321.00px][71.00px][124px][54.00px][172.00][428px]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px]"));
 		
 		JLabel labelnome = new JLabel("Nome");
+		labelnome.setForeground(Color.WHITE);
 		labelnome.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(labelnome, "cell 0 0,alignx left,aligny bottom");
-		
+		JLabel lblbtnExcluir = new JLabel("");
 		JLabel lblNomeobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblNomeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblNomeobri.setForeground(Color.RED);
-		cadast.add(lblNomeobri, "cell 2 0 3 1,alignx left,growy");
+		cadast.add(lblNomeobri, "cell 2 0 3 1,alignx left,aligny bottom");
 		lblNomeobri.setVisible(false);
+		JLabel lblbtnEditar = new JLabel("");
 		
 		JLabel lblcpfobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblcpfobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblcpfobri.setForeground(Color.RED);
-		cadast.add(lblcpfobri, "cell 2 2 3 1,grow");
+		cadast.add(lblcpfobri, "cell 2 2 3 1,growx,aligny bottom");
 		lblcpfobri.setVisible(false);
 		
 		JLabel lblcidadeobri = new JLabel("Preenchmento obrigat\u00F3rio");
@@ -189,7 +194,7 @@ public class JCadastroCliente extends JInternalFrame {
 		JLabel lblrgobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblrgobri.setForeground(Color.RED);
 		lblrgobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblrgobri, "cell 11 2,alignx left,growy");
+		cadast.add(lblrgobri, "cell 11 2,alignx left,aligny bottom");
 		lblrgobri.setVisible(false);
 		
 		JLabel lblestadoobri = new JLabel("Preenchmento obrigat\u00F3rio");
@@ -201,16 +206,17 @@ public class JCadastroCliente extends JInternalFrame {
 		JLabel lblenderecoobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblenderecoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblenderecoobri.setForeground(Color.RED);
-		cadast.add(lblenderecoobri, "cell 2 6 3 1,grow");
+		cadast.add(lblenderecoobri, "cell 2 6 3 1,growx,aligny bottom");
 		lblenderecoobri.setVisible(false);
 		
 		JLabel lblNumero = new JLabel("numero");
+		lblNumero.setForeground(Color.WHITE);
 		lblNumero.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblNumero, "cell 10 6,alignx left,aligny bottom");
+		cadast.add(lblNumero, "cell 8 6,alignx left,aligny bottom");
 		
 		numeroField = new JTextField();
 		numeroField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		cadast.add(numeroField, "cell 10 7,alignx left,growy");
+		cadast.add(numeroField, "cell 8 7 4 1,grow");
 		numeroField.setColumns(10);
 		
 		
@@ -223,11 +229,16 @@ public class JCadastroCliente extends JInternalFrame {
 		try {
 			MaskFormatter mascara = new MaskFormatter("(##)####-####");
 			mascara.setPlaceholderCharacter('_');
+			
+			JLabel lblTelefone = new JLabel("Telefone");
+			lblTelefone.setForeground(Color.WHITE);
+			lblTelefone.setFont(new Font("Dialog", Font.PLAIN, 15));
+			cadast.add(lblTelefone, "flowx,cell 8 8,alignx left,aligny bottom");
 		
 			telefoneField = new JFormattedTextField(mascara);
 			telefoneField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			telefoneField.setBounds(432, 463, 380, 30);
-			cadast.add(telefoneField, "cell 10 9,grow");
+			cadast.add(telefoneField, "cell 8 9 4 1,grow");
 		
 		} catch (ParseException e1) {
 		
@@ -270,6 +281,7 @@ public class JCadastroCliente extends JInternalFrame {
 					
 					
 					JLabel lblCpf = new JLabel("CPF");
+					lblCpf.setForeground(Color.WHITE);
 					lblCpf.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblCpf, "cell 0 2,alignx left,aligny bottom");
 					
@@ -279,19 +291,22 @@ public class JCadastroCliente extends JInternalFrame {
 					rgField.setColumns(10);
 					
 					JLabel lblRg = new JLabel("RG");
+					lblRg.setForeground(Color.WHITE);
 					lblRg.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblRg, "cell 8 2,growx,aligny bottom");
 					
 					JLabel lblEndereo = new JLabel("Endere\u00E7o");
+					lblEndereo.setForeground(Color.WHITE);
 					lblEndereo.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblEndereo, "cell 0 6,growx,aligny bottom");
 					
 					enderecoField = new JTextField();
 					enderecoField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					cadast.add(enderecoField, "cell 0 7 9 1,grow");
+					cadast.add(enderecoField, "cell 0 7 7 1,grow");
 					enderecoField.setColumns(10);
 					
 					JLabel lblBairro = new JLabel("Bairro");
+					lblBairro.setForeground(Color.WHITE);
 					lblBairro.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblBairro, "cell 0 8,growx,aligny bottom");
 					
@@ -301,10 +316,12 @@ public class JCadastroCliente extends JInternalFrame {
 					bairroField.setColumns(10);
 					
 					JLabel lblCidade = new JLabel("Cidade");
+					lblCidade.setForeground(Color.WHITE);
 					lblCidade.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblCidade, "cell 0 4,alignx left,aligny bottom");
 					
 					JLabel lblEstado = new JLabel("Estado");
+					lblEstado.setForeground(Color.WHITE);
 					lblEstado.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(lblEstado, "cell 8 4,growx,aligny bottom");
 					
@@ -312,7 +329,7 @@ public class JCadastroCliente extends JInternalFrame {
 					JLabel lbltelefoneobri = new JLabel("Preenchmento obrigat\u00F3rio");
 					lbltelefoneobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lbltelefoneobri.setForeground(Color.RED);
-					cadast.add(lbltelefoneobri, "cell 11 8,alignx left,growy");
+					cadast.add(lbltelefoneobri, "cell 11 8,alignx left,aligny bottom");
 					lbltelefoneobri.setVisible(false);
 					
 					cidadeField = new JTextField();
@@ -337,11 +354,6 @@ public class JCadastroCliente extends JInternalFrame {
 						}
 					});
 					
-					
-					JButton btnCancelar = new JButton("Cancelar");
-					btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					cadast.add(btnCancelar, "cell 4 10,aligny bottom");
-					
 					JButton btnLimparTela = new JButton("Limpar tela");
 					btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
 					btnLimparTela.addActionListener(new ActionListener() {
@@ -360,13 +372,10 @@ public class JCadastroCliente extends JInternalFrame {
 					});
 					cadast.add(btnLimparTela, "cell 0 10 4 1,aligny bottom");
 					
-					JLabel lblTelefone = new JLabel("Telefone");
-					lblTelefone.setFont(new Font("Dialog", Font.PLAIN, 15));
-					cadast.add(lblTelefone, "flowx,cell 10 8 2 1,alignx left,aligny bottom");
-					
 					JLabel lblbtnsalvar = new JLabel("");
 					lblbtnsalvar.setHorizontalAlignment(SwingConstants.CENTER);
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
+						@SuppressWarnings("resource")
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
@@ -472,15 +481,31 @@ public class JCadastroCliente extends JInternalFrame {
 							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 						}
 					});
+					
+					JLabel lblbtncancelar = new JLabel("");
+					lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+					lblbtncancelar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+						}
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+						}
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+						}
+					});
+					
+					cadast.add(lblbtncancelar, "cell 4 10,aligny bottom");
 					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 					cadast.add(lblbtnsalvar, "cell 5 10,alignx left,aligny bottom");
-					
-		
-		JButton btnExculir = new JButton("Exculir");
-		btnExculir.setEnabled(false);
-		
-				JButton btnEditar = new JButton("Editar");
-				btnEditar.setEnabled(false);
 				tabelaCategoria = new JTable(new ClienteTableModel());
 				tabelaCategoria.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent arg0) {
@@ -528,27 +553,38 @@ public class JCadastroCliente extends JInternalFrame {
 				}
 			}
 		});
-		scrollPane.setBounds(0, 11, 1249, 504);
 		
 		
 			
 		tabelaCategoria.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				
-				btnEditar.setEnabled(true);
-				btnExculir.setEnabled(true);
+				lblbtnExcluir.setEnabled(true);
+				lblbtnEditar.setEnabled(true);
 				
 			}
 			});
 		
 		
 		JPanel exibirpanel = new JPanel();
+		exibirpanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
-		exibirpanel.setLayout(null);
-		exibirpanel.add(scrollPane);
+		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
+		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
 		
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				carregarTabela();
+			}
+		});
+		exibirpanel.add(btnAtualizar, "cell 0 1,growx,aligny center");
+		
+		
+		lblbtnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
@@ -568,14 +604,29 @@ public class JCadastroCliente extends JInternalFrame {
 			} else {
 				   
 			}
+			
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
 			}
 		});
-		btnEditar.setBounds(400, 556, 124, 34);
-		exibirpanel.add(btnEditar);
+		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx left,growy");
 		
 		
-		btnExculir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		lblbtnExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
 				c.setCPF(svalueCpf);
 				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
@@ -584,27 +635,30 @@ public class JCadastroCliente extends JInternalFrame {
 				} else {
 				}
 				
-				
-				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
 			}
 		});
-		btnExculir.setBounds(218, 556, 124, 34);
-		exibirpanel.add(btnExculir);
-		
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				carregarTabela();
-			}
-		});
-		btnAtualizar.setBounds(32, 556, 124, 34);
-		exibirpanel.add(btnAtualizar);
+		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+		exibirpanel.add(lblbtnExcluir, "cell 2 1,grow");
 		
 		JPanel editPanel = new JPanel();
+		editPanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Editar Clientes", null, editPanel, null);
-		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][107px][43.00px][][89px,grow]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][40.00px][33.00][]"));
+		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][26.00px][43.00px][][89px,grow]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][40.00px][33.00][]"));
 		
 		JLabel nomelabel2 = new JLabel("Nome");
+		nomelabel2.setForeground(Color.WHITE);
 		nomelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(nomelabel2, "cell 0 0,alignx left,aligny bottom");
 		
@@ -619,10 +673,12 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(cpfField2, "cell 0 3 5 1,grow");
 		
 		JLabel cpflabel2 = new JLabel("CPF");
+		cpflabel2.setForeground(Color.WHITE);
 		cpflabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(cpflabel2, "cell 0 2,alignx left,aligny bottom");
 		
 		JLabel rglabel2 = new JLabel("RG");
+		rglabel2.setForeground(Color.WHITE);
 		rglabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(rglabel2, "cell 6 2,growx,aligny bottom");
 		
@@ -632,10 +688,12 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(rgField2, "cell 6 3 6 1,grow");
 		
 		JLabel estadolabel2 = new JLabel("Estado");
+		estadolabel2.setForeground(Color.WHITE);
 		estadolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(estadolabel2, "cell 6 4,alignx left,aligny bottom");
 		
 		JLabel cidadelabel2 = new JLabel("Cidade");
+		cidadelabel2.setForeground(Color.WHITE);
 		cidadelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(cidadelabel2, "cell 0 4,alignx left,aligny bottom");
 		
@@ -644,41 +702,45 @@ public class JCadastroCliente extends JInternalFrame {
 		cidadeField2.setColumns(10);
 		editPanel.add(cidadeField2, "cell 0 5 5 1,grow");
 		
+		JLabel numerolabel2 = new JLabel("numero");
+		numerolabel2.setForeground(Color.WHITE);
+		numerolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(numerolabel2, "cell 6 6,alignx left,aligny bottom");
+		
 		enderecoField2 = new JTextField();
 		enderecoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		enderecoField2.setColumns(10);
-		editPanel.add(enderecoField2, "cell 0 7 9 1,grow");
+		editPanel.add(enderecoField2, "cell 0 7 5 1,grow");
 		
 		JLabel enderecolabel2 = new JLabel("Endere\u00E7o");
+		enderecolabel2.setForeground(Color.WHITE);
 		enderecolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(enderecolabel2, "cell 0 6,growx,aligny bottom");
 		
 		numeroField2 = new JTextField();
 		numeroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		numeroField2.setColumns(10);
-		editPanel.add(numeroField2, "cell 10 7 2 1,alignx left,growy");
+		editPanel.add(numeroField2, "cell 6 7 6 1,grow");
 		
 		JLabel bairrolabel2 = new JLabel("Bairro");
+		bairrolabel2.setForeground(Color.WHITE);
 		bairrolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(bairrolabel2, "cell 0 8,alignx left,aligny bottom");
+		
+		JLabel telefonelabel2 = new JLabel("Telefone");
+		telefonelabel2.setForeground(Color.WHITE);
+		telefonelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(telefonelabel2, "cell 6 8,growx,aligny bottom");
 		
 		bairroField2 = new JTextField();
 		bairroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		bairroField2.setColumns(10);
-		editPanel.add(bairroField2, "cell 0 9 7 1,grow");
-		
-		JLabel numerolabel2 = new JLabel("numero");
-		numerolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(numerolabel2, "cell 11 6,alignx left,aligny bottom");
+		editPanel.add(bairroField2, "cell 0 9 5 1,grow");
 		
 		telefoneField2 = new JTextField();
 		telefoneField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		telefoneField2.setColumns(10);
-		editPanel.add(telefoneField2, "cell 8 9 4 1,alignx left,growy");
-		
-		JLabel telefonelabel2 = new JLabel("Telefone");
-		telefonelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(telefonelabel2, "cell 8 8,growx,aligny bottom");
+		editPanel.add(telefoneField2, "cell 6 9 6 1,grow");
 		
 		estadoField2 = new JTextField();
 		estadoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -690,11 +752,205 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(pesquisarField, "cell 0 11 3 1,grow");
 		pesquisarField.setColumns(10);
 		
-		JButton btnPesquisarNome = new JButton("Pesquisar");
-		btnPesquisarNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnPesquisarNome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome");
+		lblPesquisarPorNome.setForeground(Color.WHITE);
+		lblPesquisarPorNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(lblPesquisarPorNome, "cell 0 10 3 1,alignx left,aligny bottom");
+		
+		JLabel lblNewLabel = new JLabel("Pesquisar por CPF");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(lblNewLabel, "cell 0 12 3 1,alignx left,aligny bottom");
+		
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			cpfpesqField = new JFormattedTextField(mascara);
+			cpfpesqField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			
+			editPanel.add(cpfpesqField, "cell 0 13 3 1,grow");
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 
+		try {
+			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
+			mascara.setPlaceholderCharacter('_');
+			
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		JButton btnLimpparTela = new JButton("Limpar tela");
+		btnLimpparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLimpparTela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				nomeField2.setText("");
+				cpfField2.setText("");
+				rgField2.setText("");
+				cidadeField2.setText("");
+				estadoField2.setText("");
+				enderecoField2.setText("");
+				numeroField2.setText("");
+				bairroField2.setText("");
+				telefoneField2.setText("");
+				pesquisarField.setText("");
+			}
+		});
+		
+		JLabel lblbtnPesquisarCPF = new JLabel("");
+		lblbtnPesquisarCPF.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String pesq;
+				pesq = cpfpesqField.getText();
+				Fachada.getInstancia().BuscarClienteCPF(c,pesq);
+				
+				cpfField2.setText(""+c.getCPF());
+				nomeField2.setText(c.getNome());
+				rgField2.setText(c.getRG());
+				cidadeField2.setText(c.getCidade());
+				estadoField2.setText(c.getEstado());
+				enderecoField2.setText(c.getEndereco());
+				numeroField2.setText(""+c.getNumero());
+				bairroField2.setText(c.getBairro());
+				telefoneField2.setText(""+c.getTelefone());
+				 c.setNome("");
+				 c.setCPF("");
+				 c.setRG("");
+				 c.setTelefone("");
+				 c.setEstado("");
+				 c.setCidade("");
+				 c.setBairro("");
+				 c.setNumero("");
+				 c.setEndereco("");
+				 if(nomeField2.getText().isEmpty()){
+					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+				 }
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+			}
+		});
+		lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+		editPanel.add(lblbtnPesquisarCPF, "cell 4 13");
+		
+		JLabel lblbtnSalvar = new JLabel("");
+		lblbtnSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				c.setNome(nomeField2.getText()); 
+				c.setCPF(cpfField2.getText());
+				c.setRG(rgField2.getText());
+				c.setTelefone(telefoneField2.getText());
+				c.setBairro(bairroField2.getText());
+				c.setCidade(cidadeField2.getText());
+				c.setEstado(estadoField2.getText());
+				c.setNumero(numeroField2.getText());
+				c.setEndereco(enderecoField2.getText());
+				@SuppressWarnings("unused")
+				String cpf = c.getCPF();
+				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
+			}
 
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar2.png")));
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+			}
+		});
+		
+		JLabel lblbtnEditar2 = new JLabel("");
+		lblbtnEditar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
+				numeroField2.setEditable(true);
+				nomeField2.setEditable(true);
+				cpfField2.setEditable(true);
+				rgField2.setEditable(true);
+				cidadeField2.setEditable(true);
+				estadoField2.setEditable(true);
+				enderecoField2.setEditable(true);
+				bairroField2.setEditable(true);
+				telefoneField2.setEditable(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+			}
+		});
+		
+		JLabel lblbtnExcluir2 = new JLabel("");
+		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
+				c.setCPF(svalueCpf);
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirCliente(c);
+					carregarTabela();} else {   
+				}
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+		});
+		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+		editPanel.add(lblbtnExcluir2, "cell 7 13");
+		lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+		editPanel.add(lblbtnEditar2, "cell 9 13");
+		lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+		editPanel.add(lblbtnSalvar, "cell 11 13");
+		editPanel.add(btnLimpparTela, "cell 2 14,growx,aligny bottom");
+		
+		JLabel lblbtnPesquisarNome = new JLabel("");
+		lblbtnPesquisarNome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar3.png")));
 				String pesq;
 				pesq = pesquisarField.getText();
 				Fachada.getInstancia().BuscarClientenome(c,pesq);
@@ -723,146 +979,21 @@ public class JCadastroCliente extends JInternalFrame {
 				 }
 				
 			}
-		});
-		editPanel.add(btnPesquisarNome, "cell 4 11,alignx left,growy");
-		
-		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome");
-		lblPesquisarPorNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(lblPesquisarPorNome, "cell 0 10 3 1,alignx left,aligny bottom");
-		
-		JLabel lblNewLabel = new JLabel("Pesquisar por CPF");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(lblNewLabel, "cell 0 12 3 1,alignx left,aligny bottom");
-		
-		try {
-			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
-			mascara.setPlaceholderCharacter('_');
-			cpfpesqField = new JFormattedTextField(mascara);
-			cpfpesqField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			
-			editPanel.add(cpfpesqField, "cell 0 13 3 1,grow");
-			
-		
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		 
-		try {
-			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
-			mascara.setPlaceholderCharacter('_');
-			
-		
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	
-		
-		
-		JButton btnPesquisarCPF = new JButton("Pesquisar");
-		btnPesquisarCPF.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String pesq;
-				pesq = cpfpesqField.getText();
-				Fachada.getInstancia().BuscarClienteCPF(c,pesq);
-				
-				cpfField2.setText(""+c.getCPF());
-				nomeField2.setText(c.getNome());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
-				 c.setNome("");
-				 c.setCPF("");
-				 c.setRG("");
-				 c.setTelefone("");
-				 c.setEstado("");
-				 c.setCidade("");
-				 c.setBairro("");
-				 c.setNumero("");
-				 c.setEndereco("");
-				 if(nomeField2.getText().isEmpty()){
-					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
-				 }
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
 			}
 		});
-		btnPesquisarCPF.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(btnPesquisarCPF, "cell 4 13,alignx left,growy");
-		
-		JButton btnLimpparTela = new JButton("Limpar tela");
-		btnLimpparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLimpparTela.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				nomeField2.setText("");
-				cpfField2.setText("");
-				rgField2.setText("");
-				cidadeField2.setText("");
-				estadoField2.setText("");
-				enderecoField2.setText("");
-				numeroField2.setText("");
-				bairroField2.setText("");
-				telefoneField2.setText("");
-				pesquisarField.setText("");
-			}
-		});
-		
-		JButton button_1 = new JButton("Salvar");
-		button_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				c.setNome(nomeField2.getText()); 
-				c.setCPF(cpfField2.getText());
-				c.setRG(rgField2.getText());
-				c.setTelefone(telefoneField2.getText());
-				c.setBairro(bairroField2.getText());
-				c.setCidade(cidadeField2.getText());
-				c.setEstado(estadoField2.getText());
-				c.setNumero(numeroField2.getText());
-				c.setEndereco(enderecoField2.getText());
-				@SuppressWarnings("unused")
-				String cpf = c.getCPF();
-				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
-			}
-		});
-		
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				c.setCPF(svalueCpf);
-				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-				if (opcao == 0){
-					Fachada.getInstancia().ExcluirCliente(c);
-					carregarTabela();} else {   
-				}
-			}
-		});
-		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(btnExcluir, "cell 6 13 2 1,alignx right,growy");
-		
-		JButton btnEditar_1 = new JButton("Editar");
-		btnEditar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-					numeroField2.setEditable(true);
-					nomeField2.setEditable(true);
-					cpfField2.setEditable(true);
-					rgField2.setEditable(true);
-					cidadeField2.setEditable(true);
-					estadoField2.setEditable(true);
-					enderecoField2.setEditable(true);
-					bairroField2.setEditable(true);
-					telefoneField2.setEditable(true);
-			}
-		});
-		btnEditar_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(btnEditar_1, "cell 8 13,alignx right,growy");
-		editPanel.add(button_1, "cell 10 13 2 1,alignx left,growy");
-		editPanel.add(btnLimpparTela, "cell 2 14,growx,aligny bottom");
+		lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+		editPanel.add(lblbtnPesquisarNome, "cell 4 11");
 	
 
 	}
