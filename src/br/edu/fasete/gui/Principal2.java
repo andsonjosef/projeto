@@ -6,26 +6,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JDesktopPane;
+public class Principal2 extends JFrame {
 
-public class Principal extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel contentPane_1;
+	
 	private JDesktopPane desktop;
+
 	/**
 	 * Launch the application.
 	 */
@@ -33,7 +32,7 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal frame = new Principal();
+					Principal2 frame = new Principal2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,20 +44,38 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal(){
+	public Principal2() {
+		setForeground(SystemColor.desktop);
+		setBackground(SystemColor.desktop);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		setExtendedState(MAXIMIZED_BOTH);
 		
 		
 		JMenuBar barraMenu = new JMenuBar();
+		barraMenu.setBackground(SystemColor.desktop);
 		setJMenuBar(barraMenu);
 		
 		JMenu menuCliente = new JMenu("Cliente");
-		barraMenu.add(menuCliente);
+		menuCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JCadastroCliente janela = new JCadastroCliente();
+				desktop.add(janela);
+				janela.setVisible(true);
+				try {
+					janela.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		menuCliente.setForeground(SystemColor.textHighlightText);
+		menuCliente.setBackground(SystemColor.windowBorder);
 		
-		JMenuItem menuCadastroCliente = new JMenuItem("Cliente");
-		menuCadastroCliente.addActionListener(new ActionListener() {
+		menuCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JCadastroCliente janela = new JCadastroCliente();
 				desktop.add(janela);
@@ -71,9 +88,14 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		menuCliente.add(menuCadastroCliente);
+		
+		barraMenu.add(menuCliente);
+		
+		
+		
 		
 		JMenu menuRoupa = new JMenu("Roupa");
+		menuRoupa.setForeground(SystemColor.textHighlightText);
 		barraMenu.add(menuRoupa);
 		
 		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
@@ -94,6 +116,7 @@ public class Principal extends JFrame {
 		
 		
 		JMenu menuAluguel = new JMenu("Aluguel");
+		menuAluguel.setForeground(SystemColor.textHighlightText);
 		barraMenu.add(menuAluguel);
 		
 		JMenuItem menuCadastroAluguel = new JMenuItem("Aluguel");
@@ -123,6 +146,7 @@ public class Principal extends JFrame {
 	
 		
 	JMenu menuRegistro = new JMenu("Registro");
+	menuRegistro.setForeground(SystemColor.textHighlightText);
 	barraMenu.add(menuRegistro);
 	
 	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
@@ -142,15 +166,17 @@ public class Principal extends JFrame {
 	menuRegistro.add(menuCadastroRegistro);
 	
 	
-	contentPane = new JPanel();
-	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	setContentPane(contentPane);
-	contentPane.setLayout(new BorderLayout(0, 0));
+	contentPane_1 = new JPanel();
+	contentPane_1.setBackground(Color.DARK_GRAY);
+	contentPane_1.setForeground(SystemColor.desktop);
+	contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+	setContentPane(contentPane_1);
+	contentPane_1.setLayout(new BorderLayout(0, 0));
 	desktop = new JDesktopPane();
-	contentPane.add(desktop);
+	contentPane_1.add(desktop);
 
-}	
+	
 			
-		
 	}
 
+}
