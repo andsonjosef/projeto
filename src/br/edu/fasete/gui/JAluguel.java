@@ -182,7 +182,7 @@ public class JAluguel extends JInternalFrame {
 		});
 					
 					tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-					tabbedPane.setEnabled(false);
+					
 					tabbedPane.addChangeListener(new ChangeListener() {
 						public void stateChanged(ChangeEvent e) {
 							
@@ -358,10 +358,23 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
+										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar3.png")));
 										String pesq = c.getCPF();
 										Fachada.getInstancia().BuscarClienteCPF(c, pesq);
 										
 										tabbedPane.setSelectedIndex(1);
+									}
+									@Override
+									public void mouseEntered(MouseEvent arg0) {
+										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
 									}
 								});
 								btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
@@ -548,8 +561,8 @@ public class JAluguel extends JInternalFrame {
 								JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa_1);
 								exibirpanel.add(scrollPaneRoupa, "cell 0 0 5 1,grow");
 								
-								JLabel label_2 = new JLabel("");
-								label_2.addMouseListener(new MouseAdapter() {
+								JLabel btnlblAvancar2 = new JLabel("");
+								btnlblAvancar2.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										int linha = 0;
@@ -576,13 +589,44 @@ public class JAluguel extends JInternalFrame {
 										precoFieldal.setText(""+a.getPreco());
 										tabbedPane.setSelectedIndex(2);
 									}
+									@Override
+									public void mouseEntered(MouseEvent arg0) {
+										btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+									}
 								});
 								
-								JLabel label_5 = new JLabel("");
-								label_5.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
-								exibirpanel.add(label_5, "flowx,cell 5 8,alignx right");
-								label_2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
-								exibirpanel.add(label_2, "cell 5 8,alignx right");
+								JLabel lblbtnVoltar = new JLabel("");
+								lblbtnVoltar.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR3.png")));
+										tabbedPane.setSelectedIndex(0);
+									}
+									@Override
+									public void mouseEntered(MouseEvent e) {
+										lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+									}
+								});
+								lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+								exibirpanel.add(lblbtnVoltar, "flowx,cell 5 8,alignx right");
+								btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+								exibirpanel.add(btnlblAvancar2, "cell 5 8,alignx right");
 								scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 								});
 								
@@ -621,7 +665,7 @@ public void mouseClicked(MouseEvent e) {
 									}
 									
 								});
-								editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
+								editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px,grow]", "[14px][36.00px][396.00px][54.00px][20px][80.00px][]"));
 								
 								
 								
@@ -725,9 +769,28 @@ public void mouseClicked(MouseEvent e) {
 								comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
 								editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
 								
-								JLabel label_4 = new JLabel("");
-								label_4.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
-								editPanel.add(label_4, "flowx,cell 8 5,alignx right");
+								JLabel lblbtnVoltar2 = new JLabel("");
+								lblbtnVoltar2.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR3.png")));
+										tabbedPane.setSelectedIndex(1);
+									}
+									@Override
+									public void mouseEntered(MouseEvent e) {
+										lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+									}
+								});
+								lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+								editPanel.add(lblbtnVoltar2, "flowx,cell 8 5,alignx right");
 								
 								JLabel label_3 = new JLabel("");
 								label_3.addMouseListener(new MouseAdapter() {

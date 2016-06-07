@@ -171,14 +171,13 @@ public class JCadastroCliente extends JInternalFrame {
 		labelnome.setForeground(Color.WHITE);
 		labelnome.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(labelnome, "cell 0 0,alignx left,aligny bottom");
-		JLabel lblbtnExcluir = new JLabel("");
 		JLabel lblNomeobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblNomeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblNomeobri.setForeground(Color.RED);
 		cadast.add(lblNomeobri, "cell 2 0 3 1,alignx left,aligny bottom");
 		lblNomeobri.setVisible(false);
 		JLabel lblbtnEditar = new JLabel("");
-		
+		JLabel lblbtnExcluir = new JLabel("");
 		JLabel lblcpfobri = new JLabel("Preenchmento obrigat\u00F3rio");
 		lblcpfobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblcpfobri.setForeground(Color.RED);
@@ -378,7 +377,7 @@ public class JCadastroCliente extends JInternalFrame {
 						@SuppressWarnings("resource")
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
 							Cliente c = new Cliente();
 							if(nomeField.getText().isEmpty()){
 								lblNomeobri.setVisible(true);
@@ -468,17 +467,17 @@ public class JCadastroCliente extends JInternalFrame {
 						
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar2.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
 							
 						}
 						@Override
 						public void mouseExited(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
 							
 						}
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
 						}
 					});
 					
@@ -503,9 +502,9 @@ public class JCadastroCliente extends JInternalFrame {
 						}
 					});
 					
-					cadast.add(lblbtncancelar, "cell 4 10,aligny bottom");
-					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
-					cadast.add(lblbtnsalvar, "cell 5 10,alignx left,aligny bottom");
+					cadast.add(lblbtncancelar, "flowx,cell 11 10,alignx right,aligny bottom");
+					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+					cadast.add(lblbtnsalvar, "cell 11 10,alignx left,aligny bottom");
 				tabelaCategoria = new JTable(new ClienteTableModel());
 				tabelaCategoria.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent arg0) {
@@ -572,14 +571,6 @@ public class JCadastroCliente extends JInternalFrame {
 		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
 		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
 		
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				carregarTabela();
-			}
-		});
-		exibirpanel.add(btnAtualizar, "cell 0 1,growx,aligny center");
-		
 		
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -619,8 +610,7 @@ public class JCadastroCliente extends JInternalFrame {
 				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
 			}
 		});
-		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx left,growy");
+	
 		
 		
 		lblbtnExcluir.addMouseListener(new MouseAdapter() {
@@ -650,7 +640,9 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 		});
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
-		exibirpanel.add(lblbtnExcluir, "cell 2 1,grow");
+		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
+		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
 		
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
@@ -772,7 +764,6 @@ public class JCadastroCliente extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		 
@@ -782,7 +773,6 @@ public class JCadastroCliente extends JInternalFrame {
 			
 		
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -839,14 +829,14 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 			}
 		});
-		lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+		lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 		editPanel.add(lblbtnPesquisarCPF, "cell 4 13");
 		
 		JLabel lblbtnSalvar = new JLabel("");
@@ -985,14 +975,14 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 			}
 		});
-		lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/ppesquisar1.png")));
+		lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
 		editPanel.add(lblbtnPesquisarNome, "cell 4 11");
 	
 

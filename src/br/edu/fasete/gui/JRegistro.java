@@ -112,7 +112,6 @@ public class JRegistro extends JInternalFrame {
 		Fachada.getInstancia().limparLista();
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setEnabled(false);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				
@@ -385,147 +384,21 @@ public class JRegistro extends JInternalFrame {
 							precoFieldFim.setText(""+a.getPrecoTotal());
 							tabbedPane.setSelectedIndex(1);
 						}
+						@Override
+						public void mouseEntered(MouseEvent arg0) {
+							lblbtnConfirmar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar2.png")));
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtnConfirmar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+						}
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							lblbtnConfirmar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
+						}
 					});
 					lblbtnConfirmar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/avan\u00E7ar1.png")));
 					cadast.add(lblbtnConfirmar, "cell 8 11,alignx right");
-					
-					JPanel editPanel = new JPanel();
-					editPanel.setBackground(Color.DARK_GRAY);
-					tabbedPane.addTab("Visualizar registro", null, editPanel, null);
-					
-					///
-					tabelaRoupaAluguel = new JTable(new RoupaTableModel());
-					tabelaRoupaAluguel.addMouseListener(new MouseAdapter() {
-						public void mouseReleased(MouseEvent arg0) {
-							srow = tabelaRoupaAluguel.getSelectedRow();
-							
-							svaluecodCli = (int) tabelaRoupaAluguel.getValueAt(srow, 6);
-							
-						}
-						
-					});
-					editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
-					
-					
-					
-					
-					tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
-					editPanel.add(scrollPaneRoupasele, "cell 0 2 9 1,grow");
-					scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
-					});
-					
-					
-					
-					
-					JLabel nomelabel2 = new JLabel("Nome");
-					nomelabel2.setForeground(Color.WHITE);
-					editPanel.add(nomelabel2, "cell 0 0,alignx left,aligny top");
-					
-					nomeField2 = new JTextField();
-					nomeField2.setEditable(false);
-					nomeField2.setColumns(10);
-					editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
-					
-					JButton button = new JButton("Cancelar");
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							
-							
-						}
-					});
-					editPanel.add(button, "cell 0 5,alignx right,aligny bottom");
-					
-					JButton btnEditar = new JButton("Editar");
-					btnEditar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) 
-						{
-							Fachada.getInstancia().limparTabela();
-							Fachada.getInstancia().BuscarRoupaEd(r);
-							c.setCodCliente(svaluecodCli);
-							Fachada.getInstancia().ListarRoupaEdi(r,c);
-							carregarTabelaRoupasele();
-							tabbedPane.setSelectedIndex(2);
-							Fachada.getInstancia().SomaPrecoEdi(a,c);
-							precoField2.setText(""+a.getPreco());
-							datadevoField2.setText(DataDevo.getText());
-							datalocaField2.setText(dataLoca.getText());
-							
-						}
-					});
-					editPanel.add(btnEditar, "cell 2 5,alignx left,aligny bottom");
-					
-					JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
-					lblDataDeLocao.setForeground(Color.WHITE);
-					editPanel.add(lblDataDeLocao, "cell 0 3,growx,aligny bottom");
-					
-					dataLoca = new JTextField();
-					editPanel.add(dataLoca, "cell 0 4,alignx left,aligny top");
-					dataLoca.setColumns(10);
-					
-					JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
-					lblDataDeDevoluo.setForeground(Color.WHITE);
-					editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
-					
-					DataDevo = new JTextField();
-					editPanel.add(DataDevo, "cell 2 4,alignx left,aligny top");
-					DataDevo.setColumns(10);
-					
-					precoFieldal = new JTextField();
-					precoFieldal.setEditable(false);
-					editPanel.add(precoFieldal, "cell 4 4,alignx left,aligny top");
-					precoFieldal.setColumns(10);
-					
-					precoFieldFim = new JTextField();
-					editPanel.add(precoFieldFim, "cell 6 4,alignx left,aligny top");
-					precoFieldFim.setColumns(10);
-					
-					JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
-					lblPreo_1.setForeground(Color.WHITE);
-					editPanel.add(lblPreo_1, "cell 4 3,alignx center,aligny bottom");
-					
-					JLabel lblPreoFinal = new JLabel("Pre\u00E7o final");
-					lblPreoFinal.setForeground(Color.WHITE);
-					editPanel.add(lblPreoFinal, "cell 6 3,alignx center,aligny bottom");
-					
-					JComboBox comboBox = new JComboBox();
-					comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
-					editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
-					
-					JLabel lblbtnInicio = new JLabel("");
-					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
-					editPanel.add(lblbtnInicio, "flowx,cell 8 5,alignx right");
-					
-					JLabel lblbtnExcluir = new JLabel("");
-					lblbtnExcluir.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir2.png")));
-							Fachada.getInstancia().ExcluirReg(c);
-						}
-					});
-					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
-					editPanel.add(lblbtnExcluir, "cell 8 5,alignx right");
-					
-					JLabel lblbtnEditar = new JLabel("");
-					lblbtnEditar.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar3.png")));
-							Fachada.getInstancia().limparTabela();
-							Fachada.getInstancia().BuscarRoupaEd(r);
-							c.setCodCliente(svaluecodCli);
-							Fachada.getInstancia().ListarRoupaEdi(r,c);
-							carregarTabelaRoupasele();
-							tabbedPane.setSelectedIndex(2);
-							Fachada.getInstancia().SomaPrecoEdi(a,c);
-							precoField2.setText(""+a.getPreco());
-							datadevoField2.setText(DataDevo.getText());
-							datalocaField2.setText(dataLoca.getText());
-						}
-					});
-					lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar1.png")));
-					editPanel.add(lblbtnEditar, "cell 8 5,alignx right");
 					
 					JPanel exibirpanel = new JPanel();
 					exibirpanel.setBackground(Color.DARK_GRAY);
@@ -714,6 +587,12 @@ public class JRegistro extends JInternalFrame {
 					exibirpanel.add(button_3, "cell 5 7,alignx right,aligny bottom");
 					
 					JLabel lblbtnCancelar = new JLabel("");
+					lblbtnCancelar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							tabbedPane.setSelectedIndex(1);
+						}
+					});
 					lblbtnCancelar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/cancelar1.png")));
 					exibirpanel.add(lblbtnCancelar, "flowx,cell 7 7");
 					
@@ -783,6 +662,167 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					exibirpanel.add(btnSelecionar, "cell 5 2,grow");
+					
+					JPanel editPanel = new JPanel();
+					editPanel.setBackground(Color.DARK_GRAY);
+					tabbedPane.addTab("Visualizar registro", null, editPanel, null);
+					
+					///
+					tabelaRoupaAluguel = new JTable(new RoupaTableModel());
+					tabelaRoupaAluguel.addMouseListener(new MouseAdapter() {
+						public void mouseReleased(MouseEvent arg0) {
+							srow = tabelaRoupaAluguel.getSelectedRow();
+							
+							svaluecodCli = (int) tabelaRoupaAluguel.getValueAt(srow, 6);
+							
+						}
+						
+					});
+					editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
+					
+					
+					
+					
+					tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
+					editPanel.add(scrollPaneRoupasele, "cell 0 2 9 1,grow");
+					scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
+					});
+					
+					
+					
+					
+					JLabel nomelabel2 = new JLabel("Nome");
+					nomelabel2.setForeground(Color.WHITE);
+					editPanel.add(nomelabel2, "cell 0 0,alignx left,aligny top");
+					
+					nomeField2 = new JTextField();
+					nomeField2.setEditable(false);
+					nomeField2.setColumns(10);
+					editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
+					
+					JButton button = new JButton("Cancelar");
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							
+							
+						}
+					});
+					editPanel.add(button, "cell 0 5,alignx right,aligny bottom");
+					
+					JButton btnEditar = new JButton("Editar");
+					btnEditar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) 
+						{
+							Fachada.getInstancia().limparTabela();
+							Fachada.getInstancia().BuscarRoupaEd(r);
+							c.setCodCliente(svaluecodCli);
+							Fachada.getInstancia().ListarRoupaEdi(r,c);
+							carregarTabelaRoupasele();
+							tabbedPane.setSelectedIndex(2);
+							Fachada.getInstancia().SomaPrecoEdi(a,c);
+							precoField2.setText(""+a.getPreco());
+							datadevoField2.setText(DataDevo.getText());
+							datalocaField2.setText(dataLoca.getText());
+							
+						}
+					});
+					editPanel.add(btnEditar, "cell 2 5,alignx left,aligny bottom");
+					
+					JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
+					lblDataDeLocao.setForeground(Color.WHITE);
+					editPanel.add(lblDataDeLocao, "cell 0 3,growx,aligny bottom");
+					
+					dataLoca = new JTextField();
+					editPanel.add(dataLoca, "cell 0 4,alignx left,aligny top");
+					dataLoca.setColumns(10);
+					
+					JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
+					lblDataDeDevoluo.setForeground(Color.WHITE);
+					editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
+					
+					DataDevo = new JTextField();
+					editPanel.add(DataDevo, "cell 2 4,alignx left,aligny top");
+					DataDevo.setColumns(10);
+					
+					precoFieldal = new JTextField();
+					precoFieldal.setEditable(false);
+					editPanel.add(precoFieldal, "cell 4 4,alignx left,aligny top");
+					precoFieldal.setColumns(10);
+					
+					precoFieldFim = new JTextField();
+					editPanel.add(precoFieldFim, "cell 6 4,alignx left,aligny top");
+					precoFieldFim.setColumns(10);
+					
+					JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
+					lblPreo_1.setForeground(Color.WHITE);
+					editPanel.add(lblPreo_1, "cell 4 3,alignx center,aligny bottom");
+					
+					JLabel lblPreoFinal = new JLabel("Pre\u00E7o final");
+					lblPreoFinal.setForeground(Color.WHITE);
+					editPanel.add(lblPreoFinal, "cell 6 3,alignx center,aligny bottom");
+					
+					JComboBox comboBox = new JComboBox();
+					comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
+					editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
+					
+					JLabel lblbtnInicio = new JLabel("");
+					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
+					editPanel.add(lblbtnInicio, "flowx,cell 8 5,alignx right");
+					
+					JLabel lblbtnExcluir = new JLabel("");
+					lblbtnExcluir.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir2.png")));
+							Fachada.getInstancia().ExcluirReg(c);
+						}
+					});
+					
+					JLabel lblbtnVoltar = new JLabel("");
+					lblbtnVoltar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR3.png")));
+							tabbedPane.setSelectedIndex(0);
+						}
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR2.png")));
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+						}
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
+						}
+					});
+					lblbtnVoltar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/VOLTAR1.png")));
+					editPanel.add(lblbtnVoltar, "cell 8 5");
+					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
+					editPanel.add(lblbtnExcluir, "cell 8 5,alignx right");
+					
+					JLabel lblbtnEditar = new JLabel("");
+					lblbtnEditar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar3.png")));
+							Fachada.getInstancia().limparTabela();
+							Fachada.getInstancia().BuscarRoupaEd(r);
+							c.setCodCliente(svaluecodCli);
+							Fachada.getInstancia().ListarRoupaEdi(r,c);
+							carregarTabelaRoupasele();
+							tabbedPane.setSelectedIndex(2);
+							Fachada.getInstancia().SomaPrecoEdi(a,c);
+							precoField2.setText(""+a.getPreco());
+							datadevoField2.setText(DataDevo.getText());
+							datalocaField2.setText(dataLoca.getText());
+						}
+					});
+					lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar1.png")));
+					editPanel.add(lblbtnEditar, "cell 8 5,alignx right");
 					scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 					});
 					

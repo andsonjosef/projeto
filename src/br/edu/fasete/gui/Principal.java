@@ -17,6 +17,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import javax.swing.JDesktopPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Principal extends JFrame {
 
@@ -55,11 +57,9 @@ public class Principal extends JFrame {
 		setJMenuBar(barraMenu);
 		
 		JMenu menuCliente = new JMenu("Cliente");
-		barraMenu.add(menuCliente);
-		
-		JMenuItem menuCadastroCliente = new JMenuItem("Cliente");
-		menuCadastroCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		menuCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				JCadastroCliente janela = new JCadastroCliente();
 				desktop.add(janela);
 				janela.setVisible(true);
@@ -71,7 +71,7 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		menuCliente.add(menuCadastroCliente);
+		barraMenu.add(menuCliente);
 		
 		JMenu menuRoupa = new JMenu("Roupa");
 		barraMenu.add(menuRoupa);
@@ -150,7 +150,5 @@ public class Principal extends JFrame {
 	contentPane.add(desktop);
 
 }	
-			
-		
 	}
 
