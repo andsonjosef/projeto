@@ -56,6 +56,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 							r.setCor(resultado.getString("cor"));
 							r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
 							r.setPreco(resultado.getFloat("preco"));
+							r.setCodRoupa(resultado.getInt("codRoupa"));
 						}
 		  }catch(Exception e){
 			  JOptionPane.showMessageDialog(null,e);

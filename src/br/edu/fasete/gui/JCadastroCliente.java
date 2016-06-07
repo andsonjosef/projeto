@@ -353,24 +353,6 @@ public class JCadastroCliente extends JInternalFrame {
 						}
 					});
 					
-					JButton btnLimparTela = new JButton("Limpar tela");
-					btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
-					btnLimparTela.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							nomeField.setText("");
-							cpfField.setText("");
-							rgField.setText("");
-							cidadeField.setText("");
-							estadoField.setText("");
-							enderecoField.setText("");
-							numeroField.setText("");
-							bairroField.setText("");
-							telefoneField.setText("");
-							
-						}
-					});
-					cadast.add(btnLimparTela, "cell 0 10 4 1,aligny bottom");
-					
 					JLabel lblbtnsalvar = new JLabel("");
 					lblbtnsalvar.setHorizontalAlignment(SwingConstants.CENTER);
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {

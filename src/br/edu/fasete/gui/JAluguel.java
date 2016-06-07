@@ -2,7 +2,6 @@ package br.edu.fasete.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,12 +20,9 @@ import br.edu.fasete.principais.Lista;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
@@ -220,10 +216,6 @@ public class JAluguel extends JInternalFrame {
 					labelnome.setForeground(Color.WHITE);
 					labelnome.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(labelnome, "cell 0 1,alignx left,aligny bottom");
-					
-							JButton btnSalvar = new JButton("Salvar");
-							btnSalvar.setFont(new Font("Dialog", Font.PLAIN, 15));
-							cadast.add(btnSalvar, "cell 0 11,growx,aligny bottom");
 							nomeField = new JTextField();
 							nomeField.setFont(new Font("Dialog", Font.PLAIN, 15));
 							cadast.add(nomeField, "cell 0 2 9 1,grow");
@@ -310,24 +302,6 @@ public class JAluguel extends JInternalFrame {
 									}
 								});
 								
-	
-								
-								//------------------------SALVAR--------------------------------------
-								
-								btnSalvar.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										String pesq = c.getCPF();
-										Fachada.getInstancia().BuscarClienteCPF(c, pesq);
-										
-										tabbedPane.setSelectedIndex(1);
-									}
-								});
-								
-								
-								JButton btnCancelar = new JButton("Cancelar");
-								btnCancelar.setFont(new Font("Dialog", Font.PLAIN, 15));
-								cadast.add(btnCancelar, "cell 2 11,alignx left,aligny bottom");
-								
 								JLabel lblNumero = new JLabel("numero");
 								lblNumero.setForeground(Color.WHITE);
 								lblNumero.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -383,68 +357,62 @@ public class JAluguel extends JInternalFrame {
 								JPanel exibirpanel = new JPanel();
 								exibirpanel.setBackground(Color.DARK_GRAY);
 								tabbedPane.addTab("Selecionar Roupas", null, exibirpanel, null);
+								exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][133.00px,grow][16.00][623px,grow]", "[311px][23px][47.00px][25px][42.00px][25px][42.00px][25px][55.00px]"));
 								
-								JButton button_2 = new JButton("Salvar");
-								button_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-								button_2.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										int linha = 0;
-										
-										int linhat = tabelaRoupasele.getRowCount();
-										
-										while(linha < linhat){
-										r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
-										r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
-										r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
-										r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
-										r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
-										r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
-										r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
-								
-										linha++;
-									
-										Fachada.getInstancia().InserirLista(r, c);
-										
-										}
-										
-										carregarTabelaRoupaLista();
-										Fachada.getInstancia().SomaPreco(a);
-										precoFieldal.setText(""+a.getPreco());
-										tabbedPane.setSelectedIndex(2);
-									}
-								});
-								exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][133.00px][623px]", "[311px][23px][47.00px][25px][42.00px][25px][42.00px][25px][55.00px]"));
-								
-								JLabel label_1 = new JLabel("");
-								label_1.addMouseListener(new MouseAdapter() {
+								JLabel lblbtnRemover = new JLabel("");
+								lblbtnRemover.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
+										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover3.png")));
 										int linha = tabelaRoupasele.getSelectedRow();
 									    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
 									    Fachada.getInstancia().ExcluirRoupaSele(r);
 									    carregarTabelaRoupasele();
 									}
+									public void mouseEntered(MouseEvent arg0) {
+										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover2.png")));
+										
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
+									}
+									public void mouseReleased(MouseEvent e) {
+										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
+									}
 								});
 								
-								JLabel label = new JLabel("");
-								label.addMouseListener(new MouseAdapter() {
+								JLabel lblbtnAdicionar = new JLabel("");
+								lblbtnAdicionar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
+										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/adicionar3.png")));
 										   int linha = tabelaRoupa_1.getSelectedRow();
 										    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
 										   Fachada.getInstancia().InserirRoupaSele(r);
 										   carregarTabelaRoupasele();
 									}
+									@Override
+									public void mouseEntered(MouseEvent arg0) {
+										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/adicionar2.png")));
+										
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/Adicionar1.png")));
+									}
+									public void mouseReleased(MouseEvent e) {
+										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/Adicionar1.png")));
+									}
 								});
-								label.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/Adicionar1.png")));
-								exibirpanel.add(label, "cell 4 1");
-								label_1.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
-								exibirpanel.add(label_1, "cell 5 1,alignx right,aligny center");
-								exibirpanel.add(button_2, "cell 0 8,growx,aligny bottom");
+								lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/Adicionar1.png")));
+								exibirpanel.add(lblbtnAdicionar, "cell 4 1");
+								lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
+								exibirpanel.add(lblbtnRemover, "cell 6 1,alignx right,aligny center");
 								
 								JFormattedTextField precoField = new JFormattedTextField((Object) null);
 								precoField.setFont(new Font("Dialog", Font.PLAIN, 15));
-								exibirpanel.add(precoField, "cell 5 7,grow");
+								exibirpanel.add(precoField, "cell 6 7,grow");
 								
 								JLabel lbltipo = new JLabel("Tipo");
 								lbltipo.setForeground(Color.WHITE);
@@ -463,7 +431,7 @@ public class JAluguel extends JInternalFrame {
 								JLabel lblModelo = new JLabel("Modelo");
 								lblModelo.setForeground(Color.WHITE);
 								lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
-								exibirpanel.add(lblModelo, "cell 5 2,grow");
+								exibirpanel.add(lblModelo, "cell 6 2,grow");
 								
 								JLabel lblCor = new JLabel("Cor");
 								lblCor.setForeground(Color.WHITE);
@@ -488,7 +456,7 @@ public class JAluguel extends JInternalFrame {
 								JLabel lblGenero = new JLabel("Genero");
 								lblGenero.setForeground(Color.WHITE);
 								lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
-								exibirpanel.add(lblGenero, "cell 5 4,growx,aligny top");
+								exibirpanel.add(lblGenero, "cell 6 4,growx,aligny top");
 								
 								tipoField = new JTextField();
 								tipoField.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -498,21 +466,17 @@ public class JAluguel extends JInternalFrame {
 								modeloField = new JTextField();
 								modeloField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								modeloField.setColumns(10);
-								exibirpanel.add(modeloField, "cell 5 3,grow");
-								
-								JButton button_3 = new JButton("Cancelar");
-								button_3.setFont(new Font("Dialog", Font.PLAIN, 15));
-								exibirpanel.add(button_3, "cell 2 8,growx,aligny bottom");
+								exibirpanel.add(modeloField, "cell 6 3,grow");
 								
 								JLabel lblPreo = new JLabel("Pre\u00E7o");
 								lblPreo.setForeground(Color.WHITE);
 								lblPreo.setFont(new Font("Dialog", Font.PLAIN, 15));
-								exibirpanel.add(lblPreo, "cell 5 6,grow");
+								exibirpanel.add(lblPreo, "cell 6 6,grow");
 								
 								generoField = new JTextField();
 								generoField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								generoField.setColumns(10);
-								exibirpanel.add(generoField, "cell 5 5,grow");
+								exibirpanel.add(generoField, "cell 6 5,grow");
 								
 								
 								///
@@ -532,7 +496,7 @@ public class JAluguel extends JInternalFrame {
 								
 								tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 								JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
-								exibirpanel.add(scrollPaneRoupaAluguel, "cell 5 0,grow");
+								exibirpanel.add(scrollPaneRoupaAluguel, "cell 6 0,grow");
 								scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
 								});
 								
@@ -624,9 +588,9 @@ public class JAluguel extends JInternalFrame {
 									}
 								});
 								lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
-								exibirpanel.add(lblbtnVoltar, "flowx,cell 5 8,alignx right");
+								exibirpanel.add(lblbtnVoltar, "flowx,cell 6 8,alignx right");
 								btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
-								exibirpanel.add(btnlblAvancar2, "cell 5 8,alignx right");
+								exibirpanel.add(btnlblAvancar2, "cell 6 8,alignx right");
 								scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 								});
 								
@@ -688,50 +652,6 @@ public void mouseClicked(MouseEvent e) {
 								nomeField2.setColumns(10);
 								editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
 								
-								JButton button = new JButton("Cancelar");
-								button.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent arg0) {
-										
-										
-									}
-								});
-								editPanel.add(button, "cell 0 5,alignx right,aligny bottom");
-								
-								JButton button_1 = new JButton("Salvar");
-								button_1.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent arg0) 
-									{
-										
-										int i= 0;	
-										int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
-										while(i<tamanho){
-											r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
-											r.setTipo((String) tabelaRoupaAluguel.getValueAt(i, 1));
-											r.setModelo((String) tabelaRoupaAluguel.getValueAt(i, 2));
-											r.setTamanho((String) tabelaRoupaAluguel.getValueAt(i, 3));
-											r.setGenero((String) tabelaRoupaAluguel.getValueAt(i, 4));
-											r.setCor((String) tabelaRoupaAluguel.getValueAt(i, 5));
-											r.setPreco((float) tabelaRoupaAluguel.getValueAt(i, 6));
-											
-											
-											Fachada.getInstancia().InserirListaFinal(r, c);
-											Fachada.getInstancia().dispinibilidade(r);
-											i++;
-										}
-										
-										a.setCodCliente(c.getCodCliente());
-										a.setDataLoca(dataLoca.getText());
-										a.setDataEntre(DataDevo.getText());
-										a.setPreco(Float.parseFloat((precoFieldal.getText())));
-										a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
-										Fachada.getInstancia().InserirRegistro(a);
-										
-										
-										
-									}
-								});
-								editPanel.add(button_1, "cell 2 5,alignx left,aligny bottom");
-								
 								JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
 								lblDataDeLocao.setForeground(Color.WHITE);
 								editPanel.add(lblDataDeLocao, "cell 0 3,growx,aligny bottom");
@@ -792,14 +712,14 @@ public void mouseClicked(MouseEvent e) {
 								lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
 								editPanel.add(lblbtnVoltar2, "flowx,cell 8 5,alignx right");
 								
-								JLabel label_3 = new JLabel("");
-								label_3.addMouseListener(new MouseAdapter() {
+								JLabel lblbtnsalvar = new JLabel("");
+								lblbtnsalvar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										int i= 0;	
 										int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
 										while(i<tamanho){
-											label_3.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar3.png")));
+											lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar3.png")));
 											r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
 											r.setTipo((String) tabelaRoupaAluguel.getValueAt(i, 1));
 											r.setModelo((String) tabelaRoupaAluguel.getValueAt(i, 2));
@@ -821,9 +741,23 @@ public void mouseClicked(MouseEvent e) {
 										a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
 										Fachada.getInstancia().InserirRegistro(a);
 									}
+									@Override
+									public void mouseEntered(MouseEvent e) {
+										lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
+										
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+										
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+									}
 								});
-								label_3.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar1.png")));
-								editPanel.add(label_3, "cell 8 5,alignx right");
+								lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar1.png")));
+								editPanel.add(lblbtnsalvar, "cell 8 5,alignx right");
 					scrollPane.addMouseListener(new MouseAdapter() {
 					});
 					
