@@ -208,7 +208,7 @@ public class JCadastroCliente extends JInternalFrame {
 		cadast.add(lblenderecoobri, "cell 2 6 3 1,growx,aligny bottom");
 		lblenderecoobri.setVisible(false);
 		
-		JLabel lblNumero = new JLabel("numero");
+		JLabel lblNumero = new JLabel("N\u00FAmero");
 		lblNumero.setForeground(Color.WHITE);
 		lblNumero.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(lblNumero, "cell 8 6,alignx left,aligny bottom");
@@ -360,6 +360,8 @@ public class JCadastroCliente extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
+							int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao == 0){	
 							Cliente c = new Cliente();
 							if(nomeField.getText().isEmpty()){
 								lblNomeobri.setVisible(true);
@@ -445,6 +447,20 @@ public class JCadastroCliente extends JInternalFrame {
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 								}
+							}
+							int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao2 == 0){	
+							nomeField.setText("");
+							cpfField.setText("");
+							rgField.setText("");
+							cidadeField.setText("");
+							estadoField.setText("");
+							enderecoField.setText("");
+							numeroField.setText("");
+							bairroField.setText("");
+							telefoneField.setText("");
+							
+							}
 						}
 						
 						@Override
@@ -513,7 +529,7 @@ public class JCadastroCliente extends JInternalFrame {
 				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 				c.setNome(svalueName);
-				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja visualizar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
 				if (opcao == 0){
 				Fachada.getInstancia().BuscarClientenome(c,pesq);
@@ -559,7 +575,7 @@ public class JCadastroCliente extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
 				c.setNome(svalueName);
-				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
 				if (opcao == 0){
 				Fachada.getInstancia().BuscarClientenome(c,pesq);
@@ -600,7 +616,7 @@ public class JCadastroCliente extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
 				c.setCPF(svalueCpf);
-				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().ExcluirCliente(c);
 					carregarTabela();
@@ -637,11 +653,13 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(nomelabel2, "cell 0 0,alignx left,aligny bottom");
 		
 		nomeField2 = new JTextField();
+		nomeField2.setEditable(false);
 		nomeField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		nomeField2.setColumns(10);
 		editPanel.add(nomeField2, "cell 0 1 12 1,grow");
 		
 		cpfField2 = new JTextField();
+		cpfField2.setEditable(false);
 		cpfField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cpfField2.setColumns(10);
 		editPanel.add(cpfField2, "cell 0 3 5 1,grow");
@@ -657,6 +675,7 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(rglabel2, "cell 6 2,growx,aligny bottom");
 		
 		rgField2 = new JTextField();
+		rgField2.setEditable(false);
 		rgField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rgField2.setColumns(10);
 		editPanel.add(rgField2, "cell 6 3 6 1,grow");
@@ -672,16 +691,18 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(cidadelabel2, "cell 0 4,alignx left,aligny bottom");
 		
 		cidadeField2 = new JTextField();
+		cidadeField2.setEditable(false);
 		cidadeField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cidadeField2.setColumns(10);
 		editPanel.add(cidadeField2, "cell 0 5 5 1,grow");
 		
-		JLabel numerolabel2 = new JLabel("numero");
+		JLabel numerolabel2 = new JLabel("N\u00FAmero");
 		numerolabel2.setForeground(Color.WHITE);
 		numerolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(numerolabel2, "cell 6 6,alignx left,aligny bottom");
 		
 		enderecoField2 = new JTextField();
+		enderecoField2.setEditable(false);
 		enderecoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		enderecoField2.setColumns(10);
 		editPanel.add(enderecoField2, "cell 0 7 5 1,grow");
@@ -692,6 +713,7 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(enderecolabel2, "cell 0 6,growx,aligny bottom");
 		
 		numeroField2 = new JTextField();
+		numeroField2.setEditable(false);
 		numeroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		numeroField2.setColumns(10);
 		editPanel.add(numeroField2, "cell 6 7 6 1,grow");
@@ -707,16 +729,19 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(telefonelabel2, "cell 6 8,growx,aligny bottom");
 		
 		bairroField2 = new JTextField();
+		bairroField2.setEditable(false);
 		bairroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		bairroField2.setColumns(10);
 		editPanel.add(bairroField2, "cell 0 9 5 1,grow");
 		
 		telefoneField2 = new JTextField();
+		telefoneField2.setEditable(false);
 		telefoneField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		telefoneField2.setColumns(10);
 		editPanel.add(telefoneField2, "cell 6 9 6 1,grow");
 		
 		estadoField2 = new JTextField();
+		estadoField2.setEditable(false);
 		estadoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		estadoField2.setColumns(10);
 		editPanel.add(estadoField2, "cell 6 5 6 1,grow");
@@ -825,6 +850,9 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
 				c.setNome(nomeField2.getText()); 
 				c.setCPF(cpfField2.getText());
 				c.setRG(rgField2.getText());
@@ -837,21 +865,22 @@ public class JCadastroCliente extends JInternalFrame {
 				@SuppressWarnings("unused")
 				String cpf = c.getCPF();
 				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
+				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar2.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
 				
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
 			}
 		});
 		
@@ -859,6 +888,8 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnEditar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
 				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
 				numeroField2.setEditable(true);
 				nomeField2.setEditable(true);
@@ -869,6 +900,7 @@ public class JCadastroCliente extends JInternalFrame {
 				enderecoField2.setEditable(true);
 				bairroField2.setEditable(true);
 				telefoneField2.setEditable(true);
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -890,7 +922,7 @@ public class JCadastroCliente extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
 				c.setCPF(svalueCpf);
-				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().ExcluirCliente(c);
 					carregarTabela();} else {   
@@ -914,7 +946,7 @@ public class JCadastroCliente extends JInternalFrame {
 		editPanel.add(lblbtnExcluir2, "cell 7 13");
 		lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
 		editPanel.add(lblbtnEditar2, "cell 9 13");
-		lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
+		lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
 		editPanel.add(lblbtnSalvar, "cell 11 13");
 		editPanel.add(btnLimpparTela, "cell 2 14,growx,aligny bottom");
 		

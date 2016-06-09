@@ -5,20 +5,18 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import javax.swing.JDesktopPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class Principal extends JFrame {
 
@@ -77,6 +75,7 @@ public class Principal extends JFrame {
 		barraMenu.add(menuRoupa);
 		
 		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
+		menuCadastroRoupa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.ALT_MASK));
 		menuCadastroRoupa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JCadastroRoupa janela = new JCadastroRoupa();

@@ -17,17 +17,15 @@ import javax.swing.text.MaskFormatter;
 import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Roupa;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import br.edu.fasete.principais.Teste;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JFormattedTextField;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.ImageIcon;
 
@@ -37,6 +35,7 @@ public class JCadastroRoupa extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
+	Teste t = new Teste();
 	int srow;
 	String sValueNome;
 	int sValueCode;
@@ -49,7 +48,6 @@ public class JCadastroRoupa extends JInternalFrame {
 	private JTextField tamanhoField;
 	private JTabbedPane tabbedPane;
 	private JTable tabelaRoupa;
-	private JFormattedTextField telefoneField;
 	private JTextField ModeloField;
 	private JTextField tipoField2;
 	private JTextField modeloField2;
@@ -196,7 +194,7 @@ public class JCadastroRoupa extends JInternalFrame {
 					srow = tabelaRoupa.getSelectedRow();
 					sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
 					sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
-					int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+					int opcao = JOptionPane.showConfirmDialog(null, "deseja visualizar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 					if (opcao == 0){	
 						r.setCodRoupa(sValueCode);
 						Fachada.getInstancia().BuscarRoupa(r);
@@ -227,7 +225,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		JPanel cadast = new JPanel();
 		cadast.setBackground(Color.DARK_GRAY);
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.addTab("Cadastrar Roupas", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[136px][83px][87px][89px][203.00px][22.00][71px][237px][320.00px,grow]", "[123.00px][33px][116.00px][30px][116.00px][31px][112.00px]"));
 		
@@ -362,6 +360,8 @@ public class JCadastroRoupa extends JInternalFrame {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					lblbtnsalvar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/salvar3.png")));
+					int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+					if (opcao2 == 0){	
 					r.setTipo(tipoField.getText()); 
 					r.setModelo(ModeloField.getText());
 					r.setPreco(Float.parseFloat((precoField.getText())));
@@ -370,6 +370,18 @@ public class JCadastroRoupa extends JInternalFrame {
 					r.setCor(corField.getText());
 					r.setDisponibilidade(false);
 					Fachada.getInstancia().InserirRoupa(r);
+					}
+					int opcao = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
+					if (opcao == 0){	
+					
+						tipoField.setText("");
+						ModeloField.setText("");
+						precoField.setText("");
+						generoField.setText("");
+						tamanhoField.setText("");
+						corField.setText("");
+						
+					}
 				}
 				public void mouseEntered(MouseEvent e) {
 					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
@@ -391,7 +403,8 @@ public class JCadastroRoupa extends JInternalFrame {
 		
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+		tabbedPane.addTab("Exibir Roupas", null, exibirpanel, null);
+		tabbedPane.setEnabledAt(1, true);
 		exibirpanel.setLayout(new MigLayout("", "[146px][62px][124px][58px][849px,grow]", "[504px][82.00px]"));
 		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
 		
@@ -536,8 +549,145 @@ public class JCadastroRoupa extends JInternalFrame {
 		panel.add(lblPesquisar, "cell 0 6,growx,aligny bottom");
 		
 		pesqField = new JTextField();
-		panel.add(pesqField, "cell 0 7,grow");
+		panel.add(pesqField, "flowx,cell 0 7,grow");
 		pesqField.setColumns(10);
+		
+		JLabel lblbtnExcluir2 = new JLabel("");
+		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + modeloField2.getText() + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirRoupa(r);
+					carregarTabela();} else { 
+						
+					}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+		});
+		
+		JLabel lblbtnCancelar = new JLabel("");
+		lblbtnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a edição?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){	
+				lblbtnCancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+				tipoField2.setEditable(false);
+				modeloField2.setEditable(false);
+				precoField2.setEditable(false);
+				corField2.setEditable(false);
+				precoField2.setEditable(false);
+				tamanhoField2.setEditable(false);
+				generoField2.setEditable(false);
+				tipoField2.setText("");
+				modeloField2.setText("");
+				precoField2.setText("");
+				corField2.setText("");
+				precoField2.setText("");
+				tamanhoField2.setText("");
+				generoField2.setText("");
+				}
+				
+			}
+									
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+			}
+		});
+		lblbtnCancelar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/cancelar1.png")));
+		panel.add(lblbtnCancelar, "cell 2 7,alignx right");
+		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/excluir1.png")));
+		panel.add(lblbtnExcluir2, "flowx,cell 3 7,alignx right");
+		
+		JLabel lblbtnEditar2 = new JLabel("");
+		lblbtnEditar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){	
+				
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
+				tipoField2.setEditable(true);
+				modeloField2.setEditable(true);
+				precoField2.setEditable(true);
+				corField2.setEditable(true);
+				precoField2.setEditable(true);
+				tamanhoField2.setEditable(true);
+				generoField2.setEditable(true);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+			}
+		});
+		lblbtnEditar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/editar1.png")));
+		panel.add(lblbtnEditar2, "cell 3 7");
+		
+		JLabel lblbtnSalvar2 = new JLabel("");
+		lblbtnSalvar2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){	
+				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
+				r.setTipo(tipoField2.getText()); 
+				r.setModelo(modeloField2.getText());
+				r.setPreco(Float.parseFloat((precoField2.getText())));
+				r.setGenero(generoField2.getText());
+				r.setTamanho(tamanhoField2.getText());
+				r.setCor(corField2.getText());
+				r.setDisponibilidade(false);
+				Fachada.getInstancia().AtualizarRoupa(r);
+				}
+			
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+			}
+		});
+		lblbtnSalvar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/salvar1.png")));
+		panel.add(lblbtnSalvar2, "cell 3 7");
 		
 		JLabel lblbtnPesquisar = new JLabel("");
 		lblbtnPesquisar.addMouseListener(new MouseAdapter() {
@@ -568,96 +718,7 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnPesquisar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/pesquisar1.png")));
-		panel.add(lblbtnPesquisar, "cell 2 7,alignx right");
-		
-		JLabel lblbtnExcluir2 = new JLabel("");
-		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
-				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + modeloField2.getText() + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-				if (opcao == 0){
-					Fachada.getInstancia().ExcluirRoupa(r);
-					carregarTabela();} else { 
-						
-					}
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
-			}
-		});
-		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/excluir1.png")));
-		panel.add(lblbtnExcluir2, "flowx,cell 3 7,alignx right");
-		
-		JLabel lblbtnEditar2 = new JLabel("");
-		lblbtnEditar2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
-				tipoField2.setEditable(true);
-				modeloField2.setEditable(true);
-				precoField2.setEditable(true);
-				corField2.setEditable(true);
-				precoField2.setEditable(true);
-				tamanhoField2.setEditable(true);
-				generoField2.setEditable(true);
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-			}
-		});
-		lblbtnEditar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/editar1.png")));
-		panel.add(lblbtnEditar2, "cell 3 7");
-		
-		JLabel lblbtnSalvar2 = new JLabel("");
-		lblbtnSalvar2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
-				r.setTipo(tipoField2.getText()); 
-				r.setModelo(modeloField2.getText());
-				r.setPreco(Float.parseFloat((precoField2.getText())));
-				r.setGenero(generoField2.getText());
-				r.setTamanho(tamanhoField2.getText());
-				r.setCor(corField2.getText());
-				r.setDisponibilidade(false);
-				Fachada.getInstancia().AtualizarRoupa(r);
-			
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
-				
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
-				
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
-			}
-		});
-		lblbtnSalvar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/salvar1.png")));
-		panel.add(lblbtnSalvar2, "cell 3 7");
+		panel.add(lblbtnPesquisar, "cell 0 7,alignx right");
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("###.###.###-##");

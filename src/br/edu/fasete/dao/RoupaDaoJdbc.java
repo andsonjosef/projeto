@@ -84,6 +84,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	@Override
 	public void InserirRoupa(Roupa r) {
 		
+		
 		  try {
 			  PreparedStatement stmt;
 		  
@@ -100,11 +101,11 @@ public class RoupaDaoJdbc implements RoupaDao {
 			   
 			   	 	  
 			   JOptionPane.showMessageDialog(null,"Roupa cadastrada!");
-			  
-			 
+			
 	}catch(Exception es){
 		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
 		  JOptionPane.showMessageDialog(null,es);
+		  
 	  }
 
 	}
