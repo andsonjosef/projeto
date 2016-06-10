@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -111,6 +112,11 @@ public class JRegistro extends JInternalFrame {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
+				if(tabbedPane.getSelectedIndex() == 0) {
+					Fachada.getInstancia().limparTabela();
+					Fachada.getInstancia().limparLista();
+				}
+				
 				
 				//Carregar tabela sempre que alternar para aba de relatÃ³rios
 				if(tabbedPane.getSelectedIndex() == 1) {
@@ -215,7 +221,7 @@ public class JRegistro extends JInternalFrame {
 		
 		tabbedPane.addTab("Registros abertos", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
-		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
+		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
 		
 		JLabel labelnome = new JLabel("Nome");
 		labelnome.setForeground(Color.WHITE);
@@ -378,12 +384,12 @@ public class JRegistro extends JInternalFrame {
 						public void mouseReleased(MouseEvent arg0) {
 							srow = tabelaRoupaAluguel.getSelectedRow();
 							
-							svaluecodCli = (int) tabelaRoupaAluguel.getValueAt(srow, 6);
+
 							
 						}
 						
 					});
-					editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
+					editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px,grow]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
 					
 					
 					
@@ -453,6 +459,7 @@ public class JRegistro extends JInternalFrame {
 						public void mouseClicked(MouseEvent e) {
 							lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
 							Fachada.getInstancia().ExcluirReg(c);
+							tabbedPane.setSelectedIndex(0);
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -528,7 +535,7 @@ public class JRegistro extends JInternalFrame {
 					JPanel exibirpanel = new JPanel();
 					exibirpanel.setBackground(Color.DARK_GRAY);
 					tabbedPane.addTab("Editar registro", null, exibirpanel, null);
-					exibirpanel.setLayout(new MigLayout("", "[38.00,grow][128px][42px][124px][168px][133.00px][58.00][495.00px,trailing][grow]", "[311px][23px][47.00px][25px][42.00px][42.00px][25px][55.00px]"));
+					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][157.00px][32.00][495.00px,grow,trailing]", "[311px][23px][47.00px][25px][42.00px][42.00px][25px][55.00px]"));
 					
 					JLabel lblbtnAdicionar = new JLabel("");
 					lblbtnAdicionar.addMouseListener(new MouseAdapter() {
@@ -557,7 +564,7 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					lblbtnAdicionar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/Adicionar1.png")));
-					exibirpanel.add(lblbtnAdicionar, "cell 5 1");
+					exibirpanel.add(lblbtnAdicionar, "cell 4 1,alignx right");
 					
 					JLabel lblbtnRemover = new JLabel("");
 					lblbtnRemover.addMouseListener(new MouseAdapter() {
@@ -585,22 +592,22 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					lblbtnRemover.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/remover1.png")));
-					exibirpanel.add(lblbtnRemover, "cell 7 1,alignx left");
+					exibirpanel.add(lblbtnRemover, "cell 6 1,alignx right");
 					
 					JLabel lblModelo = new JLabel("Data de devolu\u00E7\u00E3o");
 					lblModelo.setForeground(Color.WHITE);
 					lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblModelo, "cell 7 2,growx,aligny bottom");
+					exibirpanel.add(lblModelo, "cell 6 2,growx,aligny bottom");
 					
 					datalocaField2 = new JTextField();
 					datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					datalocaField2.setColumns(10);
-					exibirpanel.add(datalocaField2, "cell 1 3 5 1,grow");
+					exibirpanel.add(datalocaField2, "cell 0 3 5 1,grow");
 					
 					datadevoField2 = new JTextField();
 					datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					datadevoField2.setColumns(10);
-					exibirpanel.add(datadevoField2, "cell 7 3,grow");
+					exibirpanel.add(datadevoField2, "cell 6 3,grow");
 					
 					
 					///
@@ -620,7 +627,7 @@ public class JRegistro extends JInternalFrame {
 					
 					tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
-					exibirpanel.add(scrollPaneRoupaAluguel, "cell 7 0,grow");
+					exibirpanel.add(scrollPaneRoupaAluguel, "cell 6 0,grow");
 					scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
 					});
 					
@@ -632,7 +639,7 @@ public class JRegistro extends JInternalFrame {
 						public void mouseReleased(MouseEvent arg0) {
 							srow = tabelaRoupa.getSelectedRow();
 							
-							svaluecoder = (int) tabelaRoupa.getValueAt(srow, 0);
+
 							
 						}
 						
@@ -640,28 +647,28 @@ public class JRegistro extends JInternalFrame {
 					
 					tabelaRoupa_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa_1);
-					exibirpanel.add(scrollPaneRoupa, "cell 1 0 5 1,grow");
+					exibirpanel.add(scrollPaneRoupa, "cell 0 0 5 1,grow");
 					
 					JLabel lblTamanho = new JLabel("Pre\u00E7o");
 					lblTamanho.setForeground(Color.WHITE);
 					lblTamanho.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblTamanho, "cell 1 5,growx,aligny bottom");
+					exibirpanel.add(lblTamanho, "cell 0 5,growx,aligny bottom");
 					
 					JLabel lblGenero = new JLabel("Pre\u00E7o final");
 					lblGenero.setForeground(Color.WHITE);
 					lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblGenero, "cell 7 5,growx,aligny bottom");
+					exibirpanel.add(lblGenero, "cell 6 5,growx,aligny bottom");
 					
 					precoField2 = new JTextField();
 					precoField2.setEditable(false);
 					precoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precoField2.setColumns(10);
-					exibirpanel.add(precoField2, "cell 1 6 5 1,grow");
+					exibirpanel.add(precoField2, "cell 0 6 5 1,grow");
 					
 					precofimField2 = new JTextField();
 					precofimField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precofimField2.setColumns(10);
-					exibirpanel.add(precofimField2, "cell 7 6,grow");
+					exibirpanel.add(precofimField2, "cell 6 6,grow");
 					
 					JLabel lblbtncancelar = new JLabel("");
 					lblbtncancelar.addMouseListener(new MouseAdapter() {
@@ -685,12 +692,16 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					lblbtncancelar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/cancelar1.png")));
-					exibirpanel.add(lblbtncancelar, "flowx,cell 7 7");
+					exibirpanel.add(lblbtncancelar, "flowx,cell 6 7");
 					
 					JLabel lblbtnsalvar = new JLabel("");
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
+							if(precofimField2.getText().isEmpty()){
+								JOptionPane.showMessageDialog(null, "adicione um preço");
+								
+							}else{
 							lblbtnsalvar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/salvar3.png")));
 							Fachada.getInstancia().ExcluirReg(c);
 							
@@ -720,7 +731,7 @@ public class JRegistro extends JInternalFrame {
 							
 							carregarTabelaRoupaLista();
 							Fachada.getInstancia().SomaPreco(a);
-						
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -744,6 +755,7 @@ public class JRegistro extends JInternalFrame {
 						public void mouseClicked(MouseEvent e) {
 							lblbtnENcerrar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
 							Fachada.getInstancia().ExcluirReg(c);
+							tabbedPane.setSelectedIndex(0);
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -760,9 +772,9 @@ public class JRegistro extends JInternalFrame {
 						
 					});
 					lblbtnENcerrar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
-					exibirpanel.add(lblbtnENcerrar, "cell 7 7");
+					exibirpanel.add(lblbtnENcerrar, "cell 6 7");
 					lblbtnsalvar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/salvar1.png")));
-					exibirpanel.add(lblbtnsalvar, "cell 7 7");
+					exibirpanel.add(lblbtnsalvar, "cell 6 7");
 					scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 					});
 					

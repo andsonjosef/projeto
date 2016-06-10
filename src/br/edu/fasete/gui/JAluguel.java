@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -210,7 +211,7 @@ public class JAluguel extends JInternalFrame {
 					
 					tabbedPane.addTab("Cadastrar Aluguel", null, cadast, null);
 					tabbedPane.setEnabledAt(0, true);
-					cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
+					cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
 					
 					JLabel labelnome = new JLabel("Nome");
 					labelnome.setForeground(Color.WHITE);
@@ -498,8 +499,34 @@ public class JAluguel extends JInternalFrame {
 								JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
 								exibirpanel.add(scrollPaneRoupaAluguel, "cell 6 0,grow");
 								scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										if(e.getClickCount() == 2) {
+											int linha = tabelaRoupasele.getSelectedRow();
+										    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+										    Fachada.getInstancia().ExcluirRoupaSele(r);
+										    carregarTabelaRoupasele();
+										}
+									}
+									
 								});
-								
+								tabelaRoupasele.addMouseListener(new MouseAdapter() {
+									public void mouseClicked(MouseEvent e) {
+										if(e.getClickCount() == 2) {
+											
+											int linha = tabelaRoupasele.getSelectedRow();
+										    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+										    Fachada.getInstancia().ExcluirRoupaSele(r);
+										    carregarTabelaRoupasele();
+										
+									
+										
+									} else {
+										   
+									}
+								}
+									
+								});
 								////
 								
 								tabelaRoupa_1 = new JTable(new RoupaTableModel());
@@ -529,8 +556,9 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar2.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
-										int linha = 0;
 										
+										int linha = 0;
+										 nomeField2.setText(c.getNome());
 										int linhat = tabelaRoupasele.getRowCount();
 										
 										while(linha < linhat){
@@ -592,6 +620,25 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
 								exibirpanel.add(btnlblAvancar2, "cell 6 8,alignx right");
 								scrollPaneRoupa.addMouseListener(new MouseAdapter() {
+								});
+								
+								
+								tabelaRoupa_1.addMouseListener(new MouseAdapter() {
+									public void mouseClicked(MouseEvent e) {
+										if(e.getClickCount() == 2) {
+											
+											 int linha = tabelaRoupa_1.getSelectedRow();
+											    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+											   Fachada.getInstancia().InserirRoupaSele(r);
+											   carregarTabelaRoupasele();
+										
+									
+										
+									} else {
+										   
+									}
+								}
+									
 								});
 								
 								
