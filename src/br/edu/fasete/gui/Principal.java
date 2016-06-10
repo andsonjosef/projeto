@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class Principal extends JFrame {
 
@@ -26,6 +28,17 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JDesktopPane desktop;
+	
+	JCadastroCliente janelaCliente = new JCadastroCliente();
+	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
+	JMenu menuCliente = new JMenu("Cliente");
+	JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
+	JMenu menuRoupa = new JMenu("Roupa");
+	JAluguel janelaAluguel = new JAluguel();
+	JMenu menuAluguel = new JMenu("Aluguel");
+	JRegistro janelaRegistro = new JRegistro();
+	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
+	JMenu menuRegistro = new JMenu("Registro");
 	/**
 	 * Launch the application.
 	 */
@@ -52,17 +65,31 @@ public class Principal extends JFrame {
 		
 		
 		JMenuBar barraMenu = new JMenuBar();
+		barraMenu.setBackground(Color.DARK_GRAY);
 		setJMenuBar(barraMenu);
 		
-		JMenu menuCliente = new JMenu("Cliente");
+		
+		menuCliente.setForeground(Color.WHITE);
+		menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
 		menuCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JCadastroCliente janela = new JCadastroCliente();
-				desktop.add(janela);
-				janela.setVisible(true);
+				
+				desktop.add(janelaCliente);
+				janelaCliente.setVisible(true);
+				if(janelaCliente.isShowing()==true){
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconclienteSele.png")));
+					menuCliente.setForeground(Color.YELLOW);
+					menuRoupa.setForeground(Color.WHITE);
+					menuAluguel.setForeground(Color.WHITE);
+					menuRegistro.setForeground(Color.WHITE);
+					janelaRoupa.dispose();
+					janelaAluguel.dispose();
+					janelaRegistro.dispose();
+					
+				}
 				try {
-					janela.setMaximum(true);
+					janelaCliente.setMaximum(true);
 				} catch (PropertyVetoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -71,18 +98,30 @@ public class Principal extends JFrame {
 		});
 		barraMenu.add(menuCliente);
 		
-		JMenu menuRoupa = new JMenu("Roupa");
+		
+		menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupauicone.png")));
+		menuRoupa.setForeground(Color.WHITE);
 		barraMenu.add(menuRoupa);
 		
-		JMenuItem menuCadastroRoupa = new JMenuItem("Roupa");
+		
 		menuCadastroRoupa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.ALT_MASK));
 		menuCadastroRoupa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JCadastroRoupa janela = new JCadastroRoupa();
-				desktop.add(janela);
-				janela.setVisible(true);
+				desktop.add(janelaRoupa);
+				janelaRoupa.setVisible(true);
+				if(janelaRoupa.isFocusable()==true){
+					
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+					menuRoupa.setForeground(Color.YELLOW);
+					menuCliente.setForeground(Color.WHITE);
+					menuAluguel.setForeground(Color.WHITE);
+					menuRegistro.setForeground(Color.WHITE);
+					janelaCliente.dispose();
+					janelaAluguel.dispose();
+					janelaRegistro.dispose();
+				}
 				try {
-					janela.setMaximum(true);
+					janelaRoupa.setMaximum(true);
 				} catch (PropertyVetoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -92,17 +131,30 @@ public class Principal extends JFrame {
 		menuRoupa.add(menuCadastroRoupa);
 		
 		
-		JMenu menuAluguel = new JMenu("Aluguel");
+		
+		menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/alugueliicone.png")));
+		menuAluguel.setForeground(Color.WHITE);
 		barraMenu.add(menuAluguel);
 		
 		JMenuItem menuCadastroAluguel = new JMenuItem("Aluguel");
 		menuCadastroAluguel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JAluguel janela = new JAluguel();
-				desktop.add(janela);
-				janela.setVisible(true);
+				
+				if(janelaAluguel.isFocusable()==true){
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+					menuRoupa.setForeground(Color.WHITE);
+					menuCliente.setForeground(Color.WHITE);
+					menuAluguel.setForeground(Color.YELLOW);
+					menuRegistro.setForeground(Color.WHITE);
+					janelaCliente.dispose();
+					janelaRoupa.dispose();
+					janelaRegistro.dispose();
+					
+				}
+				desktop.add(janelaAluguel);
+				janelaAluguel.setVisible(true);
 				try {
-					janela.setMaximum(true);
+					janelaAluguel.setMaximum(true);
 				} catch (PropertyVetoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -121,22 +173,37 @@ public class Principal extends JFrame {
 		
 	
 		
-	JMenu menuRegistro = new JMenu("Registro");
+	
+	menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/registroicone.png")));
+	menuRegistro.setForeground(Color.WHITE);
 	barraMenu.add(menuRegistro);
 	
-	JMenuItem menuCadastroRegistro = new JMenuItem("Registro");
+	
+	
 	menuCadastroRegistro.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JRegistro janela = new JRegistro();
-			desktop.add(janela);
-			janela.setVisible(true);
+			
+			desktop.add(janelaRegistro);
+			janelaRegistro.setVisible(true);
+			if(janelaRegistro.isFocusable()==true){
+				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+				menuRoupa.setForeground(Color.WHITE);
+				menuCliente.setForeground(Color.WHITE);
+				menuAluguel.setForeground(Color.WHITE);
+				menuRegistro.setForeground(Color.YELLOW);
+				janelaCliente.dispose();
+				janelaAluguel.dispose();
+				janelaRoupa.dispose();
+			}
+			
 			try {
-				janela.setMaximum(true);
+				janelaRegistro.setMaximum(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
+		
 	});
 	menuRegistro.add(menuCadastroRegistro);
 	

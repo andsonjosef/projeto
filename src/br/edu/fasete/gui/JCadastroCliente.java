@@ -44,6 +44,7 @@ public class JCadastroCliente extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
+	
 	int srow;
 	String svalueCpf;
 	String svalueName;
@@ -97,6 +98,7 @@ public class JCadastroCliente extends JInternalFrame {
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
+		
 		setBounds(100, 100, 1280, 720);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);

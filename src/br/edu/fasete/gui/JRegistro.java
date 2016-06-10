@@ -865,6 +865,8 @@ public void mouseClicked(MouseEvent e) {
 	
 carregarTabela();
 	}
+	
+	
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
 		tableModel.setRowCount(0);
