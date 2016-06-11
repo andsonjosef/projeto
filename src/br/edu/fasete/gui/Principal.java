@@ -79,6 +79,10 @@ public class Principal extends JFrame {
 				janelaCliente.setVisible(true);
 				if(janelaCliente.isShowing()==true){
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconclienteSele.png")));
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/registroicone.png")));
+					
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/alugueliicone.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupauicone.png")));
 					menuCliente.setForeground(Color.YELLOW);
 					menuRoupa.setForeground(Color.WHITE);
 					menuAluguel.setForeground(Color.WHITE);
@@ -110,8 +114,10 @@ public class Principal extends JFrame {
 				desktop.add(janelaRoupa);
 				janelaRoupa.setVisible(true);
 				if(janelaRoupa.isFocusable()==true){
-					
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/registroicone.png")));
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/alugueliicone.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupauSeleicone.png")));
 					menuRoupa.setForeground(Color.YELLOW);
 					menuCliente.setForeground(Color.WHITE);
 					menuAluguel.setForeground(Color.WHITE);
@@ -141,7 +147,10 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(janelaAluguel.isFocusable()==true){
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/registroicone.png")));
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelSeleiicone.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupauicone.png")));
 					menuRoupa.setForeground(Color.WHITE);
 					menuCliente.setForeground(Color.WHITE);
 					menuAluguel.setForeground(Color.YELLOW);
@@ -186,7 +195,10 @@ public class Principal extends JFrame {
 			desktop.add(janelaRegistro);
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/registroSeleicone.png")));
 				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconcliente.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/alugueliicone.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupauicone.png")));
 				menuRoupa.setForeground(Color.WHITE);
 				menuCliente.setForeground(Color.WHITE);
 				menuAluguel.setForeground(Color.WHITE);

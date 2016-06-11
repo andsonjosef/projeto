@@ -29,6 +29,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -180,34 +181,34 @@ public class JCadastroCliente extends JInternalFrame {
 		lblNomeobri.setVisible(false);
 		JLabel lblbtnEditar = new JLabel("");
 		JLabel lblbtnExcluir = new JLabel("");
-		JLabel lblcpfobri = new JLabel("Preenchmento obrigat\u00F3rio");
+		JLabel lblcpfobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblcpfobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblcpfobri.setForeground(Color.RED);
-		cadast.add(lblcpfobri, "cell 2 2 3 1,growx,aligny bottom");
+		cadast.add(lblcpfobri, "cell 6 2,growx,aligny bottom");
 		lblcpfobri.setVisible(false);
 		
-		JLabel lblcidadeobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblcidadeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblcidadeobri.setForeground(Color.RED);
-		cadast.add(lblcidadeobri, "cell 2 4 3 1,growx,aligny bottom");
-		lblcidadeobri.setVisible(false);
-		
-		JLabel lblrgobri = new JLabel("Preenchmento obrigat\u00F3rio");
+		JLabel lblrgobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblrgobri.setForeground(Color.RED);
 		lblrgobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(lblrgobri, "cell 11 2,alignx left,aligny bottom");
 		lblrgobri.setVisible(false);
 		
-		JLabel lblestadoobri = new JLabel("Preenchmento obrigat\u00F3rio");
+		JLabel lblcidadeobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblcidadeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblcidadeobri.setForeground(Color.RED);
+		cadast.add(lblcidadeobri, "cell 6 4,growx,aligny bottom");
+		lblcidadeobri.setVisible(false);
+		
+		JLabel lblestadoobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblestadoobri.setForeground(Color.RED);
 		lblestadoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(lblestadoobri, "cell 11 4,alignx left,aligny bottom");
 		lblestadoobri.setVisible(false);
 		
-		JLabel lblenderecoobri = new JLabel("Preenchmento obrigat\u00F3rio");
+		JLabel lblenderecoobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblenderecoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblenderecoobri.setForeground(Color.RED);
-		cadast.add(lblenderecoobri, "cell 2 6 3 1,growx,aligny bottom");
+		cadast.add(lblenderecoobri, "cell 6 6,growx,aligny bottom");
 		lblenderecoobri.setVisible(false);
 		
 		JLabel lblNumero = new JLabel("N\u00FAmero");
@@ -215,21 +216,28 @@ public class JCadastroCliente extends JInternalFrame {
 		lblNumero.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(lblNumero, "cell 8 6,alignx left,aligny bottom");
 		
+		JLabel lblnumobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblnumobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblnumobri.setForeground(Color.RED);
+		cadast.add(lblnumobri, "cell 11 6,aligny bottom");
+		lblnumobri.setVisible(false);
+		JLabel lblBairroobri2 = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblBairroobri2.setForeground(Color.RED);
+		lblBairroobri2.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblBairroobri2, "cell 6 8,alignx left,aligny bottom");
+		lblBairroobri2.setVisible(false);
+		
 		numeroField = new JTextField();
 		numeroField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cadast.add(numeroField, "cell 8 7 4 1,grow");
 		numeroField.setColumns(10);
 		
-		
-		JLabel lblBairroobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblBairroobri.setForeground(Color.RED);
-		lblBairroobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblBairroobri, "cell 2 8 3 1,alignx left,growy");
-		lblBairroobri.setVisible(false);
-		
 		try {
 			MaskFormatter mascara = new MaskFormatter("(##)####-####");
 			mascara.setPlaceholderCharacter('_');
+			
+			
+			
 			
 			JLabel lblTelefone = new JLabel("Telefone");
 			lblTelefone.setForeground(Color.WHITE);
@@ -327,7 +335,7 @@ public class JCadastroCliente extends JInternalFrame {
 					cadast.add(lblEstado, "cell 8 4,growx,aligny bottom");
 					
 
-					JLabel lbltelefoneobri = new JLabel("Preenchmento obrigat\u00F3rio");
+					JLabel lbltelefoneobri = new JLabel("Preenchimento obrigat\u00F3rio");
 					lbltelefoneobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lbltelefoneobri.setForeground(Color.RED);
 					cadast.add(lbltelefoneobri, "cell 11 8,alignx left,aligny bottom");
@@ -360,9 +368,36 @@ public class JCadastroCliente extends JInternalFrame {
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
 						@SuppressWarnings("resource")
 						@Override
+						
+
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
-							int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+							int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+							int ctnum = 0;
+							int ctnum2 = 0;
+							String texto = cpfField.getText();
+							String numerotel = telefoneField.getText();
+							
+							char ch, ch2;
+							int n = 14;
+							int m =13;
+							int i,j;
+							for (i=0; i<n; i++) {
+								ch = texto.charAt(i);
+							if ((ch >= '0') && (ch <= '9')) {
+					              ctnum = ctnum + 1;
+					              
+					           }
+							}
+							for (j=0; j<m; j++) {
+								ch2 = numerotel.charAt(j);
+							if ((ch2 >= '0') && (ch2 <= '9')) {
+					              ctnum2 = ctnum2 + 1;
+					              
+					           }
+							}
+							
+							
 							if (opcao == 0){	
 							Cliente c = new Cliente();
 							if(nomeField.getText().isEmpty()){
@@ -370,7 +405,7 @@ public class JCadastroCliente extends JInternalFrame {
 							}else{
 								lblNomeobri.setVisible(false);
 
-							}if(cpfField.getText().isEmpty()){
+							}if(ctnum<11){
 							lblcpfobri.setVisible(true);
 							}else{
 							lblcpfobri.setVisible(false);
@@ -380,15 +415,15 @@ public class JCadastroCliente extends JInternalFrame {
 							}else{
 							lblrgobri.setVisible(false);
 
-							}if(telefoneField.getText().isEmpty()){
+							}if(ctnum2<10){
 							lbltelefoneobri.setVisible(true);
 							}else{
 							lbltelefoneobri.setVisible(false);
 
 							}if(bairroField.getText().isEmpty()){
-							lblBairroobri.setVisible(true);
+							lblBairroobri2.setVisible(true);
 							}else{
-							lblBairroobri.setVisible(false);
+							lblBairroobri2.setVisible(false);
 
 							}if(estadoField.getText().isEmpty()){
 							lblestadoobri.setVisible(true);
@@ -401,7 +436,13 @@ public class JCadastroCliente extends JInternalFrame {
 							}else{
 							lblenderecoobri.setVisible(false);
 
-							}
+							}if(numeroField.getText().isEmpty()){
+								lblnumobri.setVisible(true);
+
+								}else{
+									lblnumobri.setVisible(false);
+
+								}
 							c.setRegistrado(false);
 							c.setNome(nomeField.getText()); 
 							c.setCPF(cpfField.getText());
