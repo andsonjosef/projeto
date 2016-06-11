@@ -232,13 +232,13 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblTipo = new JLabel("Tipo");
 		lblTipo.setForeground(Color.WHITE);
 		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblTipo, "cell 0 0 5 1,growx,aligny bottom");
+		cadast.add(lblTipo, "cell 0 0,growx,aligny bottom");
 		
-		JLabel lblNomeobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblNomeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblNomeobri.setForeground(Color.RED);
-		cadast.add(lblNomeobri, "cell 2 0 3 1,growx,aligny bottom");
-		lblNomeobri.setVisible(false);
+		JLabel lbltipoobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lbltipoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lbltipoobri.setForeground(Color.RED);
+		cadast.add(lbltipoobri, "cell 4 0,growx,aligny bottom");
+		lbltipoobri.setVisible(false);
 		
 		
 		
@@ -250,7 +250,13 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblModelo = new JLabel("Modelo");
 		lblModelo.setForeground(Color.WHITE);
 		lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblModelo, "cell 6 0 3 1,growx,aligny bottom");
+		cadast.add(lblModelo, "cell 6 0,growx,aligny bottom");
+		
+		JLabel lblmodeloobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblmodeloobri.setForeground(Color.RED);
+		lblmodeloobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblmodeloobri, "cell 8 0,alignx right,aligny bottom");
+		lblmodeloobri.setVisible(false);
 		
 		ModeloField = new JTextField();
 		cadast.add(ModeloField, "cell 6 1 3 1,grow");
@@ -259,24 +265,24 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblGenero = new JLabel("Genero");
 		lblGenero.setForeground(Color.WHITE);
 		lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblGenero, "cell 0 2 5 1,growx,aligny bottom");
+		cadast.add(lblGenero, "cell 0 2,growx,aligny bottom");
 		
-		JLabel lblcidadeobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblcidadeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblcidadeobri.setForeground(Color.RED);
-		cadast.add(lblcidadeobri, "cell 2 2 3 1,growx,aligny bottom");
-		lblcidadeobri.setVisible(false);
+		JLabel lblgeneroobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblgeneroobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblgeneroobri.setForeground(Color.RED);
+		cadast.add(lblgeneroobri, "cell 4 2,growx,aligny bottom");
+		lblgeneroobri.setVisible(false);
 		
 		JLabel lblTamanho = new JLabel("Tamanho");
 		lblTamanho.setForeground(Color.WHITE);
 		lblTamanho.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(lblTamanho, "cell 6 2,growx,aligny bottom");
 		
-		JLabel lblestadoobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblestadoobri.setForeground(Color.RED);
-		lblestadoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblestadoobri, "cell 8 2,alignx left,aligny bottom");
-		lblestadoobri.setVisible(false);
+		JLabel lbltamanhoobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lbltamanhoobri.setForeground(Color.RED);
+		lbltamanhoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lbltamanhoobri, "cell 8 2,alignx right,aligny bottom");
+		lbltamanhoobri.setVisible(false);
 		
 		generoField = new JTextField();
 		generoField.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -291,20 +297,25 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblCor = new JLabel("Cor");
 		lblCor.setForeground(Color.WHITE);
 		lblCor.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblCor, "cell 0 4 5 1,growx,aligny bottom");
+		cadast.add(lblCor, "cell 0 4,growx,aligny bottom");
 		
 		
-		JLabel lblBairroobri = new JLabel("Preenchmento obrigat\u00F3rio");
-		lblBairroobri.setForeground(Color.RED);
-		lblBairroobri.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblBairroobri, "cell 2 4 3 1,growx,aligny bottom");
-		lblBairroobri.setVisible(false);
+		JLabel lblcorobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblcorobri.setForeground(Color.RED);
+		lblcorobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblcorobri, "cell 4 4,growx,aligny bottom");
+		lblcorobri.setVisible(false);
 		
 		JLabel lblPreco = new JLabel("Preco");
 		lblPreco.setForeground(Color.WHITE);
 		lblPreco.setFont(new Font("Dialog", Font.PLAIN, 15));
-		cadast.add(lblPreco, "cell 6 4 3 1,growx,aligny bottom");
+		cadast.add(lblPreco, "cell 6 4,growx,aligny bottom");
 		
+		JLabel lblprecoobri = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblprecoobri.setForeground(Color.RED);
+		lblprecoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblprecoobri, "cell 8 4,alignx right,aligny bottom");
+		lblprecoobri.setVisible(false);
 		corField = new JTextField();
 		corField.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(corField, "cell 0 5 5 1,grow");
@@ -362,6 +373,31 @@ public class JCadastroRoupa extends JInternalFrame {
 					lblbtnsalvar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/salvar3.png")));
 					int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 					if (opcao2 == 0){	
+						if(tipoField.getText().isEmpty()){
+							lbltipoobri.setVisible(true);
+						}else{
+							lbltipoobri.setVisible(false);
+						}if(ModeloField.getText().isEmpty()){
+							lblmodeloobri.setVisible(true);
+						}else{
+							lblmodeloobri.setVisible(false);
+						}if(precoField.getText().isEmpty()){
+							lblprecoobri.setVisible(true);
+						}else{
+							lblprecoobri.setVisible(false);
+						}if(generoField.getText().isEmpty()){
+							lblgeneroobri.setVisible(true);
+						}else{
+							lblgeneroobri.setVisible(false);
+						}if(tamanhoField.getText().isEmpty()){
+							lbltamanhoobri.setVisible(true);
+						}else{
+							lbltamanhoobri.setVisible(false);
+						}if(corField.getText().isEmpty()){
+							lblcorobri.setVisible(true);
+						}else{
+							lblcorobri.setVisible(false);
+						}
 					r.setTipo(tipoField.getText()); 
 					r.setModelo(ModeloField.getText());
 					r.setPreco(Float.parseFloat((precoField.getText())));
@@ -369,7 +405,12 @@ public class JCadastroRoupa extends JInternalFrame {
 					r.setTamanho(tamanhoField.getText());
 					r.setCor(corField.getText());
 					r.setDisponibilidade(false);
-					Fachada.getInstancia().InserirRoupa(r);
+					if(corField.getText().isEmpty()||tipoField.getText().isEmpty()||ModeloField.getText().isEmpty()||precoField.getText().isEmpty()||generoField.getText().isEmpty()||tamanhoField.getText().isEmpty()){
+						
+					}else{
+						Fachada.getInstancia().InserirRoupa(r);
+					}
+					
 					}
 					int opcao = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
 					if (opcao == 0){	

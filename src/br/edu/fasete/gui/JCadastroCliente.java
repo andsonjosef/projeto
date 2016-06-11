@@ -283,12 +283,6 @@ public class JCadastroCliente extends JInternalFrame {
 				}
 					
 					
-					
-				
-				
-				
-					
-					
 					JLabel lblCpf = new JLabel("CPF");
 					lblCpf.setForeground(Color.WHITE);
 					lblCpf.setFont(new Font("Dialog", Font.PLAIN, 15));
