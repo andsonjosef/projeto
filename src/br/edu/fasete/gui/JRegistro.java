@@ -102,6 +102,7 @@ public class JRegistro extends JInternalFrame {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JRegistro() {
+		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
@@ -110,6 +111,8 @@ public class JRegistro extends JInternalFrame {
 		Fachada.getInstancia().limparLista();
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setForeground(Color.WHITE);
+		tabbedPane.setBackground(Color.DARK_GRAY);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if(tabbedPane.getSelectedIndex() == 0) {

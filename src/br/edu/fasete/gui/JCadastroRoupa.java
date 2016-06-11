@@ -78,11 +78,15 @@ public class JCadastroRoupa extends JInternalFrame {
 	 */
 	
 	public JCadastroRoupa() {
+		getContentPane().setBackground(Color.DARK_GRAY);
+		setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setForeground(Color.WHITE);
+		tabbedPane.setBackground(Color.DARK_GRAY);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				//Carregar tabela sempre que alternar para aba de relatórios

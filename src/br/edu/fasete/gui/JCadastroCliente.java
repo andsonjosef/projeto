@@ -19,7 +19,6 @@ import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Cliente;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,7 +28,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -95,7 +93,7 @@ public class JCadastroCliente extends JInternalFrame {
 	 */
 	
 	public JCadastroCliente() {
-		setBackground(Color.BLACK);
+		setBackground(Color.DARK_GRAY);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
@@ -103,6 +101,8 @@ public class JCadastroCliente extends JInternalFrame {
 		setBounds(100, 100, 1280, 720);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setForeground(Color.WHITE);
+		tabbedPane.setBackground(Color.DARK_GRAY);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				//Carregar tabela sempre que alternar para aba de relatórios
@@ -167,6 +167,7 @@ public class JCadastroCliente extends JInternalFrame {
 		cadast.setBackground(Color.DARK_GRAY);
 		
 		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.setBackgroundAt(0, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(0, true);
 		cadast.setLayout(new MigLayout("", "[84px][23px][46px][69px][160px][85px][321.00px][71.00px][124px][54.00px][172.00][428px]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px]"));
 		

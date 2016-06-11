@@ -99,6 +99,7 @@ public class JAluguel extends JInternalFrame {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JAluguel() {
+		getContentPane().setBackground(Color.DARK_GRAY);
 		
 		setIconifiable(true);
 		setClosable(true);
@@ -178,6 +179,8 @@ public class JAluguel extends JInternalFrame {
 		});
 					
 					tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+					tabbedPane.setForeground(Color.WHITE);
+					tabbedPane.setBackground(Color.DARK_GRAY);
 					
 					tabbedPane.addChangeListener(new ChangeListener() {
 						public void stateChanged(ChangeEvent e) {
