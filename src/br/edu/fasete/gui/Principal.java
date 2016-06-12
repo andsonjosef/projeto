@@ -2,12 +2,9 @@ package br.edu.fasete.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Frame;
-import java.awt.Shape;
 import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import java.awt.Window.Type;
 
 public class Principal extends JFrame {
 
@@ -31,13 +27,15 @@ public class Principal extends JFrame {
 	
 	
 	JCadastroCliente janelaCliente = new JCadastroCliente();
-	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
 	JMenu menuCliente = new JMenu("");
+	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
 	JMenu menuRoupa = new JMenu("");
 	JAluguel janelaAluguel = new JAluguel();
 	JMenu menuAluguel = new JMenu("");
 	JRegistro janelaRegistro = new JRegistro();
 	JMenu menuRegistro = new JMenu("");
+	JFuncionario janelaFuncionario = new JFuncionario();
+	JMenu menuFuncionario = new JMenu("");
 	/**
 	 * Launch the application.
 	 */
@@ -224,9 +222,6 @@ public class Principal extends JFrame {
 		menuAluguel.setForeground(Color.WHITE);
 		barraMenu.add(menuAluguel);
 		
-		///
-		
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -241,12 +236,12 @@ public class Principal extends JFrame {
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu3.png")));
-				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 				janelaAluguel.dispose();
 				janelaRoupa.dispose();
-				janelaCliente.dispose();
+				janelaFuncionario.dispose();
 			}
 			
 			try {
@@ -280,6 +275,58 @@ public class Principal extends JFrame {
 	menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 	menuRegistro.setForeground(Color.WHITE);
 	barraMenu.add(menuRegistro);
+	
+	///
+	
+	menuFuncionario.setForeground(Color.WHITE);
+	
+	menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+	
+	
+	
+	menuFuncionario.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			if(janelaFuncionario.isShowing()==false){
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu2.png")));
+				}if(janelaFuncionario.isShowing()==true){
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));	
+				}
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			if(janelaFuncionario.isShowing()==false){
+			menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+			}if(janelaFuncionario.isShowing()==true){
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));	
+			}
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			
+			desktop.add(janelaFuncionario);
+			janelaFuncionario.setVisible(true);
+			if(janelaFuncionario.isShowing()==true){
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				janelaRoupa.dispose();
+				janelaAluguel.dispose();
+				janelaRegistro.dispose();
+				
+			}
+			try {
+				janelaFuncionario.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	
+	});
+	barraMenu.add(menuFuncionario);
 	
 	
 	contentPane_1 = new JPanel();

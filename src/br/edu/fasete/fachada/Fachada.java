@@ -3,19 +3,23 @@ package br.edu.fasete.fachada;
 
 import java.util.Vector;
 import br.edu.fasete.cadastro.CadastroAluguel;
+import br.edu.fasete.cadastro.CadastroFuncionario;
 import br.edu.fasete.cadastro.CadastroCliente;
 import br.edu.fasete.cadastro.CadastroRoupa;
 import br.edu.fasete.cadastro.CadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroAluguel;
 import br.edu.fasete.cadastro.InterfaceCadastroCliente;
+import br.edu.fasete.cadastro.InterfaceCadastroFuncionario;
 import br.edu.fasete.cadastro.InterfaceCadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
 import br.edu.fasete.dao.AluguelDaoJdbc;
 import br.edu.fasete.dao.ClienteDaoJdbc;
+import br.edu.fasete.dao.FuncionarioDaoJdbc;
 import br.edu.fasete.dao.RegistroDaoJdbc;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 
 
@@ -25,6 +29,7 @@ private InterfaceCadastroCliente cadastroCliente;
 private InterfaceCadastroRoupa cadastroRoupa;
 private InterfaceCadastroAluguel cadastroAluguel;
 private InterfaceCadastroRegistro cadastroRegistro;
+private InterfaceCadastroFuncionario cadastroFuncionario;;
 
 private static Fachada instancia;
 
@@ -39,6 +44,7 @@ private Fachada() {
 	cadastroRoupa = new CadastroRoupa(new RoupaDaoJdbc());
 	cadastroAluguel = new CadastroAluguel(new AluguelDaoJdbc());
 	cadastroRegistro = new CadastroRegistro(new RegistroDaoJdbc());
+	cadastroFuncionario = new CadastroFuncionario(new FuncionarioDaoJdbc());
 }
 
 //------------Cliente----------------------
@@ -146,6 +152,26 @@ public void ListarRegistro(Cliente c, Aluguel a){
 }
 public void SomaPrecoEdi(Aluguel a,Cliente c){
 	cadastroRegistro.SomaPrecoEdi(a,c);
+}
+
+//------------Funcionario----------------------
+public void AtualizarFuncionario(Funcionario f, String svalueCpf){
+	cadastroFuncionario.AtualizarFuncionario(f,svalueCpf);
+}
+public void BuscarFuncionarioCPF(Funcionario f, String pesq){
+	cadastroFuncionario.BuscarFuncionarioCPF(f,pesq);
+}
+public void BuscarFuncionarionome(Funcionario f, String pesq){
+	cadastroFuncionario.BuscarFuncionarionome(f,pesq);
+}
+public void ExcluirFuncionario(Funcionario f){
+	cadastroFuncionario.ExcluirFuncionario(f);
+}
+public void InserirFuncionario(Funcionario f){
+	cadastroFuncionario.InserirFuncionario(f);
+}
+public Vector<Funcionario> listarFuncionario(){
+	return cadastroFuncionario.listarFuncionario();
 }
 
 }

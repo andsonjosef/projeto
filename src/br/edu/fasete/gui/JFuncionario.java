@@ -14,20 +14,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.MaskFormatter;
-import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.fachada.Fachada;
-import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
+
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -36,18 +33,17 @@ import javax.swing.JFormattedTextField;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 
-public class JCadastroCliente extends JInternalFrame {
+public class JFuncionario extends JInternalFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ClienteDaoJdbc cli = new ClienteDaoJdbc();
 	
+	Funcionario f = new Funcionario();
 	int srow;
 	String svalueCpf;
 	String svalueName;
 	String vazio;
-	Cliente c = new Cliente();
 	private JTextField nomeField;
 	private JTextField rgField;
 	private JTextField enderecoField;
@@ -70,6 +66,10 @@ public class JCadastroCliente extends JInternalFrame {
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
 	private JFormattedTextField cpfpesqField;
+	private JTextField loginField;
+	private JTextField senhaField;
+	private JTextField loginField2;
+	private JTextField senhaField2;
 	
 	/**
 	 * Launch the application.
@@ -78,7 +78,7 @@ public class JCadastroCliente extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JCadastroCliente frame = new JCadastroCliente();
+					JFuncionario frame = new JFuncionario();
 					frame.setVisible(true);
 				   
 					
@@ -94,7 +94,7 @@ public class JCadastroCliente extends JInternalFrame {
 	 * Create the frame.
 	 */
 	
-	public JCadastroCliente() {
+	public JFuncionario() {
 		setBackground(Color.DARK_GRAY);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
@@ -169,10 +169,10 @@ public class JCadastroCliente extends JInternalFrame {
 		JPanel cadast = new JPanel();
 		cadast.setBackground(Color.DARK_GRAY);
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
+		tabbedPane.addTab("Cadastrar Funcionário", null, cadast, null);
 		tabbedPane.setBackgroundAt(0, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(0, true);
-		cadast.setLayout(new MigLayout("", "[84px][23px][46px][69px][160px][85px][321.00px][71.00px][124px][54.00px][172.00][428px]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px]"));
+		cadast.setLayout(new MigLayout("", "[84px,grow][23px][46px][69px][160px][85px][321.00px][71.00px][124px,grow][54.00px][172.00][428px]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][30px][56px][30][91.00px]"));
 		
 		JLabel labelnome = new JLabel("Nome");
 		labelnome.setForeground(Color.WHITE);
@@ -369,7 +369,7 @@ public class JCadastroCliente extends JInternalFrame {
 						
 
 						public void mouseClicked(MouseEvent arg0) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar3.png")));
 							int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 							int ctnum = 0;
 							int ctnum2 = 0;
@@ -397,7 +397,7 @@ public class JCadastroCliente extends JInternalFrame {
 							
 							
 							if (opcao == 0){	
-							Cliente c = new Cliente();
+							Funcionario f = new Funcionario();
 							if(nomeField.getText().isEmpty()){
 								lblNomeobri.setVisible(true);
 							}else{
@@ -441,31 +441,33 @@ public class JCadastroCliente extends JInternalFrame {
 									lblnumobri.setVisible(false);
 
 								}
-							c.setRegistrado(false);
-							c.setNome(nomeField.getText()); 
-							c.setCPF(cpfField.getText());
-							c.setRG(rgField.getText());
-							c.setTelefone(telefoneField.getText());
-							c.setBairro(bairroField.getText());
-							c.setCidade(cidadeField.getText());
-							c.setEstado(estadoField.getText());
-							c.setNumero(numeroField.getText());
-							c.setEndereco(enderecoField.getText());
+							f.setRegistrado(false);
+							f.setNome(nomeField.getText()); 
+							f.setCPF(cpfField.getText());
+							f.setRG(rgField.getText());
+							f.setTelefone(telefoneField.getText());
+							f.setBairro(bairroField.getText());
+							f.setCidade(cidadeField.getText());
+							f.setEstado(estadoField.getText());
+							f.setNumero(numeroField.getText());
+							f.setEndereco(enderecoField.getText());
+							f.setLogin(loginField.getText());
+							f.setSenha(senhaField.getText());
 							String cpf = "";
 							PreparedStatement stmt;
 							try {
 								stmt = (PreparedStatement) Conexao.getConnection()
-								.prepareStatement("select cpf from loja.Cliente ");
+								.prepareStatement("select cpf from loja.Funcionario ");
 								ResultSet rs = stmt.executeQuery();
 								while(rs.next()) {
 									 cpf = rs.getString("CPF");
-									 if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
+									 if(cpf != f.getCPF() && f.getCPF().length() == 14 ){
 										if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
 										}else{								 
 											  cpf = "";																   
 											  try {
 												  stmt = (PreparedStatement) Conexao.getConnection()
-												  .prepareStatement("select cpf from loja.Cliente ");
+												  .prepareStatement("select cpf from loja.funcionario ");
 												  rs = stmt.executeQuery();
 												  while(rs.next()) {
 													 cpf = rs.getString("CPF");																		
@@ -473,8 +475,8 @@ public class JCadastroCliente extends JInternalFrame {
 											  }   catch (SQLException e1) {
 													e1.printStackTrace();
 												  }
-												  if(cpf != c.getCPF() && c.getCPF().length() == 14 ){
-													 Fachada.getInstancia().InserirCliente(c);
+												  if(cpf != f.getCPF() && f.getCPF().length() == 14 ){
+													 Fachada.getInstancia().InserirFuncionario(f);
 												  }else{
 														JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");																	
 												  }
@@ -506,49 +508,67 @@ public class JCadastroCliente extends JInternalFrame {
 						
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar2.png")));
 							
 						}
 						@Override
 						public void mouseExited(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
 							
 						}
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+							lblbtnsalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
 						}
 					});
 					
 					JLabel lblbtncancelar = new JLabel("");
-					lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+					lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
 					lblbtncancelar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+							lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar3.png")));
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
+							lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar2.png")));
 						}
 						@Override
 						public void mouseExited(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+							lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
 						}
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+							lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
 						}
 					});
 					
-					cadast.add(lblbtncancelar, "flowx,cell 11 10,alignx right,aligny bottom");
-					lblbtnsalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
-					cadast.add(lblbtnsalvar, "cell 11 10,alignx left,aligny bottom");
-				tabelaCategoria = new JTable(new ClienteTableModel());
+					JLabel lblLogin = new JLabel("Login");
+					lblLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
+					lblLogin.setForeground(Color.WHITE);
+					cadast.add(lblLogin, "cell 0 10,aligny bottom");
+					
+					JLabel lblSenha = new JLabel("Senha");
+					lblSenha.setForeground(Color.WHITE);
+					lblSenha.setFont(new Font("Dialog", Font.PLAIN, 15));
+					cadast.add(lblSenha, "cell 8 10,aligny bottom");
+					
+					loginField = new JTextField();
+					cadast.add(loginField, "cell 0 11 7 1,grow");
+					loginField.setColumns(10);
+					
+					senhaField = new JTextField();
+					cadast.add(senhaField, "cell 8 11 4 1,grow");
+					senhaField.setColumns(10);
+					
+					cadast.add(lblbtncancelar, "flowx,cell 11 12,alignx right,aligny bottom");
+					lblbtnsalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
+					cadast.add(lblbtnsalvar, "cell 11 12,alignx left,aligny bottom");
+				tabelaCategoria = new JTable(new FuncionarioTableModel());
 				tabelaCategoria.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent arg0) {
 						srow = tabelaCategoria.getSelectedRow();
-						svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+						svalueCpf = (String) tabelaCategoria.getValueAt(srow, 2);
 						svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 						
 					}
@@ -567,22 +587,22 @@ public class JCadastroCliente extends JInternalFrame {
 					
 					
 				srow = tabelaCategoria.getSelectedRow();
-				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 2);
 				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
-				c.setNome(svalueName);
+				f.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja visualizar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarClientenome(c,pesq);
-				nomeField2.setText(c.getNome());
-				cpfField2.setText(""+c.getCPF());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
+				Fachada.getInstancia().BuscarFuncionarionome(f,pesq);
+				nomeField2.setText(f.getNome());
+				cpfField2.setText(""+f.getCPF());
+				rgField2.setText(f.getRG());
+				cidadeField2.setText(f.getCidade());
+				estadoField2.setText(f.getEstado());
+				enderecoField2.setText(f.getEndereco());
+				numeroField2.setText(""+f.getNumero());
+				bairroField2.setText(f.getBairro());
+				telefoneField2.setText(""+f.getTelefone());
 			
 				tabbedPane.setSelectedIndex(2);
 			} else {
@@ -606,7 +626,7 @@ public class JCadastroCliente extends JInternalFrame {
 		
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+		tabbedPane.addTab("Exibir funcionários", null, exibirpanel, null);
 		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
 		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
 		
@@ -614,21 +634,23 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
-				c.setNome(svalueName);
+				lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar3.png")));
+				f.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarClientenome(c,pesq);
-				nomeField2.setText(c.getNome());
-				cpfField2.setText(""+c.getCPF());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
+				Fachada.getInstancia().BuscarFuncionarionome(f,pesq);
+				nomeField2.setText(f.getNome());
+				cpfField2.setText(""+f.getCPF());
+				rgField2.setText(f.getRG());
+				cidadeField2.setText(f.getCidade());
+				estadoField2.setText(f.getEstado());
+				enderecoField2.setText(f.getEndereco());
+				numeroField2.setText(""+f.getNumero());
+				bairroField2.setText(f.getBairro());
+				telefoneField2.setText(""+f.getTelefone());
+				loginField2.setText(f.getLogin());
+				senhaField2.setText(f.getSenha());
 			
 				tabbedPane.setSelectedIndex(2);
 			} else {
@@ -638,15 +660,15 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 			}
 		});
 	
@@ -655,11 +677,11 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
-				c.setCPF(svalueCpf);
+				lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir3.png")));
+				f.setCPF(svalueCpf);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
-					Fachada.getInstancia().ExcluirCliente(c);
+					Fachada.getInstancia().ExcluirFuncionario(f);
 					carregarTabela();
 				} else {
 				}
@@ -667,26 +689,26 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+				lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+				lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+				lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
 			}
 		});
-		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+		lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
 		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
-		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+		lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
 		
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Editar Clientes", null, editPanel, null);
-		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][26.00px][43.00px][][89px,grow]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][40.00px][33.00][]"));
+		tabbedPane.addTab("Editar Funcionários", null, editPanel, null);
+		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px,grow][43.00px][26.00px][43.00px][][89px,grow]", "[40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40][30][40.00px][30.00px][40.00px][30.00][]"));
 		
 		JLabel nomelabel2 = new JLabel("Nome");
 		nomelabel2.setForeground(Color.WHITE);
@@ -787,20 +809,40 @@ public class JCadastroCliente extends JInternalFrame {
 		estadoField2.setColumns(10);
 		editPanel.add(estadoField2, "cell 6 5 6 1,grow");
 		
+		JLabel lblLogin_1 = new JLabel("Login");
+		lblLogin_1.setForeground(Color.WHITE);
+		lblLogin_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		editPanel.add(lblLogin_1, "cell 0 10,aligny bottom");
+		
+		JLabel lblSenha_1 = new JLabel("Senha");
+		lblSenha_1.setForeground(Color.WHITE);
+		lblSenha_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		editPanel.add(lblSenha_1, "cell 6 10,aligny bottom");
+		
+		loginField2 = new JTextField();
+		loginField2.setEditable(false);
+		editPanel.add(loginField2, "cell 0 11 5 1,grow");
+		loginField2.setColumns(10);
+		
+		senhaField2 = new JTextField();
+		senhaField2.setEditable(false);
+		editPanel.add(senhaField2, "cell 6 11 6 1,grow");
+		senhaField2.setColumns(10);
+		
 		pesquisarField = new JTextField();
 		pesquisarField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(pesquisarField, "cell 0 11 3 1,grow");
+		editPanel.add(pesquisarField, "cell 0 13 3 1,grow");
 		pesquisarField.setColumns(10);
 		
 		JLabel lblPesquisarPorNome = new JLabel("Pesquisar por nome");
 		lblPesquisarPorNome.setForeground(Color.WHITE);
 		lblPesquisarPorNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(lblPesquisarPorNome, "cell 0 10 3 1,alignx left,aligny bottom");
+		editPanel.add(lblPesquisarPorNome, "cell 0 12 3 1,alignx left,aligny bottom");
 		
 		JLabel lblNewLabel = new JLabel("Pesquisar por CPF");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(lblNewLabel, "cell 0 12 3 1,alignx left,aligny bottom");
+		editPanel.add(lblNewLabel, "cell 0 14 3 1,alignx left,aligny bottom");
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("###.###.###-##");
@@ -808,7 +850,7 @@ public class JCadastroCliente extends JInternalFrame {
 			cpfpesqField = new JFormattedTextField(mascara);
 			cpfpesqField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			
-			editPanel.add(cpfpesqField, "cell 0 13 3 1,grow");
+			editPanel.add(cpfpesqField, "cell 0 15 3 1,grow");
 			
 		
 		} catch (ParseException e1) {
@@ -824,104 +866,89 @@ public class JCadastroCliente extends JInternalFrame {
 			e1.printStackTrace();
 		}
 		
-		JButton btnLimpparTela = new JButton("Limpar tela");
-		btnLimpparTela.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLimpparTela.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				nomeField2.setText("");
-				cpfField2.setText("");
-				rgField2.setText("");
-				cidadeField2.setText("");
-				estadoField2.setText("");
-				enderecoField2.setText("");
-				numeroField2.setText("");
-				bairroField2.setText("");
-				telefoneField2.setText("");
-				pesquisarField.setText("");
-			}
-		});
-		
 		JLabel lblbtnPesquisarCPF = new JLabel("");
 		lblbtnPesquisarCPF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String pesq;
 				pesq = cpfpesqField.getText();
-				Fachada.getInstancia().BuscarClienteCPF(c,pesq);
+				Fachada.getInstancia().BuscarFuncionarioCPF(f,pesq);
 				
-				cpfField2.setText(""+c.getCPF());
-				nomeField2.setText(c.getNome());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
-				 c.setNome("");
-				 c.setCPF("");
-				 c.setRG("");
-				 c.setTelefone("");
-				 c.setEstado("");
-				 c.setCidade("");
-				 c.setBairro("");
-				 c.setNumero("");
-				 c.setEndereco("");
+				cpfField2.setText(""+f.getCPF());
+				nomeField2.setText(f.getNome());
+				rgField2.setText(f.getRG());
+				cidadeField2.setText(f.getCidade());
+				estadoField2.setText(f.getEstado());
+				enderecoField2.setText(f.getEndereco());
+				numeroField2.setText(""+f.getNumero());
+				bairroField2.setText(f.getBairro());
+				telefoneField2.setText(""+f.getTelefone());
+				 f.setNome("");
+				 f.setCPF("");
+				 f.setRG("");
+				 f.setTelefone("");
+				 f.setEstado("");
+				 f.setCidade("");
+				 f.setBairro("");
+				 f.setNumero("");
+				 f.setEndereco("");
 				 if(nomeField2.getText().isEmpty()){
-					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+					 JOptionPane.showMessageDialog(null,"Funcionario não encontrado");
 				 }
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar2.png")));
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+				lblbtnPesquisarCPF.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
 			}
 		});
-		lblbtnPesquisarCPF.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
-		editPanel.add(lblbtnPesquisarCPF, "cell 4 13");
+		lblbtnPesquisarCPF.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
+		editPanel.add(lblbtnPesquisarCPF, "cell 4 15");
 		
 		JLabel lblbtnSalvar = new JLabel("");
 		lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar3.png")));
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
-				c.setNome(nomeField2.getText()); 
-				c.setCPF(cpfField2.getText());
-				c.setRG(rgField2.getText());
-				c.setTelefone(telefoneField2.getText());
-				c.setBairro(bairroField2.getText());
-				c.setCidade(cidadeField2.getText());
-				c.setEstado(estadoField2.getText());
-				c.setNumero(numeroField2.getText());
-				c.setEndereco(enderecoField2.getText());
+				f.setNome(nomeField2.getText()); 
+				f.setCPF(cpfField2.getText());
+				f.setRG(rgField2.getText());
+				f.setTelefone(telefoneField2.getText());
+				f.setBairro(bairroField2.getText());
+				f.setCidade(cidadeField2.getText());
+				f.setEstado(estadoField2.getText());
+				f.setNumero(numeroField2.getText());
+				f.setEndereco(enderecoField2.getText());
+				f.setLogin(loginField2.getText());
+				f.setSenha(loginField2.getText());
 				@SuppressWarnings("unused")
-				String cpf = c.getCPF();
-				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
+				String cpf = f.getCPF();
+				Fachada.getInstancia().AtualizarFuncionario(f,svalueCpf);
 				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar2.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar2.png")));
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
 				
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
+				lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
 			}
 		});
 		
@@ -931,7 +958,7 @@ public class JCadastroCliente extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
+				lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar3.png")));
 				numeroField2.setEditable(true);
 				nomeField2.setEditable(true);
 				cpfField2.setEditable(true);
@@ -941,19 +968,21 @@ public class JCadastroCliente extends JInternalFrame {
 				enderecoField2.setEditable(true);
 				bairroField2.setEditable(true);
 				telefoneField2.setEditable(true);
+				loginField2.setEditable(true);
+				senhaField2.setEditable(true);
 				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+				lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 			}
 		});
 		
@@ -961,91 +990,90 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir3.png")));
-				c.setCPF(svalueCpf);
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir3.png")));
+				f.setCPF(svalueCpf);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
-					Fachada.getInstancia().ExcluirCliente(c);
+					Fachada.getInstancia().ExcluirFuncionario(f);
 					carregarTabela();} else {   
 				}
 				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
 			}
 		});
-		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
-		editPanel.add(lblbtnExcluir2, "cell 7 13");
-		lblbtnEditar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-		editPanel.add(lblbtnEditar2, "cell 9 13");
-		lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar1.png")));
-		editPanel.add(lblbtnSalvar, "cell 11 13");
-		editPanel.add(btnLimpparTela, "cell 2 14,growx,aligny bottom");
+		lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
+		editPanel.add(lblbtnExcluir2, "cell 7 15");
+		lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
+		editPanel.add(lblbtnEditar2, "cell 9 15");
+		lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
+		editPanel.add(lblbtnSalvar, "cell 11 15");
 		
 		JLabel lblbtnPesquisarNome = new JLabel("");
 		lblbtnPesquisarNome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar3.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar3.png")));
 				String pesq;
 				pesq = pesquisarField.getText();
-				Fachada.getInstancia().BuscarClientenome(c,pesq);
+				Fachada.getInstancia().BuscarFuncionarionome(f,pesq);
 				
-				cpfField2.setText(""+c.getCPF());
-				nomeField2.setText(c.getNome());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
+				cpfField2.setText(""+f.getCPF());
+				nomeField2.setText(f.getNome());
+				rgField2.setText(f.getRG());
+				cidadeField2.setText(f.getCidade());
+				estadoField2.setText(f.getEstado());
+				enderecoField2.setText(f.getEndereco());
+				numeroField2.setText(""+f.getNumero());
+				bairroField2.setText(f.getBairro());
+				telefoneField2.setText(""+f.getTelefone());
 				
-				 c.setNome("");
-				 c.setCPF("");
-				 c.setRG("");
-				 c.setTelefone("");
-				 c.setEstado("");
-				 c.setCidade("");
-				 c.setBairro("");
-				 c.setNumero("");
-				 c.setEndereco("");
+				 f.setNome("");
+				 f.setCPF("");
+				 f.setRG("");
+				 f.setTelefone("");
+				 f.setEstado("");
+				 f.setCidade("");
+				 f.setBairro("");
+				 f.setNumero("");
+				 f.setEndereco("");
 				 if(nomeField2.getText().isEmpty()){
-					 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+					 JOptionPane.showMessageDialog(null,"Funcionario não encontrado");
 				 }
 				
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar2.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+				lblbtnPesquisarNome.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
 			}
 		});
-		lblbtnPesquisarNome.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
-		editPanel.add(lblbtnPesquisarNome, "cell 4 11");
+		lblbtnPesquisarNome.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/pesquisar1.png")));
+		editPanel.add(lblbtnPesquisarNome, "cell 4 13");
 	
 
 	}
 	public void carregarTabela() {
-		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
+		FuncionarioTableModel tableModel = (FuncionarioTableModel) tabelaCategoria.getModel();
 		tableModel.setRowCount(0);
-		for(Cliente cat : Fachada.getInstancia().listarClientes()) {
+		for(Funcionario cat : Fachada.getInstancia().listarFuncionario()) {
 			tableModel.adicionarCategoria(cat);
 		}
 	}
