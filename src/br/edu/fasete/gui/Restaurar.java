@@ -22,12 +22,12 @@ public class Restaurar {
 	            String jarDir = jarFile.getParentFile().getPath();
 
 	            /*NOTE: Creating Database Constraints*/
-	             String dbName = "loja3";
+	             String dbName = "loja";
 	             String dbUser = "root";
 	             String dbPass = "root";
 
 	            /*NOTE: Creating Path Constraints for restoring*/
-	            String restorePath = "\"" + jarDir + "\\backup\\" + "backup.sql\"";
+	            String restorePath = "\"" + jarDir + "\\backup\\" + "backup122.sql\"";
 
 	            /*NOTE: Used to create a cmd command*/
 	            /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/

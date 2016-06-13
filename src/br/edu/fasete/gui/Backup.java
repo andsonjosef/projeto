@@ -25,7 +25,7 @@ public class Backup {
 
 	        /*NOTE: Creating Path Constraints for folder saving*/
 	        /*NOTE: Here the backup folder is created for saving inside it*/
-	        String folderPath = jarDir + "\\backup";
+	        String folderPath = jarDir + "\\backup2";
 
 	        /*NOTE: Creating Folder if it does not exist*/
 	        File f1 = new File(folderPath);
@@ -33,10 +33,10 @@ public class Backup {
 
 	        /*NOTE: Creating Path Constraints for backup saving*/
 	        /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
-	         String savePath = "\"" + jarDir + "\\backup\\" + "backup.sql\"";
+	         String savePath = "\"" + jarDir + "\\backup2\\" + "backup11122.sql\"";
 
 	        /*NOTE: Used to create a cmd command*/
-	         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --database " + dbName + " -r " + savePath;
+	         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --compact --skip-comments --skip-triggers --database " + dbName + " -r " + savePath;
 	
 	
 	        /*NOTE: Executing the command here*/
@@ -46,7 +46,7 @@ public class Backup {
 	        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
 	        if (processComplete == 0) {
 	            System.out.println("Backup Complete");
-	          
+	            JOptionPane.showMessageDialog(null, "aa");
 	        } else {
 	            System.out.println("Backup Failure");
 	        }

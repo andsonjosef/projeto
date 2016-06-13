@@ -12,7 +12,7 @@ public class Conexao {
 	 private static Connection con;
 	 private static String url = "jdbc:mysql://localhost:3306/loja";
 	 private static String user = "root";
-	 private static String pass = "";
+	 private static String pass = "root";
 
 	  
 	static{
