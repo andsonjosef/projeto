@@ -4,17 +4,20 @@ package br.edu.fasete.fachada;
 import java.util.Vector;
 import br.edu.fasete.cadastro.CadastroAluguel;
 import br.edu.fasete.cadastro.CadastroFuncionario;
+import br.edu.fasete.cadastro.CadastroLogin;
 import br.edu.fasete.cadastro.CadastroCliente;
 import br.edu.fasete.cadastro.CadastroRoupa;
 import br.edu.fasete.cadastro.CadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroAluguel;
 import br.edu.fasete.cadastro.InterfaceCadastroCliente;
 import br.edu.fasete.cadastro.InterfaceCadastroFuncionario;
+import br.edu.fasete.cadastro.InterfaceCadastroLogin;
 import br.edu.fasete.cadastro.InterfaceCadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
 import br.edu.fasete.dao.AluguelDaoJdbc;
 import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.dao.FuncionarioDaoJdbc;
+import br.edu.fasete.dao.LoginDaoJdbc;
 import br.edu.fasete.dao.RegistroDaoJdbc;
 import br.edu.fasete.dao.RoupaDaoJdbc;
 import br.edu.fasete.principais.Aluguel;
@@ -29,7 +32,8 @@ private InterfaceCadastroCliente cadastroCliente;
 private InterfaceCadastroRoupa cadastroRoupa;
 private InterfaceCadastroAluguel cadastroAluguel;
 private InterfaceCadastroRegistro cadastroRegistro;
-private InterfaceCadastroFuncionario cadastroFuncionario;;
+private InterfaceCadastroFuncionario cadastroFuncionario;
+private InterfaceCadastroLogin cadastroLogin;
 
 private static Fachada instancia;
 
@@ -45,6 +49,7 @@ private Fachada() {
 	cadastroAluguel = new CadastroAluguel(new AluguelDaoJdbc());
 	cadastroRegistro = new CadastroRegistro(new RegistroDaoJdbc());
 	cadastroFuncionario = new CadastroFuncionario(new FuncionarioDaoJdbc());
+	cadastroLogin = new CadastroLogin(new LoginDaoJdbc());
 }
 
 //------------Cliente----------------------
@@ -172,6 +177,21 @@ public void InserirFuncionario(Funcionario f){
 }
 public Vector<Funcionario> listarFuncionario(){
 	return cadastroFuncionario.listarFuncionario();
+}
+
+//------------Login---------------
+
+public void apagarLogin(Funcionario f){
+	cadastroLogin.apagarLogin(f);
+}
+public Funcionario buscarLogin(Funcionario f){
+	return cadastroLogin.buscarLogin(f);
+}
+public Funcionario buscarLoginRoot(Funcionario f){
+	return cadastroLogin.buscarLoginRoot(f);
+}
+public void inserirLogin(Funcionario f){
+	cadastroLogin.inserirLogin(f);
 }
 
 }
