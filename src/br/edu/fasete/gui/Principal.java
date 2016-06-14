@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.beans.PropertyVetoException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -40,16 +42,31 @@ public class Principal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+            //here you can put the selected theme class name in JTattoo
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+ 
+		} catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Principal frame = new Principal();
 					frame.pack();
 					frame.setBackground(Color.DARK_GRAY);
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				} 
 			}
 		});
 	}
@@ -63,6 +80,7 @@ public class Principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		setExtendedState(MAXIMIZED_BOTH);
+		
 		
 		
 		//this.setUndecorated(true);        
