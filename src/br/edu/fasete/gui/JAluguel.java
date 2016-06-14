@@ -882,7 +882,9 @@ public void mouseClicked(MouseEvent e) {
 			e1.printStackTrace();
 		}
 	
-carregarTabela();
+
+	//carregarTabela();
+
 	}
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();

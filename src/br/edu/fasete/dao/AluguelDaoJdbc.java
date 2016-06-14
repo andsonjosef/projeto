@@ -132,7 +132,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 				.prepareStatement("DELETE FROM loja.lista");
 				 stmt.executeUpdate();			
 		  }catch(Exception e){
-			  JOptionPane.showMessageDialog(null,e);
+			  
 		  }   
 	}
 	
@@ -145,7 +145,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 				.prepareStatement("DELETE FROM loja.roupasele");
 				 stmt.executeUpdate();			
 		  }catch(Exception e){
-			  JOptionPane.showMessageDialog(null,e);
+			
 		  }   
 	}
 	

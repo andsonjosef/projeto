@@ -199,6 +199,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(janelaAluguel.isFocusable()==true){
+					janelaAluguel.carregarTabela();
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
@@ -256,6 +257,7 @@ public class Principal extends JFrame {
 			desktop.add(janelaRegistro);
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){
+				janelaRegistro.carregarTabela();
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu3.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
