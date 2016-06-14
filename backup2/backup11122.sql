@@ -13,9 +13,9 @@ CREATE TABLE `aluguel` (
   `precoFinal` float NOT NULL,
   PRIMARY KEY (`codAluguel`),
   UNIQUE KEY `codCliente` (`codCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `aluguel` VALUES (10,48,'12','21',32,11);
+INSERT INTO `aluguel` VALUES (16,25,'111','222',22,11);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
@@ -35,7 +35,7 @@ CREATE TABLE `cliente` (
   UNIQUE KEY `RG` (`RG`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `cliente` VALUES ('joseph','232.344.423-23','sdsdsd','(23)2323-23232','sdss','ssdsd','sdsdsd','sdssds','323',25,0),('Andson','123.444.555-66','234433','(87)9922-3322','rua','centro','petro','pern','88',46,0),('junior','123.555.599-00','22323232','(87)9992-2323','rua frei domingos','quadra 02','petrolandia','pernambuco','48',47,0),('andsonj13','123.232.323-33','3232','(32)3999-1111','rua','centro','petro','pern','31',48,1),('fulano','222.222.222-22','sdsds','(22)2222-2222','rua tal','aquele la','pa','bh','22',49,0),('coisinha','333.333.333-33','2121','(11)1111-1111','rua tal','op','recife','pe','22',50,0);
+INSERT INTO `cliente` VALUES ('joseph','232.344.423-23','sdsdsd','(23)2323-23232','sdss','ssdsd','sdsdsd','sdssds','323',25,1),('Andson','123.444.555-66','234433','(87)9922-3322','rua','centro','petro','pern','88',46,0),('junior','123.555.599-00','22323232','(87)9992-2323','rua frei domingos','quadra 02','petrolandia','pernambuco','48',47,0),('andsonj13','123.232.323-33','3232','(32)3999-1111','rua','centro','petro','pern','31',48,0),('fulano','222.222.222-22','sdsds','(22)2222-2222','rua tal','aquele la','pa','bh','22',49,0),('coisinha','333.333.333-33','2121','(11)1111-1111','rua tal','op','recife','pe','22',50,0);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `funcionario` (
@@ -70,7 +70,7 @@ CREATE TABLE `lista` (
   `disponibilidade` tinyint(1) NOT NULL,
   `preco` float NOT NULL,
   PRIMARY KEY (`codLista`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -86,9 +86,9 @@ CREATE TABLE `listafinal` (
   `disponibilidade` tinyint(1) NOT NULL,
   `preco` float NOT NULL,
   PRIMARY KEY (`codLista`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `listafinal` VALUES (15,25,2,'casaco','capuz','gg','masculino','preto',0,12),(16,25,9,'SAIA','RODADA','4','forro','laranja',0,500),(23,48,4,'cal?ºa','jeans','asdas','assd','asdas',0,22),(24,48,10,'calcinha','preta','?® s?? o','a mo?ºada','fil?®',0,10);
+INSERT INTO `listafinal` VALUES (41,25,4,'cal?ºa','jeans','asdas','assd','asdas',0,22);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `login` (
@@ -123,7 +123,7 @@ CREATE TABLE `roupa` (
   PRIMARY KEY (`codRoupa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `roupa` VALUES ('casaco','capuz','gg','masculino','preto',0,12,2),('cal?ºa','jeans','asdas','assd','asdas',1,22,4),('sapato','social','sdsds','dsdsd','sdsds',0,2121,7),('meia','cano alto','p','masculina','azul',0,12,8),('SAIA','RODADA','4','forro','laranja',0,500,9),('calcinha','preta','?® s?? o','a mo?ºada','fil?®',1,10,10);
+INSERT INTO `roupa` VALUES ('casaco','capuz','gg','masculino','preto',0,12,2),('cal?ºa','jeans','asdas','assd','asdas',1,22,4),('sapato','social','sdsds','dsdsd','sdsds',0,2121,7),('meia','cano alto','p','masculina','azul',0,12,8),('SAIA','RODADA','4','forro','laranja',0,500,9),('calcinha','preta','?® s?? o','a mo?ºada','fil?®',0,10,10);
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roupasele` (
@@ -138,5 +138,5 @@ CREATE TABLE `roupasele` (
   `preco` float NOT NULL,
   PRIMARY KEY (`codRoupaSele`),
   UNIQUE KEY `codRoupa` (`codRoupa`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

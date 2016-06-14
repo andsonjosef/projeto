@@ -2,7 +2,13 @@ package br.edu.fasete.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -10,11 +16,15 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class Principal extends JFrame {
 
@@ -25,6 +35,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JPanel contentPane_1;
 	private JDesktopPane desktop;
+	private JDesktopPane desktop_1;
 	
 	
 	
@@ -127,6 +138,7 @@ public class Principal extends JFrame {
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 					janelaRoupa.dispose();
 					janelaAluguel.dispose();
 					janelaRegistro.dispose();
@@ -156,6 +168,7 @@ public class Principal extends JFrame {
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu3.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 					janelaCliente.dispose();
 					janelaAluguel.dispose();
 					janelaRegistro.dispose();
@@ -201,6 +214,7 @@ public class Principal extends JFrame {
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu3.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 					janelaCliente.dispose();
 					janelaRoupa.dispose();
 					janelaRegistro.dispose();
@@ -257,6 +271,7 @@ public class Principal extends JFrame {
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 				janelaAluguel.dispose();
 				janelaRoupa.dispose();
 				janelaFuncionario.dispose();
@@ -298,7 +313,7 @@ public class Principal extends JFrame {
 	
 	menuFuncionario.setForeground(Color.WHITE);
 	
-	menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+	menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 	
 	
 	
@@ -306,30 +321,30 @@ public class Principal extends JFrame {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			if(janelaFuncionario.isShowing()==false){
-				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu2.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu2.png")));
 				}if(janelaFuncionario.isShowing()==true){
-					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));	
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu3.png")));	
 				}
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
 			if(janelaFuncionario.isShowing()==false){
-			menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+			menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 			}if(janelaFuncionario.isShowing()==true){
-				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));	
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu3.png")));	
 			}
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
-			
 			desktop.add(janelaFuncionario);
 			janelaFuncionario.setVisible(true);
 			if(janelaFuncionario.isShowing()==true){
-				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu3.png")));
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				janelaRoupa.dispose();
 				janelaAluguel.dispose();
 				janelaRegistro.dispose();
@@ -352,9 +367,80 @@ public class Principal extends JFrame {
 	contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane_1);
 	contentPane_1.setLayout(new BorderLayout(0, 0));
-	desktop = new JDesktopPane();
-	contentPane_1.add(desktop);
-	desktop.setBackground(Color.DARK_GRAY);
+	desktop_1 = new JDesktopPane();
+	contentPane_1.add(desktop_1);
+	desktop_1.setBackground(Color.DARK_GRAY);
+	desktop_1.setLayout(null);
+	
+	JLabel label = new JLabel("");
+	label.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			
+			try{
+				 CodeSource codeSource = Backup.class.getProtectionDomain().getCodeSource();
+			        File jarFile = new File(codeSource.getLocation().toURI().getPath());
+			        String jarDir = jarFile.getParentFile().getPath();
+			        	String nome="";
+			        JFileChooser file = new JFileChooser(); 
+			          file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			          int i= file.showSaveDialog(null);
+			        if (i==1){
+			           
+			        } else {
+			            File arquivo = file.getSelectedFile();
+			          nome = arquivo.getPath();
+			        }
+			        /*NOTE: Creating Database Constraints*/
+			        String dbName = "loja";
+			        String dbUser = "root";
+			        String dbPass = "root";
+
+			        /*NOTE: Creating Path Constraints for folder saving*/
+			        /*NOTE: Here the backup folder is created for saving inside it*/
+			        String folderPath = jarDir + "\\backup2";
+
+			        /*NOTE: Creating Folder if it does not exist*/
+			        File f1 = new File(folderPath);
+			        f1.mkdir();
+
+			        /*NOTE: Creating Path Constraints for backup saving*/
+			        /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
+			        // String savePath = "\"" + jarDir + "\\backup2\\" + "backup11122.sql\"";
+			        String savePath = nome+".sql";
+
+			        /*NOTE: Used to create a cmd command*/
+			         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --compact --skip-comments --skip-triggers --database " + dbName + " -r " + savePath;
+			
+			
+			        /*NOTE: Executing the command here*/
+			        Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+			        int processComplete = runtimeProcess.waitFor();
+
+			        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+			        if (processComplete == 0) {
+			            
+			            JOptionPane.showMessageDialog(null, "Backup concluido com sucesso!");
+			        } else {
+			        	JOptionPane.showMessageDialog(null, "Erro ao tentar fazer o backup!");
+			        }
+
+			    } catch (URISyntaxException | IOException | InterruptedException | HeadlessException ex) {
+		            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+		        }
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			label.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao2.png")));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			label.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+		}
+	});
+	label.setBounds(30, 579, 219, 48);
+	label.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+	desktop_1.add(label);
 
 }	
 	}
