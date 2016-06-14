@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -321,6 +322,7 @@ public class JAluguel extends JInternalFrame {
 										srow = tabelaCategoria.getSelectedRow();
 										svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
 										svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+										
 										
 									}
 									
@@ -807,7 +809,9 @@ public void mouseClicked(MouseEvent e) {
 								});
 								lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar1.png")));
 								editPanel.add(lblbtnsalvar, "cell 8 5,alignx right");
-					scrollPane.addMouseListener(new MouseAdapter() {
+					tabelaCategoria.addMouseListener(new MouseAdapter() {
+						
+						
 					});
 					
 		tabelaCategoria.addMouseListener(new MouseAdapter() {
@@ -835,7 +839,14 @@ public void mouseClicked(MouseEvent e) {
 				
 				
 					if(e.getClickCount() == 2) {
-					
+						 pesq = c.getCPF();
+						 int opcao = JOptionPane.showConfirmDialog(null, "Deseja selecionar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+							
+							if (opcao == 0){
+						Fachada.getInstancia().BuscarClienteCPF(c, pesq);
+						
+						tabbedPane.setSelectedIndex(1);
+							}
 			
 			}
 			}

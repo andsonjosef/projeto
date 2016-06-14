@@ -181,6 +181,18 @@ JOptionPane.showMessageDialog(null,e);
 	
 	public void ExcluirRoupaSeleEdi(Roupa r) {
 		try {
+			
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement("update loja.roupasele set disponibilidade = 0 where codRoupa = ?");
+			  
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+		try {
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 			  .prepareStatement( "DELETE FROM loja.lista WHERE codRoupa = ?");
 			  stmt.setInt(1,r.getCodRoupa());
@@ -190,18 +202,8 @@ JOptionPane.showMessageDialog(null,e);
 		  }catch(Exception e){
 		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
 		  } 
-		try {
-			
-			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-			  .prepareStatement("update loja.roupa set disponibilidade = 0 where codRoupa = ?");
-			  
-			  stmt.setInt(1,r.getCodRoupa());
-		      stmt.executeUpdate(); 
-		    
-		     
-		  }catch(Exception e){
-		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
-		  } 
+		
+		
 		
 	}
 	

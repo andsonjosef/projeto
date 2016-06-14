@@ -96,12 +96,14 @@ public class JRegistro extends JInternalFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JRegistro() {
+		 
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);
 		setClosable(true);
@@ -111,11 +113,13 @@ public class JRegistro extends JInternalFrame {
 		Fachada.getInstancia().limparLista();
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setEnabled(false);
 		tabbedPane.setForeground(Color.WHITE);
 		tabbedPane.setBackground(Color.DARK_GRAY);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if(tabbedPane.getSelectedIndex() == 0) {
+					
 					Fachada.getInstancia().limparTabela();
 					Fachada.getInstancia().limparLista();
 				}
@@ -124,7 +128,7 @@ public class JRegistro extends JInternalFrame {
 				//Carregar tabela sempre que alternar para aba de relatórios
 				if(tabbedPane.getSelectedIndex() == 1) {
 					carregarTabelaRoupa();
-					
+					 carregarTabela();
 					carregarTabelaRoupasele();	
 				}
 				
@@ -335,6 +339,25 @@ public class JRegistro extends JInternalFrame {
 							svaluecodCli=(int) tabelaCategoria.getValueAt(srow, 6);
 						}
 						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if(e.getClickCount() == 2) {
+								int opcao = JOptionPane.showConfirmDialog(null, "Deseja visualizar o registro de " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+								
+								if (opcao == 0){
+							nomeField2.setText(c.getNome());
+							c.setCodCliente(svaluecodCli);
+							carregarTabelaRoupaLista();
+							Fachada.getInstancia().ListarRegistro(c, a);
+							dataLoca.setText(a.getDataLoca());
+							DataDevo.setText(a.getDataEntre());
+							precoFieldal.setText(""+a.getPreco());
+							precoFieldFim.setText(""+a.getPrecoTotal());
+							tabbedPane.setSelectedIndex(1);
+								}
+							}
+							
+						}
 					});
 					
 					
@@ -580,6 +603,9 @@ public class JRegistro extends JInternalFrame {
 						    carregarTabelaRoupasele();
 						    carregarTabelaRoupa();
 						    Fachada.getInstancia().SomaPrecoEdi(a,c);
+						    carregarTabelaRoupasele();
+						    carregarTabelaRoupa();
+						    
 						    precoField2.setText(""+a.getPreco());
 						}
 						public void mouseEntered(MouseEvent arg0) {
@@ -596,6 +622,11 @@ public class JRegistro extends JInternalFrame {
 					});
 					lblbtnRemover.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/remover1.png")));
 					exibirpanel.add(lblbtnRemover, "cell 6 1,alignx right");
+					
+					JLabel lblDataDeLocao_1 = new JLabel("Data de Loca\u00E7\u00E3o");
+					lblDataDeLocao_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+					lblDataDeLocao_1.setForeground(Color.WHITE);
+					exibirpanel.add(lblDataDeLocao_1, "cell 0 2,aligny bottom");
 					
 					JLabel lblModelo = new JLabel("Data de devolu\u00E7\u00E3o");
 					lblModelo.setForeground(Color.WHITE);
@@ -626,6 +657,18 @@ public class JRegistro extends JInternalFrame {
 							
 						}
 						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if(e.getClickCount() == 2) {
+							int linha = tabelaRoupasele.getSelectedRow();
+						    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+						    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
+						    carregarTabelaRoupasele();
+						    carregarTabelaRoupa();
+						    Fachada.getInstancia().SomaPrecoEdi(a,c);
+						    precoField2.setText(""+a.getPreco());
+							}
+						}
 					});
 					
 					tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -646,6 +689,19 @@ public class JRegistro extends JInternalFrame {
 							
 						}
 						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if(e.getClickCount() == 2) {
+								 int linha = tabelaRoupa_1.getSelectedRow();
+								    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+								   Fachada.getInstancia().InserirRoupaEdi(r, c);
+								   carregarTabelaRoupasele();
+								   carregarTabelaRoupa();
+								   Fachada.getInstancia().SomaPrecoEdi(a,c);
+								   precoField2.setText(""+a.getPreco());
+								
+							}
+						}
 					});
 					
 					tabelaRoupa_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -865,7 +921,7 @@ public void mouseClicked(MouseEvent e) {
 			
 			e1.printStackTrace();
 		}
-	
+
 carregarTabela();
 	}
 	
