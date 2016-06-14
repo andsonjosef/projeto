@@ -28,6 +28,7 @@ public class Restaurar {
 
 	            /*NOTE: Creating Path Constraints for restoring*/
 	            String restorePath = "\"" + jarDir + "\\backup\\" + "backup122.sql\"";
+	            JOptionPane.showMessageDialog(null, restorePath);
 
 	            /*NOTE: Used to create a cmd command*/
 	            /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/

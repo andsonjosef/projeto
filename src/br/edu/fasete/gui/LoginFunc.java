@@ -115,7 +115,7 @@ public class LoginFunc extends JFrame {
 							 int retorno = abrir.showOpenDialog(null);  
 							            if (retorno==JFileChooser.APPROVE_OPTION)  {
 							                    caminho = abrir.getSelectedFile().getAbsolutePath();  
-							                    JOptionPane.showMessageDialog(null, caminho);
+							                    
 							            }
 					            /*NOTE: String s is the mysql file name including the .sql in its name*/
 					            /*NOTE: Getting path to the Jar file being executed*/
@@ -129,7 +129,10 @@ public class LoginFunc extends JFrame {
 					             String dbPass = "root";
 
 					            /*NOTE: Creating Path Constraints for restoring*/
-					            String restorePath = caminho;
+					            String restorePath = "\""+caminho+"\"";
+					            JOptionPane.showMessageDialog(null, restorePath);
+					           
+					           
 
 					            /*NOTE: Used to create a cmd command*/
 					            /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/
