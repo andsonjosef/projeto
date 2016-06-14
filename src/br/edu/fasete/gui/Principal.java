@@ -3,6 +3,11 @@ package br.edu.fasete.gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -10,10 +15,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.HeadlessException;
+
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
@@ -37,6 +54,11 @@ public class Principal extends JFrame {
 	JMenu menuRegistro = new JMenu("");
 	JFuncionario janelaFuncionario = new JFuncionario();
 	JMenu menuFuncionario = new JMenu("");
+	private final JLabel label = new JLabel(".................................................................................................................................................................................................................................................................................................................................................................................................");
+	private final JMenu mnNewMenu = new JMenu("");
+	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
+	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -353,6 +375,120 @@ public class Principal extends JFrame {
 	
 	});
 	barraMenu.add(menuFuncionario);
+	label.setFont(new Font("Dialog", Font.BOLD, 5));
+	label.setForeground(Color.DARK_GRAY);
+	
+	barraMenu.add(label);
+	mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+	
+	barraMenu.add(mnNewMenu);
+	mntmCriarBackup.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			try{
+				 CodeSource codeSource = Backup.class.getProtectionDomain().getCodeSource();
+			        File jarFile = new File(codeSource.getLocation().toURI().getPath());
+			        String jarDir = jarFile.getParentFile().getPath();
+			        	String nome="";
+			        JFileChooser file = new JFileChooser(); 
+			          file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			          int i= file.showSaveDialog(null);
+			        if (i==1){
+			           
+			        } else {
+			            File arquivo = file.getSelectedFile();
+			          nome = arquivo.getPath();
+			        }
+			        /*NOTE: Creating Database Constraints*/
+			        String dbName = "loja";
+			        String dbUser = "root";
+			        String dbPass = "root";
+
+			        /*NOTE: Creating Path Constraints for folder saving*/
+			        /*NOTE: Here the backup folder is created for saving inside it*/
+			        String folderPath = jarDir + "\\backup2";
+
+			        /*NOTE: Creating Folder if it does not exist*/
+			        File f1 = new File(folderPath);
+			        f1.mkdir();
+
+			        /*NOTE: Creating Path Constraints for backup saving*/
+			        /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
+			        // String savePath = "\"" + jarDir + "\\backup2\\" + "backup11122.sql\"";
+			        String savePath = nome+".sql";
+
+			        /*NOTE: Used to create a cmd command*/
+			         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --compact --skip-comments --skip-triggers --database " + dbName + " -r " + savePath;
+			
+			
+			        /*NOTE: Executing the command here*/
+			        Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+			        int processComplete = runtimeProcess.waitFor();
+
+			        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+			        if (processComplete == 0) {
+			            
+			            JOptionPane.showMessageDialog(null, "Backup concluido com sucesso!");
+			        } else {
+			        	JOptionPane.showMessageDialog(null, "Erro ao tentar fazer o backup!");
+			        }
+
+			    } catch (URISyntaxException | IOException | InterruptedException | HeadlessException ex) {
+		            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+		        }
+		}
+	});
+	
+	mnNewMenu.add(mntmCriarBackup);
+	mntmRestaurarDeBackup.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			 try {
+				    String caminho="";
+						 JFileChooser abrir = new JFileChooser();  
+						 int retorno = abrir.showOpenDialog(null);  
+						            if (retorno==JFileChooser.APPROVE_OPTION)  {
+						                    caminho = abrir.getSelectedFile().getAbsolutePath();  
+						                    
+						            }
+				            /*NOTE: String s is the mysql file name including the .sql in its name*/
+				            /*NOTE: Getting path to the Jar file being executed*/
+				            /*NOTE: YourImplementingClass-> replace with the class executing the code*/
+				            CodeSource codeSource = Restaurar.class.getProtectionDomain().getCodeSource();
+				           
+				            
+				            /*NOTE: Creating Database Constraints*/
+				             String dbName = "mysql";
+				             String dbUser = "root";
+				             String dbPass = "root";
+
+				            /*NOTE: Creating Path Constraints for restoring*/
+				            String restorePath = "\""+caminho+"\"";
+				            JOptionPane.showMessageDialog(null, restorePath);
+				           
+				           
+
+				            /*NOTE: Used to create a cmd command*/
+				            /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/
+				            String[] executeCmd = new String[]{"C:\\xampp\\mysql\\bin\\mysql", dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
+
+				            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+				            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+				            int processComplete = runtimeProcess.waitFor();
+
+				            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
+				            if (processComplete == 0) {
+				                JOptionPane.showMessageDialog(null, "Successfully restored from SQL : " );
+				            } else {
+				                JOptionPane.showMessageDialog(null, "Error at restoring");
+				            }
+
+
+				        } catch (IOException | InterruptedException | HeadlessException ex) {
+				            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+				        }
+		}
+	});
+	
+	mnNewMenu.add(mntmRestaurarDeBackup);
 	
 	
 	contentPane_1 = new JPanel();
