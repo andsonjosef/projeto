@@ -138,6 +138,50 @@ ResultSet rs = stmt.executeQuery();
 		  
 	}
 	public void ExcluirCliente(Cliente c) {
+		try{
+			 PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+						 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ?");
+			 stmt.setString(1, c.getCPF());
+			 ResultSet rs = stmt.executeQuery();
+
+			while(rs.next()){
+			c.setNome(rs.getString("nome"));
+			c.setCPF(rs.getString("CPF"));
+			c.setRG(rs.getString("RG"));
+			c.setTelefone(rs.getString("telefone"));
+			c.setEstado(rs.getString("estado"));
+			c.setCidade(rs.getString("cidade"));
+			c.setBairro(rs.getString("bairro"));
+			c.setNumero(rs.getString("numero"));
+			c.setEndereco(rs.getString("endereco"));
+			c.setCodCliente(rs.getInt("codCliente"));
+			}
+		 }catch(Exception es){
+			 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+		 }
+		 try {
+			  PreparedStatement stmt;
+			    stmt =  (PreparedStatement) Conexao.getConnection()
+			    .prepareStatement("insert into loja.clientelixeira  (nome,cpf,rg,telefone,estado,cidade,bairro,numero,endereco,registrado,codCliente) values (?,?,?,?,?,?,?,?,?,?,?)") ;
+			   stmt.setString(1,c.getNome());
+			   stmt.setString(2,c.getCPF());
+			   stmt.setString(3,c.getRG());
+			   stmt.setString(4,c.getTelefone());
+			   stmt.setString(5,c.getEstado());
+			   stmt.setString(6,c.getCidade());
+			   stmt.setString(7,c.getBairro());
+			   stmt.setString(8,c.getNumero());
+			   stmt.setString(9,c.getEndereco());
+			   stmt.setBoolean(10, c.isRegistrado());
+			   stmt.setInt(11, c.getCodCliente());
+			   stmt.executeUpdate();
+			   	 	  
+			  
+			 
+	}catch(Exception es){
+		  //  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  JOptionPane.showMessageDialog(null,es);
+	  }
 		 try {
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 					    .prepareStatement( "DELETE FROM loja.cliente WHERE cpf = ?");

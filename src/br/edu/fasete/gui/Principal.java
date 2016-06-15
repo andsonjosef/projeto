@@ -21,7 +21,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -54,10 +53,14 @@ public class Principal extends JFrame {
 	JMenu menuRegistro = new JMenu("");
 	JFuncionario janelaFuncionario = new JFuncionario();
 	JMenu menuFuncionario = new JMenu("");
-	private final JLabel label = new JLabel(".................................................................................................................................................................................................................................................................................................................................................................................................");
-	private final JMenu mnNewMenu = new JMenu("");
+	JLixeira janelaLixeira = new JLixeira();
+	JMenu menuLixeira = new JMenu("");
+	
+	private final JLabel label = new JLabel("................................................................................................................................................................................................................................................................................................................................");
+	private final JMenu menuBackup = new JMenu("");
 	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
 	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
+	private final JMenu menuLixeiro = new JMenu("");
 	
 	/**
 	 * Launch the application.
@@ -379,9 +382,9 @@ public class Principal extends JFrame {
 	label.setForeground(Color.DARK_GRAY);
 	
 	barraMenu.add(label);
-	mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+	menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 	
-	barraMenu.add(mnNewMenu);
+	barraMenu.add(menuBackup);
 	mntmCriarBackup.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			try{
@@ -438,7 +441,7 @@ public class Principal extends JFrame {
 		}
 	});
 	
-	mnNewMenu.add(mntmCriarBackup);
+	menuBackup.add(mntmCriarBackup);
 	mntmRestaurarDeBackup.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			 try {
@@ -452,7 +455,7 @@ public class Principal extends JFrame {
 				            /*NOTE: String s is the mysql file name including the .sql in its name*/
 				            /*NOTE: Getting path to the Jar file being executed*/
 				            /*NOTE: YourImplementingClass-> replace with the class executing the code*/
-				            CodeSource codeSource = Restaurar.class.getProtectionDomain().getCodeSource();
+				          
 				           
 				            
 				            /*NOTE: Creating Database Constraints*/
@@ -488,7 +491,39 @@ public class Principal extends JFrame {
 		}
 	});
 	
-	mnNewMenu.add(mntmRestaurarDeBackup);
+	menuBackup.add(mntmRestaurarDeBackup);
+	menuLixeiro.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			desktop.add(janelaLixeira);
+			janelaLixeira.setVisible(true);
+			if(janelaLixeira.isShowing()==true){
+				janelaLixeira.carregarTabela();
+				janelaLixeira.carregarTabelaRoupa();
+				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				janelaRoupa.dispose();
+				janelaAluguel.dispose();
+				janelaRegistro.dispose();
+				janelaCliente.dispose();
+				janelaFuncionario.dispose();
+				
+			}
+			try {
+				janelaLixeira.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	});
+	menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/excluir1.png")));
+	
+	barraMenu.add(menuLixeiro);
 	
 	
 	contentPane_1 = new JPanel();

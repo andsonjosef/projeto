@@ -111,47 +111,28 @@ public class LoginFunc extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 try {
 					    String caminho="";
-							 JFileChooser abrir = new JFileChooser();  
-							 int retorno = abrir.showOpenDialog(null);  
-							            if (retorno==JFileChooser.APPROVE_OPTION)  {
-							                    caminho = abrir.getSelectedFile().getAbsolutePath();  
-							                    
-							            }
-					            /*NOTE: String s is the mysql file name including the .sql in its name*/
-					            /*NOTE: Getting path to the Jar file being executed*/
-					            /*NOTE: YourImplementingClass-> replace with the class executing the code*/
-					            CodeSource codeSource = Restaurar.class.getProtectionDomain().getCodeSource();
+						JFileChooser abrir = new JFileChooser();  
+					    int retorno = abrir.showOpenDialog(null);  
+				            if (retorno==JFileChooser.APPROVE_OPTION)  {
+			                    caminho = abrir.getSelectedFile().getAbsolutePath();  					                    
+							          }
 					           
-					            
-					            /*NOTE: Creating Database Constraints*/
 					             String dbName = "loja";
 					             String dbUser = "root";
 					             String dbPass = "root";
-
-					            /*NOTE: Creating Path Constraints for restoring*/
 					            String restorePath = "\""+caminho+"\"";
-					            JOptionPane.showMessageDialog(null, restorePath);
-					           
-					           
-
-					            /*NOTE: Used to create a cmd command*/
-					            /*NOTE: Do not create a single large string, this will cause buffer locking, use string array*/
 					            String[] executeCmd = new String[]{"C:\\xampp\\mysql\\bin\\mysql", dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
-
-					            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
 					            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 					            int processComplete = runtimeProcess.waitFor();
-
-					            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
 					            if (processComplete == 0) {
-					                JOptionPane.showMessageDialog(null, "Successfully restored from SQL : " );
+					                JOptionPane.showMessageDialog(null, "Restaurado com sucesso! " );
 					            } else {
-					                JOptionPane.showMessageDialog(null, "Error at restoring");
+					                JOptionPane.showMessageDialog(null, "Erro ao restaurar!");
 					            }
 
 
 					        } catch (IOException | InterruptedException | HeadlessException ex) {
-					            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
+					            JOptionPane.showMessageDialog(null, "Erro ao restaurarl" + ex.getMessage());
 					        }
 						
 			}
@@ -174,33 +155,18 @@ public class LoginFunc extends JFrame {
 				            File arquivo = file.getSelectedFile();
 				          nome = arquivo.getPath();
 				        }
-				        /*NOTE: Creating Database Constraints*/
+				        
 				        String dbName = "loja";
 				        String dbUser = "root";
 				        String dbPass = "root";
-
-				        /*NOTE: Creating Path Constraints for folder saving*/
-				        /*NOTE: Here the backup folder is created for saving inside it*/
 				        String folderPath = jarDir + "\\backup2";
-
-				        /*NOTE: Creating Folder if it does not exist*/
 				        File f1 = new File(folderPath);
 				        f1.mkdir();
-
-				        /*NOTE: Creating Path Constraints for backup saving*/
-				        /*NOTE: Here the backup is saved in a folder called backup with the name backup.sql*/
-				        // String savePath = "\"" + jarDir + "\\backup2\\" + "backup11122.sql\"";
 				        String savePath = nome+".sql";
-
-				        /*NOTE: Used to create a cmd command*/
 				         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --compact --skip-comments --skip-triggers --database " + dbName + " -r " + savePath;
-				
-				
-				        /*NOTE: Executing the command here*/
 				        Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 				        int processComplete = runtimeProcess.waitFor();
 
-				        /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
 				        if (processComplete == 0) {
 				            
 				            JOptionPane.showMessageDialog(null, "Backup concluido com sucesso!");
