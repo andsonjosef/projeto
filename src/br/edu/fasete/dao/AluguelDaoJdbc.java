@@ -29,7 +29,7 @@ public class AluguelDaoJdbc implements AluguelDao {
 	
 	public void InserirLista(Roupa r, Cliente c) {
 
-		///
+		
 		  try {
 			  PreparedStatement stmt;
 		  

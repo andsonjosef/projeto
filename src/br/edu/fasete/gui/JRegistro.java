@@ -575,6 +575,8 @@ public class JRegistro extends JInternalFrame {
 							   carregarTabelaRoupa();
 							   Fachada.getInstancia().SomaPrecoEdi(a,c);
 							   precoField2.setText(""+a.getPreco());
+							   carregarTabelaRoupasele();
+							   carregarTabelaRoupa();
 						}
 						@Override
 						public void mouseEntered(MouseEvent arg0) {
@@ -790,6 +792,7 @@ public class JRegistro extends JInternalFrame {
 							
 							carregarTabelaRoupaLista();
 							Fachada.getInstancia().SomaPreco(a);
+							tabbedPane.setSelectedIndex(0);
 							}
 						}
 						@Override

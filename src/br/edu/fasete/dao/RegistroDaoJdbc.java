@@ -228,6 +228,18 @@ JOptionPane.showMessageDialog(null,e);
 		  }catch(Exception e){
 			  JOptionPane.showMessageDialog(null,e);
 		  } 
+		  try {
+				
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement("update loja.roupasele set disponibilidade = 1 where codRoupa = ?");
+			  
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
 		
 		  try {
 			  PreparedStatement stmt;

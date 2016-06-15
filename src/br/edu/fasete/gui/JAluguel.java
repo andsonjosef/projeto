@@ -190,18 +190,18 @@ public class JAluguel extends JInternalFrame {
 							//Carregar tabela sempre que alternar para aba de relatórios
 							if(tabbedPane.getSelectedIndex() == 1) {
 								carregarTabelaRoupa();
-								Fachada.getInstancia().limparTabela();
-								Fachada.getInstancia().limparLista();
+								//Fachada.getInstancia().limparTabela();
+								//Fachada.getInstancia().limparLista();
 								carregarTabelaRoupasele();	
 							}
 							
 							if(tabbedPane.getSelectedIndex() == 2) {
 								carregarTabelaRoupa();
-								Fachada.getInstancia().limparTabela();
+								//Fachada.getInstancia().limparTabela();
 								carregarTabelaRoupaLista();
 							}
 							if(tabbedPane.isShowing()) {	
-								Fachada.getInstancia().limparTabela();	
+								//Fachada.getInstancia().limparTabela();	
 								carregarTabela();	
 							}	
 						}
@@ -337,6 +337,12 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
+										
+										Fachada.getInstancia().limparTabela();
+										Fachada.getInstancia().BuscarRoupaEd(r);
+										Fachada.getInstancia().ListarRoupaEdi(r,c);
+										carregarTabelaRoupasele();
+										
 										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar3.png")));
 										String pesq = c.getCPF();
 										Fachada.getInstancia().BuscarClienteCPF(c, pesq);
@@ -371,8 +377,9 @@ public class JAluguel extends JInternalFrame {
 										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover3.png")));
 										int linha = tabelaRoupasele.getSelectedRow();
 									    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-									    Fachada.getInstancia().ExcluirRoupaSele(r);
+									    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
 									    carregarTabelaRoupasele();
+									    carregarTabelaRoupa();
 									}
 									public void mouseEntered(MouseEvent arg0) {
 										lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover2.png")));
@@ -394,8 +401,11 @@ public class JAluguel extends JInternalFrame {
 										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/adicionar3.png")));
 										   int linha = tabelaRoupa_1.getSelectedRow();
 										    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
-										   Fachada.getInstancia().InserirRoupaSele(r);
-										   carregarTabelaRoupasele();
+										    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+											   Fachada.getInstancia().InserirRoupaEdi(r, c);
+											   carregarTabelaRoupasele();
+											   carregarTabelaRoupa();
+										  
 									}
 									@Override
 									public void mouseEntered(MouseEvent arg0) {
@@ -561,8 +571,8 @@ public class JAluguel extends JInternalFrame {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										
-										int linha = 0;
-										 nomeField2.setText(c.getNome());
+									/*	int linha = 0;
+										 
 										int linhat = tabelaRoupasele.getRowCount();
 										
 										while(linha < linhat){
@@ -579,11 +589,15 @@ public class JAluguel extends JInternalFrame {
 										Fachada.getInstancia().InserirLista(r, c);
 										
 										}
+										*/
 										
+										nomeField2.setText(c.getNome());
 										carregarTabelaRoupaLista();
 										Fachada.getInstancia().SomaPreco(a);
 										precoFieldal.setText(""+a.getPreco());
 										tabbedPane.setSelectedIndex(2);
+										
+										
 									}
 									@Override
 									public void mouseEntered(MouseEvent arg0) {
@@ -782,6 +796,7 @@ public void mouseClicked(MouseEvent e) {
 											
 											Fachada.getInstancia().InserirListaFinal(r, c);
 											Fachada.getInstancia().dispinibilidade(r);
+											
 											i++;
 										}
 										
@@ -791,6 +806,9 @@ public void mouseClicked(MouseEvent e) {
 										a.setPreco(Float.parseFloat((precoFieldal.getText())));
 										a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
 										Fachada.getInstancia().InserirRegistro(a);
+										Fachada.getInstancia().limparLista();
+										tabbedPane.setSelectedIndex(0);
+										
 									}
 									@Override
 									public void mouseEntered(MouseEvent e) {
@@ -897,7 +915,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabelaRoupa() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupa_1.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupas()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupasSeleEdi()) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}
@@ -905,7 +923,7 @@ public void mouseClicked(MouseEvent e) {
 	public void carregarTabelaRoupasele() {
 		RoupaTableModel tableModel = (RoupaTableModel) tabelaRoupasele.getModel();
 		tableModel.setRowCount(0);
-		for(Roupa rou : Fachada.getInstancia().listarRoupasSele()) {
+		for(Roupa rou : Fachada.getInstancia().listarRoupaLista()) {
 			tableModel.adicionarCategoria(rou);
 		}
 	}
