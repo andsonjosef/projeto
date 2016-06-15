@@ -80,6 +80,7 @@ public class JAluguel extends JInternalFrame {
 	private JTextField precoFieldFim;
 	java.util.Date x;
 	JTextField funcField;
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -690,8 +691,8 @@ public void mouseClicked(MouseEvent e) {
 }
 });
 								
-								JPanel editPanel = new JPanel();
-								editPanel.setBackground(Color.DARK_GRAY);
+			JPanel editPanel = new JPanel();
+			editPanel.setBackground(Color.DARK_GRAY);
 								tabbedPane.addTab("Concluir Aluguel", null, editPanel, null);
 								
 								///
@@ -705,14 +706,14 @@ public void mouseClicked(MouseEvent e) {
 									}
 									
 								});
-								editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px,grow]", "[14px][36.00px][396.00px][54.00px][20px][80.00px][]"));
+								editPanel.setLayout(new MigLayout("", "[115px][30px][115px][30px][115px][30px][115px][30px][115,grow][652px,grow]", "[14px][36.00px][465.00px][54.00px][20px][grow]"));
 								
 								
 								
 								
 								tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 								JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
-								editPanel.add(scrollPaneRoupasele, "cell 0 2 9 1,grow");
+								editPanel.add(scrollPaneRoupasele, "cell 0 2 10 1,grow");
 								scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 								});
 								
@@ -726,44 +727,49 @@ public void mouseClicked(MouseEvent e) {
 								nomeField2 = new JTextField();
 								nomeField2.setEditable(false);
 								nomeField2.setColumns(10);
-								editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
+								editPanel.add(nomeField2, "cell 0 1 10 1,growx,aligny top");
 								
 								JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
+								lblDataDeLocao.setFont(new Font("Dialog", Font.PLAIN, 15));
 								lblDataDeLocao.setForeground(Color.WHITE);
 								editPanel.add(lblDataDeLocao, "cell 0 3,growx,aligny bottom");
 								
+								JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio");
+								lblFuncionrio.setForeground(Color.WHITE);
+								lblFuncionrio.setFont(new Font("Dialog", Font.PLAIN, 15));
+								editPanel.add(lblFuncionrio, "cell 8 3,aligny bottom");
+								
 								dataLoca = new JTextField();
-								editPanel.add(dataLoca, "cell 0 4,alignx left,aligny top");
+								editPanel.add(dataLoca, "cell 0 4,grow");
 								dataLoca.setColumns(10);
 								
 								JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
+								lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 								lblDataDeDevoluo.setForeground(Color.WHITE);
-								editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
+								editPanel.add(lblDataDeDevoluo, "cell 2 3,alignx left,aligny bottom");
 								
 								DataDevo = new JTextField();
-								editPanel.add(DataDevo, "cell 2 4,alignx left,aligny top");
+								editPanel.add(DataDevo, "cell 2 4,grow");
 								DataDevo.setColumns(10);
 								
 								precoFieldal = new JTextField();
 								precoFieldal.setEditable(false);
-								editPanel.add(precoFieldal, "cell 4 4,alignx left,aligny top");
+								editPanel.add(precoFieldal, "cell 4 4,grow");
 								precoFieldal.setColumns(10);
 								
 								precoFieldFim = new JTextField();
-								editPanel.add(precoFieldFim, "cell 6 4,alignx left,aligny top");
+								editPanel.add(precoFieldFim, "cell 6 4,grow");
 								precoFieldFim.setColumns(10);
 								
 								JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
+								lblPreo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 								lblPreo_1.setForeground(Color.WHITE);
-								editPanel.add(lblPreo_1, "cell 4 3,alignx center,aligny bottom");
+								editPanel.add(lblPreo_1, "cell 4 3,alignx left,aligny bottom");
 								
 								JLabel lblPreoFinal = new JLabel("Pre\u00E7o final");
+								lblPreoFinal.setFont(new Font("Dialog", Font.PLAIN, 15));
 								lblPreoFinal.setForeground(Color.WHITE);
-								editPanel.add(lblPreoFinal, "cell 6 3,alignx center,aligny bottom");
-								
-								JComboBox comboBox = new JComboBox();
-								comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
-								editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
+								editPanel.add(lblPreoFinal, "cell 6 3,alignx left,aligny bottom");
 								
 								JLabel lblbtnVoltar2 = new JLabel("");
 								lblbtnVoltar2.addMouseListener(new MouseAdapter() {
@@ -785,8 +791,12 @@ public void mouseClicked(MouseEvent e) {
 										lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
 									}
 								});
+								
+								textField = new JTextField();
+								editPanel.add(textField, "cell 8 4,grow");
+								textField.setColumns(10);
 								lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
-								editPanel.add(lblbtnVoltar2, "flowx,cell 8 5,alignx right");
+								editPanel.add(lblbtnVoltar2, "flowx,cell 9 4,alignx right");
 								
 								JLabel lblbtnsalvar = new JLabel("");
 								lblbtnsalvar.addMouseListener(new MouseAdapter() {
@@ -839,7 +849,7 @@ public void mouseClicked(MouseEvent e) {
 									}
 								});
 								lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar1.png")));
-								editPanel.add(lblbtnsalvar, "cell 8 5,alignx right");
+								editPanel.add(lblbtnsalvar, "cell 9 4,alignx right");
 					tabelaCategoria.addMouseListener(new MouseAdapter() {
 						
 						

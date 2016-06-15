@@ -59,8 +59,6 @@ public class Principal extends JFrame {
 	JMenu menuFuncionario = new JMenu("");
 	JLixeira janelaLixeira = new JLixeira();
 	JMenu menuLixeira = new JMenu("");
-	
-	private final JLabel label = new JLabel("................................................................................................................................................................");
 	private final JMenu menuBackup = new JMenu("");
 	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
 	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
@@ -230,7 +228,7 @@ public class Principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				texto1 = textField.getText();
-				JOptionPane.showMessageDialog(null, texto1);
+				
 				janelaAluguel.funcField.setText(texto1);
 				if(janelaAluguel.isFocusable()==true){
 					janelaAluguel.carregarTabela();
@@ -387,17 +385,6 @@ public class Principal extends JFrame {
 	
 	});
 	barraMenu.add(menuFuncionario);
-	label.setFont(new Font("Dialog", Font.BOLD, 5));
-	label.setForeground(Color.DARK_GRAY);
-	
-	barraMenu.add(label);
-	
-	textField = new JTextField();
-	textField.setForeground(Color.BLACK);
-	textField.setBackground(Color.LIGHT_GRAY);
-	textField.setEditable(false);
-	barraMenu.add(textField);
-	textField.setColumns(10);
 	menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 	
 	barraMenu.add(menuBackup);
@@ -537,9 +524,20 @@ public class Principal extends JFrame {
 			}
 		}
 	});
-	menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/excluir1.png")));
+	menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
 	
 	barraMenu.add(menuLixeiro);
+	
+	textField = new JTextField();
+	textField.setForeground(Color.BLACK);
+	textField.setBackground(Color.LIGHT_GRAY);
+	textField.setEditable(false);
+	barraMenu.add(textField);
+	textField.setColumns(10);
+	
+	JMenu mnNewMenu = new JMenu("");
+	mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu.png")));
+	barraMenu.add(mnNewMenu);
 	
 	
 	contentPane_1 = new JPanel();
@@ -556,6 +554,5 @@ public class Principal extends JFrame {
 		textField.setText(f.getLogin());
 		
 	}
-	
 	}
 

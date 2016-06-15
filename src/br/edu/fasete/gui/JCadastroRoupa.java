@@ -521,7 +521,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Editar Roupa", null, panel, null);
-		panel.setLayout(new MigLayout("", "[637px][23.00][166.00px][156px,grow]", "[108.00px][33px][105.00px][33px][105.00px][33px][105.00px][33px]"));
+		panel.setLayout(new MigLayout("", "[637px][23.00][156px,grow]", "[108.00px][33px][105.00px][33px][105.00px][33px][105.00px][33px][grow]"));
 		
 		JLabel lblTipo_1 = new JLabel("Tipo");
 		lblTipo_1.setForeground(Color.WHITE);
@@ -531,7 +531,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblModelo_1 = new JLabel("Modelo");
 		lblModelo_1.setForeground(Color.WHITE);
 		lblModelo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		panel.add(lblModelo_1, "cell 2 0 2 1,growx,aligny bottom");
+		panel.add(lblModelo_1, "cell 2 0,growx,aligny bottom");
 		
 		tipoField2 = new JTextField();
 		tipoField2.setEditable(false);
@@ -542,7 +542,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		modeloField2 = new JTextField();
 		modeloField2.setEditable(false);
 		modeloField2.setColumns(10);
-		panel.add(modeloField2, "cell 2 1 2 1,grow");
+		panel.add(modeloField2, "cell 2 1,grow");
 		
 		JLabel lblGenero_1 = new JLabel("Genero");
 		lblGenero_1.setForeground(Color.WHITE);
@@ -552,7 +552,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblTamanho_1 = new JLabel("Tamanho");
 		lblTamanho_1.setForeground(Color.WHITE);
 		lblTamanho_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		panel.add(lblTamanho_1, "cell 2 2 2 1,growx,aligny bottom");
+		panel.add(lblTamanho_1, "cell 2 2,growx,aligny bottom");
 		
 		generoField2 = new JTextField();
 		generoField2.setEditable(false);
@@ -564,7 +564,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		tamanhoField2.setEditable(false);
 		tamanhoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tamanhoField2.setColumns(10);
-		panel.add(tamanhoField2, "cell 2 3 2 1,grow");
+		panel.add(tamanhoField2, "cell 2 3,grow");
 		
 		JLabel lblCor_1 = new JLabel("Cor");
 		lblCor_1.setForeground(Color.WHITE);
@@ -574,7 +574,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblPreco_1 = new JLabel("Preco");
 		lblPreco_1.setForeground(Color.WHITE);
 		lblPreco_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		panel.add(lblPreco_1, "cell 2 4 2 1,growx,aligny bottom");
+		panel.add(lblPreco_1, "cell 2 4,growx,aligny bottom");
 		
 		corField2 = new JTextField();
 		corField2.setEditable(false);
@@ -586,7 +586,7 @@ public class JCadastroRoupa extends JInternalFrame {
 		precoField2.setEditable(false);
 		precoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		precoField2.setColumns(10);
-		panel.add(precoField2, "cell 2 5 2 1,grow");
+		panel.add(precoField2, "cell 2 5,grow");
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
 		lblPesquisar.setForeground(Color.WHITE);
@@ -662,9 +662,9 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnCancelar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/cancelar1.png")));
-		panel.add(lblbtnCancelar, "cell 2 7,alignx right");
+		panel.add(lblbtnCancelar, "flowx,cell 2 7,alignx right");
 		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/excluir1.png")));
-		panel.add(lblbtnExcluir2, "flowx,cell 3 7,alignx right");
+		panel.add(lblbtnExcluir2, "cell 2 7,alignx right");
 		
 		JLabel lblbtnEditar2 = new JLabel("");
 		lblbtnEditar2.addMouseListener(new MouseAdapter() {
@@ -697,7 +697,7 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnEditar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/editar1.png")));
-		panel.add(lblbtnEditar2, "cell 3 7");
+		panel.add(lblbtnEditar2, "cell 2 7");
 		
 		JLabel lblbtnSalvar2 = new JLabel("");
 		lblbtnSalvar2.addMouseListener(new MouseAdapter() {
@@ -732,7 +732,7 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnSalvar2.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/salvar1.png")));
-		panel.add(lblbtnSalvar2, "cell 3 7");
+		panel.add(lblbtnSalvar2, "cell 2 7");
 		
 		JLabel lblbtnPesquisar = new JLabel("");
 		lblbtnPesquisar.addMouseListener(new MouseAdapter() {

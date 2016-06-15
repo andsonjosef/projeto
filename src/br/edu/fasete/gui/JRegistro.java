@@ -115,7 +115,6 @@ public class JRegistro extends JInternalFrame {
 		Fachada.getInstancia().limparLista();
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setEnabled(false);
 		tabbedPane.setForeground(Color.WHITE);
 		tabbedPane.setBackground(Color.DARK_GRAY);
 		tabbedPane.addChangeListener(new ChangeListener() {
@@ -230,7 +229,7 @@ public class JRegistro extends JInternalFrame {
 		
 		tabbedPane.addTab("Registros abertos", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
-		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
+		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][30px][47.00px][30px][51.00px][30px][54.00px][30px][58.00px][25px][61.00px]"));
 		
 		JLabel labelnome = new JLabel("Nome");
 		labelnome.setForeground(Color.WHITE);
@@ -417,7 +416,7 @@ public class JRegistro extends JInternalFrame {
 						}
 						
 					});
-					editPanel.setLayout(new MigLayout("", "[111px][30px][132px][30px][86px][67px][86px][45px][652px,grow]", "[14px][36.00px][396.00px][54.00px][20px][80.00px]"));
+					editPanel.setLayout(new MigLayout("", "[115px][30px][132px][30px][115px][30px][115px][45px][652px,grow]", "[14px][36.00px][547.00px][54.00px][20px][80.00px,grow]"));
 					
 					
 					
@@ -441,45 +440,71 @@ public class JRegistro extends JInternalFrame {
 					editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
 					
 					JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
+					lblDataDeLocao.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblDataDeLocao.setForeground(Color.WHITE);
-					editPanel.add(lblDataDeLocao, "cell 0 3,growx,aligny bottom");
+					editPanel.add(lblDataDeLocao, "cell 0 3,alignx left,aligny bottom");
 					
 					dataLoca = new JTextField();
-					editPanel.add(dataLoca, "cell 0 4,alignx left,aligny top");
+					editPanel.add(dataLoca, "cell 0 4,grow");
 					dataLoca.setColumns(10);
 					
 					JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
+					lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblDataDeDevoluo.setForeground(Color.WHITE);
 					editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
 					
 					DataDevo = new JTextField();
-					editPanel.add(DataDevo, "cell 2 4,alignx left,aligny top");
+					editPanel.add(DataDevo, "cell 2 4,grow");
 					DataDevo.setColumns(10);
 					
 					precoFieldal = new JTextField();
 					precoFieldal.setEditable(false);
-					editPanel.add(precoFieldal, "cell 4 4,alignx left,aligny top");
+					editPanel.add(precoFieldal, "cell 4 4,grow");
 					precoFieldal.setColumns(10);
 					
 					precoFieldFim = new JTextField();
-					editPanel.add(precoFieldFim, "cell 6 4,alignx left,aligny top");
+					editPanel.add(precoFieldFim, "cell 6 4,grow");
 					precoFieldFim.setColumns(10);
 					
 					JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
+					lblPreo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblPreo_1.setForeground(Color.WHITE);
-					editPanel.add(lblPreo_1, "cell 4 3,alignx center,aligny bottom");
+					editPanel.add(lblPreo_1, "cell 4 3,alignx left,aligny bottom");
 					
 					JLabel lblPreoFinal = new JLabel("Pre\u00E7o final");
+					lblPreoFinal.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblPreoFinal.setForeground(Color.WHITE);
-					editPanel.add(lblPreoFinal, "cell 6 3,alignx center,aligny bottom");
+					editPanel.add(lblPreoFinal, "cell 6 3,alignx left,aligny bottom");
 					
-					JComboBox comboBox = new JComboBox();
-					comboBox.setModel(new DefaultComboBoxModel(new String[] {"Parcelado", "Pago"}));
-					editPanel.add(comboBox, "cell 8 4,alignx left,aligny top");
-					
-					JLabel lblbtnInicio = new JLabel("");
-					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
-					editPanel.add(lblbtnInicio, "flowx,cell 8 5,alignx right");
+					JLabel lblbtnEditar = new JLabel("");
+					lblbtnEditar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar3.png")));
+							Fachada.getInstancia().limparTabela();
+							Fachada.getInstancia().BuscarRoupaEd(r);
+							c.setCodCliente(svaluecodCli);
+							Fachada.getInstancia().ListarRoupaEdi(r,c);
+							carregarTabelaRoupasele();
+							tabbedPane.setSelectedIndex(2);
+							Fachada.getInstancia().SomaPrecoEdi(a,c);
+							precoField2.setText(""+a.getPreco());
+							datadevoField2.setText(DataDevo.getText());
+							datalocaField2.setText(dataLoca.getText());
+						}
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+						}
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+						}
+					});
 					
 					JLabel lblbtnExcluir = new JLabel("");
 					lblbtnExcluir.addMouseListener(new MouseAdapter() {
@@ -523,47 +548,21 @@ public class JRegistro extends JInternalFrame {
 							lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
 						}
 					});
-					lblbtnVoltar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/VOLTAR1.png")));
-					editPanel.add(lblbtnVoltar, "cell 8 5");
-					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
-					editPanel.add(lblbtnExcluir, "cell 8 5,alignx right");
 					
-					JLabel lblbtnEditar = new JLabel("");
-					lblbtnEditar.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar3.png")));
-							Fachada.getInstancia().limparTabela();
-							Fachada.getInstancia().BuscarRoupaEd(r);
-							c.setCodCliente(svaluecodCli);
-							Fachada.getInstancia().ListarRoupaEdi(r,c);
-							carregarTabelaRoupasele();
-							tabbedPane.setSelectedIndex(2);
-							Fachada.getInstancia().SomaPrecoEdi(a,c);
-							precoField2.setText(""+a.getPreco());
-							datadevoField2.setText(DataDevo.getText());
-							datalocaField2.setText(dataLoca.getText());
-						}
-						@Override
-						public void mouseEntered(MouseEvent e) {
-							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
-						}
-						@Override
-						public void mouseExited(MouseEvent e) {
-							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-						}
-						@Override
-						public void mouseReleased(MouseEvent e) {
-							lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
-						}
-					});
+					JLabel lblbtnInicio = new JLabel("");
+					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
+					editPanel.add(lblbtnInicio, "flowx,cell 8 4,alignx right,aligny bottom");
+					lblbtnVoltar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/VOLTAR1.png")));
+					editPanel.add(lblbtnVoltar, "cell 8 4,alignx right,aligny bottom");
+					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
+					editPanel.add(lblbtnExcluir, "cell 8 4,alignx right,aligny bottom");
 					lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar1.png")));
-					editPanel.add(lblbtnEditar, "cell 8 5,alignx right");
+					editPanel.add(lblbtnEditar, "cell 8 4,alignx right,aligny bottom");
 					
 					JPanel exibirpanel = new JPanel();
 					exibirpanel.setBackground(Color.DARK_GRAY);
 					tabbedPane.addTab("Editar registro", null, exibirpanel, null);
-					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][157.00px][32.00][495.00px,grow,trailing]", "[311px][23px][47.00px][25px][42.00px][42.00px][25px][55.00px]"));
+					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][157.00px][32.00][495.00px,grow,trailing]", "[341.00px][23px][47.00px][30px][42.00px][42.00px][30px][55.00px,grow]"));
 					
 					JLabel lblbtnAdicionar = new JLabel("");
 					lblbtnAdicionar.addMouseListener(new MouseAdapter() {
