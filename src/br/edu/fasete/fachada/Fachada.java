@@ -139,8 +139,8 @@ public void ExcluirReg(Cliente c){
 public void ExcluirRoupaSeleEdi(Roupa r){
 	cadastroRegistro.ExcluirRoupaSeleEdi(r);
 }
-public void InserirRegistro(Aluguel a){
-	 cadastroRegistro.InserirRegistro(a);
+public void InserirRegistro(Aluguel a,Funcionario f){
+	 cadastroRegistro.InserirRegistro(a,f);
 }
 public void InserirRoupaEdi(Roupa r,Cliente c){
 	cadastroRegistro.InserirRoupaEdi(r, c);

@@ -20,6 +20,7 @@ import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Lista;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,6 +51,8 @@ public class JAluguel extends JInternalFrame {
 	Cliente c = new Cliente();
 	Roupa r = new Roupa();
 	Aluguel a = new Aluguel();
+	Funcionario f = new Funcionario();
+	
 	private JTextField nomeField;
 	private JTextField rgField;
 	private JTextField enderecoField;
@@ -76,6 +79,7 @@ public class JAluguel extends JInternalFrame {
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
 	java.util.Date x;
+	JTextField funcField;
 	
 	/**
 	 * Launch the application.
@@ -214,7 +218,7 @@ public class JAluguel extends JInternalFrame {
 					
 					tabbedPane.addTab("Cadastrar Aluguel", null, cadast, null);
 					tabbedPane.setEnabledAt(0, true);
-					cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
+					cadast.setLayout(new MigLayout("", "[101.00px][31px,grow][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][25px][47.00px][25px][51.00px][25px][54.00px][25px][58.00px][25px][61.00px]"));
 					
 					JLabel labelnome = new JLabel("Nome");
 					labelnome.setForeground(Color.WHITE);
@@ -338,6 +342,8 @@ public class JAluguel extends JInternalFrame {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
 										
+										
+										
 										Fachada.getInstancia().limparTabela();
 										Fachada.getInstancia().BuscarRoupaEd(r);
 										Fachada.getInstancia().ListarRoupaEdi(r,c);
@@ -362,6 +368,11 @@ public class JAluguel extends JInternalFrame {
 										btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
 									}
 								});
+								
+								funcField = new JTextField();
+								funcField.setVisible(false);
+								cadast.add(funcField, "cell 1 11,alignx center");
+								funcField.setColumns(10);
 								btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar1.png")));
 								cadast.add(btnlblAvancar, "cell 8 11,alignx right");
 								
@@ -805,7 +816,9 @@ public void mouseClicked(MouseEvent e) {
 										a.setDataEntre(DataDevo.getText());
 										a.setPreco(Float.parseFloat((precoFieldal.getText())));
 										a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
-										Fachada.getInstancia().InserirRegistro(a);
+										
+									    f.setLogin(funcField.getText());
+										Fachada.getInstancia().InserirRegistro(a,f);
 										Fachada.getInstancia().limparLista();
 										tabbedPane.setSelectedIndex(0);
 										

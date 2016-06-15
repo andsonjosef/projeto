@@ -21,6 +21,7 @@ import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Lista;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -53,6 +54,7 @@ public class JRegistro extends JInternalFrame {
 	Cliente c = new Cliente();
 	Roupa r = new Roupa();
 	Aluguel a = new Aluguel();
+	Funcionario f = new Funcionario();
 	private JTextField nomeField;
 	private JTextField rgField;
 	private JTextField enderecoField;
@@ -788,7 +790,7 @@ public class JRegistro extends JInternalFrame {
 							a.setDataEntre(datadevoField2.getText());
 							a.setPreco(Float.parseFloat((precoField2.getText())));
 							a.setPrecoTotal(Float.parseFloat((precofimField2.getText())));
-							Fachada.getInstancia().InserirRegistro(a);
+							Fachada.getInstancia().InserirRegistro(a,f);
 							
 							carregarTabelaRoupaLista();
 							Fachada.getInstancia().SomaPreco(a);

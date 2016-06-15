@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 
 
@@ -267,15 +268,16 @@ JOptionPane.showMessageDialog(null,e);
 	  }
 	}
 	///
-	public void InserirRegistro(Aluguel a) {		   
+	public void InserirRegistro(Aluguel a,Funcionario f) {		   
 		try {											  
 			PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal) values (?,?,?,?,?)") ;
+			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal,funcionario) values (?,?,?,?,?,?)") ;
 				 stmt.setInt(1, a.getCodCliente());
 				 stmt.setString(2, a.getDataLoca());
 				 stmt.setString(3,a.getDataEntre());
 				 stmt.setFloat(4,a.getPreco());
 				 stmt.setFloat(5, a.getPrecoTotal());
+				 stmt.setString(6,f.getLogin());
 				 stmt.executeUpdate();
 				 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
 				 a.setErro(false);

@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import br.edu.fasete.principais.Funcionario;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JDesktopPane;
@@ -30,6 +33,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class Principal extends JFrame {
 
@@ -42,7 +46,7 @@ public class Principal extends JFrame {
 	private JDesktopPane desktop;
 	
 	
-	
+	Funcionario f = new Funcionario();
 	JCadastroCliente janelaCliente = new JCadastroCliente();
 	JMenu menuCliente = new JMenu("");
 	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
@@ -56,11 +60,13 @@ public class Principal extends JFrame {
 	JLixeira janelaLixeira = new JLixeira();
 	JMenu menuLixeira = new JMenu("");
 	
-	private final JLabel label = new JLabel("................................................................................................................................................................................................................................................................................................................................");
+	private final JLabel label = new JLabel("................................................................................................................................................................");
 	private final JMenu menuBackup = new JMenu("");
 	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
 	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
 	private final JMenu menuLixeiro = new JMenu("");
+	JTextField textField;
+	String texto1;
 	
 	/**
 	 * Launch the application.
@@ -223,6 +229,9 @@ public class Principal extends JFrame {
 		menuAluguel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				texto1 = textField.getText();
+				JOptionPane.showMessageDialog(null, texto1);
+				janelaAluguel.funcField.setText(texto1);
 				if(janelaAluguel.isFocusable()==true){
 					janelaAluguel.carregarTabela();
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
@@ -382,6 +391,13 @@ public class Principal extends JFrame {
 	label.setForeground(Color.DARK_GRAY);
 	
 	barraMenu.add(label);
+	
+	textField = new JTextField();
+	textField.setForeground(Color.BLACK);
+	textField.setBackground(Color.LIGHT_GRAY);
+	textField.setEditable(false);
+	barraMenu.add(textField);
+	textField.setColumns(10);
 	menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 	
 	barraMenu.add(menuBackup);
@@ -536,5 +552,10 @@ public class Principal extends JFrame {
 	desktop.setBackground(Color.DARK_GRAY);
 
 }	
+	public void func(Funcionario f){
+		textField.setText(f.getLogin());
+		
+	}
+	
 	}
 

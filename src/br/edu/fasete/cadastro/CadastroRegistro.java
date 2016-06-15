@@ -5,6 +5,7 @@ import java.util.Vector;
 import br.edu.fasete.dao.RegistroDao;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
+import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 
 public class CadastroRegistro implements InterfaceCadastroRegistro {
@@ -27,8 +28,8 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	public void ExcluirRoupaSeleEdi(Roupa r){
 		registroDao.ExcluirRoupaSeleEdi(r);
 	}
-	public void InserirRegistro(Aluguel a){
-		registroDao.InserirRegistro(a);
+	public void InserirRegistro(Aluguel a, Funcionario f){
+		registroDao.InserirRegistro(a,f);
 	}
 	public void InserirRoupaEdi(Roupa r,Cliente c){
 		registroDao.InserirRoupaEdi(r, c);

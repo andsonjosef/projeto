@@ -98,6 +98,7 @@ public class LoginFunc extends JFrame {
 						
 						Principal janela = new Principal();
 						janela.setVisible(true);
+						janela.func(fu);
 						dispose();
 					}
 			}
