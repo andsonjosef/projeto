@@ -1,7 +1,6 @@
 package br.edu.fasete.cadastro;
 
 import java.util.Vector;
-import br.edu.fasete.dao.ClienteDao;
 import br.edu.fasete.dao.LixeiraDao;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
@@ -20,6 +19,12 @@ public class CadastroLixeira implements InterfaceCadastroLixeira {
 	public Vector<Roupa> listarRoupalixe() {
 		return lixeiraDao.listarRoupalixe();
 	}
-
+	
+	public void RestaurarCliente(Cliente c){
+		lixeiraDao.RestaurarCliente(c);
+	}
+	public void RestaurarRoupa(Roupa r){
+		lixeiraDao.RestaurarRoupa(r);
+	}
 
 }

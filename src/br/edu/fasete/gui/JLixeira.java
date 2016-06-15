@@ -18,7 +18,6 @@ import br.edu.fasete.dao.ClienteDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Roupa;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -32,7 +31,6 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import net.miginfocom.swing.MigLayout;
-import java.awt.Component;
 
 public class JLixeira extends JInternalFrame {
 	/**
@@ -44,8 +42,11 @@ public class JLixeira extends JInternalFrame {
 	int srow;
 	String svalueCpf;
 	String svalueName;
+	String svalueNome;
 	String vazio;
+	int sValueCode;
 	Cliente c = new Cliente();
+	Roupa r = new Roupa();
 	private JTabbedPane tabbedPane;
 	private JTable tabelaCategoria;
 	private JTable tabelaRoupa;
@@ -159,8 +160,8 @@ public class JLixeira extends JInternalFrame {
 				tabelaRoupa.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent arg0) {
 						srow = tabelaRoupa.getSelectedRow();
-						//sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
-						//sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
+						sValueCode = (int) tabelaRoupa.getValueAt(srow, 0);
+						svalueNome = (String) tabelaRoupa.getValueAt(srow, 2);
 					}
 					
 				});
@@ -169,6 +170,11 @@ public class JLixeira extends JInternalFrame {
 				tabelaRoupa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				JScrollPane scrollPane_1 = new JScrollPane(tabelaRoupa);
 				scrollPane_1.addMouseListener(new MouseAdapter() {
+					public void mouseReleased(MouseEvent arg0) {
+						
+						
+						
+					}
 					
 				});
 				
@@ -245,22 +251,14 @@ public class JLixeira extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar3.png")));
-				c.setNome(svalueName);
+				c.setCPF(svalueCpf);
+				
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-				String pesq = svalueName;
 				if (opcao == 0){
-				Fachada.getInstancia().BuscarClientenome(c,pesq);
-				nomeField2.setText(c.getNome());
-				cpfField2.setText(""+c.getCPF());
-				rgField2.setText(c.getRG());
-				cidadeField2.setText(c.getCidade());
-				estadoField2.setText(c.getEstado());
-				enderecoField2.setText(c.getEndereco());
-				numeroField2.setText(""+c.getNumero());
-				bairroField2.setText(c.getBairro());
-				telefoneField2.setText(""+c.getTelefone());
-			
-				tabbedPane.setSelectedIndex(2);
+					Fachada.getInstancia().RestaurarCliente(c);
+					JCadastroCliente janelaCliente = new JCadastroCliente();
+					janelaCliente.carregarTabela();
+				
 			} else {
 				   
 			}
@@ -322,6 +320,21 @@ public class JLixeira extends JInternalFrame {
 		
 		scrollPane_1.setBounds(21, 11, 1216, 504);
 		cadast.add(scrollPane_1);
+		
+		JButton btnRestaurar = new JButton("Restaurar");
+		btnRestaurar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				r.setCodRoupa(sValueCode);
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().RestaurarRoupa(r);
+					carregarTabela();} else { 
+						
+					}
+			}
+		});
+		btnRestaurar.setBounds(1125, 526, 89, 23);
+		cadast.add(btnRestaurar);
 		tabbedPane.setBackgroundAt(1, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(1, true);
 		

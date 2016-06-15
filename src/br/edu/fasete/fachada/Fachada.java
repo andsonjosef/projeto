@@ -207,4 +207,10 @@ public Vector<Cliente> listarClienteslixe() {
 public Vector<Roupa> listarRoupalixe() {
 	return cadastroLixeira.listarRoupalixe();
 }
+public void RestaurarCliente(Cliente c){
+	cadastroLixeira.RestaurarCliente(c);
+}
+public void RestaurarRoupa(Roupa r){
+	cadastroLixeira.RestaurarRoupa(r);
+}
 }
