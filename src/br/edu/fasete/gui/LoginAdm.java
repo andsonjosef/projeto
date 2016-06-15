@@ -96,9 +96,12 @@ public class LoginAdm extends JFrame {
 		senhaField = new JPasswordField();
 		contentPane.add(senhaField, "cell 0 3,grow");
 		
+		JButton btnRecuperarSenha = new JButton("Recuperar Senha");
+		contentPane.add(btnRecuperarSenha, "flowx,cell 0 5,alignx right");
+		
 		JLabel lblbtnEditar = new JLabel("");
 		lblbtnEditar.setIcon(new ImageIcon(LoginAdm.class.getResource("/imagens/editar1.png")));
-		contentPane.add(lblbtnEditar, "flowx,cell 0 5,alignx right");
+		contentPane.add(lblbtnEditar, "cell 0 5,alignx right");
 		lblbtnConfirmar.setIcon(new ImageIcon(LoginAdm.class.getResource("/imagens/confirmarv1.png")));
 		contentPane.add(lblbtnConfirmar, "cell 0 5,alignx right");
 	}

@@ -8,5 +8,7 @@ public interface LoginDao {
 	public Funcionario buscarLogin(Funcionario f);
 	public Funcionario buscarLoginRoot(Funcionario f);
 	public void inserirLogin(Funcionario f);
+	public void editarLogin(Funcionario f, String login, String senha);
+	public void editarPergunta(Funcionario f, String pergunta, String resposta);
 	
 }

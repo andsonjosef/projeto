@@ -106,81 +106,13 @@ public class LoginFunc extends JFrame {
 		senhaField = new JPasswordField();
 		contentPane.add(senhaField, "cell 0 3,grow");
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 try {
-					    String caminho="";
-						JFileChooser abrir = new JFileChooser();  
-					    int retorno = abrir.showOpenDialog(null);  
-				            if (retorno==JFileChooser.APPROVE_OPTION)  {
-			                    caminho = abrir.getSelectedFile().getAbsolutePath();  					                    
-							          }
-					           
-					             String dbName = "loja";
-					             String dbUser = "root";
-					             String dbPass = "root";
-					            String restorePath = "\""+caminho+"\"";
-					            String[] executeCmd = new String[]{"C:\\xampp\\mysql\\bin\\mysql", dbName, "-u" + dbUser, "-p" + dbPass, "-e", " source " + restorePath};
-					            Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-					            int processComplete = runtimeProcess.waitFor();
-					            if (processComplete == 0) {
-					                JOptionPane.showMessageDialog(null, "Restaurado com sucesso! " );
-					            } else {
-					                JOptionPane.showMessageDialog(null, "Erro ao restaurar!");
-					            }
-
-
-					        } catch (IOException | InterruptedException | HeadlessException ex) {
-					            JOptionPane.showMessageDialog(null, "Erro ao restaurarl" + ex.getMessage());
-					        }
-						
+		JButton btnAdiministrador = new JButton("Adiministrador");
+		btnAdiministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
-		
-		JButton btnBackup = new JButton("backup");
-		btnBackup.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					 CodeSource codeSource = Backup.class.getProtectionDomain().getCodeSource();
-				        File jarFile = new File(codeSource.getLocation().toURI().getPath());
-				        String jarDir = jarFile.getParentFile().getPath();
-				        	String nome="";
-				        JFileChooser file = new JFileChooser(); 
-				          file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				          int i= file.showSaveDialog(null);
-				        if (i==1){
-				           
-				        } else {
-				            File arquivo = file.getSelectedFile();
-				          nome = arquivo.getPath();
-				        }
-				        
-				        String dbName = "loja";
-				        String dbUser = "root";
-				        String dbPass = "root";
-				        String folderPath = jarDir + "\\backup2";
-				        File f1 = new File(folderPath);
-				        f1.mkdir();
-				        String savePath = nome+".sql";
-				         String executeCmd = "C:\\xampp\\mysql\\bin\\mysqldump -u" + dbUser + " -p" + dbPass + " --compact --skip-comments --skip-triggers --database " + dbName + " -r " + savePath;
-				        Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-				        int processComplete = runtimeProcess.waitFor();
-
-				        if (processComplete == 0) {
-				            
-				            JOptionPane.showMessageDialog(null, "Backup concluido com sucesso!");
-				        } else {
-				        	JOptionPane.showMessageDialog(null, "Erro ao tentar fazer o backup!");
-				        }
-
-				    } catch (URISyntaxException | IOException | InterruptedException | HeadlessException ex) {
-			            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
-			        }
-			}
-		});
-		contentPane.add(btnBackup, "flowx,cell 0 5");
-		contentPane.add(btnNewButton, "cell 0 5,alignx right");
+		contentPane.add(btnAdiministrador, "flowx,cell 0 5,alignx right");
 		lblbtnConfirmar.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/confirmarv1.png")));
 		contentPane.add(lblbtnConfirmar, "cell 0 5,alignx right");
 	}

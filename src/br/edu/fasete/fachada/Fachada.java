@@ -198,6 +198,12 @@ public Funcionario buscarLoginRoot(Funcionario f){
 public void inserirLogin(Funcionario f){
 	cadastroLogin.inserirLogin(f);
 }
+public void editarLogin(Funcionario f, String login, String senha){
+	cadastroLogin.editarLogin(f, login, senha);
+}
+public void editarPergunta(Funcionario f, String pergunta, String resposta){
+	cadastroLogin.editarPergunta(f, pergunta, resposta);
+}
 
 //-------------Lixeira-----------------
 

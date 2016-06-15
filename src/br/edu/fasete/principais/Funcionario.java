@@ -4,6 +4,8 @@ public class Funcionario extends Cliente{
 	public int codFuncionario;
 	String login;
 	String senha;
+	String pergunta;
+	String respsota;
 	boolean acessar;
 
 	
@@ -13,12 +15,30 @@ public class Funcionario extends Cliente{
 	}
 
 	public Funcionario(String nome, String CPF, 
-					   String RG,  String telefone,int codCliente,String estado, String cidade, String bairro, String endereco, String numero, int codFuncionario, String login, String senha,boolean acessar,boolean registro) {
+					   String RG,  String telefone,int codCliente,String estado, String cidade, String bairro, String endereco, String numero, int codFuncionario, String login, String senha,String pergunta, String resposta, boolean acessar,boolean registro) {
 		super(nome, CPF, RG, telefone,codCliente,estado,cidade,bairro,endereco,numero,registro );
 		this.codFuncionario = codFuncionario;
 		this.login = login;
 		this.senha = senha;
+		this.pergunta = pergunta;
+		this.senha = senha;
 		this.acessar = acessar;
+	}
+
+	public String getPergunta() {
+		return pergunta;
+	}
+
+	public void setPergunta(String pergunta) {
+		this.pergunta = pergunta;
+	}
+
+	public String getRespsota() {
+		return respsota;
+	}
+
+	public void setRespsota(String respsota) {
+		this.respsota = respsota;
 	}
 
 	public boolean isAcessar() {

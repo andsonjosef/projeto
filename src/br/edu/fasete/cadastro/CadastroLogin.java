@@ -22,5 +22,10 @@ public class CadastroLogin implements InterfaceCadastroLogin {
 	public void inserirLogin(Funcionario f){
 		loginDao.inserirLogin(f);
 	}
-
+	public void editarLogin(Funcionario f, String login, String senha){
+		loginDao.editarLogin(f, login, senha);
+	}
+	public void editarPergunta(Funcionario f, String pergunta, String resposta){
+		loginDao.editarPergunta(f, pergunta, resposta);
+	}
 }

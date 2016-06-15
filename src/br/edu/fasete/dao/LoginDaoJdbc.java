@@ -41,7 +41,41 @@ public class LoginDaoJdbc implements LoginDao {
 		    JOptionPane.showMessageDialog(null,"Login não encontrado!");
 		  } 
 	}
-
+	@Override
+	public void editarLogin(Funcionario f, String login, String senha) {
+		 try {
+			
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					 
+			  .prepareStatement( "update loja.login_root set login = ?, senha = ? WHERE login = ? and senha = ?");
+			  stmt.setString(1, login);
+			  stmt.setString(2, senha);
+		      stmt.setString(3, f.getLogin());
+		      stmt.setString(4, f.getSenha());
+		      stmt.executeUpdate(); 
+		    
+		      JOptionPane.showMessageDialog(null,"Login editado!");
+	     }catch(Exception e){
+		    JOptionPane.showMessageDialog(null, e);
+		  } 
+	}
+	
+	public void editarPergunta(Funcionario f, String pergunta, String resposta) {
+		 try {
+			
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					 
+			  .prepareStatement( "update loja.login_root set pergunta = ?, resposta = ? WHERE senha = ?");
+			  stmt.setString(1, pergunta);
+			  stmt.setString(2, resposta);
+		      stmt.setString(3, f.getSenha());
+		      stmt.executeUpdate(); 
+		    
+		      JOptionPane.showMessageDialog(null,"pergunta editada!");
+	     }catch(Exception e){
+		    JOptionPane.showMessageDialog(null, e);
+		  } 
+	}
 	@Override
 	public Funcionario buscarLogin(Funcionario f) {
 		Funcionario fu = new Funcionario();
@@ -91,4 +125,6 @@ public class LoginDaoJdbc implements LoginDao {
 		  }
 		return lo;
 	}
+	
+	
 }
