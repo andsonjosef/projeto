@@ -214,6 +214,14 @@ public void editarPergunta(Funcionario f, String pergunta, String resposta){
 
 //-------------Lixeira-----------------
 
+
+public void ExcluirClienteLixe(Cliente c){
+	cadastroLixeira.ExcluirClienteLixe(c);
+}
+public void ExcluirRoupaLixe(Roupa r){
+	cadastroLixeira.ExcluirRoupaLixe(r);
+}
+
 public Vector<Cliente> listarClienteslixe() {
 	return cadastroLixeira.listarClienteslixe();
 }

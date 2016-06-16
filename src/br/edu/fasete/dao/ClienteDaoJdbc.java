@@ -140,7 +140,7 @@ ResultSet rs = stmt.executeQuery();
 	public void ExcluirCliente(Cliente c) {
 		try{
 			 PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-						 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ?");
+						 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ? ");
 			 stmt.setString(1, c.getCPF());
 			 ResultSet rs = stmt.executeQuery();
 
@@ -157,8 +157,9 @@ ResultSet rs = stmt.executeQuery();
 			c.setCodCliente(rs.getInt("codCliente"));
 			}
 		 }catch(Exception es){
-			 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
+			 JOptionPane.showMessageDialog(null,"Cliente não encontrado!");
 		 }
+		if(c.isRegistrado()==false){
 		 try {
 			  PreparedStatement stmt;
 			    stmt =  (PreparedStatement) Conexao.getConnection()
@@ -175,7 +176,7 @@ ResultSet rs = stmt.executeQuery();
 			   stmt.setBoolean(10, c.isRegistrado());
 			   stmt.setInt(11, c.getCodCliente());
 			   stmt.executeUpdate();
-			   	 	  
+		  	 	  
 			  
 			 
 	}catch(Exception es){
@@ -184,7 +185,7 @@ ResultSet rs = stmt.executeQuery();
 	  }
 		 try {
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement( "DELETE FROM loja.cliente WHERE cpf = ?");
+					    .prepareStatement( "DELETE FROM loja.cliente WHERE cpf = ? ");
 		 stmt.setString(1,c.getCPF());
 		 stmt.executeUpdate(); 
 		    
@@ -193,6 +194,12 @@ ResultSet rs = stmt.executeQuery();
 		  }catch(Exception e){
 		    JOptionPane.showMessageDialog(null,"Cliente não encontrado!");
 		  } 
+		}else{
+			
+			 JOptionPane.showMessageDialog(null,"Cliente com registro !");
+			
+		}
+		
 	}
 
 	////

@@ -26,5 +26,11 @@ public class CadastroLixeira implements InterfaceCadastroLixeira {
 	public void RestaurarRoupa(Roupa r){
 		lixeiraDao.RestaurarRoupa(r);
 	}
+	 public void ExcluirClienteLixe(Cliente c){
+		 lixeiraDao.ExcluirClienteLixe(c);
+	 }
+	 public void ExcluirRoupaLixe(Roupa r){
+		 lixeiraDao.ExcluirRoupaLixe(r);
+	 }
 
 }

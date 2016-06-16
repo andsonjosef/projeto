@@ -572,8 +572,11 @@ public class JRegistro extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
+							int opcao = JOptionPane.showConfirmDialog(null, "Realmente excluir o registro?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao == 0){
 							Fachada.getInstancia().ExcluirReg(c);
 							tabbedPane.setSelectedIndex(0);
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -988,8 +991,8 @@ public void mouseClicked(MouseEvent e) {
 			
 			public void mouseClicked(MouseEvent e) {
 				srow = tabelaCategoria.getSelectedRow();
-				svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
-				svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+				//svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+				//svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
 				c.setNome(svalueName);
 				
 				String pesq = "";

@@ -11,4 +11,6 @@ public interface LixeiraDao {
 	 public Vector<Roupa> listarRoupalixe();
 	 public void RestaurarCliente(Cliente c);
 	 public void RestaurarRoupa(Roupa r);
+	 public void ExcluirClienteLixe(Cliente c);
+	 public void ExcluirRoupaLixe(Roupa r);
 }

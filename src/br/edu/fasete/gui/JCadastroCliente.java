@@ -1039,6 +1039,7 @@ public class JCadastroCliente extends JInternalFrame {
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a edição?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 				numeroField2.setEditable(false);
@@ -1060,6 +1061,17 @@ public class JCadastroCliente extends JInternalFrame {
 				bairroField2.setText("");
 				telefoneField2.setText("");
 				}
+			}
+			public void mouseEntered(MouseEvent e) {
+				label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
 			}
 		});
 		label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));

@@ -11,7 +11,36 @@ import br.edu.fasete.principais.Roupa;
 
 
 public class LixeiraDaoJdbc implements LixeiraDao {
+	
+	public void ExcluirClienteLixe(Cliente c){
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+					    .prepareStatement( "DELETE FROM loja.clientelixeira WHERE cpf = ?");
+		 stmt.setString(1,c.getCPF());
+		 stmt.executeUpdate(); 
+		    
+		 JOptionPane.showMessageDialog(null,"Cliente excluido!");
+		 
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Cliente não encontrado!");
+		  } 
 		
+	}
+	
+	public void ExcluirRoupaLixe(Roupa r) {
+		  
+		  
+		try {
+			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			  .prepareStatement( "DELETE FROM loja.roupalixeira WHERE codRoupa = ?");
+			  stmt.setInt(1,r.getCodRoupa());
+		      stmt.executeUpdate(); 
+		    
+		     JOptionPane.showMessageDialog(null,"Roupa excluida!");
+		  }catch(Exception e){
+		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
+		  } 
+	}
 
 	@Override
 	public Vector<Cliente> listarClienteslixe() {

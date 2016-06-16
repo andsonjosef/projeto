@@ -87,6 +87,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 		  }catch(Exception e){
 			  JOptionPane.showMessageDialog(null,e);
 		  } 
+		  if(r.isDisponibilidade()==false){
 		  try {
 			  PreparedStatement stmt;
 		  
@@ -104,7 +105,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 			   
 			
 	}catch(Exception es){
-		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!");
 		  JOptionPane.showMessageDialog(null,es);
 		  
 	  }
@@ -119,6 +120,9 @@ public class RoupaDaoJdbc implements RoupaDao {
 		  }catch(Exception e){
 		    JOptionPane.showMessageDialog(null,"Roupa não encontrada!");
 		  } 
+		  }else{
+			  JOptionPane.showMessageDialog(null,"Roupa registrada em aluguel!");
+		  }
 	}
 	
 	//////

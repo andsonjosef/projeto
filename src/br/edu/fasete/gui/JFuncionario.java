@@ -528,6 +528,20 @@ public class JFuncionario extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtncancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar3.png")));
+							int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao2 == 0){	
+							nomeField.setText("");
+							cpfField.setText("");
+							rgField.setText("");
+							cidadeField.setText("");
+							estadoField.setText("");
+							enderecoField.setText("");
+							numeroField.setText("");
+							bairroField.setText("");
+							telefoneField.setText("");
+							loginField.setText("");
+							senhaField.setText("");
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -708,7 +722,7 @@ public class JFuncionario extends JInternalFrame {
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Editar Funcionários", null, editPanel, null);
-		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px,grow][43.00px][26.00px][43.00px][][89px,grow]", "[40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40][30][40.00px][30.00px][40.00px][30.00][]"));
+		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][35.00px][111.00px][47.00px][89px,grow]", "[40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40.00px][30.00px][40][30][40.00px][30.00px][40.00px][30.00][]"));
 		
 		JLabel nomelabel2 = new JLabel("Nome");
 		nomelabel2.setForeground(Color.WHITE);
@@ -719,7 +733,12 @@ public class JFuncionario extends JInternalFrame {
 		nomeField2.setEditable(false);
 		nomeField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		nomeField2.setColumns(10);
-		editPanel.add(nomeField2, "cell 0 1 12 1,grow");
+		editPanel.add(nomeField2, "cell 0 1 7 1,grow");
+		
+		JLabel rglabel2 = new JLabel("RG");
+		rglabel2.setForeground(Color.WHITE);
+		rglabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(rglabel2, "cell 6 2,growx,aligny bottom");
 		
 		cpfField2 = new JTextField();
 		cpfField2.setEditable(false);
@@ -732,26 +751,21 @@ public class JFuncionario extends JInternalFrame {
 		cpflabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(cpflabel2, "cell 0 2,alignx left,aligny bottom");
 		
-		JLabel rglabel2 = new JLabel("RG");
-		rglabel2.setForeground(Color.WHITE);
-		rglabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(rglabel2, "cell 6 2,growx,aligny bottom");
-		
 		rgField2 = new JTextField();
 		rgField2.setEditable(false);
 		rgField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rgField2.setColumns(10);
-		editPanel.add(rgField2, "cell 6 3 6 1,grow");
-		
-		JLabel estadolabel2 = new JLabel("Estado");
-		estadolabel2.setForeground(Color.WHITE);
-		estadolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		editPanel.add(estadolabel2, "cell 6 4,alignx left,aligny bottom");
+		editPanel.add(rgField2, "cell 6 3,grow");
 		
 		JLabel cidadelabel2 = new JLabel("Cidade");
 		cidadelabel2.setForeground(Color.WHITE);
 		cidadelabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		editPanel.add(cidadelabel2, "cell 0 4,alignx left,aligny bottom");
+		
+		JLabel estadolabel2 = new JLabel("Estado");
+		estadolabel2.setForeground(Color.WHITE);
+		estadolabel2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		editPanel.add(estadolabel2, "cell 6 4,alignx left,aligny bottom");
 		
 		cidadeField2 = new JTextField();
 		cidadeField2.setEditable(false);
@@ -779,7 +793,7 @@ public class JFuncionario extends JInternalFrame {
 		numeroField2.setEditable(false);
 		numeroField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		numeroField2.setColumns(10);
-		editPanel.add(numeroField2, "cell 6 7 6 1,grow");
+		editPanel.add(numeroField2, "cell 6 7,grow");
 		
 		JLabel bairrolabel2 = new JLabel("Bairro");
 		bairrolabel2.setForeground(Color.WHITE);
@@ -801,13 +815,13 @@ public class JFuncionario extends JInternalFrame {
 		telefoneField2.setEditable(false);
 		telefoneField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		telefoneField2.setColumns(10);
-		editPanel.add(telefoneField2, "cell 6 9 6 1,grow");
+		editPanel.add(telefoneField2, "cell 6 9,grow");
 		
 		estadoField2 = new JTextField();
 		estadoField2.setEditable(false);
 		estadoField2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		estadoField2.setColumns(10);
-		editPanel.add(estadoField2, "cell 6 5 6 1,grow");
+		editPanel.add(estadoField2, "cell 6 5,grow");
 		
 		JLabel lblLogin_1 = new JLabel("Login");
 		lblLogin_1.setForeground(Color.WHITE);
@@ -826,7 +840,7 @@ public class JFuncionario extends JInternalFrame {
 		
 		senhaField2 = new JTextField();
 		senhaField2.setEditable(false);
-		editPanel.add(senhaField2, "cell 6 11 6 1,grow");
+		editPanel.add(senhaField2, "cell 6 11,grow");
 		senhaField2.setColumns(10);
 		
 		pesquisarField = new JTextField();
@@ -952,6 +966,82 @@ public class JFuncionario extends JInternalFrame {
 			}
 		});
 		
+		JLabel lblbtnExcluir2 = new JLabel("");
+		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir3.png")));
+				f.setCPF(svalueCpf);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirFuncionario(f);
+					carregarTabela();} else {   
+				}
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
+			}
+		});
+		
+		JLabel lblbtnCancelar = new JLabel("");
+		lblbtnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				lblbtnCancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar3.png")));
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a edição?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+				numeroField2.setEditable(false);
+				nomeField2.setEditable(false);
+				cpfField2.setEditable(false);
+				rgField2.setEditable(false);
+				cidadeField2.setEditable(false);
+				estadoField2.setEditable(false);
+				enderecoField2.setEditable(false);
+				bairroField2.setEditable(false);
+				telefoneField2.setEditable(false);	
+				loginField2.setEditable(false);
+				senhaField2.setEditable(false);
+				nomeField2.setText("");
+				cpfField2.setText("");
+				rgField2.setText("");
+				cidadeField2.setText("");
+				estadoField2.setText("");
+				enderecoField2.setText("");
+				numeroField2.setText("");
+				bairroField2.setText("");
+				telefoneField2.setText("");
+				loginField2.setText("");
+				senhaField2.setText("");
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnCancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
+			}
+		});
+		lblbtnCancelar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/cancelar1.png")));
+		editPanel.add(lblbtnCancelar, "flowx,cell 6 15,alignx right");
+		lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
+		editPanel.add(lblbtnExcluir2, "cell 6 15,alignx right");
+		
 		JLabel lblbtnEditar2 = new JLabel("");
 		lblbtnEditar2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -985,39 +1075,10 @@ public class JFuncionario extends JInternalFrame {
 				lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
 			}
 		});
-		
-		JLabel lblbtnExcluir2 = new JLabel("");
-		lblbtnExcluir2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir3.png")));
-				f.setCPF(svalueCpf);
-				int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
-				if (opcao == 0){
-					Fachada.getInstancia().ExcluirFuncionario(f);
-					carregarTabela();} else {   
-				}
-				
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir2.png")));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
-			}
-		});
-		lblbtnExcluir2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
-		editPanel.add(lblbtnExcluir2, "cell 7 15");
 		lblbtnEditar2.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
-		editPanel.add(lblbtnEditar2, "cell 9 15");
+		editPanel.add(lblbtnEditar2, "cell 6 15");
 		lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar1.png")));
-		editPanel.add(lblbtnSalvar, "cell 11 15");
+		editPanel.add(lblbtnSalvar, "cell 6 15");
 		
 		JLabel lblbtnPesquisarNome = new JLabel("");
 		lblbtnPesquisarNome.addMouseListener(new MouseAdapter() {

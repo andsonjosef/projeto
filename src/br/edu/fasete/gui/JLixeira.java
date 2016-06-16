@@ -242,7 +242,7 @@ public class JLixeira extends JInternalFrame {
 		
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
+		tabbedPane.addTab("Clientes", null, exibirpanel, null);
 		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
 		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
 		
@@ -253,7 +253,7 @@ public class JLixeira extends JInternalFrame {
 				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar3.png")));
 				c.setCPF(svalueCpf);
 				
-				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja restaurar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().RestaurarCliente(c);
 					JCadastroCliente janelaCliente = new JCadastroCliente();
@@ -287,7 +287,7 @@ public class JLixeira extends JInternalFrame {
 					c.setCPF(svalueCpf);
 					int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 					if (opcao == 0){
-						Fachada.getInstancia().ExcluirCliente(c);
+						Fachada.getInstancia().ExcluirClienteLixe(c);
 						carregarTabela();
 					} else {
 					}
@@ -314,18 +314,45 @@ public class JLixeira extends JInternalFrame {
 		JPanel cadast = new JPanel();
 		cadast.setBackground(Color.DARK_GRAY);
 		
-		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
-		cadast.setLayout(null);
+		tabbedPane.addTab("Roupas", null, cadast, null);
+		cadast.setLayout(new MigLayout("", "[1075px,grow]", "[504px][70px]"));
+		cadast.add(scrollPane_1, "cell 0 0,grow");
 		
-		
-		scrollPane_1.setBounds(21, 11, 1216, 504);
-		cadast.add(scrollPane_1);
+		JLabel lblbtnExccluir2 = new JLabel("");
+		lblbtnExccluir2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnExccluir2.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
+				r.setCodRoupa(sValueCode);
+				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+					Fachada.getInstancia().ExcluirRoupaLixe(r);
+					carregarTabelaRoupa();
+					} else { 
+						
+					}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblbtnExccluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnExccluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnExccluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
+			}
+		});
+		lblbtnExccluir2.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/excluir1.png")));
+		cadast.add(lblbtnExccluir2, "flowx,cell 0 1,alignx right,growy");
 		
 		JButton btnRestaurar = new JButton("Restaurar");
 		btnRestaurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				r.setCodRoupa(sValueCode);
-				int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja excluir " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja Restaurar " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().RestaurarRoupa(r);
 					carregarTabela();} else { 
@@ -333,8 +360,7 @@ public class JLixeira extends JInternalFrame {
 					}
 			}
 		});
-		btnRestaurar.setBounds(1125, 526, 89, 23);
-		cadast.add(btnRestaurar);
+		cadast.add(btnRestaurar, "cell 0 1,alignx left,aligny center");
 		tabbedPane.setBackgroundAt(1, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(1, true);
 		
@@ -381,7 +407,7 @@ public class JLixeira extends JInternalFrame {
 		
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Editar Clientes", null, editPanel, null);
+		tabbedPane.addTab("Registros", null, editPanel, null);
 		editPanel.setLayout(new MigLayout("", "[89px,grow][55px][157.00px][54.00px][347.00px][47.00px][60px][43.00px][26.00px][43.00px][][89px,grow]", "[42.00px][33.00px][38.00px][33.00px][41.00px][33.00px][43.00px][33.00px][41.00px][33.00px][40.00px][33.00px][40.00px][33.00][]"));
 		
 		JLabel nomelabel2 = new JLabel("Nome");

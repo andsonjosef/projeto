@@ -95,6 +95,9 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal(){
+		addMouseListener(new MouseAdapter() {
+			
+		});
 		setForeground(Color.DARK_GRAY);
 		setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -528,6 +531,17 @@ public class Principal extends JFrame {
 	textField.setColumns(10);
 	
 	JMenu mnNewMenu = new JMenu("");
+	mnNewMenu.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+
+				LoginFunc lg = new LoginFunc();
+				lg.setVisible(true);
+				dispose();
+				
+
+		}
+	});
 	mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu.png")));
 	barraMenu.add(mnNewMenu);
 	
