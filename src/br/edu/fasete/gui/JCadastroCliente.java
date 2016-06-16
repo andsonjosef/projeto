@@ -19,15 +19,12 @@ import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Cliente;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -526,6 +523,18 @@ public class JCadastroCliente extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+							int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao2 == 0){	
+							nomeField.setText("");
+							cpfField.setText("");
+							rgField.setText("");
+							cidadeField.setText("");
+							estadoField.setText("");
+							enderecoField.setText("");
+							numeroField.setText("");
+							bairroField.setText("");
+							telefoneField.setText("");
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -614,7 +623,7 @@ public class JCadastroCliente extends JInternalFrame {
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar3.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
 				c.setNome(svalueName);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
@@ -638,15 +647,15 @@ public class JCadastroCliente extends JInternalFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar2.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 			}
 		});
 	
@@ -680,7 +689,7 @@ public class JCadastroCliente extends JInternalFrame {
 		});
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
 		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
-		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/editar1.png")));
+		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
 		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
 		
 		JPanel editPanel = new JPanel();
@@ -938,6 +947,16 @@ public class JCadastroCliente extends JInternalFrame {
 				@SuppressWarnings("unused")
 				String cpf = c.getCPF();
 				Fachada.getInstancia().AtualizarCliente(c,svalueCpf);
+				numeroField2.setEditable(false);
+				nomeField2.setEditable(false);
+				cpfField2.setEditable(false);
+				rgField2.setEditable(false);
+				cidadeField2.setEditable(false);
+				estadoField2.setEditable(false);
+				enderecoField2.setEditable(false);
+				bairroField2.setEditable(false);
+				telefoneField2.setEditable(false);	
+				
 				}
 			}
 
@@ -1017,6 +1036,32 @@ public class JCadastroCliente extends JInternalFrame {
 		});
 		
 		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja cancelar a edição?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if (opcao == 0){
+				numeroField2.setEditable(false);
+				nomeField2.setEditable(false);
+				cpfField2.setEditable(false);
+				rgField2.setEditable(false);
+				cidadeField2.setEditable(false);
+				estadoField2.setEditable(false);
+				enderecoField2.setEditable(false);
+				bairroField2.setEditable(false);
+				telefoneField2.setEditable(false);	
+				nomeField2.setText("");
+				cpfField2.setText("");
+				rgField2.setText("");
+				cidadeField2.setText("");
+				estadoField2.setText("");
+				enderecoField2.setText("");
+				numeroField2.setText("");
+				bairroField2.setText("");
+				telefoneField2.setText("");
+				}
+			}
+		});
 		label.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
 		editPanel.add(label, "flowx,cell 4 13,alignx right");
 		lblbtnExcluir2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
@@ -1031,7 +1076,7 @@ public class JCadastroCliente extends JInternalFrame {
 	public void carregarTabela() {
 		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
 		tableModel.setRowCount(0);
-		for(Cliente cat : Fachada.getInstancia().listarClientes()) {
+		for(Cliente cat : Fachada.getInstancia().listartodosClientes()) {
 			tableModel.adicionarCategoria(cat);
 		}
 	}

@@ -37,5 +37,7 @@ public class CadastroRoupa implements InterfaceCadastroRoupa {
 	public Vector<Roupa> listarRoupas() {
 		return roupaDao.listarRoupas();
 	}
-	
+	public Vector<Roupa> listartodasRoupas(){
+		return roupaDao.listartodasRoupas();
+	}
 }

@@ -76,6 +76,9 @@ public void InserirCliente(Cliente c){
 public Vector<Cliente> listarClientes(){
 	return cadastroCliente.listarClientes();
 }
+public Vector<Cliente> listartodosClientes(){
+	return cadastroCliente.listartodosClientes();
+}
 
 //---------------Roupa-----------------------
 public void AtualizarRoupa(Roupa r){
@@ -92,6 +95,10 @@ public void InserirRoupa(Roupa r){
 }
 public Vector<Roupa> listarRoupas(){
 	return cadastroRoupa.listarRoupas();
+	
+}
+public Vector<Roupa> listartodasRoupas(){
+	return cadastroRoupa.listartodasRoupas();
 }
 
 //---------------Aluguel-----------------------

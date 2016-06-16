@@ -11,5 +11,6 @@ public interface InterfaceCadastroCliente {
 	 public void ExcluirCliente(Cliente c);
 	 public void InserirCliente(Cliente c);
 	 public Vector<Cliente> listarClientes();
+	 public Vector<Cliente> listartodosClientes();
 
 }

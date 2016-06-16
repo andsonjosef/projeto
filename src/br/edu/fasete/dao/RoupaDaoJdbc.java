@@ -179,6 +179,29 @@ public class RoupaDaoJdbc implements RoupaDao {
 		}
 		return lista;
 	}
+	public Vector<Roupa> listartodasRoupas() {
+		Vector<Roupa> lista = new Vector<Roupa>();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Roupa r = new Roupa();
+				
+				r.setCodRoupa(resultado.getInt("codRoupa"));
+				r.setTipo(resultado.getString("tipo"));
+				r.setModelo(resultado.getString("modelo"));
+				r.setTamanho(resultado.getString("tamanho"));
+				r.setGenero(resultado.getString("genero"));
+				r.setCor(resultado.getString("cor"));
+				r.setDisponibilidade(resultado.getBoolean("disponibilidade"));
+				r.setPreco(resultado.getFloat("preco"));
+				lista.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
 	////
 }
 

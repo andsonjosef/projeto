@@ -74,8 +74,8 @@ public class JAluguel extends JInternalFrame {
 	private JTextField tipoField;
 	private JTextField modeloField;
 	private JTextField generoField;
-	private JTextField dataLoca;
-	private JTextField DataDevo;
+	private JFormattedTextField dataLoca;
+	private JFormattedTextField DataDevo;
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
 	java.util.Date x;
@@ -343,9 +343,7 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
-										
-										
-										
+
 										Fachada.getInstancia().limparTabela();
 										Fachada.getInstancia().BuscarRoupaEd(r);
 										Fachada.getInstancia().ListarRoupaEdi(r,c);
@@ -413,7 +411,7 @@ public class JAluguel extends JInternalFrame {
 									public void mouseClicked(MouseEvent e) {
 										lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/adicionar3.png")));
 										   int linha = tabelaRoupa_1.getSelectedRow();
-										    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+										  //  r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
 										    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
 											   Fachada.getInstancia().InserirRoupaEdi(r, c);
 											   carregarTabelaRoupasele();
@@ -531,29 +529,14 @@ public class JAluguel extends JInternalFrame {
 										if(e.getClickCount() == 2) {
 											int linha = tabelaRoupasele.getSelectedRow();
 										    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-										    Fachada.getInstancia().ExcluirRoupaSele(r);
+										    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
 										    carregarTabelaRoupasele();
+										    carregarTabelaRoupa();
 										}
 									}
 									
 								});
-								tabelaRoupasele.addMouseListener(new MouseAdapter() {
-									public void mouseClicked(MouseEvent e) {
-										if(e.getClickCount() == 2) {
-											
-											int linha = tabelaRoupasele.getSelectedRow();
-										    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-										    Fachada.getInstancia().ExcluirRoupaSele(r);
-										    carregarTabelaRoupasele();
-										
-									
-										
-									} else {
-										   
-									}
-								}
-									
-								});
+							
 								////
 								
 								tabelaRoupa_1 = new JTable(new RoupaTableModel());
@@ -632,6 +615,7 @@ public class JAluguel extends JInternalFrame {
 									public void mouseClicked(MouseEvent e) {
 										lblbtnVoltar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR3.png")));
 										tabbedPane.setSelectedIndex(0);
+										Fachada.getInstancia().limparLista();
 									}
 									@Override
 									public void mouseEntered(MouseEvent e) {
@@ -656,14 +640,14 @@ public class JAluguel extends JInternalFrame {
 								
 								tabelaRoupa_1.addMouseListener(new MouseAdapter() {
 									public void mouseClicked(MouseEvent e) {
-										if(e.getClickCount() == 2) {
-											
-											 int linha = tabelaRoupa_1.getSelectedRow();
-											    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
-											   Fachada.getInstancia().InserirRoupaSele(r);
-											   carregarTabelaRoupasele();
+										if(e.getClickCount() == 2) {											 
 										
-									
+											   int linha = tabelaRoupa_1.getSelectedRow();
+											    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+											    r.setCodRoupa((int) tabelaRoupa_1.getValueAt(linha, 0));  
+												   Fachada.getInstancia().InserirRoupaEdi(r, c);
+												   carregarTabelaRoupasele();
+												   carregarTabelaRoupa();
 										
 									} else {
 										   
@@ -671,13 +655,24 @@ public class JAluguel extends JInternalFrame {
 								}
 									
 								});
+								tabelaRoupasele.addMouseListener(new MouseAdapter() {
+									public void mouseClicked(MouseEvent e) {
+										if(e.getClickCount()==2){
+											int linha = tabelaRoupasele.getSelectedRow();
+										    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+										    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
+										    carregarTabelaRoupasele();
+										    carregarTabelaRoupa();
+										}
+									}
+								});
 								
 								
 								tabelaRoupa_1.addMouseListener(new MouseAdapter() {
 public void mouseClicked(MouseEvent e) {
 	srow = tabelaRoupa_1.getSelectedRow();
 	
-	r.setCodRoupa( (int) tabelaRoupa_1.getValueAt(srow, 0));
+	//r.setCodRoupa( (int) tabelaRoupa_1.getValueAt(srow, 0));
 	Fachada.getInstancia().BuscarRoupa(r);
 	tipoField.setText(r.getTipo());
 	modeloField.setText(r.getModelo());
@@ -740,25 +735,55 @@ public void mouseClicked(MouseEvent e) {
 								lblFuncionrio.setFont(new Font("Dialog", Font.PLAIN, 15));
 								editPanel.add(lblFuncionrio, "cell 8 3,aligny bottom");
 								
-								dataLoca = new JTextField();
-								editPanel.add(dataLoca, "cell 0 4,grow");
-								dataLoca.setColumns(10);
+								try {
+									MaskFormatter mascara = new MaskFormatter("##/##/####");
+									mascara.setPlaceholderCharacter('_');
+									dataLoca = new JFormattedTextField(mascara);
+									dataLoca.setFont(new Font("Dialog", Font.PLAIN, 15));
+									editPanel.add(dataLoca, "cell 0 4,grow");
+									dataLoca.setColumns(10);
+									
+									
+									
+									
+								
+								} catch (ParseException e1) {
+									
+									e1.printStackTrace();
+								}
+							
 								
 								JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
 								lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 								lblDataDeDevoluo.setForeground(Color.WHITE);
 								editPanel.add(lblDataDeDevoluo, "cell 2 3,alignx left,aligny bottom");
 								
-								DataDevo = new JTextField();
-								editPanel.add(DataDevo, "cell 2 4,grow");
-								DataDevo.setColumns(10);
+								try {
+									MaskFormatter mascara = new MaskFormatter("##/##/####");
+									mascara.setPlaceholderCharacter('_');
+									DataDevo = new JFormattedTextField(mascara);
+									DataDevo.setFont(new Font("Dialog", Font.PLAIN, 15));
+									editPanel.add(DataDevo, "cell 2 4,grow");
+									DataDevo.setColumns(10);
+									
+									
+									
+									
+								
+								} catch (ParseException e1) {
+									
+									e1.printStackTrace();
+								}
+								
 								
 								precoFieldal = new JTextField();
+								precoFieldal.setFont(new Font("Dialog", Font.PLAIN, 15));
 								precoFieldal.setEditable(false);
 								editPanel.add(precoFieldal, "cell 4 4,grow");
 								precoFieldal.setColumns(10);
 								
 								precoFieldFim = new JTextField();
+								precoFieldFim.setFont(new Font("Dialog", Font.PLAIN, 15));
 								editPanel.add(precoFieldFim, "cell 6 4,grow");
 								precoFieldFim.setColumns(10);
 								
@@ -794,11 +819,13 @@ public void mouseClicked(MouseEvent e) {
 								});
 								
 								funcioField = new JTextField();
+								funcioField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								funcioField.setEditable(false);
 								editPanel.add(funcioField, "cell 8 4,grow");
 								funcioField.setColumns(10);
 								
 								JComboBox pagamentoBox = new JComboBox();
+								pagamentoBox.setFont(new Font("Dialog", Font.PLAIN, 15));
 								pagamentoBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
 								editPanel.add(pagamentoBox, "cell 10 4,grow");
 								lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
@@ -891,6 +918,15 @@ public void mouseClicked(MouseEvent e) {
 						 int opcao = JOptionPane.showConfirmDialog(null, "Deseja selecionar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 							
 							if (opcao == 0){
+						Fachada.getInstancia().BuscarClienteCPF(c, pesq);
+						
+						Fachada.getInstancia().limparTabela();
+						Fachada.getInstancia().BuscarRoupaEd(r);
+						Fachada.getInstancia().ListarRoupaEdi(r,c);
+						carregarTabelaRoupasele();
+						
+						btnlblAvancar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/avan\u00E7ar3.png")));
+						 pesq = c.getCPF();
 						Fachada.getInstancia().BuscarClienteCPF(c, pesq);
 						
 						tabbedPane.setSelectedIndex(1);

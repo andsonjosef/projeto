@@ -71,11 +71,11 @@ public class JRegistro extends JInternalFrame {
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
 	private JTextField precoField2;
-	private JTextField datalocaField2;
-	private JTextField datadevoField2;
+	private JFormattedTextField datalocaField2;
+	private JFormattedTextField datadevoField2;
 	private JTextField precofimField2;
-	private JTextField dataLoca;
-	private JTextField DataDevo;
+	private JFormattedTextField dataLoca;
+	private JFormattedTextField DataDevo;
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
 	java.util.Date x;
@@ -383,9 +383,6 @@ public class JRegistro extends JInternalFrame {
 					cadast.add(logField, "cell 0 11,alignx center");
 					logField.setColumns(10);
 					logField.setVisible(false);
-					JLabel label = new JLabel("");
-					label.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
-					cadast.add(label, "flowx,cell 8 11,alignx right");
 					
 					JLabel lblbtnConfirmar = new JLabel("");
 					lblbtnConfirmar.addMouseListener(new MouseAdapter() {
@@ -474,27 +471,57 @@ public class JRegistro extends JInternalFrame {
 					lblPagamento.setFont(new Font("Dialog", Font.PLAIN, 15));
 					editPanel.add(lblPagamento, "cell 10 3,alignx left,aligny bottom");
 					
-					dataLoca = new JTextField();
-					dataLoca.setEditable(false);
-					editPanel.add(dataLoca, "cell 0 4,grow");
-					dataLoca.setColumns(10);
+					try {
+						MaskFormatter mascara = new MaskFormatter("##/##/####");
+						mascara.setPlaceholderCharacter('_');
+						dataLoca = new JFormattedTextField(mascara);
+						dataLoca.setFont(new Font("Dialog", Font.PLAIN, 15));
+						dataLoca.setEditable(false);
+						editPanel.add(dataLoca, "cell 0 4,grow");
+						dataLoca.setColumns(10);
+						
+						
+						
+						
+					
+					} catch (ParseException e1) {
+						
+						e1.printStackTrace();
+					}
+					
 					
 					JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
 					lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblDataDeDevoluo.setForeground(Color.WHITE);
 					editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
 					
-					DataDevo = new JTextField();
-					DataDevo.setEditable(false);
-					editPanel.add(DataDevo, "cell 2 4,grow");
-					DataDevo.setColumns(10);
+					try {
+						MaskFormatter mascara = new MaskFormatter("##/##/####");
+						mascara.setPlaceholderCharacter('_');
+						DataDevo = new JFormattedTextField(mascara);
+						DataDevo.setFont(new Font("Dialog", Font.PLAIN, 15));
+						DataDevo.setEditable(false);
+						editPanel.add(DataDevo, "cell 2 4,grow");
+						DataDevo.setColumns(10);
+						
+						
+						
+						
+					
+					} catch (ParseException e1) {
+						
+						e1.printStackTrace();
+					}
+					
 					
 					precoFieldal = new JTextField();
+					precoFieldal.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precoFieldal.setEditable(false);
 					editPanel.add(precoFieldal, "cell 4 4,grow");
 					precoFieldal.setColumns(10);
 					
 					precoFieldFim = new JTextField();
+					precoFieldFim.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precoFieldFim.setEditable(false);
 					editPanel.add(precoFieldFim, "cell 6 4,grow");
 					precoFieldFim.setColumns(10);
@@ -584,20 +611,18 @@ public class JRegistro extends JInternalFrame {
 					});
 					
 					funcField = new JTextField();
+					funcField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					funcField.setEditable(false);
 					editPanel.add(funcField, "cell 8 4,grow");
 					funcField.setColumns(10);
 					
 					pagamentoField = new JTextField();
+					pagamentoField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					pagamentoField.setEditable(false);
 					editPanel.add(pagamentoField, "cell 10 4,grow");
 					pagamentoField.setColumns(10);
-					
-					JLabel lblbtnInicio = new JLabel("");
-					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
-					editPanel.add(lblbtnInicio, "flowx,cell 11 4,alignx right,aligny bottom");
 					lblbtnVoltar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/VOLTAR1.png")));
-					editPanel.add(lblbtnVoltar, "cell 11 4,alignx right,aligny bottom");
+					editPanel.add(lblbtnVoltar, "flowx,cell 11 4,alignx right,aligny bottom");
 					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
 					editPanel.add(lblbtnExcluir, "cell 11 4,alignx right,aligny bottom");
 					lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar1.png")));
@@ -760,15 +785,40 @@ public class JRegistro extends JInternalFrame {
 					lblFuncionrio_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 					exibirpanel.add(lblFuncionrio_1, "cell 10 2,aligny bottom");
 					
-					datalocaField2 = new JTextField();
-					datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					datalocaField2.setColumns(10);
-					exibirpanel.add(datalocaField2, "cell 0 3,grow");
+					try {
+						MaskFormatter mascara = new MaskFormatter("##/##/####");
+						mascara.setPlaceholderCharacter('_');
+						datalocaField2 = new JFormattedTextField(mascara);
+						datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+						datalocaField2.setColumns(10);
+						exibirpanel.add(datalocaField2, "cell 0 3,grow");
+						
+						
+						
+						
 					
-					datadevoField2 = new JTextField();
-					datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					datadevoField2.setColumns(10);
-					exibirpanel.add(datadevoField2, "cell 2 3,grow");
+					} catch (ParseException e1) {
+						
+						e1.printStackTrace();
+					}
+				
+					try {
+						MaskFormatter mascara = new MaskFormatter("##/##/####");
+						mascara.setPlaceholderCharacter('_');
+						datadevoField2 = new JFormattedTextField(mascara);
+						datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+						datadevoField2.setColumns(10);
+						exibirpanel.add(datadevoField2, "cell 2 3,grow");
+						
+						
+						
+						
+					
+					} catch (ParseException e1) {
+						
+						e1.printStackTrace();
+					}
+				
 					
 					precoField2 = new JTextField();
 					precoField2.setEditable(false);
@@ -789,6 +839,8 @@ public class JRegistro extends JInternalFrame {
 								JOptionPane.showMessageDialog(null, "adicione um preço");
 								
 							}else{
+								int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+								if (opcao == 0){
 							lblbtnsalvar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/salvar3.png")));
 							Fachada.getInstancia().ExcluirReg(c);
 							
@@ -821,6 +873,7 @@ public class JRegistro extends JInternalFrame {
 							Fachada.getInstancia().SomaPreco(a);
 							tabbedPane.setSelectedIndex(0);
 							}
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -843,6 +896,7 @@ public class JRegistro extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+							Fachada.getInstancia().limparLista();
 							tabbedPane.setSelectedIndex(1);
 						}
 												
@@ -866,6 +920,7 @@ public class JRegistro extends JInternalFrame {
 					exibirpanel.add(pagamentoBox, "cell 8 3,grow");
 					
 					funcioField2 = new JTextField();
+					funcioField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					funcioField2.setEditable(false);
 					exibirpanel.add(funcioField2, "cell 10 3,grow");
 					funcioField2.setColumns(10);
@@ -876,9 +931,12 @@ public class JRegistro extends JInternalFrame {
 					lblbtnENcerrar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
+							int opcao = JOptionPane.showConfirmDialog(null, "Realmente excluir o registro?", "Aviso", JOptionPane.YES_NO_OPTION);
+							if (opcao == 0){
 							lblbtnENcerrar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
 							Fachada.getInstancia().ExcluirReg(c);
 							tabbedPane.setSelectedIndex(0);
+							}
 						}
 						@Override
 						public void mouseEntered(MouseEvent e) {
