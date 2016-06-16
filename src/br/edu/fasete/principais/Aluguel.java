@@ -7,13 +7,15 @@ public class Aluguel {
 	String dataEntre;
 	float preco;
 	float precoTotal;
+	String funcionario;
+	String pagamento;
 	boolean erro;
 	
 	
 	public Aluguel(){
 		
 	}
-	public Aluguel(int codAluguel, int codCliente, String dataLoca, String dataEntre, float preco, float precoTotal, boolean erro) {
+	public Aluguel(int codAluguel, int codCliente, String dataLoca, String dataEntre, float preco, float precoTotal,String funcionario,String pagamento, boolean erro) {
 		super();
 		this.codAluguel = codAluguel;
 		this.codCliente = codCliente;
@@ -21,7 +23,21 @@ public class Aluguel {
 		this.dataEntre = dataEntre;
 		this.preco = preco;
 		this.precoTotal = precoTotal;
+		this.funcionario = funcionario;
+		this.pagamento = pagamento;
 		this.erro = erro;
+	}
+	public String getPagamento() {
+		return pagamento;
+	}
+	public void setPagamento(String pagamento) {
+		this.pagamento = pagamento;
+	}
+	public String getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(String funcionario) {
+		this.funcionario = funcionario;
 	}
 	public int getCodAluguel() {
 		return codAluguel;

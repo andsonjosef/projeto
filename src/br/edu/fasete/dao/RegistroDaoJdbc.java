@@ -271,13 +271,14 @@ JOptionPane.showMessageDialog(null,e);
 	public void InserirRegistro(Aluguel a,Funcionario f) {		   
 		try {											  
 			PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal,funcionario) values (?,?,?,?,?,?)") ;
+			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal,funcionario,pagamento) values (?,?,?,?,?,?,?)") ;
 				 stmt.setInt(1, a.getCodCliente());
 				 stmt.setString(2, a.getDataLoca());
 				 stmt.setString(3,a.getDataEntre());
 				 stmt.setFloat(4,a.getPreco());
 				 stmt.setFloat(5, a.getPrecoTotal());
 				 stmt.setString(6,f.getLogin());
+				 stmt.setString(7, a.getPagamento());
 				 stmt.executeUpdate();
 				 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
 				 a.setErro(false);
@@ -449,6 +450,8 @@ JOptionPane.showMessageDialog(null,e);
 					a.setDataLoca(resultado.getString("dataLoca"));
 					a.setPrecoTotal(resultado.getFloat("precoFinal"));
 					a.setPreco(resultado.getFloat("preco"));
+					a.setFuncionario(resultado.getString("funcionario"));
+					a.setPagamento(resultado.getString("pagamento"));
 				}
 			
 		}catch(SQLException e){

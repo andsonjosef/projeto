@@ -7,30 +7,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.CodeSource;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-
 import br.edu.fasete.principais.Funcionario;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.HeadlessException;
-
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -285,7 +277,7 @@ public class Principal extends JFrame {
 	menuRegistro.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+			janelaRegistro.logField.setText(texto1);
 			desktop.add(janelaRegistro);
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){

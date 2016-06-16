@@ -29,11 +29,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class JAluguel extends JInternalFrame {
 	/**
@@ -80,7 +80,7 @@ public class JAluguel extends JInternalFrame {
 	private JTextField precoFieldFim;
 	java.util.Date x;
 	JTextField funcField;
-	private JTextField textField;
+	private JTextField funcioField;
 	
 	/**
 	 * Launch the application.
@@ -103,7 +103,8 @@ public class JAluguel extends JInternalFrame {
 	 * Create the frame.
 	 */
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JAluguel() {
 		getContentPane().setBackground(Color.DARK_GRAY);
 		
@@ -602,7 +603,7 @@ public class JAluguel extends JInternalFrame {
 										
 										}
 										*/
-										
+										funcioField.setText(funcField.getText());
 										nomeField2.setText(c.getNome());
 										carregarTabelaRoupaLista();
 										Fachada.getInstancia().SomaPreco(a);
@@ -706,14 +707,14 @@ public void mouseClicked(MouseEvent e) {
 									}
 									
 								});
-								editPanel.setLayout(new MigLayout("", "[115px][30px][115px][30px][115px][30px][115px][30px][115,grow][652px,grow]", "[14px][36.00px][465.00px][54.00px][20px][grow]"));
+								editPanel.setLayout(new MigLayout("", "[115px][30px][115px][30px][115px][30px][115px][30px][115,grow][30][115,grow][652px,grow]", "[14px][36.00px][465.00px][54.00px][20px][grow]"));
 								
 								
 								
 								
 								tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 								JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
-								editPanel.add(scrollPaneRoupasele, "cell 0 2 10 1,grow");
+								editPanel.add(scrollPaneRoupasele, "cell 0 2 12 1,grow");
 								scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 								});
 								
@@ -727,7 +728,7 @@ public void mouseClicked(MouseEvent e) {
 								nomeField2 = new JTextField();
 								nomeField2.setEditable(false);
 								nomeField2.setColumns(10);
-								editPanel.add(nomeField2, "cell 0 1 10 1,growx,aligny top");
+								editPanel.add(nomeField2, "cell 0 1 12 1,growx,aligny top");
 								
 								JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
 								lblDataDeLocao.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -792,11 +793,16 @@ public void mouseClicked(MouseEvent e) {
 									}
 								});
 								
-								textField = new JTextField();
-								editPanel.add(textField, "cell 8 4,grow");
-								textField.setColumns(10);
+								funcioField = new JTextField();
+								funcioField.setEditable(false);
+								editPanel.add(funcioField, "cell 8 4,grow");
+								funcioField.setColumns(10);
+								
+								JComboBox pagamentoBox = new JComboBox();
+								pagamentoBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
+								editPanel.add(pagamentoBox, "cell 10 4,grow");
 								lblbtnVoltar2.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/VOLTAR1.png")));
-								editPanel.add(lblbtnVoltar2, "flowx,cell 9 4,alignx right");
+								editPanel.add(lblbtnVoltar2, "flowx,cell 11 4,alignx right");
 								
 								JLabel lblbtnsalvar = new JLabel("");
 								lblbtnsalvar.addMouseListener(new MouseAdapter() {
@@ -821,6 +827,7 @@ public void mouseClicked(MouseEvent e) {
 											i++;
 										}
 										
+										a.setPagamento(pagamentoBox.getSelectedItem().toString());
 										a.setCodCliente(c.getCodCliente());
 										a.setDataLoca(dataLoca.getText());
 										a.setDataEntre(DataDevo.getText());
@@ -849,7 +856,7 @@ public void mouseClicked(MouseEvent e) {
 									}
 								});
 								lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar1.png")));
-								editPanel.add(lblbtnsalvar, "cell 9 4,alignx right");
+								editPanel.add(lblbtnsalvar, "cell 11 4,alignx right");
 					tabelaCategoria.addMouseListener(new MouseAdapter() {
 						
 						

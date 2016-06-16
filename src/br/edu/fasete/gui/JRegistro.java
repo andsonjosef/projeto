@@ -2,7 +2,6 @@ package br.edu.fasete.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,11 +29,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class JRegistro extends JInternalFrame {
 	/**
@@ -80,6 +79,10 @@ public class JRegistro extends JInternalFrame {
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
 	java.util.Date x;
+	private JTextField funcField;
+	private JTextField pagamentoField;
+	private JTextField funcioField2;
+	public JTextField logField;
 	
 	/**
 	 * Launch the application.
@@ -103,7 +106,7 @@ public class JRegistro extends JInternalFrame {
 	 * Create the frame.
 	 */
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"rawtypes", "unchecked" })
 	public JRegistro() {
 		 
 		getContentPane().setBackground(Color.DARK_GRAY);
@@ -229,8 +232,8 @@ public class JRegistro extends JInternalFrame {
 		
 		tabbedPane.addTab("Registros abertos", null, cadast, null);
 		tabbedPane.setEnabledAt(0, true);
-		cadast.setLayout(new MigLayout("", "[101.00px][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][30px][47.00px][30px][51.00px][30px][54.00px][30px][58.00px][25px][61.00px]"));
-		
+		cadast.setLayout(new MigLayout("", "[101.00px,grow][31px][407px][31px][13px][28px][181px][34px][373px,grow]", "[253px][51.00px][30px][47.00px][30px][51.00px][30px][54.00px][30px][58.00px][25px][61.00px]"));
+		JComboBox pagamentoBox = new JComboBox();
 		JLabel labelnome = new JLabel("Nome");
 		labelnome.setForeground(Color.WHITE);
 		labelnome.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -242,18 +245,22 @@ public class JRegistro extends JInternalFrame {
 				cadast.add(lblNumero, "cell 6 7,alignx left,aligny bottom");
 				
 				numeroField = new JTextField();
+				numeroField.setEditable(false);
 				numeroField.setFont(new Font("Dialog", Font.PLAIN, 15));
 				cadast.add(numeroField, "cell 6 8 3 1,grow");
 				numeroField.setColumns(10);
 				nomeField = new JTextField();
+				nomeField.setEditable(false);
 				nomeField.setFont(new Font("Dialog", Font.PLAIN, 15));
 				cadast.add(nomeField, "cell 0 2 9 1,grow");
 				nomeField.setColumns(10);
 				cpfField = new JFormattedTextField();
+				cpfField.setEditable(false);
 				cpfField.setFont(new Font("Dialog", Font.PLAIN, 15));
 				cadast.add(cpfField, "cell 0 4 5 1,grow");
 				
 					telefoneField = new JFormattedTextField();
+					telefoneField.setEditable(false);
 					telefoneField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(telefoneField, "cell 6 10 3 1,grow");
 					
@@ -264,6 +271,7 @@ public class JRegistro extends JInternalFrame {
 					cadast.add(lblCpf, "cell 0 3,alignx left,aligny bottom");
 					
 					rgField = new JTextField();
+					rgField.setEditable(false);
 					rgField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(rgField, "cell 6 4 3 1,grow");
 					rgField.setColumns(10);
@@ -284,6 +292,7 @@ public class JRegistro extends JInternalFrame {
 					cadast.add(lblEndereo, "cell 0 7,alignx left,aligny bottom");
 					
 					enderecoField = new JTextField();
+					enderecoField.setEditable(false);
 					enderecoField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(enderecoField, "cell 0 8 5 1,grow");
 					enderecoField.setColumns(10);
@@ -294,6 +303,7 @@ public class JRegistro extends JInternalFrame {
 					cadast.add(lblBairro, "cell 0 9,alignx left,aligny bottom");
 					
 					bairroField = new JTextField();
+					bairroField.setEditable(false);
 					bairroField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(bairroField, "cell 0 10 5 1,grow");
 					bairroField.setColumns(10);
@@ -309,11 +319,13 @@ public class JRegistro extends JInternalFrame {
 					cadast.add(lblEstado, "cell 6 5,alignx left,aligny bottom");
 					
 					cidadeField = new JTextField();
+					cidadeField.setEditable(false);
 					cidadeField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(cidadeField, "cell 0 6 5 1,grow");
 					cidadeField.setColumns(10);
 					
 					estadoField = new JTextField();
+					estadoField.setEditable(false);
 					estadoField.setFont(new Font("Dialog", Font.PLAIN, 15));
 					cadast.add(estadoField, "cell 6 6 3 1,grow");
 					estadoField.setColumns(10);
@@ -331,6 +343,7 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					tabelaCategoria = new JTable(new ClienteTableModel());
+					tabelaCategoria.setCellSelectionEnabled(true);
 					tabelaCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
 					tabelaCategoria.addMouseListener(new MouseAdapter() {
 						public void mouseReleased(MouseEvent arg0) {
@@ -366,6 +379,10 @@ public class JRegistro extends JInternalFrame {
 					JScrollPane scrollPane = new JScrollPane(tabelaCategoria);
 					cadast.add(scrollPane, "cell 0 0 9 1,grow");
 					
+					logField = new JTextField();
+					cadast.add(logField, "cell 0 11,alignx center");
+					logField.setColumns(10);
+					logField.setVisible(false);
 					JLabel label = new JLabel("");
 					label.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
 					cadast.add(label, "flowx,cell 8 11,alignx right");
@@ -383,6 +400,8 @@ public class JRegistro extends JInternalFrame {
 							DataDevo.setText(a.getDataEntre());
 							precoFieldal.setText(""+a.getPreco());
 							precoFieldFim.setText(""+a.getPrecoTotal());
+							funcField.setText(a.getFuncionario());
+							pagamentoField.setText(a.getPagamento());
 							tabbedPane.setSelectedIndex(1);
 						}
 						@Override
@@ -407,6 +426,7 @@ public class JRegistro extends JInternalFrame {
 					
 					///
 					tabelaRoupaAluguel = new JTable(new RoupaTableModel());
+					tabelaRoupaAluguel.setCellSelectionEnabled(true);
 					tabelaRoupaAluguel.addMouseListener(new MouseAdapter() {
 						public void mouseReleased(MouseEvent arg0) {
 							srow = tabelaRoupaAluguel.getSelectedRow();
@@ -416,14 +436,14 @@ public class JRegistro extends JInternalFrame {
 						}
 						
 					});
-					editPanel.setLayout(new MigLayout("", "[115px][30px][132px][30px][115px][30px][115px][45px][652px,grow]", "[14px][36.00px][547.00px][54.00px][20px][80.00px,grow]"));
+					editPanel.setLayout(new MigLayout("", "[115px][30px][132px][30px][115px][30px][115px][30px][115][30][115,grow][652px,grow]", "[14px][36.00px][547.00px][54.00px][20px][80.00px,grow]"));
 					
 					
 					
 					
 					tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
-					editPanel.add(scrollPaneRoupasele, "cell 0 2 9 1,grow");
+					editPanel.add(scrollPaneRoupasele, "cell 0 2 12 1,grow");
 					scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 					});
 					
@@ -437,14 +457,25 @@ public class JRegistro extends JInternalFrame {
 					nomeField2 = new JTextField();
 					nomeField2.setEditable(false);
 					nomeField2.setColumns(10);
-					editPanel.add(nomeField2, "cell 0 1 9 1,growx,aligny top");
+					editPanel.add(nomeField2, "cell 0 1 12 1,growx,aligny top");
 					
 					JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
 					lblDataDeLocao.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblDataDeLocao.setForeground(Color.WHITE);
 					editPanel.add(lblDataDeLocao, "cell 0 3,alignx left,aligny bottom");
 					
+					JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio");
+					lblFuncionrio.setForeground(Color.WHITE);
+					lblFuncionrio.setFont(new Font("Dialog", Font.PLAIN, 15));
+					editPanel.add(lblFuncionrio, "cell 8 3,alignx left,aligny bottom");
+					
+					JLabel lblPagamento = new JLabel("Pagamento");
+					lblPagamento.setForeground(Color.WHITE);
+					lblPagamento.setFont(new Font("Dialog", Font.PLAIN, 15));
+					editPanel.add(lblPagamento, "cell 10 3,alignx left,aligny bottom");
+					
 					dataLoca = new JTextField();
+					dataLoca.setEditable(false);
 					editPanel.add(dataLoca, "cell 0 4,grow");
 					dataLoca.setColumns(10);
 					
@@ -454,6 +485,7 @@ public class JRegistro extends JInternalFrame {
 					editPanel.add(lblDataDeDevoluo, "cell 2 3,growx,aligny bottom");
 					
 					DataDevo = new JTextField();
+					DataDevo.setEditable(false);
 					editPanel.add(DataDevo, "cell 2 4,grow");
 					DataDevo.setColumns(10);
 					
@@ -463,6 +495,7 @@ public class JRegistro extends JInternalFrame {
 					precoFieldal.setColumns(10);
 					
 					precoFieldFim = new JTextField();
+					precoFieldFim.setEditable(false);
 					editPanel.add(precoFieldFim, "cell 6 4,grow");
 					precoFieldFim.setColumns(10);
 					
@@ -488,6 +521,7 @@ public class JRegistro extends JInternalFrame {
 							carregarTabelaRoupasele();
 							tabbedPane.setSelectedIndex(2);
 							Fachada.getInstancia().SomaPrecoEdi(a,c);
+							funcioField2.setText(logField.getText());
 							precoField2.setText(""+a.getPreco());
 							datadevoField2.setText(DataDevo.getText());
 							datalocaField2.setText(dataLoca.getText());
@@ -549,20 +583,59 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					
+					funcField = new JTextField();
+					funcField.setEditable(false);
+					editPanel.add(funcField, "cell 8 4,grow");
+					funcField.setColumns(10);
+					
+					pagamentoField = new JTextField();
+					pagamentoField.setEditable(false);
+					editPanel.add(pagamentoField, "cell 10 4,grow");
+					pagamentoField.setColumns(10);
+					
 					JLabel lblbtnInicio = new JLabel("");
 					lblbtnInicio.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/inicio1.png")));
-					editPanel.add(lblbtnInicio, "flowx,cell 8 4,alignx right,aligny bottom");
+					editPanel.add(lblbtnInicio, "flowx,cell 11 4,alignx right,aligny bottom");
 					lblbtnVoltar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/VOLTAR1.png")));
-					editPanel.add(lblbtnVoltar, "cell 8 4,alignx right,aligny bottom");
+					editPanel.add(lblbtnVoltar, "cell 11 4,alignx right,aligny bottom");
 					lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
-					editPanel.add(lblbtnExcluir, "cell 8 4,alignx right,aligny bottom");
+					editPanel.add(lblbtnExcluir, "cell 11 4,alignx right,aligny bottom");
 					lblbtnEditar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/editar1.png")));
-					editPanel.add(lblbtnEditar, "cell 8 4,alignx right,aligny bottom");
+					editPanel.add(lblbtnEditar, "cell 11 4,alignx right,aligny bottom");
 					
 					JPanel exibirpanel = new JPanel();
 					exibirpanel.setBackground(Color.DARK_GRAY);
 					tabbedPane.addTab("Editar registro", null, exibirpanel, null);
-					exibirpanel.setLayout(new MigLayout("", "[128px][42px][124px][168px][157.00px][32.00][495.00px,grow,trailing]", "[341.00px][23px][47.00px][30px][42.00px][42.00px][30px][55.00px,grow]"));
+					exibirpanel.setLayout(new MigLayout("", "[115][][115][][115][][115][][115,grow][40.00][115][495.00px,trailing]", "[459.00px][23px][55][20][55.00px,grow]"));
+					
+					JLabel lblbtnRemover = new JLabel("");
+					lblbtnRemover.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							lblbtnRemover.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/remover3.png")));
+							int linha = tabelaRoupasele.getSelectedRow();
+						    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
+						    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
+						    carregarTabelaRoupasele();
+						    carregarTabelaRoupa();
+						    Fachada.getInstancia().SomaPrecoEdi(a,c);
+						    carregarTabelaRoupasele();
+						    carregarTabelaRoupa();
+						    
+						    precoField2.setText(""+a.getPreco());
+						}
+						public void mouseEntered(MouseEvent arg0) {
+							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover2.png")));
+							
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
+						}
+						public void mouseReleased(MouseEvent e) {
+							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
+						}
+					});
 					
 					JLabel lblbtnAdicionar = new JLabel("");
 					lblbtnAdicionar.addMouseListener(new MouseAdapter() {
@@ -593,58 +666,9 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					lblbtnAdicionar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/Adicionar1.png")));
-					exibirpanel.add(lblbtnAdicionar, "cell 4 1,alignx right");
-					
-					JLabel lblbtnRemover = new JLabel("");
-					lblbtnRemover.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							lblbtnRemover.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/remover3.png")));
-							int linha = tabelaRoupasele.getSelectedRow();
-						    r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));  
-						    Fachada.getInstancia().ExcluirRoupaSeleEdi(r);
-						    carregarTabelaRoupasele();
-						    carregarTabelaRoupa();
-						    Fachada.getInstancia().SomaPrecoEdi(a,c);
-						    carregarTabelaRoupasele();
-						    carregarTabelaRoupa();
-						    
-						    precoField2.setText(""+a.getPreco());
-						}
-						public void mouseEntered(MouseEvent arg0) {
-							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover2.png")));
-							
-						}
-						@Override
-						public void mouseExited(MouseEvent e) {
-							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
-						}
-						public void mouseReleased(MouseEvent e) {
-							lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));
-						}
-					});
+					exibirpanel.add(lblbtnAdicionar, "cell 8 1,alignx right");
 					lblbtnRemover.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/remover1.png")));
-					exibirpanel.add(lblbtnRemover, "cell 6 1,alignx right");
-					
-					JLabel lblDataDeLocao_1 = new JLabel("Data de Loca\u00E7\u00E3o");
-					lblDataDeLocao_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-					lblDataDeLocao_1.setForeground(Color.WHITE);
-					exibirpanel.add(lblDataDeLocao_1, "cell 0 2,aligny bottom");
-					
-					JLabel lblModelo = new JLabel("Data de devolu\u00E7\u00E3o");
-					lblModelo.setForeground(Color.WHITE);
-					lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblModelo, "cell 6 2,growx,aligny bottom");
-					
-					datalocaField2 = new JTextField();
-					datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					datalocaField2.setColumns(10);
-					exibirpanel.add(datalocaField2, "cell 0 3 5 1,grow");
-					
-					datadevoField2 = new JTextField();
-					datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					datadevoField2.setColumns(10);
-					exibirpanel.add(datadevoField2, "cell 6 3,grow");
+					exibirpanel.add(lblbtnRemover, "cell 11 1,alignx right");
 					
 					
 					///
@@ -676,7 +700,7 @@ public class JRegistro extends JInternalFrame {
 					
 					tabelaRoupasele.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupaAluguel = new JScrollPane(tabelaRoupasele);
-					exibirpanel.add(scrollPaneRoupaAluguel, "cell 6 0,grow");
+					exibirpanel.add(scrollPaneRoupaAluguel, "cell 10 0 2 1,grow");
 					scrollPaneRoupaAluguel.addMouseListener(new MouseAdapter() {
 					});
 					
@@ -709,52 +733,53 @@ public class JRegistro extends JInternalFrame {
 					
 					tabelaRoupa_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupa = new JScrollPane(tabelaRoupa_1);
-					exibirpanel.add(scrollPaneRoupa, "cell 0 0 5 1,grow");
+					exibirpanel.add(scrollPaneRoupa, "cell 0 0 9 1,grow");
+					
+					JLabel lblDataDeLocao_1 = new JLabel("Data de Loca\u00E7\u00E3o");
+					lblDataDeLocao_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+					lblDataDeLocao_1.setForeground(Color.WHITE);
+					exibirpanel.add(lblDataDeLocao_1, "cell 0 2,aligny bottom");
+					
+					JLabel lblModelo = new JLabel("Data de devolu\u00E7\u00E3o");
+					lblModelo.setForeground(Color.WHITE);
+					lblModelo.setFont(new Font("Dialog", Font.PLAIN, 15));
+					exibirpanel.add(lblModelo, "cell 2 2,growx,aligny bottom");
 					
 					JLabel lblTamanho = new JLabel("Pre\u00E7o");
 					lblTamanho.setForeground(Color.WHITE);
 					lblTamanho.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblTamanho, "cell 0 5,growx,aligny bottom");
+					exibirpanel.add(lblTamanho, "cell 4 2,growx,aligny bottom");
 					
 					JLabel lblGenero = new JLabel("Pre\u00E7o final");
 					lblGenero.setForeground(Color.WHITE);
 					lblGenero.setFont(new Font("Dialog", Font.PLAIN, 15));
-					exibirpanel.add(lblGenero, "cell 6 5,growx,aligny bottom");
+					exibirpanel.add(lblGenero, "cell 6 2,growx,aligny bottom");
+					
+					JLabel lblFuncionrio_1 = new JLabel("Funcion\u00E1rio");
+					lblFuncionrio_1.setForeground(Color.WHITE);
+					lblFuncionrio_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+					exibirpanel.add(lblFuncionrio_1, "cell 10 2,aligny bottom");
+					
+					datalocaField2 = new JTextField();
+					datalocaField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					datalocaField2.setColumns(10);
+					exibirpanel.add(datalocaField2, "cell 0 3,grow");
+					
+					datadevoField2 = new JTextField();
+					datadevoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
+					datadevoField2.setColumns(10);
+					exibirpanel.add(datadevoField2, "cell 2 3,grow");
 					
 					precoField2 = new JTextField();
 					precoField2.setEditable(false);
 					precoField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precoField2.setColumns(10);
-					exibirpanel.add(precoField2, "cell 0 6 5 1,grow");
+					exibirpanel.add(precoField2, "cell 4 3,grow");
 					
 					precofimField2 = new JTextField();
 					precofimField2.setFont(new Font("Dialog", Font.PLAIN, 15));
 					precofimField2.setColumns(10);
-					exibirpanel.add(precofimField2, "cell 6 6,grow");
-					
-					JLabel lblbtncancelar = new JLabel("");
-					lblbtncancelar.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent arg0) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
-							tabbedPane.setSelectedIndex(1);
-						}
-												
-						@Override
-						public void mouseEntered(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
-						}
-						@Override
-						public void mouseExited(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
-						}
-						@Override
-						public void mouseReleased(MouseEvent e) {
-							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
-						}
-					});
-					lblbtncancelar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/cancelar1.png")));
-					exibirpanel.add(lblbtncancelar, "flowx,cell 6 7");
+					exibirpanel.add(precofimField2, "cell 6 3,grow");
 					
 					JLabel lblbtnsalvar = new JLabel("");
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
@@ -783,7 +808,8 @@ public class JRegistro extends JInternalFrame {
 								Fachada.getInstancia().dispinibilidade(r);
 								i++;
 							}
-							
+							 f.setLogin(funcioField2.getText());
+							 a.setPagamento(pagamentoBox.getSelectedItem().toString());
 							a.setCodCliente(c.getCodCliente());
 							a.setDataLoca(datalocaField2.getText());
 							a.setDataEntre(datadevoField2.getText());
@@ -812,6 +838,40 @@ public class JRegistro extends JInternalFrame {
 						}
 					});
 					
+					JLabel lblbtncancelar = new JLabel("");
+					lblbtncancelar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar3.png")));
+							tabbedPane.setSelectedIndex(1);
+						}
+												
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar2.png")));
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+						}
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							lblbtncancelar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/cancelar1.png")));
+						}
+					});
+					
+				
+					pagamentoBox.setFont(new Font("Dialog", Font.PLAIN, 15));
+					pagamentoBox.setModel(new DefaultComboBoxModel(new String[] {"  \u00C0 vista", "  2 vezes"}));
+					exibirpanel.add(pagamentoBox, "cell 8 3,grow");
+					
+					funcioField2 = new JTextField();
+					funcioField2.setEditable(false);
+					exibirpanel.add(funcioField2, "cell 10 3,grow");
+					funcioField2.setColumns(10);
+					lblbtncancelar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/cancelar1.png")));
+					exibirpanel.add(lblbtncancelar, "flowx,cell 11 3");
+					
 					JLabel lblbtnENcerrar = new JLabel("");
 					lblbtnENcerrar.addMouseListener(new MouseAdapter() {
 						@Override
@@ -835,9 +895,9 @@ public class JRegistro extends JInternalFrame {
 						
 					});
 					lblbtnENcerrar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir1.png")));
-					exibirpanel.add(lblbtnENcerrar, "cell 6 7");
+					exibirpanel.add(lblbtnENcerrar, "cell 11 3");
 					lblbtnsalvar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/salvar1.png")));
-					exibirpanel.add(lblbtnsalvar, "cell 6 7");
+					exibirpanel.add(lblbtnsalvar, "cell 11 3");
 					scrollPaneRoupa.addMouseListener(new MouseAdapter() {
 					});
 					
