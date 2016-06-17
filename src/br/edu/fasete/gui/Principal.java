@@ -499,6 +499,7 @@ public class Principal extends JFrame {
 			if(janelaLixeira.isShowing()==true){
 				janelaLixeira.carregarTabela();
 				janelaLixeira.carregarTabelaRoupa();
+				janelaLixeira.carregarTabela3();
 				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));

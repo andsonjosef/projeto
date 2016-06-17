@@ -140,8 +140,8 @@ public void dispinibilidade( Roupa r){
 public void disponivel( Roupa r){
 	cadastroRegistro.disponivel(r);
 }
-public void ExcluirReg(Cliente c){
-	cadastroRegistro.ExcluirReg(c);
+public void ExcluirReg(Cliente c,Aluguel a ){
+	cadastroRegistro.ExcluirReg(c,a);
 }
 public void ExcluirRoupaSeleEdi(Roupa r){
 	cadastroRegistro.ExcluirRoupaSeleEdi(r);
@@ -233,5 +233,11 @@ public void RestaurarCliente(Cliente c){
 }
 public void RestaurarRoupa(Roupa r){
 	cadastroLixeira.RestaurarRoupa(r);
+}
+public Vector<Aluguel> ListarRegistrolixeira( Aluguel a){
+	return cadastroRegistro.ListarRegistrolixeira(a);
+}
+public Vector<Roupa> listarRoupaListaFimlixeira(Cliente c){
+	return cadastroRegistro.listarRoupaListaFimlixeira(c);
 }
 }

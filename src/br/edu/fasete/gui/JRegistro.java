@@ -435,17 +435,11 @@ public class JRegistro extends JInternalFrame {
 					});
 					editPanel.setLayout(new MigLayout("", "[115px][30px][132px][30px][115px][30px][115px][30px][115][30][115,grow][652px,grow]", "[14px][36.00px][547.00px][54.00px][20px][80.00px,grow]"));
 					
-					
-					
-					
 					tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
 					editPanel.add(scrollPaneRoupasele, "cell 0 2 12 1,grow");
 					scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 					});
-					
-					
-					
 					
 					JLabel nomelabel2 = new JLabel("Nome");
 					nomelabel2.setForeground(Color.WHITE);
@@ -480,16 +474,13 @@ public class JRegistro extends JInternalFrame {
 						editPanel.add(dataLoca, "cell 0 4,grow");
 						dataLoca.setColumns(10);
 						
-						
-						
-						
 					
 					} catch (ParseException e1) {
 						
 						e1.printStackTrace();
 					}
 					
-					
+	
 					JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
 					lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 					lblDataDeDevoluo.setForeground(Color.WHITE);
@@ -503,10 +494,7 @@ public class JRegistro extends JInternalFrame {
 						DataDevo.setEditable(false);
 						editPanel.add(DataDevo, "cell 2 4,grow");
 						DataDevo.setColumns(10);
-						
-						
-						
-						
+
 					
 					} catch (ParseException e1) {
 						
@@ -574,7 +562,7 @@ public class JRegistro extends JInternalFrame {
 							lblbtnExcluir.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
 							int opcao = JOptionPane.showConfirmDialog(null, "Realmente excluir o registro?", "Aviso", JOptionPane.YES_NO_OPTION);
 							if (opcao == 0){
-							Fachada.getInstancia().ExcluirReg(c);
+							Fachada.getInstancia().ExcluirReg(c,a);
 							tabbedPane.setSelectedIndex(0);
 							}
 						}
@@ -845,7 +833,7 @@ public class JRegistro extends JInternalFrame {
 								int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 								if (opcao == 0){
 							lblbtnsalvar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/salvar3.png")));
-							Fachada.getInstancia().ExcluirReg(c);
+							Fachada.getInstancia().ExcluirReg(c,a);
 							
 							int i= 0;	
 							int tamanho = tabelaRoupasele.getModel().getRowCount();
@@ -937,7 +925,7 @@ public class JRegistro extends JInternalFrame {
 							int opcao = JOptionPane.showConfirmDialog(null, "Realmente excluir o registro?", "Aviso", JOptionPane.YES_NO_OPTION);
 							if (opcao == 0){
 							lblbtnENcerrar.setIcon(new ImageIcon(JRegistro.class.getResource("/imagens/excluir3.png")));
-							Fachada.getInstancia().ExcluirReg(c);
+							Fachada.getInstancia().ExcluirReg(c,a);
 							tabbedPane.setSelectedIndex(0);
 							}
 						}

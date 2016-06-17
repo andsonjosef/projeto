@@ -11,7 +11,7 @@ public interface InterfaceCadastroRegistro {
 	public void BuscarRoupaEd(Roupa r);
 	public void dispinibilidade( Roupa r);
 	public void disponivel( Roupa r);
-	public void ExcluirReg(Cliente c);
+	public void ExcluirReg(Cliente c,Aluguel a );
 	public void ExcluirRoupaSeleEdi(Roupa r);
 	public void InserirRegistro(Aluguel a, Funcionario f);
 	public void InserirRoupaEdi(Roupa r,Cliente c);
@@ -21,6 +21,8 @@ public interface InterfaceCadastroRegistro {
 	public Vector<Roupa> listarRoupaListaFim(Cliente c);
 	public void ListarRegistro(Cliente c, Aluguel a);
 	public void SomaPrecoEdi(Aluguel a,Cliente c);
+	public Vector<Aluguel> ListarRegistrolixeira( Aluguel a);
+	public Vector<Roupa> listarRoupaListaFimlixeira(Cliente c);
 	
 
 

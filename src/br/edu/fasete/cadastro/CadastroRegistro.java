@@ -22,8 +22,8 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	public void dispinibilidade( Roupa r){
 		registroDao.dispinibilidade(r);
 	}
-	public void ExcluirReg(Cliente c){
-		registroDao.ExcluirReg(c);
+	public void ExcluirReg(Cliente c,Aluguel a ){
+		registroDao.ExcluirReg(c,a);
 	}
 	public void ExcluirRoupaSeleEdi(Roupa r){
 		registroDao.ExcluirRoupaSeleEdi(r);
@@ -54,5 +54,11 @@ public class CadastroRegistro implements InterfaceCadastroRegistro {
 	}
 	public void SomaPrecoEdi(Aluguel a,Cliente c){
 		registroDao.SomaPrecoEdi(a,c);
+	}
+	public Vector<Aluguel> ListarRegistrolixeira( Aluguel a){
+		return registroDao.ListarRegistrolixeira(a);
+	}
+	public Vector<Roupa> listarRoupaListaFimlixeira(Cliente c){
+		return registroDao.listarRoupaListaFimlixeira(c);
 	}
 }
