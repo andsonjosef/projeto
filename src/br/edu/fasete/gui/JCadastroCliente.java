@@ -39,7 +39,7 @@ public class JCadastroCliente extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	ClienteDaoJdbc cli = new ClienteDaoJdbc();
-	
+	String pesq;
 	int srow;
 	String svalueCpf;
 	String svalueName;
@@ -67,6 +67,7 @@ public class JCadastroCliente extends JInternalFrame {
 	private JFormattedTextField telefoneField;
 	private JFormattedTextField cpfField;
 	private JFormattedTextField cpfpesqField;
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -616,8 +617,13 @@ public class JCadastroCliente extends JInternalFrame {
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
-		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
-		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
+		exibirpanel.setLayout(new MigLayout("", "[156px,grow][95px][143px][14px][851px,grow]", "[][504px][30px][]"));
+		
+		JLabel lblClientesCadastrados = new JLabel("Clientes cadastrados");
+		lblClientesCadastrados.setForeground(Color.WHITE);
+		lblClientesCadastrados.setFont(new Font("Dialog", Font.PLAIN, 15));
+		exibirpanel.add(lblClientesCadastrados, "cell 0 0 3 1");
+		exibirpanel.add(scrollPane, "cell 0 1 5 1,grow");
 		
 		
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
@@ -687,10 +693,21 @@ public class JCadastroCliente extends JInternalFrame {
 				lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
 			}
 		});
+		
+		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				pesq =textField.getText();
+				carregarTabelanome();
+			}
+		});
+		exibirpanel.add(textField, "cell 0 2,grow");
+		textField.setColumns(10);
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
-		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
+		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
 		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));
-		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
+		exibirpanel.add(lblbtnEditar, "cell 4 2,alignx right,growy");
 		
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
@@ -1091,5 +1108,36 @@ public class JCadastroCliente extends JInternalFrame {
 		for(Cliente cat : Fachada.getInstancia().listartodosClientes()) {
 			tableModel.adicionarCategoria(cat);
 		}
+	}
+	public void carregarTabelanome() {
+		ClienteTableModel tableModel = (ClienteTableModel) tabelaCategoria.getModel();
+		tableModel.setRowCount(0);
+		for(Cliente cat : Fachada.getInstancia().listartodosClientespesq(pesq)) {
+			tableModel.adicionarCategoria(cat);
+		}
+	}
+	public void limparFields(){
+		nomeField.setText("");
+		cpfField.setText("");
+		rgField.setText("");
+		cidadeField.setText("");
+		estadoField.setText("");
+		enderecoField.setText("");
+		numeroField.setText("");
+		bairroField.setText("");
+		telefoneField.setText("");
+		nomeField2.setText("");
+		cpfField2.setText("");
+		rgField2.setText("");
+		cidadeField2.setText("");
+		estadoField2.setText("");
+		enderecoField2.setText("");
+		numeroField2.setText("");
+		bairroField2.setText("");
+		telefoneField2.setText("");
+		pesquisarField.setText("");
+		cpfpesqField.setText("");
+		tabbedPane.setSelectedIndex(0);
+		
 	}
 }

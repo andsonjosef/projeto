@@ -37,5 +37,8 @@ public class CadastroCliente implements InterfaceCadastroCliente {
 	public Vector<Cliente> listartodosClientes(){
 		return clienteDao.listartodosClientes();
 	}
+	public Vector<Cliente> listartodosClientespesq(String pesq){
+		return clienteDao.listartodosClientespesq(pesq);
+	}
 
 }

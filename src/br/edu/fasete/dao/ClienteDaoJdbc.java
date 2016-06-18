@@ -80,7 +80,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 		 
 		 try{
 			 PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-						 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ?");
+						 .prepareStatement("SELECT * FROM loja.cliente WHERE cpf = ? ");
 			 stmt.setString(1, pesq);
 			 ResultSet rs = stmt.executeQuery();
 
@@ -237,7 +237,7 @@ ResultSet rs = stmt.executeQuery();
 	public Vector<Cliente> listarClientes() {
 		Vector<Cliente> lista = new Vector<Cliente>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente where registrado = 0 ");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente where registrado = 0 order by nome");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Cliente c = new Cliente();
@@ -262,7 +262,33 @@ ResultSet rs = stmt.executeQuery();
 	public Vector<Cliente> listartodosClientes() {
 		Vector<Cliente> lista = new Vector<Cliente>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente order by nome");
+			ResultSet resultado = stmt.executeQuery();
+			while(resultado.next()) {
+				Cliente c = new Cliente();
+				
+				c.setNome(resultado.getString("nome"));
+				c.setCPF(resultado.getString("CPF"));
+				c.setRG(resultado.getString("RG"));
+				c.setTelefone(resultado.getString("telefone"));
+				c.setEstado(resultado.getString("estado"));
+				c.setCidade(resultado.getString("cidade"));
+				c.setBairro(resultado.getString("bairro"));
+				c.setEndereco(resultado.getString("endereco"));
+				c.setNumero(resultado.getString("numero"));
+				c.setCodCliente(resultado.getInt("codCliente"));
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	public Vector<Cliente> listartodosClientespesq(String pesq) {
+		Vector<Cliente> lista = new Vector<Cliente>();
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Cliente where nome like ? order by nome ");
+			 stmt.setString(1, pesq + "%");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Cliente c = new Cliente();

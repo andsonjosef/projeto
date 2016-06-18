@@ -29,6 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
+import java.awt.Font;
 
 public class JLixeira extends JInternalFrame {
 	/**
@@ -51,6 +52,8 @@ public class JLixeira extends JInternalFrame {
 	private JTable tabelaCategoria2;
 	private JTable tabelaRoupa;
 	private JTable tabelaRoupa2;
+	JCadastroCliente jc = new JCadastroCliente();
+	JCadastroRoupa jr = new JCadastroRoupa();
 	
 	/**
 	 * Launch the application.
@@ -204,8 +207,13 @@ public class JLixeira extends JInternalFrame {
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Clientes", null, exibirpanel, null);
-		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
-		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
+		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[][504px][47px]"));
+		
+		JLabel lblClientesExcluidos = new JLabel("Clientes excluidos");
+		lblClientesExcluidos.setForeground(Color.WHITE);
+		lblClientesExcluidos.setFont(new Font("Dialog", Font.PLAIN, 15));
+		exibirpanel.add(lblClientesExcluidos, "cell 0 0");
+		exibirpanel.add(scrollPane, "cell 0 1 5 1,grow");
 		
 		
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
@@ -217,8 +225,12 @@ public class JLixeira extends JInternalFrame {
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja restaurar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().RestaurarCliente(c);
-					JCadastroCliente janelaCliente = new JCadastroCliente();
-					janelaCliente.carregarTabela();
+				
+					jc.carregarTabela();
+					carregarTabela();
+					carregarTabelaRoupa();
+					carregarTabela2();
+					carregarTabela3();
 				
 			} else {
 				   
@@ -268,9 +280,9 @@ public class JLixeira extends JInternalFrame {
 				}
 			});
 			lblbtnExcluir.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/excluir1.png")));
-			exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
+			exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
 			lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar1.png")));
-			exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
+			exibirpanel.add(lblbtnEditar, "cell 4 2,alignx right,growy");
 		
 		tabelaRoupa2 = new JTable(new RoupaTableModel());
 		tabelaRoupa2.addMouseListener(new MouseAdapter() {
@@ -337,8 +349,13 @@ public class JLixeira extends JInternalFrame {
 		tabbedPane.addTab("Roupas", null, cadast, null);
 		tabbedPane.setBackgroundAt(1, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(1, true);
-		cadast.setLayout(new MigLayout("", "[1075px,grow]", "[504px][70px]"));
-		cadast.add(scrollPane_1, "cell 0 0,grow");
+		cadast.setLayout(new MigLayout("", "[1075px,grow]", "[][504px][70px]"));
+		
+		JLabel lblRoupasExcluidas = new JLabel("Roupas excluidas");
+		lblRoupasExcluidas.setForeground(Color.WHITE);
+		lblRoupasExcluidas.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblRoupasExcluidas, "cell 0 0");
+		cadast.add(scrollPane_1, "cell 0 1,grow");
 		
 		JLabel lblbtnExccluir2 = new JLabel("");
 		lblbtnExccluir2.addMouseListener(new MouseAdapter() {
@@ -368,21 +385,26 @@ public class JLixeira extends JInternalFrame {
 			}
 		});
 		lblbtnExccluir2.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/excluir1.png")));
-		cadast.add(lblbtnExccluir2, "flowx,cell 0 1,alignx right,growy");
+		cadast.add(lblbtnExccluir2, "flowx,cell 0 2,alignx right,growy");
 		
 		JButton btnRestaurar = new JButton("Restaurar");
 		btnRestaurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				jr.carregarTabela();
 				r.setCodRoupa(sValueCode);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja Restaurar " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 					Fachada.getInstancia().RestaurarRoupa(r);
-					carregarTabela();} else { 
+					carregarTabela();
+					carregarTabelaRoupa();
+					carregarTabela2();
+					carregarTabela3();
+					} else { 
 						
 					}
 			}
 		});
-		cadast.add(btnRestaurar, "cell 0 1,alignx left,aligny center");
+		cadast.add(btnRestaurar, "cell 0 2,alignx left,aligny center");
 		
 		cadast.addKeyListener(new KeyAdapter() {
 			@Override
@@ -396,12 +418,12 @@ public class JLixeira extends JInternalFrame {
 			}
 		});
 		
-		JPanel editPanel = new JPanel();
-		editPanel.setBackground(Color.DARK_GRAY);
-		tabbedPane.addTab("Registros", null, editPanel, null);
-		editPanel.setLayout(null);
-		editPanel.add(scrollPane2);
-		editPanel.add(scrollPane3);
+		//JPanel editPanel = new JPanel();
+	//	editPanel.setBackground(Color.DARK_GRAY);
+		//tabbedPane.addTab("Registros", null, editPanel, null);
+	//	editPanel.setLayout(null);
+		//editPanel.add(scrollPane2);
+		//editPanel.add(scrollPane3);
 		
 		try {
 			MaskFormatter mascara = new MaskFormatter("(##)####-####");

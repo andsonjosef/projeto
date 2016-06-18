@@ -641,8 +641,13 @@ public class JFuncionario extends JInternalFrame {
 		JPanel exibirpanel = new JPanel();
 		exibirpanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Exibir funcionários", null, exibirpanel, null);
-		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[504px][47px]"));
-		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
+		exibirpanel.setLayout(new MigLayout("", "[156px][95px][143px][14px][851px,grow]", "[][504px][47px]"));
+		
+		JLabel lblFuncionriosCadastrados = new JLabel("Funcion\u00E1rios cadastrados");
+		lblFuncionriosCadastrados.setForeground(Color.WHITE);
+		lblFuncionriosCadastrados.setFont(new Font("Dialog", Font.PLAIN, 15));
+		exibirpanel.add(lblFuncionriosCadastrados, "cell 0 0 4 1");
+		exibirpanel.add(scrollPane, "cell 0 1 5 1,grow");
 		
 		
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
@@ -715,9 +720,9 @@ public class JFuncionario extends JInternalFrame {
 			}
 		});
 		lblbtnExcluir.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/excluir1.png")));
-		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,growy");
+		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
 		lblbtnEditar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/editar1.png")));
-		exibirpanel.add(lblbtnEditar, "cell 4 1,alignx right,growy");
+		exibirpanel.add(lblbtnEditar, "cell 4 2,alignx right,growy");
 		
 		JPanel editPanel = new JPanel();
 		editPanel.setBackground(Color.DARK_GRAY);
@@ -1137,5 +1142,33 @@ public class JFuncionario extends JInternalFrame {
 		for(Funcionario cat : Fachada.getInstancia().listarFuncionario()) {
 			tableModel.adicionarCategoria(cat);
 		}
+	}
+	public void limparFields(){
+		nomeField.setText("");
+		cpfField.setText("");
+		rgField.setText("");
+		cidadeField.setText("");
+		estadoField.setText("");
+		enderecoField.setText("");
+		numeroField.setText("");
+		bairroField.setText("");
+		telefoneField.setText("");
+		nomeField2.setText("");
+		cpfField2.setText("");
+		rgField2.setText("");
+		cidadeField2.setText("");
+		estadoField2.setText("");
+		enderecoField2.setText("");
+		numeroField2.setText("");
+		bairroField2.setText("");
+		telefoneField2.setText("");
+		pesquisarField.setText("");
+		cpfpesqField.setText("");
+		loginField.setText("");
+		senhaField.setText("");
+		loginField2.setText("");
+		senhaField2.setText("");
+		tabbedPane.setSelectedIndex(0);
+		
 	}
 }

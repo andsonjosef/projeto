@@ -460,8 +460,13 @@ public class JCadastroRoupa extends JInternalFrame {
 		exibirpanel.setBackground(Color.DARK_GRAY);
 		tabbedPane.addTab("Exibir Roupas", null, exibirpanel, null);
 		tabbedPane.setEnabledAt(1, true);
-		exibirpanel.setLayout(new MigLayout("", "[146px][62px][124px][58px][849px,grow]", "[504px][82.00px]"));
-		exibirpanel.add(scrollPane, "cell 0 0 5 1,grow");
+		exibirpanel.setLayout(new MigLayout("", "[146px][62px][124px][58px][849px,grow]", "[][504px][82.00px]"));
+		
+		JLabel lblClientesCadastrados = new JLabel("Roupas cadastrados");
+		lblClientesCadastrados.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblClientesCadastrados.setForeground(Color.WHITE);
+		exibirpanel.add(lblClientesCadastrados, "cell 0 0");
+		exibirpanel.add(scrollPane, "cell 0 1 5 1,grow");
 		
 		
 		lblbtnExcluir.addMouseListener(new MouseAdapter() {
@@ -490,7 +495,7 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/excluir1.png")));
-		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 1,alignx right,aligny bottom");
+		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,aligny bottom");
 		
 	
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
@@ -527,7 +532,7 @@ public class JCadastroRoupa extends JInternalFrame {
 			}
 		});
 		lblbtnEditar.setIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/confirmarv1.png")));
-		exibirpanel.add(lblbtnEditar, "cell 4 1,aligny bottom");
+		exibirpanel.add(lblbtnEditar, "cell 4 2,aligny bottom");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
@@ -813,5 +818,24 @@ public class JCadastroRoupa extends JInternalFrame {
 		for(Roupa cat : Fachada.getInstancia().listartodasRoupas()) {
 			tableModel.adicionarCategoria(cat);
 		}
+	}
+	
+	public void limparFields(){
+		tipoField.setText("");
+		ModeloField.setText("");
+		precoField.setText("");
+		generoField.setText("");
+		tamanhoField.setText("");
+		corField.setText("");
+		tipoField2.setText("");
+		modeloField2.setText("");
+		precoField2.setText("");
+		corField2.setText("");
+		precoField2.setText("");
+		tamanhoField2.setText("");
+		generoField2.setText("");
+		pesqField.setText("");
+		tabbedPane.setSelectedIndex(0);
+		
 	}
 }

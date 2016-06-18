@@ -40,4 +40,7 @@ public class CadastroRoupa implements InterfaceCadastroRoupa {
 	public Vector<Roupa> listartodasRoupas(){
 		return roupaDao.listartodasRoupas();
 	}
+	public Vector<Roupa> listartodasRoupascod(int pesq){
+		return roupaDao.listartodasRoupascod(pesq);
+	}
 }

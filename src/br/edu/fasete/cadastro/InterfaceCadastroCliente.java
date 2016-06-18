@@ -12,5 +12,6 @@ public interface InterfaceCadastroCliente {
 	 public void InserirCliente(Cliente c);
 	 public Vector<Cliente> listarClientes();
 	 public Vector<Cliente> listartodosClientes();
+	 public Vector<Cliente> listartodosClientespesq(String pesq);
 
 }

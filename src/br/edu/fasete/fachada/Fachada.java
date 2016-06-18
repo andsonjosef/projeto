@@ -79,6 +79,9 @@ public Vector<Cliente> listarClientes(){
 public Vector<Cliente> listartodosClientes(){
 	return cadastroCliente.listartodosClientes();
 }
+public Vector<Cliente> listartodosClientespesq(String pesq){
+	return cadastroCliente.listartodosClientespesq(pesq);
+}
 
 //---------------Roupa-----------------------
 public void AtualizarRoupa(Roupa r){
@@ -99,6 +102,9 @@ public Vector<Roupa> listarRoupas(){
 }
 public Vector<Roupa> listartodasRoupas(){
 	return cadastroRoupa.listartodasRoupas();
+}
+public Vector<Roupa> listartodasRoupascod(int pesq){
+	return cadastroRoupa.listartodasRoupascod(pesq);
 }
 
 //---------------Aluguel-----------------------

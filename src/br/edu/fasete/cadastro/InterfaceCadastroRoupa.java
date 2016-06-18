@@ -10,5 +10,6 @@ public interface InterfaceCadastroRoupa {
 	public void InserirRoupa(Roupa r); 
 	public Vector<Roupa> listarRoupas();
 	public Vector<Roupa> listartodasRoupas();
+	public Vector<Roupa> listartodasRoupascod(int pesq);
 
 }

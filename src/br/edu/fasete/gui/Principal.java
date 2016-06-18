@@ -146,15 +146,19 @@ public class Principal extends JFrame {
 				desktop.add(janelaCliente);
 				janelaCliente.setVisible(true);
 				if(janelaCliente.isShowing()==true){
+					janelaCliente.carregarTabela();
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
 					janelaRoupa.dispose();
 					janelaAluguel.dispose();
 					janelaRegistro.dispose();
 					janelaFuncionario.dispose();
+					janelaCliente.limparFields();
 					
 				}
 				try {
@@ -177,14 +181,18 @@ public class Principal extends JFrame {
 				desktop.add(janelaRoupa);
 				janelaRoupa.setVisible(true);
 				if(janelaRoupa.isFocusable()==true){
+					janelaRoupa.carregarTabela();
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu3.png")));
 					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
 					janelaCliente.dispose();
 					janelaAluguel.dispose();
 					janelaRegistro.dispose();
+					janelaRoupa.limparFields();
 				}
 				try {
 					janelaRoupa.setMaximum(true);
@@ -227,14 +235,20 @@ public class Principal extends JFrame {
 				janelaAluguel.funcField.setText(texto1);
 				if(janelaAluguel.isFocusable()==true){
 					janelaAluguel.carregarTabela();
+					janelaAluguel.carregarTabelaRoupa();
+					janelaAluguel.carregarTabelaRoupaLista();
+					janelaAluguel.carregarTabelaRoupasele();
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu3.png")));
 					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
 					janelaCliente.dispose();
 					janelaRoupa.dispose();
 					janelaRegistro.dispose();
+					janelaAluguel.limparFields();
 					
 				}
 				desktop.add(janelaAluguel);
@@ -285,14 +299,20 @@ public class Principal extends JFrame {
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){
 				janelaRegistro.carregarTabela();
+				janelaRegistro.carregarTabelaRoupa();
+				janelaRegistro.carregarTabelaRoupaLista();
+				janelaRegistro.carregarTabelaRoupasele();
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu3.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+				janelaLixeira.dispose();
 				janelaAluguel.dispose();
 				janelaRoupa.dispose();
 				janelaFuncionario.dispose();
+				janelaRegistro.limparFields();
 			}
 			
 			try {
@@ -364,10 +384,13 @@ public class Principal extends JFrame {
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+				janelaLixeira.dispose();
 				janelaRoupa.dispose();
 				janelaAluguel.dispose();
 				janelaRegistro.dispose();
 				janelaCliente.dispose();
+				janelaFuncionario.limparFields();
 				
 			}
 			try {
@@ -380,6 +403,21 @@ public class Principal extends JFrame {
 	
 	});
 	barraMenu.add(menuFuncionario);
+	menuBackup.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao3.png")));
+		}
+		public void mouseEntered(MouseEvent e) {
+			
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao2.png")));
+				
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+		}
+	});
 	menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 	
 	barraMenu.add(menuBackup);
@@ -505,11 +543,16 @@ public class Principal extends JFrame {
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
 				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu3.png")));
 				janelaRoupa.dispose();
 				janelaAluguel.dispose();
 				janelaRegistro.dispose();
 				janelaCliente.dispose();
 				janelaFuncionario.dispose();
+				janelaLixeira.carregarTabela();
+				janelaLixeira.carregarTabela2();
+				janelaLixeira.carregarTabela3();
+				janelaLixeira.carregarTabelaRoupa();
 				
 			}
 			try {
@@ -517,6 +560,21 @@ public class Principal extends JFrame {
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+			if(janelaLixeira.isShowing()==false){
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu2.png")));
+				}if(janelaRegistro.isShowing()==true){
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu3.png")));
+				}
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			if(janelaLixeira.isShowing()==false){
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+			}if(janelaLixeira.isShowing()==true){
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu3.png")));
 			}
 		}
 	});
@@ -535,12 +593,21 @@ public class Principal extends JFrame {
 	mnNewMenu.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-
+			mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu3.png")));
 				LoginFunc lg = new LoginFunc();
 				lg.setVisible(true);
 				dispose();
 				
 
+		}
+		public void mouseEntered(MouseEvent e) {	
+			mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu2.png")));
+		
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+		
+			mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu.png")));
 		}
 	});
 	mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu.png")));
