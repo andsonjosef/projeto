@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Principal extends JFrame {
 
@@ -585,7 +587,9 @@ public class Principal extends JFrame {
 	barraMenu.add(menuLixeiro);
 	
 	textField = new JTextField();
-	textField.setForeground(Color.BLACK);
+	textField.setHorizontalAlignment(SwingConstants.CENTER);
+	textField.setFont(new Font("Dialog", Font.PLAIN, 15));
+	textField.setForeground(Color.WHITE);
 	textField.setBackground(Color.LIGHT_GRAY);
 	textField.setEditable(false);
 	barraMenu.add(textField);

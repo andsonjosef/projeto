@@ -171,4 +171,25 @@ public class LoginDaoJdbc implements LoginDao {
 		
 	}
 	
+	public void buscarPerunta2(Funcionario f) {
+		  try {
+			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("select * from loja.login_root");
+			  
+			  
+			   ResultSet rs = stmt.executeQuery();
+			   
+			   while(rs.next()){
+				   f.setPergunta(rs.getString("pergunta"));
+			   }
+			   	  
+			 //JOptionPane.showMessageDialog(null,"Login Encontrado!");
+			  
+			 
+		  }catch(Exception es){
+				  JOptionPane.showMessageDialog(null,"erro!");
+		  }
+		
+	}
+	
 }

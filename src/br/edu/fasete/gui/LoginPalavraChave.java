@@ -27,7 +27,7 @@ public class LoginPalavraChave extends JFrame {
 	private JLabel lblPergunta;
 	private JTextField respostaField;
 	private JLabel labelResposta;
-	private JTextField perguntaField;
+	public JTextField perguntaField;
 	private JLabel label;
 
 	/**
@@ -64,6 +64,7 @@ public class LoginPalavraChave extends JFrame {
 		contentPane.add(lblPergunta, "cell 0 0,growx,aligny top");
 		
 		perguntaField = new JTextField();
+		perguntaField.setEditable(false);
 		perguntaField.setForeground(Color.WHITE);
 		perguntaField.setFont(new Font("Dialog", Font.PLAIN, 15));
 		contentPane.add(perguntaField, "cell 0 1 3 1,growx,aligny top");

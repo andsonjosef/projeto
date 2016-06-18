@@ -139,7 +139,10 @@ public class LoginAdm extends JFrame {
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Fachada.getInstancia().buscarPerunta2(f);
+				
 				LoginPalavraChave lpc = new LoginPalavraChave();
+				lpc.perguntaField.setText(f.getPergunta());
 				lpc.setVisible(true);
 				dispose();
 			}

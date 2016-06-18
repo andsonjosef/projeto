@@ -34,4 +34,7 @@ public class CadastroLogin implements InterfaceCadastroLogin {
 	public void buscarnRoot(Funcionario f){
 		loginDao.buscarnRoot(f);
 	}
+	public void buscarPerunta2(Funcionario f){
+		loginDao.buscarPerunta2(f);
+	}
 }

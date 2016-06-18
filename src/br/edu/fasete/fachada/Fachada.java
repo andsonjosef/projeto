@@ -223,7 +223,9 @@ public Funcionario buscarPergunta(Funcionario f){
 public void buscarnRoot(Funcionario f){
 	cadastroLogin.buscarnRoot(f);
 }
-
+public void buscarPerunta2(Funcionario f){
+	cadastroLogin.buscarPerunta2(f);
+}
 //-------------Lixeira-----------------
 
 
