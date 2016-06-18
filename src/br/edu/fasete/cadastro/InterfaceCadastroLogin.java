@@ -9,5 +9,7 @@ public interface InterfaceCadastroLogin {
 	public void inserirLogin(Funcionario f);
 	public void editarLogin(Funcionario f, String login, String senha);
 	public void editarPergunta(Funcionario f, String pergunta, String resposta);
+	public Funcionario buscarPergunta(Funcionario f);
+	public void buscarnRoot(Funcionario f);
 
 }

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class EditAdm extends JFrame {
@@ -56,6 +57,8 @@ public class EditAdm extends JFrame {
 		contentPane.add(lblLogin, "cell 0 0,aligny bottom");
 		
 		loginField = new JTextField();
+		loginField.setForeground(Color.WHITE);
+		loginField.setFont(new Font("Dialog", Font.PLAIN, 15));
 		contentPane.add(loginField, "cell 0 1,grow");
 		loginField.setColumns(10);
 		
@@ -89,6 +92,8 @@ public class EditAdm extends JFrame {
 		});
 		
 		senhaField = new JPasswordField();
+		senhaField.setForeground(Color.WHITE);
+		senhaField.setFont(new Font("Dialog", Font.PLAIN, 15));
 		contentPane.add(senhaField, "cell 0 3,grow");
 		
 		JLabel lblbtnEditar = new JLabel("");

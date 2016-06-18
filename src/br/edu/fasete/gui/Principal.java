@@ -26,6 +26,10 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Principal extends JFrame {
 
@@ -36,6 +40,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JPanel contentPane_1;
 	private JDesktopPane desktop;
+	private JDesktopPane desktop_1;
 	
 	
 	Funcionario f = new Funcionario();
@@ -57,6 +62,8 @@ public class Principal extends JFrame {
 	private final JMenu menuLixeiro = new JMenu("");
 	JTextField textField;
 	String texto1;
+	private final JLabel label = new JLabel("");
+	private final JLabel label_1 = new JLabel("......................");
 	
 	/**
 	 * Launch the application.
@@ -95,6 +102,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal(){
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagens/iconcloset.png")));
 		addMouseListener(new MouseAdapter() {
 			
 		});
@@ -501,7 +509,7 @@ public class Principal extends JFrame {
 
 				            /*NOTE: Creating Path Constraints for restoring*/
 				            String restorePath = "\""+caminho+"\"";
-				            JOptionPane.showMessageDialog(null, restorePath);
+				         
 				           
 				           
 
@@ -515,9 +523,9 @@ public class Principal extends JFrame {
 
 				            /*NOTE: processComplete=0 if correctly executed, will contain other values if not*/
 				            if (processComplete == 0) {
-				                JOptionPane.showMessageDialog(null, "Successfully restored from SQL : " );
+				                JOptionPane.showMessageDialog(null, "Restaurado com sucesso." );
 				            } else {
-				                JOptionPane.showMessageDialog(null, "Error at restoring");
+				                JOptionPane.showMessageDialog(null, "Erro ao restaurar");
 				            }
 
 
@@ -581,10 +589,15 @@ public class Principal extends JFrame {
 	menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
 	
 	barraMenu.add(menuLixeiro);
+	label_1.setForeground(Color.DARK_GRAY);
+	
+	barraMenu.add(label_1);
 	
 	textField = new JTextField();
-	textField.setForeground(Color.BLACK);
-	textField.setBackground(Color.LIGHT_GRAY);
+	textField.setHorizontalAlignment(SwingConstants.CENTER);
+	textField.setFont(new Font("Dialog", Font.PLAIN, 18));
+	textField.setForeground(Color.WHITE);
+	textField.setBackground(Color.DARK_GRAY);
 	textField.setEditable(false);
 	barraMenu.add(textField);
 	textField.setColumns(10);
@@ -619,9 +632,15 @@ public class Principal extends JFrame {
 	contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane_1);
 	contentPane_1.setLayout(new BorderLayout(0, 0));
-	desktop = new JDesktopPane();
-	contentPane_1.add(desktop);
-	desktop.setBackground(Color.DARK_GRAY);
+	desktop_1 = new JDesktopPane();
+	contentPane_1.add(desktop_1);
+	desktop_1.setBackground(Color.DARK_GRAY);
+	label.setForeground(Color.DARK_GRAY);
+	label.setBackground(Color.DARK_GRAY);
+	label.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Untitled-1.png")));
+	label.setBounds(996, -92, 959, 833);
+	
+	desktop_1.add(label);
 
 }	
 	public void func(Funcionario f){

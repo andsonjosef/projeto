@@ -704,6 +704,11 @@ public class JCadastroCliente extends JInternalFrame {
 		});
 		exibirpanel.add(textField, "cell 0 2,grow");
 		textField.setColumns(10);
+		
+		JLabel lblPesquisar = new JLabel("Pesquisar");
+		lblPesquisar.setForeground(Color.WHITE);
+		lblPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		exibirpanel.add(lblPesquisar, "cell 1 2,aligny bottom");
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
 		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
 		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));

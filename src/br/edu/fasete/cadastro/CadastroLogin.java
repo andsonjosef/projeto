@@ -28,4 +28,10 @@ public class CadastroLogin implements InterfaceCadastroLogin {
 	public void editarPergunta(Funcionario f, String pergunta, String resposta){
 		loginDao.editarPergunta(f, pergunta, resposta);
 	}
+	public Funcionario buscarPergunta(Funcionario f){
+		return loginDao.buscarPergunta(f);
+	}
+	public void buscarnRoot(Funcionario f){
+		loginDao.buscarnRoot(f);
+	}
 }

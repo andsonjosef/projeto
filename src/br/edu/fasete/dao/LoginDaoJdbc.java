@@ -126,5 +126,49 @@ public class LoginDaoJdbc implements LoginDao {
 		return lo;
 	}
 	
+	public Funcionario buscarPergunta(Funcionario f) {
+		Funcionario lo = new Funcionario();
+		  try {
+			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("select * from loja.login_root where pergunta like ? and resposta like ?");
+			   stmt.setString(1,f.getPergunta());
+			   stmt.setString(2,f.getRespsota());
+			   
+			   ResultSet rs = stmt.executeQuery();
+			   
+			   while(rs.next()){
+				   lo.setPergunta(rs.getString("pergunta"));
+				   lo.setRespsota(rs.getString("resposta"));
+			   }
+			   	  
+			  //JOptionPane.showMessageDialog(null,"Login Encontrado!");
+			  
+			 
+		  }catch(Exception es){
+				  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  }
+		return lo;
+	}
+	public void buscarnRoot(Funcionario f) {
+		  try {
+			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+			   .prepareStatement("select * from loja.login_root");
+			  
+			   
+			   ResultSet rs = stmt.executeQuery();
+			   
+			   while(rs.next()){
+				   f.setLogin(rs.getString("login"));
+				   f.setSenha(rs.getString("senha"));
+			   }
+			   	  
+			 //JOptionPane.showMessageDialog(null,"Login Encontrado!");
+			  
+			 
+		  }catch(Exception es){
+				  JOptionPane.showMessageDialog(null,"erro!");
+		  }
+		
+	}
 	
 }

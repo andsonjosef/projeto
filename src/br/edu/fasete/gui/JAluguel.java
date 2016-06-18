@@ -34,9 +34,6 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class JAluguel extends JInternalFrame {
 	/**
@@ -360,7 +357,9 @@ public class JAluguel extends JInternalFrame {
 								btnlblAvancar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
-
+										if(nomeField.getText().isEmpty()){
+											JOptionPane.showMessageDialog(null, "Selecione um Cliente.");
+										}else{
 										Fachada.getInstancia().limparTabela();
 										Fachada.getInstancia().BuscarRoupaEd(r);
 										Fachada.getInstancia().ListarRoupaEdi(r,c);
@@ -371,6 +370,8 @@ public class JAluguel extends JInternalFrame {
 										Fachada.getInstancia().BuscarClienteCPF(c, pesq);
 										
 										tabbedPane.setSelectedIndex(1);
+										
+										}
 									}
 									@Override
 									public void mouseEntered(MouseEvent arg0) {
@@ -678,12 +679,16 @@ public class JAluguel extends JInternalFrame {
 										
 										}
 										*/
+										if(tabelaRoupasele.getRowCount()==0){
+											JOptionPane.showMessageDialog(null, "Selecione alguma roupa.");
+										}else{
 										funcioField.setText(funcField.getText());
 										nomeField2.setText(c.getNome());
 										carregarTabelaRoupaLista();
 										Fachada.getInstancia().SomaPreco(a);
 										precoFieldal.setText(""+a.getPreco());
 										tabbedPane.setSelectedIndex(2);
+										}
 										
 										
 									}
@@ -932,12 +937,13 @@ public void mouseClicked(MouseEvent e) {
 								lblbtnsalvar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent e) {
+										if(dataLoca.getText().isEmpty()||DataDevo.getText().isEmpty()||precoFieldFim.getText().isEmpty()){
+											JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
+										}else{
 										int i= 0;	
 										int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
 										while(i<tamanho){
-											if(dataLoca.getText().isEmpty()||DataDevo.getText().isEmpty()||precoFieldFim.getText().isEmpty()){
-												JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
-											}else{
+										
 											lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar3.png")));
 											r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
 											r.setTipo((String) tabelaRoupaAluguel.getValueAt(i, 1));
