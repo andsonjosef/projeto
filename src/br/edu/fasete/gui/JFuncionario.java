@@ -197,12 +197,27 @@ public class JFuncionario extends JInternalFrame {
 		cadast.add(lblrgobri, "cell 11 2,alignx left,aligny bottom");
 		lblrgobri.setVisible(false);
 		
+		JLabel lblPreenchimentoObrigatrio = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblPreenchimentoObrigatrio.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblPreenchimentoObrigatrio.setForeground(Color.RED);
+		cadast.add(lblPreenchimentoObrigatrio, "cell 6 10,aligny bottom");
+		lblPreenchimentoObrigatrio.setVisible(false);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setForeground(Color.WHITE);
+		lblSenha.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblSenha, "cell 8 10,aligny bottom");
+		
+		JLabel lblPreenchimentoObrigatrio_1 = new JLabel("Preenchimento obrigat\u00F3rio");
+		lblPreenchimentoObrigatrio_1.setForeground(Color.RED);
+		lblPreenchimentoObrigatrio_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cadast.add(lblPreenchimentoObrigatrio_1, "cell 11 10,aligny bottom");
 		JLabel lblcidadeobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblcidadeobri.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblcidadeobri.setForeground(Color.RED);
 		cadast.add(lblcidadeobri, "cell 6 4,growx,aligny bottom");
 		lblcidadeobri.setVisible(false);
-		
+		lblPreenchimentoObrigatrio_1.setVisible(false);
 		JLabel lblestadoobri = new JLabel("Preenchimento obrigat\u00F3rio");
 		lblestadoobri.setForeground(Color.RED);
 		lblestadoobri.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -441,6 +456,16 @@ public class JFuncionario extends JInternalFrame {
 									lblnumobri.setVisible(false);
 
 								}
+							if(loginField.getText().isEmpty()){
+								lblPreenchimentoObrigatrio.setVisible(true);
+							}else{
+								lblPreenchimentoObrigatrio.setVisible(false);
+							}
+							if(senhaField.getText().isEmpty()){
+								lblPreenchimentoObrigatrio_1.setVisible(true);
+							}else{
+								lblPreenchimentoObrigatrio_1.setVisible(false);
+							}
 							f.setRegistrado(false);
 							f.setNome(nomeField.getText()); 
 							f.setCPF(cpfField.getText());
@@ -462,7 +487,7 @@ public class JFuncionario extends JInternalFrame {
 								while(rs.next()) {
 									 cpf = rs.getString("CPF");
 									 if(cpf != f.getCPF() && f.getCPF().length() == 14 ){
-										if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
+										if(loginField.getText().isEmpty()||senhaField.getText().isEmpty()||nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
 										}else{								 
 											  cpf = "";																   
 											  try {
@@ -562,10 +587,7 @@ public class JFuncionario extends JInternalFrame {
 					lblLogin.setForeground(Color.WHITE);
 					cadast.add(lblLogin, "cell 0 10,aligny bottom");
 					
-					JLabel lblSenha = new JLabel("Senha");
-					lblSenha.setForeground(Color.WHITE);
-					lblSenha.setFont(new Font("Dialog", Font.PLAIN, 15));
-					cadast.add(lblSenha, "cell 8 10,aligny bottom");
+					
 					
 					loginField = new JTextField();
 					cadast.add(loginField, "cell 0 11 7 1,grow");
@@ -935,6 +957,9 @@ public class JFuncionario extends JInternalFrame {
 		lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(loginField2.getText().isEmpty()||senhaField2.getText().isEmpty()||nomeField2.getText().isEmpty()||cpfField2.getText().isEmpty()||rgField2.getText().isEmpty()||telefoneField2.getText().isEmpty()||bairroField2.getText().isEmpty()||cidadeField2.getText().isEmpty()||estadoField2.getText().isEmpty()||numeroField2.getText().isEmpty()||enderecoField2.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
+				}else{
 				lblbtnSalvar.setIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/salvar3.png")));
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
@@ -952,6 +977,7 @@ public class JFuncionario extends JInternalFrame {
 				@SuppressWarnings("unused")
 				String cpf = f.getCPF();
 				Fachada.getInstancia().AtualizarFuncionario(f,svalueCpf);
+				}
 				}
 			}
 

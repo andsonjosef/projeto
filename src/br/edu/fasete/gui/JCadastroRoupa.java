@@ -719,27 +719,31 @@ public class JCadastroRoupa extends JInternalFrame {
 		JLabel lblbtnSalvar2 = new JLabel("");
 		lblbtnSalvar2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
-				if (opcao == 0){	
 				lblbtnSalvar2.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
-				r.setTipo(tipoField2.getText()); 
-				r.setModelo(modeloField2.getText());
-				r.setPreco(Float.parseFloat((precoField2.getText())));
-				r.setGenero(generoField2.getText());
-				r.setTamanho(tamanhoField2.getText());
-				r.setCor(corField2.getText());
-				r.setDisponibilidade(false);
-				Fachada.getInstancia().AtualizarRoupa(r);
-				tipoField2.setEditable(false);
-				modeloField2.setEditable(false);
-				precoField2.setEditable(false);
-				corField2.setEditable(false);
-				precoField2.setEditable(false);
-				tamanhoField2.setEditable(false);
-				generoField2.setEditable(false);
-				
+				if(tipoField2.getText().isEmpty()||modeloField2.getText().isEmpty()||precoField2.getText().isEmpty()||generoField2.getText().isEmpty()||tamanhoField2.getText().isEmpty()||corField2.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
+				}else{
+					int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+					if (opcao == 0){	
+					
+					r.setTipo(tipoField2.getText()); 
+					r.setModelo(modeloField2.getText());
+					r.setPreco(Float.parseFloat((precoField2.getText())));
+					r.setGenero(generoField2.getText());
+					r.setTamanho(tamanhoField2.getText());
+					r.setCor(corField2.getText());
+					r.setDisponibilidade(false);
+					Fachada.getInstancia().AtualizarRoupa(r);
+					tipoField2.setEditable(false);
+					modeloField2.setEditable(false);
+					precoField2.setEditable(false);
+					corField2.setEditable(false);
+					precoField2.setEditable(false);
+					tamanhoField2.setEditable(false);
+					generoField2.setEditable(false);
+					
+					}
 				}
-			
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

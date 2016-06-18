@@ -950,7 +950,10 @@ public class JCadastroCliente extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblbtnSalvar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/salvar3.png")));
-				int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
+				if(nomeField2.getText().isEmpty()||cpfField2.getText().isEmpty()||rgField2.getText().isEmpty()||telefoneField2.getText().isEmpty()||bairroField2.getText().isEmpty()||cidadeField2.getText().isEmpty()||estadoField2.getText().isEmpty()||numeroField2.getText().isEmpty()||enderecoField2.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
+				}else{
+					int opcao = JOptionPane.showConfirmDialog(null, "Deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){
 				c.setNome(nomeField2.getText()); 
 				c.setCPF(cpfField2.getText());
@@ -975,6 +978,7 @@ public class JCadastroCliente extends JInternalFrame {
 				telefoneField2.setEditable(false);	
 				
 				}
+			  }
 			}
 
 			@Override

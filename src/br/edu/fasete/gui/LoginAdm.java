@@ -20,6 +20,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class LoginAdm extends JFrame {
@@ -50,11 +52,11 @@ public class LoginAdm extends JFrame {
 	 */
 	public LoginAdm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 605, 373);
+		setBounds(100, 100, 751, 243);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[457.00,grow]", "[50][30][50][30][50][30]"));
+		contentPane.setLayout(new MigLayout("", "[457.00,grow]", "[50][30][20.00][30][28.00][30]"));
 		
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -96,10 +98,25 @@ public class LoginAdm extends JFrame {
 		senhaField = new JPasswordField();
 		contentPane.add(senhaField, "cell 0 3,grow");
 		
-		JButton btnRecuperarSenha = new JButton("Recuperar Senha");
-		contentPane.add(btnRecuperarSenha, "flowx,cell 0 5,alignx right");
+		JButton btnEsqueciASenha = new JButton("Esqueci a senha");
+		btnEsqueciASenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LoginPalavraChave lpc = new LoginPalavraChave();
+				lpc.setVisible(true);
+				dispose();
+			}
+		});
+		contentPane.add(btnEsqueciASenha, "flowx,cell 0 5");
 		
 		JLabel lblbtnEditar = new JLabel("");
+		lblbtnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				EditAdm ea = new EditAdm();
+				ea.setVisible(true);
+				dispose();
+			}
+		});
 		lblbtnEditar.setIcon(new ImageIcon(LoginAdm.class.getResource("/imagens/editar1.png")));
 		contentPane.add(lblbtnEditar, "cell 0 5,alignx right");
 		lblbtnConfirmar.setIcon(new ImageIcon(LoginAdm.class.getResource("/imagens/confirmarv1.png")));

@@ -846,8 +846,8 @@ public class JRegistro extends JInternalFrame {
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							if(precofimField2.getText().isEmpty()){
-								JOptionPane.showMessageDialog(null, "adicione um preço");
+							if(precofimField2.getText().isEmpty()||datadevoField2.getText().isEmpty()||datalocaField2.getText().isEmpty()){
+								JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
 								
 							}else{
 								int opcao = JOptionPane.showConfirmDialog(null, "Realmente deseja salvar?", "Aviso", JOptionPane.YES_NO_OPTION);

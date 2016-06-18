@@ -935,6 +935,9 @@ public void mouseClicked(MouseEvent e) {
 										int i= 0;	
 										int tamanho = tabelaRoupaAluguel.getModel().getRowCount();
 										while(i<tamanho){
+											if(dataLoca.getText().isEmpty()||DataDevo.getText().isEmpty()||precoFieldFim.getText().isEmpty()){
+												JOptionPane.showMessageDialog(null, "Erro. Há campos em branco.");
+											}else{
 											lblbtnsalvar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/salvar3.png")));
 											r.setCodRoupa((int) tabelaRoupaAluguel.getValueAt(i, 0));
 											r.setTipo((String) tabelaRoupaAluguel.getValueAt(i, 1));
@@ -949,6 +952,7 @@ public void mouseClicked(MouseEvent e) {
 											Fachada.getInstancia().dispinibilidade(r);
 											
 											i++;
+											}
 										}
 										
 										a.setPagamento(pagamentoBox.getSelectedItem().toString());
