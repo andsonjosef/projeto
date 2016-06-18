@@ -471,25 +471,58 @@ public class JAluguel extends JInternalFrame {
 								exibirpanel.add(textField, "cell 0 2 2 1,grow");
 								textField.setColumns(10);
 								
-								JLabel label = new JLabel("");
-								label.addMouseListener(new MouseAdapter() {
+								JLabel lblbtnPesquisar = new JLabel("");
+								lblbtnPesquisar.addMouseListener(new MouseAdapter() {
 									@Override
 									public void mouseClicked(MouseEvent arg0) {
-										
+										lblbtnPesquisar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar3.png")));
 										pesq2 =Integer.parseInt(textField.getText());
 										carregarTabelaRoupaListacod();
 									}
-								});
-								label.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/pesquisar1.png")));
-								exibirpanel.add(label, "cell 2 2");
+									
+									@Override
+									public void mouseEntered(MouseEvent e) {
+										lblbtnPesquisar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnPesquisar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										lblbtnPesquisar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/pesquisar1.png")));
+									}
 								
-								JButton btnNewButton = new JButton("New button");
-								btnNewButton.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent arg0) {
+								
+																	
+								});
+								lblbtnPesquisar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/pesquisar1.png")));
+								exibirpanel.add(lblbtnPesquisar, "cell 2 2");
+								
+								JLabel lblbtnlista = new JLabel("");
+								lblbtnlista.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent arg0) {
+										lblbtnlista.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/lista3.png")));
 										carregarTabelaRoupa();
 									}
+									
+									@Override
+									public void mouseEntered(MouseEvent e) {
+										lblbtnlista.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/lista2.png")));
+									}
+									@Override
+									public void mouseExited(MouseEvent e) {
+										lblbtnlista.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/lista1.png")));
+									}
+									@Override
+									public void mouseReleased(MouseEvent e) {
+										lblbtnlista.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/lista1.png")));
+									}
+								
 								});
-								exibirpanel.add(btnNewButton, "cell 3 2,alignx right");
+								lblbtnlista.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/lista1.png")));
+								exibirpanel.add(lblbtnlista, "cell 3 2,alignx center");
 								lblbtnAdicionar.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/Adicionar1.png")));
 								exibirpanel.add(lblbtnAdicionar, "cell 4 2");
 								lblbtnRemover.setIcon(new ImageIcon(JAluguel.class.getResource("/imagens/remover1.png")));

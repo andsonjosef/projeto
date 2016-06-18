@@ -219,7 +219,7 @@ public class JLixeira extends JInternalFrame {
 		lblbtnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar3.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar3.png")));
 				c.setCPF(svalueCpf);
 				
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja restaurar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
@@ -239,15 +239,15 @@ public class JLixeira extends JInternalFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar2.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar2.png")));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar1.png")));
+				lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
 			}
 		});
 		
@@ -281,7 +281,7 @@ public class JLixeira extends JInternalFrame {
 			});
 			lblbtnExcluir.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/excluir1.png")));
 			exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
-			lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/editar1.png")));
+			lblbtnEditar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
 			exibirpanel.add(lblbtnEditar, "cell 4 2,alignx right,growy");
 		
 		tabelaRoupa2 = new JTable(new RoupaTableModel());
@@ -387,9 +387,11 @@ public class JLixeira extends JInternalFrame {
 		lblbtnExccluir2.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/excluir1.png")));
 		cadast.add(lblbtnExccluir2, "flowx,cell 0 2,alignx right,growy");
 		
-		JButton btnRestaurar = new JButton("Restaurar");
-		btnRestaurar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JLabel lblbtnRestaurar = new JLabel("");
+		lblbtnRestaurar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblbtnRestaurar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar3.png")));
 				jr.carregarTabela();
 				r.setCodRoupa(sValueCode);
 				int opcao = JOptionPane.showConfirmDialog(null, "Deseja Restaurar " + svalueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
@@ -402,9 +404,22 @@ public class JLixeira extends JInternalFrame {
 					} else { 
 						
 					}
+			
+			}
+			public void mouseEntered(MouseEvent e) {
+				lblbtnRestaurar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar2.png")));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnRestaurar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblbtnRestaurar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
 			}
 		});
-		cadast.add(btnRestaurar, "cell 0 2,alignx left,aligny center");
+		lblbtnRestaurar.setIcon(new ImageIcon(JLixeira.class.getResource("/imagens/restaurar1.png")));
+		cadast.add(lblbtnRestaurar, "cell 0 2");
 		
 		cadast.addKeyListener(new KeyAdapter() {
 			@Override
