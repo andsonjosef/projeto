@@ -231,6 +231,7 @@ public class JAluguel extends JInternalFrame {
 					cadast.add(lblClientesDiponiveis, "cell 0 0 2 1");
 								
 								pesqField = new JTextField();
+								pesqField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								pesqField.addKeyListener(new KeyAdapter() {
 									@Override
 									public void keyTyped(KeyEvent e) {
@@ -461,6 +462,7 @@ public class JAluguel extends JInternalFrame {
 								exibirpanel.add(lblRoupasSelecionadas, "cell 6 0");
 								
 								textField = new JTextField();
+								textField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								textField.addKeyListener(new KeyAdapter() {
 									@Override
 									public void keyTyped(KeyEvent arg0) {

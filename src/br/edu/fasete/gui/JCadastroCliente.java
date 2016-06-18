@@ -619,7 +619,7 @@ public class JCadastroCliente extends JInternalFrame {
 		tabbedPane.addTab("Exibir Clientes", null, exibirpanel, null);
 		exibirpanel.setLayout(new MigLayout("", "[156px,grow][95px][143px][14px][851px,grow]", "[][504px][30px][]"));
 		
-		JLabel lblClientesCadastrados = new JLabel("Clientes cadastrados");
+		JLabel lblClientesCadastrados = new JLabel("Clientes cadastradas");
 		lblClientesCadastrados.setForeground(Color.WHITE);
 		lblClientesCadastrados.setFont(new Font("Dialog", Font.PLAIN, 15));
 		exibirpanel.add(lblClientesCadastrados, "cell 0 0 3 1");
@@ -695,6 +695,8 @@ public class JCadastroCliente extends JInternalFrame {
 		});
 		
 		textField = new JTextField();
+		textField.setForeground(Color.WHITE);
+		textField.setFont(new Font("Dialog", Font.PLAIN, 15));
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -708,7 +710,7 @@ public class JCadastroCliente extends JInternalFrame {
 		JLabel lblPesquisar = new JLabel("Pesquisar");
 		lblPesquisar.setForeground(Color.WHITE);
 		lblPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		exibirpanel.add(lblPesquisar, "cell 1 2,aligny bottom");
+		exibirpanel.add(lblPesquisar, "cell 1 2,aligny center");
 		lblbtnExcluir.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/excluir1.png")));
 		exibirpanel.add(lblbtnExcluir, "flowx,cell 4 2,alignx right,growy");
 		lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmarv1.png")));

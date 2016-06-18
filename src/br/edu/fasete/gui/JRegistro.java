@@ -440,7 +440,7 @@ public class JRegistro extends JInternalFrame {
 					});
 					editPanel.setLayout(new MigLayout("", "[115px][30px][132px][30px][115px][30px][115px][30px][115][30][115,grow][652px,grow]", "[14px][36.00px][][547.00px][54.00px][20px][80.00px,grow]"));
 					
-					JLabel lblNewLabel = new JLabel("Roupas Alugadas");
+					JLabel lblNewLabel = new JLabel("Roupas alugadas");
 					lblNewLabel.setForeground(Color.WHITE);
 					lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
 					editPanel.add(lblNewLabel, "cell 0 2 7 1");
