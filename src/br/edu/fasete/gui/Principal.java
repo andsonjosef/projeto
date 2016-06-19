@@ -33,9 +33,6 @@ import javax.swing.JLabel;
 
 public class Principal extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane_1;
