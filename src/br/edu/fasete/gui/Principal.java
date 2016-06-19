@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JLabel;
 
 public class Principal extends JFrame {
 
@@ -36,9 +37,10 @@ public class Principal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+
 	private JPanel contentPane_1;
-	private JDesktopPane desktop;
+	
+	private JDesktopPane desktop_1;
 	
 	
 	Funcionario f = new Funcionario();
@@ -60,6 +62,7 @@ public class Principal extends JFrame {
 	private final JMenu menuLixeiro = new JMenu("");
 	JTextField textField;
 	String texto1;
+	private JLabel label_1 = new JLabel("");
 	
 	/**
 	 * Launch the application.
@@ -147,7 +150,7 @@ public class Principal extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				desktop.add(janelaCliente);
+				desktop_1.add(janelaCliente);
 				janelaCliente.setVisible(true);
 				if(janelaCliente.isShowing()==true){
 					janelaCliente.carregarTabela();
@@ -182,7 +185,7 @@ public class Principal extends JFrame {
 		menuRoupa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				desktop.add(janelaRoupa);
+				desktop_1.add(janelaRoupa);
 				janelaRoupa.setVisible(true);
 				if(janelaRoupa.isFocusable()==true){
 					janelaRoupa.carregarTabela();
@@ -255,7 +258,7 @@ public class Principal extends JFrame {
 					janelaAluguel.limparFields();
 					
 				}
-				desktop.add(janelaAluguel);
+				desktop_1.add(janelaAluguel);
 				janelaAluguel.setVisible(true);
 				try {
 					janelaAluguel.setMaximum(true);
@@ -289,17 +292,12 @@ public class Principal extends JFrame {
 		menuAluguel.setForeground(Color.WHITE);
 		barraMenu.add(menuAluguel);
 		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		contentPane.setLayout(new BorderLayout(0, 0));
-		desktop = new JDesktopPane();
-		contentPane.add(desktop);
 	menuRegistro.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			janelaRegistro.logField.setText(texto1);
-			desktop.add(janelaRegistro);
+			desktop_1.add(janelaRegistro);
 			janelaRegistro.setVisible(true);
 			if(janelaRegistro.isFocusable()==true){
 				janelaRegistro.carregarTabela();
@@ -380,7 +378,7 @@ public class Principal extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			
 			
-			desktop.add(janelaFuncionario);
+			desktop_1.add(janelaFuncionario);
 			janelaFuncionario.setVisible(true);
 			if(janelaFuncionario.isShowing()==true){
 				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
@@ -536,7 +534,7 @@ public class Principal extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
-			desktop.add(janelaLixeira);
+			desktop_1.add(janelaLixeira);
 			janelaLixeira.setVisible(true);
 			if(janelaLixeira.isShowing()==true){
 				janelaLixeira.carregarTabela();
@@ -586,11 +584,15 @@ public class Principal extends JFrame {
 	
 	barraMenu.add(menuLixeiro);
 	
+	JLabel label = new JLabel("................");
+	label.setForeground(Color.DARK_GRAY);
+	barraMenu.add(label);
+	
 	textField = new JTextField();
 	textField.setHorizontalAlignment(SwingConstants.CENTER);
 	textField.setFont(new Font("Dialog", Font.PLAIN, 15));
 	textField.setForeground(Color.WHITE);
-	textField.setBackground(Color.LIGHT_GRAY);
+	textField.setBackground(Color.DARK_GRAY);
 	textField.setEditable(false);
 	barraMenu.add(textField);
 	textField.setColumns(10);
@@ -625,9 +627,13 @@ public class Principal extends JFrame {
 	contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane_1);
 	contentPane_1.setLayout(new BorderLayout(0, 0));
-	desktop = new JDesktopPane();
-	contentPane_1.add(desktop);
-	desktop.setBackground(Color.DARK_GRAY);
+	desktop_1 = new JDesktopPane();
+	contentPane_1.add(desktop_1);
+	desktop_1.setBackground(Color.DARK_GRAY);
+	label_1.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Untitled-1.png")));
+	label_1.setBounds(967, 11, 580, 636);
+	
+	desktop_1.add(label_1);
 
 }	
 	public void func(Funcionario f){
