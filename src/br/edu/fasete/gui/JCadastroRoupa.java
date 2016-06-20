@@ -40,6 +40,7 @@ public class JCadastroRoupa extends JInternalFrame {
 	String sValueNome;
 	int sValueCode;
 	String vazio;
+	String svaluetipo;
 	Roupa r = new Roupa();
 	private JTextField tipoField;
 	private JTextField precoField;
@@ -183,6 +184,7 @@ public class JCadastroRoupa extends JInternalFrame {
 						srow = tabelaRoupa.getSelectedRow();
 						sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
 						sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
+						svaluetipo = (String) tabelaRoupa.getValueAt(srow, 1); 
 					}
 					
 				});
@@ -199,8 +201,9 @@ public class JCadastroRoupa extends JInternalFrame {
 				if(e.getClickCount() == 2) {
 					srow = tabelaRoupa.getSelectedRow();
 					sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
+					svaluetipo = (String) tabelaRoupa.getValueAt(srow, 1); 
 					sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
-					int opcao = JOptionPane.showConfirmDialog(null, "deseja visualizar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+					int opcao = JOptionPane.showConfirmDialog(null, "deseja visualizar " + svaluetipo + " " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 					if (opcao == 0){	
 						r.setCodRoupa(sValueCode);
 						Fachada.getInstancia().BuscarRoupa(r);
@@ -505,8 +508,9 @@ public class JCadastroRoupa extends JInternalFrame {
 				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
 				srow = tabelaRoupa.getSelectedRow();
 				sValueCode= (int) tabelaRoupa.getValueAt(srow, 0);
+				svaluetipo = (String) tabelaRoupa.getValueAt(srow, 1);
 				sValueNome = (String) tabelaRoupa.getValueAt(srow, 2);
-				int opcao = JOptionPane.showConfirmDialog(null, "deseja editar " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "deseja visualizar " + svaluetipo + " " + sValueNome + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				if (opcao == 0){	
 					r.setCodRoupa(sValueCode);
 					Fachada.getInstancia().BuscarRoupa(r);

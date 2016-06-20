@@ -191,6 +191,7 @@ public class JAluguel extends JInternalFrame {
 		});
 					
 					tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+					tabbedPane.setEnabled(false);
 					tabbedPane.setForeground(Color.WHITE);
 					tabbedPane.setBackground(Color.DARK_GRAY);
 					

@@ -633,7 +633,7 @@ public class JCadastroCliente extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblbtnEditar.setIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/confirmar3.png")));
 				c.setNome(svalueName);
-				int opcao = JOptionPane.showConfirmDialog(null, "Deseja editar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
+				int opcao = JOptionPane.showConfirmDialog(null, "Deseja visualizar " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 				String pesq = svalueName;
 				if (opcao == 0){
 				Fachada.getInstancia().BuscarClientenome(c,pesq);

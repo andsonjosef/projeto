@@ -376,9 +376,13 @@ public class Principal extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
-			
+			if(menuFuncionario.isEnabled()==false){
+			}else{
 			desktop_1.add(janelaFuncionario);
 			janelaFuncionario.setVisible(true);
+			
+				
+			
 			if(janelaFuncionario.isShowing()==true){
 				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu3.png")));
@@ -400,6 +404,7 @@ public class Principal extends JFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
 		}
 	
 	});
