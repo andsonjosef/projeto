@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import br.edu.fasete.dao.LoginDaoJdbc;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Funcionario;
 import net.miginfocom.swing.MigLayout;

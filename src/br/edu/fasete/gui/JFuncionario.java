@@ -14,16 +14,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.MaskFormatter;
-import br.edu.fasete.dao.Conexao;
 import br.edu.fasete.fachada.Fachada;
 import br.edu.fasete.principais.Funcionario;
-
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -381,7 +376,7 @@ public class JFuncionario extends JInternalFrame {
 					JLabel lblbtnsalvar = new JLabel("");
 					lblbtnsalvar.setHorizontalAlignment(SwingConstants.CENTER);
 					lblbtnsalvar.addMouseListener(new MouseAdapter() {
-						@SuppressWarnings("resource")
+					
 						@Override
 						
 

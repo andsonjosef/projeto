@@ -149,9 +149,11 @@ public class Principal extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				desktop_1.add(janelaCliente);
-				janelaCliente.setVisible(true);
-				if(janelaCliente.isShowing()==true){
+				
+				if(janelaCliente.isFocusable()==true){
+					desktop_1.add(janelaCliente);
+					janelaCliente.setVisible(true);
+				
 					janelaCliente.carregarTabela();
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
@@ -184,9 +186,10 @@ public class Principal extends JFrame {
 		menuRoupa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				desktop_1.add(janelaRoupa);
-				janelaRoupa.setVisible(true);
+				
 				if(janelaRoupa.isFocusable()==true){
+					desktop_1.add(janelaRoupa);
+					janelaRoupa.setVisible(true);
 					janelaRoupa.carregarTabela();
 					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
 					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
@@ -240,6 +243,8 @@ public class Principal extends JFrame {
 				
 				janelaAluguel.funcField.setText(textField.getText());
 				if(janelaAluguel.isFocusable()==true){
+					desktop_1.add(janelaAluguel);
+					janelaAluguel.setVisible(true);
 					janelaAluguel.carregarTabela();
 					janelaAluguel.carregarTabelaRoupa();
 					janelaAluguel.carregarTabelaRoupaLista();
@@ -257,8 +262,7 @@ public class Principal extends JFrame {
 					janelaAluguel.limparFields();
 					
 				}
-				desktop_1.add(janelaAluguel);
-				janelaAluguel.setVisible(true);
+				
 				try {
 					janelaAluguel.setMaximum(true);
 				} catch (PropertyVetoException e1) {
@@ -377,13 +381,10 @@ public class Principal extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			
 			if(menuFuncionario.isEnabled()==false){
-			}else{
-			desktop_1.add(janelaFuncionario);
-			janelaFuncionario.setVisible(true);
-			
-				
-			
-			if(janelaFuncionario.isShowing()==true){
+			}else{	
+			if(janelaFuncionario.isFocusable()==true){
+				desktop_1.add(janelaFuncionario);
+				janelaFuncionario.setVisible(true);
 				menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
 				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu3.png")));
 				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
@@ -538,9 +539,10 @@ public class Principal extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
-			desktop_1.add(janelaLixeira);
-			janelaLixeira.setVisible(true);
-			if(janelaLixeira.isShowing()==true){
+			
+			if(janelaLixeira.isFocusable()==true){
+				desktop_1.add(janelaLixeira);
+				janelaLixeira.setVisible(true);
 				janelaLixeira.carregarTabela();
 				janelaLixeira.carregarTabelaRoupa();
 				janelaLixeira.carregarTabela3();
