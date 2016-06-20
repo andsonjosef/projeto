@@ -81,7 +81,7 @@ public class LoginDaoJdbc implements LoginDao {
 		Funcionario fu = new Funcionario();
 		  try {
 			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-			   .prepareStatement("select * from loja.login where login like ? and senha like ?");
+			   .prepareStatement("select * from loja.funcionario where login like ? and senha like ?");
 			   stmt.setString(1,f.getLogin());
 			   stmt.setString(2,f.getSenha());
 			   
