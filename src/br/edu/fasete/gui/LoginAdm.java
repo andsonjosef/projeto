@@ -46,6 +46,7 @@ public class LoginAdm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginAdm() {
+		setTitle("Entrar como administrador");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginAdm.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 243);

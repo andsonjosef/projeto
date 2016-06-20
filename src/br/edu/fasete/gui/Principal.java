@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 
 public class Principal extends JFrame {
 
+
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane_1;
@@ -98,6 +99,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal(){
+		setTitle("Closet");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagens/iconcloset.png")));
 		addMouseListener(new MouseAdapter() {
 			

@@ -78,6 +78,8 @@ public class JCadastroRoupa extends JInternalFrame {
 	 */
 	
 	public JCadastroRoupa() {
+		setTitle("Roupa");
+		setFrameIcon(new ImageIcon(JCadastroRoupa.class.getResource("/imagens/iconcloset.png")));
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setBackground(Color.DARK_GRAY);
 		setIconifiable(true);

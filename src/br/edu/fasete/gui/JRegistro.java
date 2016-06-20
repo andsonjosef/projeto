@@ -108,6 +108,8 @@ public class JRegistro extends JInternalFrame {
 	
 	@SuppressWarnings({"rawtypes", "unchecked" })
 	public JRegistro() {
+		setTitle("Registro");
+		setFrameIcon(new ImageIcon(JRegistro.class.getResource("/imagens/iconcloset.png")));
 		 
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);

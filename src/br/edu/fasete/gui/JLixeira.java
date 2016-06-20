@@ -76,6 +76,8 @@ public class JLixeira extends JInternalFrame {
 	 */
 	
 	public JLixeira() {
+		setTitle("Lixeira");
+		setFrameIcon(new ImageIcon(JLixeira.class.getResource("/imagens/iconcloset.png")));
 		setBackground(Color.DARK_GRAY);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);

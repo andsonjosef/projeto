@@ -93,6 +93,8 @@ public class JCadastroCliente extends JInternalFrame {
 	 */
 	
 	public JCadastroCliente() {
+		setTitle("Cliente");
+		setFrameIcon(new ImageIcon(JCadastroCliente.class.getResource("/imagens/iconcloset.png")));
 		setBackground(Color.DARK_GRAY);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);

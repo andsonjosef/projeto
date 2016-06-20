@@ -109,6 +109,8 @@ public class JAluguel extends JInternalFrame {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JAluguel() {
+		setTitle("Aluguel");
+		setFrameIcon(new ImageIcon(JAluguel.class.getResource("/imagens/iconcloset.png")));
 		getContentPane().setBackground(Color.DARK_GRAY);
 		
 		setIconifiable(true);

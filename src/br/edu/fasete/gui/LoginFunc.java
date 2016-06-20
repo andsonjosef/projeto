@@ -51,6 +51,7 @@ public class LoginFunc extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginFunc() {
+		setTitle("Entrar como funcion\u00E1rio");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginFunc.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 271);

@@ -52,6 +52,7 @@ public class LoginEditar extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginEditar() {
+		setTitle("Editar administrador");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginEditar.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 500);

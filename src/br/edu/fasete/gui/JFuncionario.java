@@ -95,6 +95,8 @@ public class JFuncionario extends JInternalFrame {
 	 */
 	
 	public JFuncionario() {
+		setTitle("Funcion\u00E1rio");
+		setFrameIcon(new ImageIcon(JFuncionario.class.getResource("/imagens/iconcloset.png")));
 		setBackground(Color.DARK_GRAY);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setIconifiable(true);

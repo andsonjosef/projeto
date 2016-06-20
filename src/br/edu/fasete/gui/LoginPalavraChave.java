@@ -50,6 +50,7 @@ public class LoginPalavraChave extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginPalavraChave() {
+		setTitle("Recuperar senha");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginPalavraChave.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 305);
