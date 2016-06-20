@@ -172,7 +172,7 @@ public class JCadastroCliente extends JInternalFrame {
 		tabbedPane.addTab("Cadastrar Clientes", null, cadast, null);
 		tabbedPane.setBackgroundAt(0, Color.DARK_GRAY);
 		tabbedPane.setEnabledAt(0, true);
-		cadast.setLayout(new MigLayout("", "[84px][23px][46px][69px][160px][85px][321.00px][71.00px][124px][54.00px][172.00][428px]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px]"));
+		cadast.setLayout(new MigLayout("", "[84px][23px][46px][69px][160px][85px][321.00px][71.00px][124px][54.00px][172.00][428px,grow][-19.00]", "[53px][33.00px][53px][30px][39px][30px][54px][30px][56px][31px][91.00px,grow]"));
 		
 		JLabel labelnome = new JLabel("Nome");
 		labelnome.setForeground(Color.WHITE);

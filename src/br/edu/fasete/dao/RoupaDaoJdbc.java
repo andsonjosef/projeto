@@ -163,7 +163,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public Vector<Roupa> listarRoupas() {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa where disponibilidade = 0 ");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa where disponibilidade = 0 order by tipo,modelo");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();
@@ -186,7 +186,7 @@ public class RoupaDaoJdbc implements RoupaDao {
 	public Vector<Roupa> listartodasRoupas() {
 		Vector<Roupa> lista = new Vector<Roupa>();
 		try {
-			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa");
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from loja.Roupa order by tipo,modelo,genero");
 			ResultSet resultado = stmt.executeQuery();
 			while(resultado.next()) {
 				Roupa r = new Roupa();
