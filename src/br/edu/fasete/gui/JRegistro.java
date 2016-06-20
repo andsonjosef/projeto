@@ -367,15 +367,17 @@ public class JRegistro extends JInternalFrame {
 								int opcao = JOptionPane.showConfirmDialog(null, "Deseja visualizar o registro de " + svalueName + "?", "Aviso", JOptionPane.YES_NO_OPTION);
 								
 								if (opcao == 0){
-							nomeField2.setText(c.getNome());
-							c.setCodCliente(svaluecodCli);
-							carregarTabelaRoupaLista();
-							Fachada.getInstancia().ListarRegistro(c, a);
-							dataLoca.setText(a.getDataLoca());
-							DataDevo.setText(a.getDataEntre());
-							precoFieldal.setText(""+a.getPreco());
-							precoFieldFim.setText(""+a.getPrecoTotal());
-							tabbedPane.setSelectedIndex(1);
+									nomeField2.setText(c.getNome());
+									c.setCodCliente(svaluecodCli);
+									carregarTabelaRoupaLista();
+									Fachada.getInstancia().ListarRegistro(c, a);
+									dataLoca.setText(a.getDataLoca());
+									DataDevo.setText(a.getDataEntre());
+									precoFieldal.setText(""+a.getPreco());
+									precoFieldFim.setText(""+a.getPrecoTotal());
+									funcField.setText(a.getFuncionario());
+									pagamentoField.setText(a.getPagamento());
+									tabbedPane.setSelectedIndex(1);
 								}
 							}
 							

@@ -65,10 +65,10 @@ public class LoginDaoJdbc implements LoginDao {
 			
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 					 
-			  .prepareStatement( "update loja.login_root set pergunta = ?, resposta = ? WHERE senha = ?");
+			  .prepareStatement( "update loja.login_root set pergunta = ?, resposta = ? WHERE login = ?");
 			  stmt.setString(1, pergunta);
 			  stmt.setString(2, resposta);
-		      stmt.setString(3, f.getSenha());
+		      stmt.setString(3, f.getLogin());
 		      stmt.executeUpdate(); 
 		    
 		      JOptionPane.showMessageDialog(null,"pergunta editada!");

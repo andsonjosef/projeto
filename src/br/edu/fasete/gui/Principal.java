@@ -236,9 +236,9 @@ public class Principal extends JFrame {
 		menuAluguel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				texto1 = textField.getText();
+				textField.getText();
 				
-				janelaAluguel.funcField.setText(texto1);
+				janelaAluguel.funcField.setText(textField.getText());
 				if(janelaAluguel.isFocusable()==true){
 					janelaAluguel.carregarTabela();
 					janelaAluguel.carregarTabelaRoupa();

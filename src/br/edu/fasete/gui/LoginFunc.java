@@ -92,8 +92,8 @@ public class LoginFunc extends JFrame {
 						
 						Principal janela = new Principal();
 						janela.textField.setText(f.getLogin());
-						janela.setVisible(true);
 						janela.menuFuncionario.setEnabled(false);
+						janela.setVisible(true);
 						dispose();
 					}
 			}

@@ -131,23 +131,24 @@ public class LoginEditar extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				LoginDaoJdbc lo = new LoginDaoJdbc();
 				
-				Funcionario f = new Funcionario();
+				
+				
 				Funcionario f2 = new Funcionario();
 				f.setLogin(loginAtualField.getText());
 				f.setSenha(senhaAtualField.getText());
 				
-				f2 = lo.buscarLogin(f);
+				f2 = Fachada.getInstancia().buscarLoginRoot(f);
 				
 				//falta conferir a resposta
 				if(f2.getLogin() != null || f2.getSenha() != null){
-					String login = loginNovotextField.getText();
-					String senha = senhaNovaField.getText();
-				Fachada.getInstancia().editarLogin(f2, login, senha);
 					String pergunta = PerguntaTextField.getText();
 					String resposta = respostaTextField.getText();
 					Fachada.getInstancia().editarPergunta(f2, pergunta, resposta);
+					String login = loginNovotextField.getText();
+					String senha = senhaNovaField.getText();
+				Fachada.getInstancia().editarLogin(f2, login, senha);
+					
 				}else{
 					JOptionPane.showMessageDialog(null,"Login ou senha incorreta.");
 				}

@@ -48,7 +48,7 @@ public class AluguelDaoJdbc implements AluguelDao {
 			   
 	}catch(Exception es){
 		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
-		  JOptionPane.showMessageDialog(null,es);
+		
 	  }
 
 	}
@@ -72,7 +72,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 								 
 						}catch(Exception es){
 							  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
-							  JOptionPane.showMessageDialog(null,es);
+							  
 						}
 		 
 	}
@@ -96,7 +96,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 							r.setCodRoupa(resultado.getInt("codRoupa"));
 						}
 		  }catch(Exception e){
-			  JOptionPane.showMessageDialog(null,e);
+			 
 		  } 
 		
 		  try {
@@ -120,7 +120,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 			 
 	}catch(Exception es){
 		  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
-		  JOptionPane.showMessageDialog(null,es);
+		 
 	  }
 	}
 	///
@@ -173,7 +173,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 				lista.add(r);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		return lista;
 	
@@ -203,7 +203,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 				lista.add(r);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		return lista;
 	}
@@ -225,7 +225,7 @@ public void InserirListaFinal(Roupa r, Cliente c) {
 				
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		
 	}

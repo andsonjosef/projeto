@@ -973,7 +973,7 @@ public void mouseClicked(MouseEvent e) {
 										a.setPreco(Float.parseFloat((precoFieldal.getText())));
 										a.setPrecoTotal(Float.parseFloat((precoFieldFim.getText())));
 										
-									    f.setLogin(funcField.getText());
+									    f.setLogin(funcioField.getText());
 										Fachada.getInstancia().InserirRegistro(a,f);
 										Fachada.getInstancia().limparLista();
 										tabbedPane.setSelectedIndex(0);

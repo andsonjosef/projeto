@@ -177,7 +177,7 @@ public class RegistroDaoJdbc implements RegistroDao{
 					stmt.setInt(8, a.getCodAluguel());
 					 
 					 stmt.executeUpdate();
-					 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
+					 
 					
 				}catch(Exception es){
 					

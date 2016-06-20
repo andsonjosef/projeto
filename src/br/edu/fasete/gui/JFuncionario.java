@@ -453,10 +453,8 @@ public class JFuncionario extends JInternalFrame {
 
 							}if(numeroField.getText().isEmpty()){
 								lblnumobri.setVisible(true);
-
 								}else{
 									lblnumobri.setVisible(false);
-
 								}
 							if(loginField.getText().isEmpty()){
 								lblPreenchimentoObrigatrio.setVisible(true);
@@ -468,7 +466,7 @@ public class JFuncionario extends JInternalFrame {
 							}else{
 								lblPreenchimentoObrigatrio_1.setVisible(false);
 							}
-							f.setRegistrado(false);
+							
 							f.setNome(nomeField.getText()); 
 							f.setCPF(cpfField.getText());
 							f.setRG(rgField.getText());
@@ -480,43 +478,9 @@ public class JFuncionario extends JInternalFrame {
 							f.setEndereco(enderecoField.getText());
 							f.setLogin(loginField.getText());
 							f.setSenha(senhaField.getText());
-							String cpf = "";
-							PreparedStatement stmt;
-							try {
-								stmt = (PreparedStatement) Conexao.getConnection()
-								.prepareStatement("select cpf from loja.Funcionario ");
-								ResultSet rs = stmt.executeQuery();
-								while(rs.next()) {
-									 cpf = rs.getString("CPF");
-									 if(cpf != f.getCPF() && f.getCPF().length() == 14 ){
-										if(loginField.getText().isEmpty()||senhaField.getText().isEmpty()||nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || rgField.getText().isEmpty() || telefoneField.getText().isEmpty() || bairroField.getText().isEmpty() || estadoField.getText().isEmpty() || enderecoField.getText().isEmpty()){
-										}else{								 
-											  cpf = "";																   
-											  try {
-												  stmt = (PreparedStatement) Conexao.getConnection()
-												  .prepareStatement("select cpf from loja.funcionario ");
-												  rs = stmt.executeQuery();
-												  while(rs.next()) {
-													 cpf = rs.getString("CPF");																		
-												  }
-											  }   catch (SQLException e1) {
-													e1.printStackTrace();
-												  }
-												  if(cpf != f.getCPF() && f.getCPF().length() == 14 ){
-													 Fachada.getInstancia().InserirFuncionario(f);
-												  }else{
-														JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido");																	
-												  }
-										}
-															
-									}else{
-										JOptionPane.showMessageDialog(null, "CPF já cadastrado ou inválido. ");
-									}
-																
-								}	
-							} catch (SQLException e1) {
-								e1.printStackTrace();
-								}
+							
+							
+							 Fachada.getInstancia().InserirFuncionario(f);
 							}
 							int opcao2 = JOptionPane.showConfirmDialog(null, "Deseja limpar os campos?", "Aviso", JOptionPane.YES_NO_OPTION);
 							if (opcao2 == 0){	

@@ -166,7 +166,7 @@ ResultSet rs = stmt.executeQuery();
 		  try {
 			  PreparedStatement stmt;
 			    stmt =  (PreparedStatement) Conexao.getConnection()
-			    .prepareStatement("insert into loja.funcionario  (nome,cpf,rg,telefone,estado,cidade,bairro,numero,endereco,registrado,login,senha) values (?,?,?,?,?,?,?,?,?,?,?,?)") ;
+			    .prepareStatement("insert into loja.funcionario  (nome,cpf,rg,telefone,estado,cidade,bairro,numero,endereco,login,senha) values (?,?,?,?,?,?,?,?,?,?,?)") ;
 			   stmt.setString(1,f.getNome());
 			   stmt.setString(2,f.getCPF());
 			   stmt.setString(3,f.getRG());
@@ -176,16 +176,15 @@ ResultSet rs = stmt.executeQuery();
 			   stmt.setString(7,f.getBairro());
 			   stmt.setString(8,f.getNumero());
 			   stmt.setString(9,f.getEndereco());
-			   stmt.setBoolean(10, f.isRegistrado());
-			   stmt.setString(11,f.getLogin());
-			   stmt.setString(12,f.getSenha());
+			   stmt.setString(10,f.getLogin());
+			   stmt.setString(11,f.getSenha());
 			   stmt.executeUpdate();
 			   	 	  
 			   JOptionPane.showMessageDialog(null,"Funcionário cadastrado!");  
 			 
 	}catch(Exception es){
 		  //  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
-		  JOptionPane.showMessageDialog(null,es);
+		  JOptionPane.showMessageDialog(null,"erro!Dados invalidos!");
 	  }
 	}
 
@@ -215,7 +214,7 @@ ResultSet rs = stmt.executeQuery();
 				lista.add(f);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		return lista;
 	}
