@@ -30,6 +30,7 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import com.toedter.calendar.JCalendar;
 
 public class Principal extends JFrame {
 
@@ -46,7 +47,7 @@ public class Principal extends JFrame {
 	JMenu menuCliente = new JMenu("");
 	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
 	JMenu menuRoupa = new JMenu("");
-	JAluguel janelaAluguel = new JAluguel();
+	JAluguel2 janelaAluguel = new JAluguel2();
 	JMenu menuAluguel = new JMenu("");
 	JRegistro janelaRegistro = new JRegistro();
 	JMenu menuRegistro = new JMenu("");
