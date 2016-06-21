@@ -41,6 +41,12 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class JAluguel2 extends JInternalFrame {
 	/**
@@ -61,7 +67,10 @@ public class JAluguel2 extends JInternalFrame {
 	Funcionario f = new Funcionario();
 	int pesq2;
 	String pesq;
-	JCalendar calendar = new JCalendar();
+	JCalendar calevenc1 = new JCalendar();
+	JCalendar calepagef1 = new JCalendar();
+	JCalendar calevenc2 = new JCalendar();
+	JCalendar calepag2 = new JCalendar();
 	private  JTextField precoField2;
 	private JTextField nomeField;
 	private JTextField enderecoField;
@@ -93,9 +102,15 @@ public class JAluguel2 extends JInternalFrame {
 	private JTextField textField;
 	private JTextField pesqField;
 	private JTextField precopagField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField valor1Field;
+	private JTextField precofimpagField;
+	private JTextField datadevenc1Field;
+	private JTextField pagefe1Field;
+	private JTextField valor2Field;
+	private JTextField datavenc2Field;
+	private JTextField pagef2Field;
+	private JTextField valoref1Field;
+	private JTextField valoref2Field;
 	
 	/**
 	 * Launch the application.
@@ -128,7 +143,12 @@ public class JAluguel2 extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 1280, 720);
+
 		
+		
+		
+		
+	
 		Fachada.getInstancia().limparTabela();
 		Fachada.getInstancia().limparLista();
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -190,7 +210,7 @@ public class JAluguel2 extends JInternalFrame {
 					}
 		
 		////
-		
+				
 		tabelaRoupa = new JTable(new RoupaTableModel());
 		tabelaRoupa.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent arg0) {
@@ -408,6 +428,362 @@ public class JAluguel2 extends JInternalFrame {
 								funcField.setColumns(10);
 								btnlblAvancar.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/avan\u00E7ar1.png")));
 								cadast.add(btnlblAvancar, "cell 8 11,alignx right");
+								
+								JPanel pagamento = new JPanel();
+								
+								pagamento.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										calevenc1.setVisible(false);
+										calevenc2.setVisible(false);
+										calepag2.setVisible(false);
+										calepagef1.setVisible(false);
+										
+										
+									}
+								});
+								pagamento.setBackground(Color.DARK_GRAY);
+								tabbedPane.addTab("Pagamento", null, pagamento, null);
+								pagamento.setLayout(new MigLayout("", "[200][30][300.00px][50][89.00px][30][200,grow][30][300,grow][]", "[68.00px][68.00,grow][30px][][160px][20px][][160px][23px]"));
+								
+								JPanel panel = new JPanel();
+								pagamento.add(panel, "cell 0 0 10 2,grow");
+								panel.setLayout(null);
+								
+								JLabel lblPreo_2 = new JLabel("Pre\u00E7o");
+								lblPreo_2.setBounds(67, 11, 39, 20);
+								panel.add(lblPreo_2);
+								lblPreo_2.setForeground(Color.WHITE);
+								lblPreo_2.setFont(new Font("Dialog", Font.PLAIN, 15));
+								JLabel lblStatus_1 = new JLabel("Status");
+								lblStatus_1.setForeground(Color.WHITE);
+								lblStatus_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblStatus_1, "cell 4 5,alignx left,aligny bottom");
+								
+								JLabel lblValorPago_1 = new JLabel("Valor pago");
+								lblValorPago_1.setForeground(Color.WHITE);
+								lblValorPago_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblValorPago_1, "cell 6 5,alignx left,aligny bottom");
+								precopagField = new JTextField();
+								precopagField.setBounds(20, 39, 209, 26);
+								panel.add(precopagField);
+								precopagField.setForeground(Color.WHITE);
+								precopagField.setFont(new Font("Dialog", Font.PLAIN, 15));
+								precopagField.setColumns(10);
+								
+								precofimpagField = new JTextField();
+								precofimpagField.setBounds(317, 39, 214, 26);
+								panel.add(precofimpagField);
+								precofimpagField.setForeground(Color.WHITE);
+								precofimpagField.setFont(new Font("Dialog", Font.PLAIN, 15));
+								precofimpagField.setColumns(10);
+								JLabel lblDataDeVencimento = new JLabel("Data de vencimento");
+								lblDataDeVencimento.setForeground(Color.WHITE);
+								lblDataDeVencimento.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblDataDeVencimento, "cell 2 2,alignx left,aligny bottom");
+								
+								JLabel lblPagamentoEfetuado = new JLabel("Data em que o pagamento foi efetuado");
+								lblPagamentoEfetuado.setForeground(Color.WHITE);
+								lblPagamentoEfetuado.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblPagamentoEfetuado, "cell 8 2,grow");
+								JLabel lblPreoFinal_1 = new JLabel("Pre\u00E7o final");
+								lblPreoFinal_1.setBounds(377, 11, 69, 20);
+								panel.add(lblPreoFinal_1);
+								lblPreoFinal_1.setForeground(Color.WHITE);
+								lblPreoFinal_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+								JComboBox status2box = new JComboBox();
+								JLabel lblSegundaParcela = new JLabel("Segunda parcela");
+								JLabel lblPagementoEfetuado2 = new JLabel("Data em que o pagamento foi efetuado");
+								JLabel lblDataDeVencimento_1 = new JLabel("Data de vencimento");
+								JComboBox comboBox = new JComboBox();
+								comboBox.addItemListener(new ItemListener() {
+									public void itemStateChanged(ItemEvent arg0) {
+										String escolha = (String) comboBox.getSelectedItem();
+										
+										
+									if(escolha=="2 vezes"){
+										
+										pagef2Field.setVisible(true);
+										
+										datavenc2Field.setVisible(true);
+										pagef2Field.setVisible(true);
+										valor2Field.setVisible(true);
+										valoref2Field.setVisible(true);
+										lblPreoFinal_1.setVisible(true);
+										lblDataDeVencimento_1.setVisible(true);
+										lblStatus_1.setVisible(true);
+										lblValorPago_1.setVisible(true);
+										status2box.setVisible(true);
+										lblSegundaParcela.setVisible(true);
+										lblPagementoEfetuado2.setVisible(true);
+										
+									}else{
+										calevenc1.setVisible(false);
+										pagef2Field.setVisible(false);
+										calepag2.setVisible(false);
+										datavenc2Field.setVisible(false);
+										pagef2Field.setVisible(false);
+										valor2Field.setVisible(false);
+										valoref2Field.setVisible(false);
+										
+										lblPreoFinal_1.setVisible(false);
+										lblDataDeVencimento_1.setVisible(false);
+										lblStatus_1.setVisible(false);
+										lblValorPago_1.setVisible(false);
+										status2box.setVisible(false);
+										lblSegundaParcela.setVisible(false);
+										lblPagementoEfetuado2.setVisible(false);
+										
+									}
+									}
+								});
+							
+								comboBox.addPropertyChangeListener(new PropertyChangeListener() {
+									public void propertyChange(PropertyChangeEvent evt) {
+									
+									
+									}
+								});
+								comboBox.setBounds(705, 39, 82, 26);
+								panel.add(comboBox);
+								comboBox.setFont(new Font("Dialog", Font.PLAIN, 15));
+								comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
+								
+								JLabel lblStatus = new JLabel("Status");
+								lblStatus.setForeground(Color.WHITE);
+								lblStatus.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblStatus, "cell 4 2,alignx left,aligny bottom");
+								
+								JLabel lblValorPago = new JLabel("Valor pago");
+								lblValorPago.setForeground(Color.WHITE);
+								lblValorPago.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblValorPago, "cell 6 2,alignx left,aligny bottom");
+								
+								valor1Field = new JTextField();
+								valor1Field.setForeground(Color.WHITE);
+								valor1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(valor1Field, "cell 0 3,growx,aligny top");
+								valor1Field.setColumns(10);
+								
+								JLabel lblPrimeiraParcela = new JLabel("Valor da primeira parcela");
+								lblPrimeiraParcela.setHorizontalAlignment(SwingConstants.TRAILING);
+								lblPrimeiraParcela.setForeground(Color.WHITE);
+								lblPrimeiraParcela.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblPrimeiraParcela, "cell 0 2,alignx left,aligny bottom");
+								
+								
+								calevenc1.addPropertyChangeListener(new PropertyChangeListener() {
+									public void propertyChange(PropertyChangeEvent arg0) {
+										if(calevenc1.isVisible()==true|datadevenc1Field.isFocusOwner()==true){
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calevenc1.getDate());
+										datadevenc1Field.setText(data);
+										}
+									}
+								});
+								
+								datadevenc1Field = new JTextField();
+								datadevenc1Field.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										calevenc1.setVisible(true);
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calevenc1.getDate());
+										datadevenc1Field.setText(data);
+										
+										
+									}
+								});
+								datadevenc1Field.setHorizontalAlignment(SwingConstants.CENTER);
+								datadevenc1Field.setForeground(Color.WHITE);
+								datadevenc1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								datadevenc1Field.addFocusListener(new FocusAdapter() {
+									@Override
+									public void focusGained(FocusEvent arg0) {
+										
+										
+										
+									}
+								});
+								pagamento.add(datadevenc1Field, "cell 2 3,growx,aligny top");
+								datadevenc1Field.setColumns(10);
+								
+								pagefe1Field = new JTextField();
+								pagefe1Field.setHorizontalAlignment(SwingConstants.CENTER);
+								pagefe1Field.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										calepagef1.setVisible(true);
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calepagef1.getDate());
+										pagefe1Field.setText(data);
+									}
+								});
+								
+								JComboBox status1box = new JComboBox();
+								status1box.addItemListener(new ItemListener() {
+									public void itemStateChanged(ItemEvent e) {
+										if(status1box.getSelectedItem()=="Pendente"){
+										pagefe1Field.setEnabled(false);
+										valoref1Field.setEnabled(false);										
+									
+										
+									}else{
+										pagefe1Field.setEnabled(true);
+										valoref1Field.setEnabled(true);										
+									
+									}
+									}
+								});
+								status1box.setForeground(Color.WHITE);
+								status1box.setFont(new Font("Dialog", Font.PLAIN, 15));
+								status1box.setModel(new DefaultComboBoxModel(new String[] {"Pendente", "Pago"}));
+								pagamento.add(status1box, "cell 4 3,grow");
+								
+								valoref1Field = new JTextField();
+								valoref1Field.setForeground(Color.WHITE);
+								valoref1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(valoref1Field, "cell 6 3,grow");
+								valoref1Field.setColumns(10);
+								pagefe1Field.setForeground(Color.WHITE);
+								pagefe1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(pagefe1Field, "cell 8 3,growx,aligny top");
+								pagefe1Field.setColumns(10);
+								pagamento.add(calevenc1, "cell 2 4,grow");
+								
+								
+								calepagef1.addPropertyChangeListener(new PropertyChangeListener() {
+									public void propertyChange(PropertyChangeEvent arg0) {
+										if(pagefe1Field.isFocusOwner()==true||calepagef1.isVisible()==true){
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calepagef1.getDate());
+										pagefe1Field.setText(data);
+										}
+									}
+								});
+								
+								
+								pagamento.add(calepagef1, "cell 8 4,grow");
+								
+								
+								
+								valor2Field = new JTextField();
+								valor2Field.setForeground(Color.WHITE);
+								valor2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(valor2Field, "cell 0 6,growx,aligny top");
+								valor2Field.setColumns(10);
+								
+								datavenc2Field = new JTextField();
+								datavenc2Field.setHorizontalAlignment(SwingConstants.CENTER);
+								datavenc2Field.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent arg0) {
+										calevenc2.setVisible(true);
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calevenc2.getDate());
+										datavenc2Field.setText(data);
+									}
+								});
+								datavenc2Field.setForeground(Color.WHITE);
+								datavenc2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(datavenc2Field, "cell 2 6,growx,aligny top");
+								datavenc2Field.setColumns(10);
+								
+								pagef2Field = new JTextField();
+								pagef2Field.setHorizontalAlignment(SwingConstants.CENTER);
+								pagef2Field.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										calepag2.setVisible(true);
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calepag2.getDate());
+										pagef2Field.setText(data);
+									}
+								});
+								
+								status2box.setForeground(Color.WHITE);
+								status2box.setFont(new Font("Dialog", Font.PLAIN, 15));
+								status2box.setModel(new DefaultComboBoxModel(new String[] {"Pendente", "Pago"}));
+								pagamento.add(status2box, "cell 4 6,grow");
+								
+								valoref2Field = new JTextField();
+								valoref2Field.setForeground(Color.WHITE);
+								valoref2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(valoref2Field, "cell 6 6,growx,aligny center");
+								valoref2Field.setColumns(10);
+								pagef2Field.setForeground(Color.WHITE);
+								pagef2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(pagef2Field, "cell 8 6,growx,aligny top");
+								pagef2Field.setColumns(10);
+								calevenc2.addPropertyChangeListener(new PropertyChangeListener() {
+									public void propertyChange(PropertyChangeEvent arg0) {
+										if(datavenc2Field.isFocusOwner()==true||calevenc2.isVisible()==true){
+										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+										String data = spd.format(calevenc2.getDate());
+										datavenc2Field.setText(data);
+										}
+									}
+								});
+								
+								pagamento.add(calevenc2, "cell 2 7,grow");
+								calevenc2.setVisible(false);
+								calepagef1.setVisible(false);
+								calepag2.addPropertyChangeListener(new PropertyChangeListener() {
+									public void propertyChange(PropertyChangeEvent evt) {
+										if(pagefe1Field.isFocusOwner()==true||calepag2.isVisible()==true){
+											SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
+											String data = spd.format(calepag2.getDate());
+											pagefe1Field.setText(data);
+											}
+									}
+								});
+								calepag2.setVisible(false);
+								
+								pagamento.add(calepag2, "cell 8 7,grow");
+								
+							
+								lblSegundaParcela.setForeground(Color.WHITE);
+								lblSegundaParcela.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblSegundaParcela, "cell 0 5,alignx left,aligny bottom");
+								
+								JButton btnNewButton_1 = new JButton("New button");
+								pagamento.add(btnNewButton_1, "flowx,cell 8 8,alignx left,aligny top");
+								
+								
+								lblDataDeVencimento_1.setForeground(Color.WHITE);
+								lblDataDeVencimento_1.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblDataDeVencimento_1, "cell 2 5,growx,aligny top");
+								
+								
+								lblPagementoEfetuado2.setForeground(Color.WHITE);
+								lblPagementoEfetuado2.setFont(new Font("Dialog", Font.PLAIN, 15));
+								pagamento.add(lblPagementoEfetuado2, "cell 8 5,growx,aligny top");
+								
+								JButton btnNewButton_2 = new JButton("New button");
+								pagamento.add(btnNewButton_2, "cell 8 8,alignx right,aligny top");
+								
+								JButton btnNewButton = new JButton("New button");
+								btnNewButton.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+									}
+								});
+								pagamento.add(btnNewButton, "cell 8 8,alignx right,aligny top");
+								calevenc1.setVisible(false);
+								pagef2Field.setVisible(false);
+								calepag2.setVisible(false);
+								datavenc2Field.setVisible(false);
+								pagef2Field.setVisible(false);
+								valor2Field.setVisible(false);
+								valoref2Field.setVisible(false);
+								lblPreoFinal_1.setVisible(false);
+								lblDataDeVencimento_1.setVisible(false);
+								lblStatus_1.setVisible(false);
+								lblValorPago_1.setVisible(false);
+								status2box.setVisible(false);
+								lblSegundaParcela.setVisible(false);
+								lblPagementoEfetuado2.setVisible(false);
+								pagefe1Field.setEnabled(false);
+								valoref1Field.setEnabled(false);	
 								
 								JPanel exibirpanel = new JPanel();
 								exibirpanel.setBackground(Color.DARK_GRAY);
@@ -905,15 +1281,7 @@ public void mouseClicked(MouseEvent e) {
 								editPanel.add(precoFieldFim, "cell 6 5,grow");
 								precoFieldFim.setColumns(10);
 								
-								JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
-								lblPreo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPreo_1.setForeground(Color.WHITE);
-								editPanel.add(lblPreo_1, "cell 4 4,alignx left,aligny bottom");
-								
-								JLabel lblPreoFinal = new JLabel("Pre\u00E7o final");
-								lblPreoFinal.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPreoFinal.setForeground(Color.WHITE);
-								editPanel.add(lblPreoFinal, "cell 6 4,alignx left,aligny bottom");
+							
 								
 								JLabel lblbtnVoltar2 = new JLabel("");
 								lblbtnVoltar2.addMouseListener(new MouseAdapter() {
@@ -1007,97 +1375,6 @@ public void mouseClicked(MouseEvent e) {
 								});
 								lblbtnsalvar.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/salvar1.png")));
 								editPanel.add(lblbtnsalvar, "cell 11 5,alignx right");
-								
-								JPanel pagamento = new JPanel();
-								pagamento.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										calendar.setVisible(false);
-									}
-								});
-								pagamento.setBackground(Color.DARK_GRAY);
-								tabbedPane.addTab("Pagamento", null, pagamento, null);
-								pagamento.setLayout(null);
-								
-								precopagField = new JTextField();
-								precopagField.setForeground(Color.WHITE);
-								precopagField.setFont(new Font("Dialog", Font.PLAIN, 15));
-								precopagField.setBounds(31, 43, 119, 20);
-								pagamento.add(precopagField);
-								precopagField.setColumns(10);
-								
-								JLabel lblPreo_2 = new JLabel("Pre\u00E7o");
-								lblPreo_2.setForeground(Color.WHITE);
-								lblPreo_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPreo_2.setBounds(34, 18, 46, 14);
-								pagamento.add(lblPreo_2);
-								
-								textField_1 = new JTextField();
-								textField_1.setForeground(Color.WHITE);
-								textField_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-								textField_1.setBounds(31, 139, 134, 20);
-								pagamento.add(textField_1);
-								textField_1.setColumns(10);
-								
-								JLabel lblPrimeiraParcela = new JLabel("primeira parcela");
-								lblPrimeiraParcela.setForeground(Color.WHITE);
-								lblPrimeiraParcela.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPrimeiraParcela.setBounds(31, 114, 119, 14);
-								pagamento.add(lblPrimeiraParcela);
-								
-								textField_2 = new JTextField();
-								textField_2.setForeground(Color.WHITE);
-								textField_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-								textField_2.setBounds(176, 43, 119, 20);
-								pagamento.add(textField_2);
-								textField_2.setColumns(10);
-								
-								JLabel lblPreoFinal_1 = new JLabel("Pre\u00E7o final");
-								lblPreoFinal_1.setForeground(Color.WHITE);
-								lblPreoFinal_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPreoFinal_1.setBounds(176, 18, 107, 14);
-								pagamento.add(lblPreoFinal_1);
-								
-								JComboBox comboBox = new JComboBox();
-								comboBox.setFont(new Font("Dialog", Font.PLAIN, 15));
-								comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
-								comboBox.setBounds(341, 43, 107, 20);
-								pagamento.add(comboBox);
-								
-								textField_3 = new JTextField();
-								textField_3.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										calendar.setVisible(false);
-									}
-								});
-								textField_3.addFocusListener(new FocusAdapter() {
-									@Override
-									public void focusGained(FocusEvent arg0) {
-										
-										calendar.setVisible(true);
-										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
-										String data = spd.format(calendar.getDate());
-										textField_3.setText(data);
-										
-									}
-								});
-								textField_3.setBounds(228, 141, 86, 20);
-								pagamento.add(textField_3);
-								textField_3.setColumns(10);
-								
-								
-								calendar.addPropertyChangeListener(new PropertyChangeListener() {
-									public void propertyChange(PropertyChangeEvent arg0) {
-										SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
-										String data = spd.format(calendar.getDate());
-										textField_3.setText(data);
-									}
-								});
-								
-								calendar.setBounds(324, 139, 267, 179);
-								pagamento.add(calendar);
-								calendar.setVisible(false);
 					tabelaCategoria.addMouseListener(new MouseAdapter() {
 						
 						
