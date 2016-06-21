@@ -24,7 +24,6 @@ import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.KeyAdapter;
@@ -492,6 +491,17 @@ public class JAluguel2 extends JInternalFrame {
 								lblPreoFinal_1.setForeground(Color.WHITE);
 								lblPreoFinal_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 								JComboBox status2box = new JComboBox();
+								status2box.addItemListener(new ItemListener() {
+									public void itemStateChanged(ItemEvent e) {
+										if(status2box.getSelectedItem()=="Pendente"){
+											pagef2Field.setEnabled(false);
+											valoref2Field.setEnabled(false);	
+										}else{
+											pagef2Field.setEnabled(true);
+											valoref2Field.setEnabled(true);
+										}
+									}
+								});
 								JLabel lblSegundaParcela = new JLabel("Segunda parcela");
 								JLabel lblPagementoEfetuado2 = new JLabel("Data em que o pagamento foi efetuado");
 								JLabel lblDataDeVencimento_1 = new JLabel("Data de vencimento");
@@ -784,7 +794,8 @@ public class JAluguel2 extends JInternalFrame {
 								lblPagementoEfetuado2.setVisible(false);
 								pagefe1Field.setEnabled(false);
 								valoref1Field.setEnabled(false);	
-								
+								pagef2Field.setEnabled(false);
+								valoref2Field.setEnabled(false);	
 								JPanel exibirpanel = new JPanel();
 								exibirpanel.setBackground(Color.DARK_GRAY);
 								tabbedPane.addTab("Selecionar Roupas", null, exibirpanel, null);

@@ -30,7 +30,6 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
-import com.toedter.calendar.JCalendar;
 
 public class Principal extends JFrame {
 
