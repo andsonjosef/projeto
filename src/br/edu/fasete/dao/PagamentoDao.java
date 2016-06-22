@@ -11,4 +11,5 @@ public interface PagamentoDao {
 	public void InserirPagamento(Pagamento p);
 	public Vector<Pagamento> listarPagamentos();
 	public Vector<Pagamento> listarPagamentopesq(String pesq);
+	public void pagamentoTotal(Pagamento p);
 }

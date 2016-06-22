@@ -29,4 +29,7 @@ public class CadastroPagamento implements InterfaceCadastroPagamento {
 	public Vector<Pagamento> listarPagamentopesq(String pesq){
 		return pagamentodao.listarPagamentopesq(pesq);
 	}
+	public void pagamentoTotal(Pagamento p){
+		pagamentodao.pagamentoTotal(p);
+	}
 }

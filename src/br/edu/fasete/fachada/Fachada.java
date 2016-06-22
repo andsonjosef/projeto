@@ -280,4 +280,7 @@ public Vector<Pagamento> listarPagamentos(){
 public Vector<Pagamento> listarPagamentopesq(String pesq){
 	return cadastroPagamento.listarPagamentopesq(pesq);
 }
+public void pagamentoTotal(Pagamento p){
+	cadastroPagamento.pagamentoTotal(p);
+}
 }

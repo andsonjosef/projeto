@@ -30,6 +30,7 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class Principal extends JFrame {
 
@@ -48,12 +49,14 @@ public class Principal extends JFrame {
 	JMenu menuRoupa = new JMenu("");
 	JAluguel2 janelaAluguel = new JAluguel2();
 	JMenu menuAluguel = new JMenu("");
-	JRegistro janelaRegistro = new JRegistro();
+	JRegistro2 janelaRegistro = new JRegistro2();
 	JMenu menuRegistro = new JMenu("");
 	JFuncionario janelaFuncionario = new JFuncionario();
 	JMenu menuFuncionario = new JMenu("");
 	JLixeira janelaLixeira = new JLixeira();
 	JMenu menuLixeira = new JMenu("");
+	JRelatorio janelaRelatorio = new JRelatorio();
+	JMenu menuRelatorio = new JMenu("pagamentos");
 	private final JMenu menuBackup = new JMenu("");
 	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
 	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
@@ -590,9 +593,17 @@ public class Principal extends JFrame {
 	
 	barraMenu.add(menuLixeiro);
 	
-	JLabel label = new JLabel("................");
-	label.setForeground(Color.DARK_GRAY);
-	barraMenu.add(label);
+	
+	menuRelatorio.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			janelaRelatorio.carregarTabelanome();
+			desktop_1.add(janelaRelatorio);
+			janelaRelatorio.setVisible(true);
+			
+		}
+	});
+	barraMenu.add(menuRelatorio);
 	
 	textField = new JTextField();
 	textField.setHorizontalAlignment(SwingConstants.CENTER);
