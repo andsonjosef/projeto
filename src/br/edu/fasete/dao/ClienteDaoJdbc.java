@@ -94,6 +94,7 @@ public class ClienteDaoJdbc implements ClienteDao {
 			c.setBairro(rs.getString("bairro"));
 			c.setNumero(rs.getString("numero"));
 			c.setEndereco(rs.getString("endereco"));
+			c.setCodCliente(rs.getInt("codCliente"));
 			}
 		 }catch(Exception es){
 			 JOptionPane.showMessageDialog(null,"Cliente não encontrado");
@@ -225,8 +226,8 @@ ResultSet rs = stmt.executeQuery();
 			   JOptionPane.showMessageDialog(null,"Cliente cadastrado!");  
 			 
 	}catch(Exception es){
-		  //  JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
-		  JOptionPane.showMessageDialog(null,es);
+		   JOptionPane.showMessageDialog(null,"Os dados são invalidos ou estão vazios!!!");
+		  //JOptionPane.showMessageDialog(null,es);
 	  }
 	}
 

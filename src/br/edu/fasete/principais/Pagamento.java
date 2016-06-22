@@ -11,12 +11,15 @@ public class Pagamento {
 	String status2;
 	float valorPago2;
 	String dataPago2;
+	String cliente;
+	String funcionario;
+	int codCliente;
 	
 	
 	public Pagamento(){
 		
 	}
-	public Pagamento(String dataVenc1, float valorParc1, String status1,float valorPago1,String dataPago1,String dataVenc2,	float valorParc2,String status2,float valorPago2,String dataPago2) {
+	public Pagamento(int codCliente, String cliente, String funcionario, String dataVenc1, float valorParc1, String status1,float valorPago1,String dataPago1,String dataVenc2,	float valorParc2,String status2,float valorPago2,String dataPago2) {
 		super();
 		this.dataVenc1 = dataVenc1;
 		this.valorParc1 = valorParc1;
@@ -28,6 +31,27 @@ public class Pagamento {
 		this.status2 = status2;
 		this.valorPago2 = valorPago2;
 		this.dataPago2 = dataPago2;
+		this.cliente = cliente;
+		this.funcionario = funcionario;
+		this.codCliente = codCliente;
+	}
+	public int getCodCliente() {
+		return codCliente;
+	}
+	public void setCodCliente(int codCliente) {
+		this.codCliente = codCliente;
+	}
+	public String getCliente() {
+		return cliente;
+	}
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+	public String getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(String funcionario) {
+		this.funcionario = funcionario;
 	}
 	public String getDataVenc1() {
 		return dataVenc1;

@@ -6,6 +6,7 @@ import br.edu.fasete.cadastro.CadastroAluguel;
 import br.edu.fasete.cadastro.CadastroLixeira;
 import br.edu.fasete.cadastro.CadastroFuncionario;
 import br.edu.fasete.cadastro.CadastroLogin;
+import br.edu.fasete.cadastro.CadastroPagamento;
 import br.edu.fasete.cadastro.CadastroCliente;
 import br.edu.fasete.cadastro.CadastroRoupa;
 import br.edu.fasete.cadastro.CadastroRegistro;
@@ -14,6 +15,7 @@ import br.edu.fasete.cadastro.InterfaceCadastroCliente;
 import br.edu.fasete.cadastro.InterfaceCadastroFuncionario;
 import br.edu.fasete.cadastro.InterfaceCadastroLixeira;
 import br.edu.fasete.cadastro.InterfaceCadastroLogin;
+import br.edu.fasete.cadastro.InterfaceCadastroPagamento;
 import br.edu.fasete.cadastro.InterfaceCadastroRegistro;
 import br.edu.fasete.cadastro.InterfaceCadastroRoupa;
 import br.edu.fasete.dao.AluguelDaoJdbc;
@@ -23,9 +25,11 @@ import br.edu.fasete.dao.LixeiraDaoJdbc;
 import br.edu.fasete.dao.LoginDaoJdbc;
 import br.edu.fasete.dao.RegistroDaoJdbc;
 import br.edu.fasete.dao.RoupaDaoJdbc;
+import br.edu.fasete.dao.PagamentoDaoJdbc;
 import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Funcionario;
+import br.edu.fasete.principais.Pagamento;
 import br.edu.fasete.principais.Roupa;
 
 
@@ -38,6 +42,7 @@ private InterfaceCadastroRegistro cadastroRegistro;
 private InterfaceCadastroFuncionario cadastroFuncionario;
 private InterfaceCadastroLogin cadastroLogin;
 private InterfaceCadastroLixeira cadastroLixeira;
+private InterfaceCadastroPagamento cadastroPagamento;
 
 private static Fachada instancia;
 
@@ -55,6 +60,7 @@ private Fachada() {
 	cadastroFuncionario = new CadastroFuncionario(new FuncionarioDaoJdbc());
 	cadastroLogin = new CadastroLogin(new LoginDaoJdbc());
 	cadastroLixeira = new CadastroLixeira(new LixeiraDaoJdbc());
+	cadastroPagamento = new CadastroPagamento(new PagamentoDaoJdbc());
 }
 
 //------------Cliente----------------------
@@ -253,5 +259,25 @@ public Vector<Aluguel> ListarRegistrolixeira( Aluguel a){
 }
 public Vector<Roupa> listarRoupaListaFimlixeira(Cliente c){
 	return cadastroRegistro.listarRoupaListaFimlixeira(c);
+}
+
+//-----Pagamento------
+public void AtualizarPagamento(Pagamento p, String cliente){
+	cadastroPagamento.AtualizarPagamento(p, cliente);
+}
+public void BuscarPagamento(Pagamento p, String pesq){
+	cadastroPagamento.BuscarPagamento(p, pesq);
+}
+public void ExcluirPagamento(Pagamento p){
+	cadastroPagamento.ExcluirPagamento(p);
+}
+public void InserirPagamento(Pagamento p){
+	cadastroPagamento.InserirPagamento(p);
+}
+public Vector<Pagamento> listarPagamentos(){
+	return cadastroPagamento.listarPagamentos();
+}
+public Vector<Pagamento> listarPagamentopesq(String pesq){
+	return cadastroPagamento.listarPagamentopesq(pesq);
 }
 }

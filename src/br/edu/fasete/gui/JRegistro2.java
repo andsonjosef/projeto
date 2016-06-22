@@ -74,8 +74,8 @@ public class JRegistro2 extends JInternalFrame {
 	private JFormattedTextField datalocaField2;
 	private JFormattedTextField datadevoField2;
 	private JTextField precofimField2;
-	private JFormattedTextField dataLoca;
-	private JFormattedTextField DataDevo;
+	private JTextField dataLoca;
+	private JTextField DataDevo;
 	private JTextField precoFieldal;
 	private JTextField precoFieldFim;
 	java.util.Date x;
@@ -483,7 +483,7 @@ public class JRegistro2 extends JInternalFrame {
 					try {
 						MaskFormatter mascara = new MaskFormatter("##/##/####");
 						mascara.setPlaceholderCharacter('_');
-						dataLoca = new JFormattedTextField(mascara);
+						dataLoca = new JTextField();
 						dataLoca.setFont(new Font("Dialog", Font.PLAIN, 15));
 						dataLoca.setEditable(false);
 						editPanel.add(dataLoca, "cell 0 5,grow");
@@ -504,7 +504,7 @@ public class JRegistro2 extends JInternalFrame {
 					try {
 						MaskFormatter mascara = new MaskFormatter("##/##/####");
 						mascara.setPlaceholderCharacter('_');
-						DataDevo = new JFormattedTextField(mascara);
+						DataDevo = new JTextField();
 						DataDevo.setFont(new Font("Dialog", Font.PLAIN, 15));
 						DataDevo.setEditable(false);
 						editPanel.add(DataDevo, "cell 2 5,grow");

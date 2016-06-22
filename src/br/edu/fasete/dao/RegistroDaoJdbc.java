@@ -151,10 +151,10 @@ public class RegistroDaoJdbc implements RegistroDao{
 						a.setCodCliente(resultado.getInt("codCliente"));
 						a.setDataEntre(resultado.getString("dataDevo"));
 						a.setDataLoca(resultado.getString("dataLoca"));
-						a.setPrecoTotal(resultado.getFloat("precoFinal"));
+					
 						a.setPreco(resultado.getFloat("preco"));
 						a.setFuncionario(resultado.getString("funcionario"));
-						a.setPagamento(resultado.getString("pagamento"));
+						
 						a.setCodAluguel(resultado.getInt("codAluguel"));
 					}
 				
@@ -162,27 +162,8 @@ public class RegistroDaoJdbc implements RegistroDao{
 				e.printStackTrace();
 				
 			}
-		  try {		
-			 
-			  
-				PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-				  .prepareStatement("insert into loja.aluguellixeira  (codCliente,dataLoca,dataDevo,preco,precoFinal,funcionario,pagamento,codAluguel) values (?,?,?,?,?,?,?,?)") ;
-					 stmt.setInt(1, a.getCodCliente());
-					 stmt.setString(2, a.getDataLoca());
-					 stmt.setString(3,a.getDataEntre());
-					 stmt.setFloat(4,a.getPreco());
-					 stmt.setFloat(5, a.getPrecoTotal());
-					stmt.setString(6,a.getFuncionario());
-					stmt.setString(7,a.getPagamento());
-					stmt.setInt(8, a.getCodAluguel());
-					 
-					 stmt.executeUpdate();
-					 
-					
-				}catch(Exception es){
-					
-									  JOptionPane.showMessageDialog(null,es);
-				}
+		  
+				
 		try {
 			  PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
 			  .prepareStatement( "DELETE FROM loja.aluguel where codCliente = ?");
@@ -358,14 +339,14 @@ JOptionPane.showMessageDialog(null,e);
 	public void InserirRegistro(Aluguel a,Funcionario f) {		   
 		try {											  
 			PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,precoFinal,funcionario,pagamento) values (?,?,?,?,?,?,?)") ;
+			  .prepareStatement("insert into loja.aluguel  (codCliente,dataLoca,dataDevo,preco,funcionario) values (?,?,?,?,?)") ;
 				 stmt.setInt(1, a.getCodCliente());
 				 stmt.setString(2, a.getDataLoca());
 				 stmt.setString(3,a.getDataEntre());
 				 stmt.setFloat(4,a.getPreco());
-				 stmt.setFloat(5, a.getPrecoTotal());
-				 stmt.setString(6,f.getLogin());
-				 stmt.setString(7, a.getPagamento());
+				
+				 stmt.setString(5,f.getLogin());
+				
 				 stmt.executeUpdate();
 				 JOptionPane.showMessageDialog(null,"Registro cadastrado!");
 				 a.setErro(false);
@@ -535,10 +516,10 @@ JOptionPane.showMessageDialog(null,e);
 					
 					a.setDataEntre(resultado.getString("dataDevo"));
 					a.setDataLoca(resultado.getString("dataLoca"));
-					a.setPrecoTotal(resultado.getFloat("precoFinal"));
+					
 					a.setPreco(resultado.getFloat("preco"));
 					a.setFuncionario(resultado.getString("funcionario"));
-					a.setPagamento(resultado.getString("pagamento"));
+		
 				}
 			
 		}catch(SQLException e){
@@ -581,7 +562,7 @@ try {
 				al.setCodCliente(resultado.getInt("codCliente"));
 				al.setDataEntre(resultado.getString("dataDevo"));
 				al.setDataLoca(resultado.getString("dataLoca"));
-				al.setPrecoTotal(resultado.getFloat("precoFinal"));
+			
 				lista.add(al);
 				
 			}
