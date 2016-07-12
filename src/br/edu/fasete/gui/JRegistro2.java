@@ -702,7 +702,7 @@ String pesq = "";
 							dataVenc1Field.setText(p.getDataVenc1());
 							dataVenc2Field.setText(p.getDataVenc2());
 							valorPago1Field.setText(String.valueOf(p.getValorPago1()));
-							valorPago2Field.setText(""+p.getDataPago2());
+							valorPago2Field.setText(""+p.getValorPago2());
 							valorParc1Field.setText(""+p.getValorParc1());
 							valorParc2Field.setText(""+p.getValorParc2());
 							if(valorPago1Field.getText()=="null"){
@@ -1429,21 +1429,27 @@ String pesq = "";
 								p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
 								p.setDataVenc1(dataVenc1Field.getText());
 								p.setStatus1((String) status1box.getSelectedItem());
-							
+								if(status1box.getSelectedItem()=="Pago"){
 								p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
 								p.setDataPago1(dataPago1Field.getText());
-													
+								}
+								if(comboBox.getSelectedItem()=="2 vezes"){
 								p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
 								p.setDataVenc2(dataVenc2Field.getText());
 								p.setStatus2((String) status2box.getSelectedItem());
-								
+								if(status2box.getSelectedItem()=="Pago"){
+									
 								p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
 								p.setDataPago2(dataPag2Field.getText());
-														
-								p.setCliente(c.getNome());
-								p.setFuncionario(f.getNome());
-								String cliente = "";
+								}
+								}
+								
+								
+							String cliente="";
+							p.setCodCliente(c.getCodCliente());
+							Fachada.getInstancia().pagamentoTotal(p);
 								Fachada.getInstancia().AtualizarPagamento(p, cliente);
+								tabbedPane.setSelectedIndex(0);
 							}
 						});
 						

@@ -1562,7 +1562,12 @@ public void mouseClicked(MouseEvent e) {
 											if(status1box.getSelectedItem()=="Pago"){
 											p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
 											p.setDataPago1(dataPago1Field.getText());
+											}else{
+												
+												p.setValorPago1(0);
+												p.setDataPago1("Pendente");
 											}
+											
 											if(comboBox.getSelectedItem()=="2 vezes"){
 											p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
 											p.setDataVenc2(dataVenc2Field.getText());
@@ -1571,6 +1576,10 @@ public void mouseClicked(MouseEvent e) {
 												
 											p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
 											p.setDataPago2(dataPag2Field.getText());
+											}
+											else{
+												p.setValorPago2(0);
+												p.setDataPago2("Pendente");
 											}
 											}
 											

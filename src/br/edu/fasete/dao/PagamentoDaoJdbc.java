@@ -17,7 +17,7 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 
 		  try {
 			  PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =? precoTotal=? where codCliente = ?");
+					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =?, precoTotal=? where codCliente = ?");
 		 
 			   stmt.setFloat(1,p.getValorParc1());
 			   stmt.setString(2,p.getDataVenc1());
