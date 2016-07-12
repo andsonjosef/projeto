@@ -17,9 +17,9 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 
 		  try {
 			  PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ? preco = ?, precoFinal =? precoTotal=? where codCliente = ?");
+					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =? precoTotal=? where codCliente = ?");
 		 
-			  stmt.setFloat(1,p.getValorParc1());
+			   stmt.setFloat(1,p.getValorParc1());
 			   stmt.setString(2,p.getDataVenc1());
 			   stmt.setString(3,p.getStatus1());
 			   stmt.setFloat(4,p.getValorPago1());
@@ -29,17 +29,18 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 			   stmt.setString(8,p.getStatus2());
 			   stmt.setFloat(9,p.getValorPago2());
 			   stmt.setString(10, p.getDataPago2());
-			   stmt.setInt(11,p.getCodCliente());
-			   stmt.setFloat(12, p.getPreco());
-			   stmt.setFloat(13,p.getPrecoFinal());
-			   stmt.setFloat(14, p.getPrecoTotal());
+			  
+			   stmt.setFloat(11, p.getPreco());
+			   stmt.setFloat(12,p.getPrecoFinal());
+			   stmt.setFloat(13, p.getPrecoTotal());
+			   stmt.setInt(14,p.getCodCliente());
 		   
 		   stmt.executeUpdate();
 			 JOptionPane.showMessageDialog(null,"Pagamento salvo!");
 		  
 		   
 		  }catch(Exception e){
-		    JOptionPane.showMessageDialog(null,"Dados invalidos!");
+		    JOptionPane.showMessageDialog(null,e);
 		  }
 	
 	}

@@ -681,11 +681,16 @@ public class JRegistro2 extends JInternalFrame {
 					pagamentoField.setEditable(false);
 					editPanel.add(pagamentoField, "cell 8 5,grow");
 					pagamentoField.setColumns(10);
+					lblbtnVoltar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/VOLTAR1.png")));
+					editPanel.add(lblbtnVoltar, "flowx,cell 11 5,alignx right,aligny bottom");
+					lblbtnExcluir.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/excluir1.png")));
+					editPanel.add(lblbtnExcluir, "cell 11 5,alignx right,aligny bottom");
 					
-					JButton btnPagamentto = new JButton("PAGAMENTTO");
-					btnPagamentto.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							String pesq = "";
+					JLabel lblbtnPagar = new JLabel("");
+					lblbtnPagar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+String pesq = "";
 							
 							p.setCodCliente(c.getCodCliente());
 							Fachada.getInstancia().BuscarPagamento(p, pesq);
@@ -710,11 +715,8 @@ public class JRegistro2 extends JInternalFrame {
 							}
 						}
 					});
-					editPanel.add(btnPagamentto, "flowx,cell 11 5,alignx right");
-					lblbtnVoltar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/VOLTAR1.png")));
-					editPanel.add(lblbtnVoltar, "cell 11 5,alignx right,aligny bottom");
-					lblbtnExcluir.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/excluir1.png")));
-					editPanel.add(lblbtnExcluir, "cell 11 5,alignx right,aligny bottom");
+					lblbtnPagar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/pagamento1.png")));
+					editPanel.add(lblbtnPagar, "cell 11 5");
 					lblbtnEditar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/editar1.png")));
 					editPanel.add(lblbtnEditar, "cell 11 5,alignx right,aligny bottom");
 					
@@ -1068,9 +1070,6 @@ public class JRegistro2 extends JInternalFrame {
 					panel.add(lblPreo_2);
 					lblPreo_2.setForeground(Color.WHITE);
 					lblPreo_2.setFont(new Font("Dialog", Font.PLAIN, 15));
-					
-					JButton btnNewButton_3 = new JButton("New button");
-					pagamento.add(btnNewButton_3, "cell 10 3");
 					JLabel lblStatus_1 = new JLabel("Status");
 					lblStatus_1.setForeground(Color.WHITE);
 					lblStatus_1.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -1323,6 +1322,31 @@ public class JRegistro2 extends JInternalFrame {
 						dataVenc2Field.setColumns(10);
 						
 						dataPag2Field = new JTextField();
+						dataPag2Field.addKeyListener(new KeyAdapter() {
+							@Override
+							public void keyPressed(KeyEvent e) {
+								if(e.getKeyCode()==KeyEvent.VK_ENTER){
+									p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
+									p.setDataVenc1(dataVenc1Field.getText());
+									p.setStatus1((String) status1box.getSelectedItem());
+								
+									p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
+									p.setDataPago1(dataPago1Field.getText());
+														
+									p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
+									p.setDataVenc2(dataVenc2Field.getText());
+									p.setStatus2((String) status2box.getSelectedItem());
+									
+									p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
+									p.setDataPago2(dataPag2Field.getText());
+															
+									p.setCliente(c.getNome());
+									p.setFuncionario(f.getNome());
+									String cliente = "";
+									Fachada.getInstancia().AtualizarPagamento(p, cliente);
+								}
+							}
+						});
 						dataPag2Field.addFocusListener(new FocusAdapter() {
 							@Override
 							public void focusGained(FocusEvent e) {
@@ -1367,9 +1391,6 @@ public class JRegistro2 extends JInternalFrame {
 							}
 						});
 						
-						JButton btnNewButton_4 = new JButton("New button");
-						pagamento.add(btnNewButton_4, "cell 10 6");
-						
 						pagamento.add(calevenc2, "cell 2 7,grow");
 						calevenc2.setVisible(false);
 						calepagef1.setVisible(false);
@@ -1391,9 +1412,6 @@ public class JRegistro2 extends JInternalFrame {
 						lblSegundaParcela.setFont(new Font("Dialog", Font.PLAIN, 15));
 						pagamento.add(lblSegundaParcela, "cell 0 5,alignx left,aligny bottom");
 						
-						JButton btnNewButton_1 = new JButton("New button");
-						pagamento.add(btnNewButton_1, "flowx,cell 8 8,alignx left,aligny top");
-						
 						
 						lblDataDeVencimento_1.setForeground(Color.WHITE);
 						lblDataDeVencimento_1.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -1404,12 +1422,10 @@ public class JRegistro2 extends JInternalFrame {
 						lblPagementoEfetuado2.setFont(new Font("Dialog", Font.PLAIN, 15));
 						pagamento.add(lblPagementoEfetuado2, "cell 8 5,growx,aligny top");
 						
-						JButton btnNewButton_2 = new JButton("New button");
-						pagamento.add(btnNewButton_2, "cell 8 8,alignx right,aligny top");
-						
-						JButton btnSalvar = new JButton("Salvar");
-						btnSalvar.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
+						JLabel lblbtnSalvar = new JLabel("");
+						lblbtnSalvar.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
 								p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
 								p.setDataVenc1(dataVenc1Field.getText());
 								p.setStatus1((String) status1box.getSelectedItem());
@@ -1428,12 +1444,14 @@ public class JRegistro2 extends JInternalFrame {
 								p.setFuncionario(f.getNome());
 								String cliente = "";
 								Fachada.getInstancia().AtualizarPagamento(p, cliente);
-								
-								
-								
 							}
 						});
-						pagamento.add(btnSalvar, "cell 8 8,alignx right,aligny top");
+						
+						JLabel lblbtnCancelar = new JLabel("");
+						lblbtnCancelar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/cancelar1.png")));
+						pagamento.add(lblbtnCancelar, "flowx,cell 8 8");
+						lblbtnSalvar.setIcon(new ImageIcon(JRegistro2.class.getResource("/imagens/salvar1.png")));
+						pagamento.add(lblbtnSalvar, "cell 8 8");
 					/*	calevenc1.setVisible(false);
 						dataPag2Field.setVisible(false);
 						calepag2.setVisible(false);

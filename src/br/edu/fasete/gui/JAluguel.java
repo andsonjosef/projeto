@@ -340,6 +340,15 @@ public class JAluguel extends JInternalFrame {
 								cadast.add(numeroField, "cell 6 8 3 1,grow");
 								numeroField.setColumns(10);
 								tabelaCategoria = new JTable(new ClienteTableModel());
+								tabelaCategoria.addKeyListener(new KeyAdapter() {
+									@Override
+									public void keyPressed(KeyEvent arg0) {
+										srow = tabelaCategoria.getSelectedRow();
+										svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+										svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+										
+									}
+								});
 								tabelaCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								tabelaCategoria.addMouseListener(new MouseAdapter() {
 									public void mouseReleased(MouseEvent arg0) {

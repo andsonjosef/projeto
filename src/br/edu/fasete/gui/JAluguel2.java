@@ -40,6 +40,7 @@ import com.toedter.calendar.JCalendar;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -373,6 +374,53 @@ public class JAluguel2 extends JInternalFrame {
 								cadast.add(numeroField, "cell 6 8 3 1,grow");
 								numeroField.setColumns(10);
 								tabelaCategoria = new JTable(new ClienteTableModel());
+								tabelaCategoria.addKeyListener(new KeyAdapter() {
+									@Override
+									public void keyPressed(KeyEvent e) {
+										if(e.getKeyCode()==KeyEvent.VK_DOWN){
+										srow = tabelaCategoria.getSelectedRow()+1;
+										svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+										svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+										c.setNome(svalueName);
+										
+										String pesq = "";
+										pesq = svalueName;
+										
+										Fachada.getInstancia().BuscarClientenome(c,pesq);
+										nomeField.setText(c.getNome());
+										cpfField.setText(""+c.getCPF());
+										
+										cidadeField.setText(c.getCidade());
+										estadoField.setText(c.getEstado());
+										enderecoField.setText(c.getEndereco());
+										numeroField.setText(""+c.getNumero());
+										bairroField.setText(c.getBairro());
+										telefoneField.setText(""+c.getTelefone());
+										}
+										if(e.getKeyCode()==KeyEvent.VK_UP){
+											srow = tabelaCategoria.getSelectedRow()-1;
+											svalueCpf = (String) tabelaCategoria.getValueAt(srow, 1);
+											svalueName = (String) tabelaCategoria.getValueAt(srow, 0);
+											c.setNome(svalueName);
+											
+											String pesq = "";
+											pesq = svalueName;
+											
+											Fachada.getInstancia().BuscarClientenome(c,pesq);
+											nomeField.setText(c.getNome());
+											cpfField.setText(""+c.getCPF());
+											
+											cidadeField.setText(c.getCidade());
+											estadoField.setText(c.getEstado());
+											enderecoField.setText(c.getEndereco());
+											numeroField.setText(""+c.getNumero());
+											bairroField.setText(c.getBairro());
+											telefoneField.setText(""+c.getTelefone());
+											}
+									}
+									
+									
+								});
 								tabelaCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
 								tabelaCategoria.addMouseListener(new MouseAdapter() {
 									public void mouseReleased(MouseEvent arg0) {
@@ -698,25 +746,8 @@ public class JAluguel2 extends JInternalFrame {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										
-									/*	int linha = 0;
-										 
-										int linhat = tabelaRoupasele.getRowCount();
-										
-										while(linha < linhat){
-										r.setCodRoupa((int) tabelaRoupasele.getValueAt(linha, 0));
-										r.setTipo( (String) tabelaRoupasele.getValueAt(linha, 1));
-										r.setModelo( (String) tabelaRoupasele.getValueAt(linha, 2));
-										r.setTamanho( (String) tabelaRoupasele.getValueAt(linha, 3));
-										r.setGenero( (String) tabelaRoupasele.getValueAt(linha, 4));
-										r.setCor( (String) tabelaRoupasele.getValueAt(linha, 5));
-										r.setPreco( (float) tabelaRoupasele.getValueAt(linha, 6));
-								
-										linha++;
 									
-										Fachada.getInstancia().InserirLista(r, c);
 										
-										}
-										*/
 										if(tabelaRoupasele.getRowCount()==0){
 											JOptionPane.showMessageDialog(null, "Selecione alguma roupa.");
 										}else{
@@ -726,6 +757,7 @@ public class JAluguel2 extends JInternalFrame {
 										Fachada.getInstancia().SomaPreco(a);
 										precoFieldal.setText(""+a.getPreco());
 										tabbedPane.setSelectedIndex(2);
+										nomeField2.requestFocus();
 										}
 										
 										
@@ -948,11 +980,11 @@ public void mouseClicked(MouseEvent e) {
 				dataDevo.setColumns(10);
 				calendarDevo.addPropertyChangeListener(new PropertyChangeListener() {
 					public void propertyChange(PropertyChangeEvent evt) {
-						calendarLoca.setVisible(true);
-						if(dataLoca.isFocusOwner()==true||calendarLoca.isVisible()==true){
+						calendarDevo.setVisible(true);
+						if(dataDevo.isFocusOwner()==true||calendarDevo.isVisible()==true){
 							SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
-							String data = spd.format(calendarLoca.getDate());
-							dataLoca.setText(data);
+							String data = spd.format(calendarDevo.getDate());
+							dataDevo.setText(data);
 							}
 					}
 				});
@@ -1129,7 +1161,7 @@ public void mouseClicked(MouseEvent e) {
 								pagamento.add(lblPreoFinal_1, "flowx,cell 2 0");
 								lblPreoFinal_1.setForeground(Color.WHITE);
 								lblPreoFinal_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-								lblPreoFinal_1.setVisible(false);
+								
 								precoSomaField = new JTextField();
 								precoSomaField.setEditable(false);
 								pagamento.add(precoSomaField, "cell 0 1,growx");
@@ -1154,9 +1186,6 @@ public void mouseClicked(MouseEvent e) {
 									});
 									comboBox.setFont(new Font("Dialog", Font.PLAIN, 15));
 									comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
-								
-								JButton btnNewButton_3 = new JButton("New button");
-								pagamento.add(btnNewButton_3, "cell 10 4");
 								JLabel lblStatus_1 = new JLabel("Status");
 								lblStatus_1.setForeground(Color.WHITE);
 								lblStatus_1.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -1371,6 +1400,38 @@ public void mouseClicked(MouseEvent e) {
 									dataVenc2Field.setColumns(10);
 									
 									dataPag2Field = new JTextField();
+									dataPag2Field.addKeyListener(new KeyAdapter() {
+										@Override
+										public void keyPressed(KeyEvent e) {
+											if(e.getKeyCode()==KeyEvent.VK_ENTER){
+												p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
+												p.setDataVenc1(dataVenc1Field.getText());
+												p.setStatus1((String) status1box.getSelectedItem());
+												if(status1box.getSelectedItem()=="Pago"){
+												p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
+												p.setDataPago1(dataPago1Field.getText());
+												}
+												if(comboBox.getSelectedItem()=="2 vezes"){
+												p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
+												p.setDataVenc2(dataVenc2Field.getText());
+												p.setStatus2((String) status2box.getSelectedItem());
+												if(status2box.getSelectedItem()=="Pago"){
+													
+												p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
+												p.setDataPago2(dataPag2Field.getText());
+												}
+												}
+												
+												
+											String cliente="";
+											p.setCodCliente(c.getCodCliente());
+											Fachada.getInstancia().pagamentoTotal(p);
+												Fachada.getInstancia().AtualizarPagamento(p, cliente);
+												
+												
+											}
+										}
+									});
 									dataPag2Field.setEnabled(false);
 									dataPag2Field.addFocusListener(new FocusAdapter() {
 										@Override
@@ -1419,9 +1480,6 @@ public void mouseClicked(MouseEvent e) {
 										}
 									});
 									
-									JButton btnNewButton_4 = new JButton("New button");
-									pagamento.add(btnNewButton_4, "cell 10 7");
-									
 									pagamento.add(calevenc2, "cell 2 8,grow");
 									calevenc2.setVisible(false);
 									calepagef1.setVisible(false);
@@ -1443,9 +1501,6 @@ public void mouseClicked(MouseEvent e) {
 									lblSegundaParcela.setFont(new Font("Dialog", Font.PLAIN, 15));
 									pagamento.add(lblSegundaParcela, "cell 0 6,alignx left,aligny bottom");
 									
-									JButton btnNewButton_1 = new JButton("New button");
-									pagamento.add(btnNewButton_1, "flowx,cell 8 9,alignx left,aligny top");
-									
 									
 									lblDataDeVencimento_1.setForeground(Color.WHITE);
 									lblDataDeVencimento_1.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -1455,41 +1510,6 @@ public void mouseClicked(MouseEvent e) {
 									lblPagementoEfetuado2.setForeground(Color.WHITE);
 									lblPagementoEfetuado2.setFont(new Font("Dialog", Font.PLAIN, 15));
 									pagamento.add(lblPagementoEfetuado2, "cell 8 6,growx,aligny top");
-									
-									JButton btnNewButton_2 = new JButton("New button");
-									pagamento.add(btnNewButton_2, "cell 8 9,alignx right,aligny top");
-									
-									JButton btnSalvar = new JButton("Salvar");
-									btnSalvar.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent arg0) {
-											p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
-											p.setDataVenc1(dataVenc1Field.getText());
-											p.setStatus1((String) status1box.getSelectedItem());
-											if(status1box.getSelectedItem()=="Pago"){
-											p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
-											p.setDataPago1(dataPago1Field.getText());
-											}
-											if(comboBox.getSelectedItem()=="2 vezes"){
-											p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
-											p.setDataVenc2(dataVenc2Field.getText());
-											p.setStatus2((String) status2box.getSelectedItem());
-											if(status2box.getSelectedItem()=="Pago"){
-												
-											p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
-											p.setDataPago2(dataPag2Field.getText());
-											}
-											}
-											
-											
-										String cliente="";
-										p.setCodCliente(c.getCodCliente());
-										Fachada.getInstancia().pagamentoTotal(p);
-											Fachada.getInstancia().AtualizarPagamento(p, cliente);
-											
-											
-											
-										}
-									});
 									comboBox.addItemListener(new ItemListener() {
 										public void itemStateChanged(ItemEvent arg0) {
 											String escolha = (String) comboBox.getSelectedItem();
@@ -1532,7 +1552,43 @@ public void mouseClicked(MouseEvent e) {
 										}
 									});
 									
-									pagamento.add(btnSalvar, "cell 8 9,alignx right,aligny top");
+									JLabel lblbtnSalvar = new JLabel("");
+									lblbtnSalvar.addMouseListener(new MouseAdapter() {
+										@Override
+										public void mouseClicked(MouseEvent arg0) {
+											p.setValorParc1(Float.parseFloat(valorParc1Field.getText()));
+											p.setDataVenc1(dataVenc1Field.getText());
+											p.setStatus1((String) status1box.getSelectedItem());
+											if(status1box.getSelectedItem()=="Pago"){
+											p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
+											p.setDataPago1(dataPago1Field.getText());
+											}
+											if(comboBox.getSelectedItem()=="2 vezes"){
+											p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
+											p.setDataVenc2(dataVenc2Field.getText());
+											p.setStatus2((String) status2box.getSelectedItem());
+											if(status2box.getSelectedItem()=="Pago"){
+												
+											p.setValorPago2(Float.parseFloat(valorPago2Field.getText()));
+											p.setDataPago2(dataPag2Field.getText());
+											}
+											}
+											
+											
+										String cliente="";
+										p.setCodCliente(c.getCodCliente());
+										Fachada.getInstancia().pagamentoTotal(p);
+											Fachada.getInstancia().AtualizarPagamento(p, cliente);
+											
+											
+										}
+									});
+									
+									JLabel lblbtnCancelar = new JLabel("");
+									lblbtnCancelar.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/cancelar1.png")));
+									pagamento.add(lblbtnCancelar, "flowx,cell 8 9");
+									lblbtnSalvar.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/salvar1.png")));
+									pagamento.add(lblbtnSalvar, "cell 8 9,alignx right");
 									calevenc1.setVisible(false);
 									dataPag2Field.setVisible(false);
 									calepag2.setVisible(false);
@@ -1704,4 +1760,5 @@ public void mouseClicked(MouseEvent e) {
 		funcioField.setText("");
 		
 	}
+
 }

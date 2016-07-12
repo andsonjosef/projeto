@@ -18,19 +18,27 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+
 import java.awt.Color;
 import java.awt.HeadlessException;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+
 import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 public class Principal extends JFrame {
 
@@ -43,9 +51,9 @@ public class Principal extends JFrame {
 	
 	
 	Funcionario f = new Funcionario();
-	JCadastroCliente janelaCliente = new JCadastroCliente();
+	JCadastroCliente2 janelaCliente = new JCadastroCliente2();
 	JMenu menuCliente = new JMenu("");
-	JCadastroRoupa janelaRoupa = new JCadastroRoupa();
+	JCadastroRoupa2 janelaRoupa = new JCadastroRoupa2();
 	JMenu menuRoupa = new JMenu("");
 	JAluguel2 janelaAluguel = new JAluguel2();
 	JMenu menuAluguel = new JMenu("");
@@ -56,7 +64,7 @@ public class Principal extends JFrame {
 	JLixeira janelaLixeira = new JLixeira();
 	JMenu menuLixeira = new JMenu("");
 	JRelatorio janelaRelatorio = new JRelatorio();
-	JMenu menuRelatorio = new JMenu("pagamentos");
+	JMenu menuRelatorio = new JMenu("");
 	private final JMenu menuBackup = new JMenu("");
 	private final JMenuItem mntmCriarBackup = new JMenuItem("Criar Backup");
 	private final JMenuItem mntmRestaurarDeBackup = new JMenuItem("Restaurar de Backup");
@@ -113,7 +121,17 @@ public class Principal extends JFrame {
 		setBounds(100, 100, 900, 700);
 		setExtendedState(MAXIMIZED_BOTH);
 		
-		
+		InputMap inputMap = this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0),"forward");
+		this.getRootPane().setInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW, inputMap);
+		this.getRootPane().getActionMap().put("forward", new AbstractAction(){
+		    private static final long serialVersionUID = 1L;
+		    @Override
+		    public void actionPerformed(ActionEvent arg0) {
+		        System.out.println("F2 foi pressionado");
+		       
+		    }
+		});
 		
 		//this.setUndecorated(true);        
 		
@@ -123,6 +141,9 @@ public class Principal extends JFrame {
 		barraMenu.setForeground(Color.DARK_GRAY);
 		barraMenu.setBackground(Color.DARK_GRAY);
 		setJMenuBar(barraMenu);
+		
+		
+
 		
 		
 		menuCliente.setForeground(Color.WHITE);
@@ -184,8 +205,48 @@ public class Principal extends JFrame {
 		barraMenu.add(menuCliente);
 		
 		////
-		
-		
+		ActionListener menucluienttc = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(janelaCliente.isFocusable()==true){
+					desktop_1.add(janelaCliente);
+					janelaCliente.setVisible(true);
+				
+					janelaCliente.carregarTabela();
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu3.png")));
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
+					janelaRoupa.dispose();
+					janelaAluguel.dispose();
+					janelaRegistro.dispose();
+					janelaFuncionario.dispose();
+					janelaCliente.limparFields();
+					
+				}
+				try {
+					janelaCliente.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		};
+		menuCliente.addActionListener(menucluienttc);
+		menuCliente.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F1"), "teste");	
+		menuCliente.getActionMap().put("teste", new AbstractAction("teste") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				menucluienttc.actionPerformed(arg0);
+				
+			}
+		});
 		menuRoupa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -235,6 +296,48 @@ public class Principal extends JFrame {
 		menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
 		menuRoupa.setForeground(Color.WHITE);
 		barraMenu.add(menuRoupa);
+		
+	ActionListener menuroupatc = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(janelaRoupa.isFocusable()==true){
+					desktop_1.add(janelaRoupa);
+					janelaRoupa.setVisible(true);
+					janelaRoupa.carregarTabela();
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu3.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
+					janelaCliente.dispose();
+					janelaAluguel.dispose();
+					janelaRegistro.dispose();
+					janelaRoupa.limparFields();
+				}
+				try {
+					janelaRoupa.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		};
+		menuRoupa.addActionListener(menuroupatc);
+		menuRoupa.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F2"), "teste2");	
+		menuRoupa.getActionMap().put("teste2", new AbstractAction("teste2") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				menuroupatc.actionPerformed(arg0);
+				
+			}
+		});
+		
+		
 		
 		////
 		
@@ -299,6 +402,56 @@ public class Principal extends JFrame {
 		barraMenu.add(menuAluguel);
 		
 		
+		
+	ActionListener menualugueltc = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				janelaAluguel.funcField.setText(textField.getText());
+				if(janelaAluguel.isFocusable()==true){
+					desktop_1.add(janelaAluguel);
+					janelaAluguel.setVisible(true);
+					janelaAluguel.carregarTabela();
+					janelaAluguel.carregarTabelaRoupa();
+					janelaAluguel.carregarTabelaRoupaLista();
+					janelaAluguel.carregarTabelaRoupasele();
+					menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+					menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+					menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+					menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu3.png")));
+					menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+					menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+					janelaLixeira.dispose();
+					janelaCliente.dispose();
+					janelaRoupa.dispose();
+					janelaRegistro.dispose();
+					janelaAluguel.limparFields();
+					
+				}
+				
+				try {
+					janelaAluguel.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		};
+		menuAluguel.addActionListener(menualugueltc);
+		menuAluguel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F3"), "teste3");	
+		menuAluguel.getActionMap().put("teste3", new AbstractAction("teste3") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				menualugueltc.actionPerformed(arg0);
+				
+			}
+		});
+		
+		
+		
+		
 	menuRegistro.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -348,7 +501,50 @@ public class Principal extends JFrame {
 		}
 	});
 		
-	
+	ActionListener menuregistrottc = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			janelaRegistro.logField.setText(texto1);
+			desktop_1.add(janelaRegistro);
+			janelaRegistro.setVisible(true);
+			if(janelaRegistro.isFocusable()==true){
+				janelaRegistro.carregarTabela();
+				janelaRegistro.carregarTabelaRoupa();
+				janelaRegistro.carregarTabelaRoupaLista();
+				janelaRegistro.carregarTabelaRoupasele();
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu3.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+				janelaLixeira.dispose();
+				janelaAluguel.dispose();
+				janelaRoupa.dispose();
+				janelaFuncionario.dispose();
+				janelaRegistro.limparFields();
+			}
+			
+			try {
+				janelaRegistro.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			
+		}
+	};
+	menuRegistro.addActionListener(menuregistrottc);
+	menuRegistro.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F4"), "teste4");	
+	menuRegistro.getActionMap().put("teste4", new AbstractAction("teste4") {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			menuregistrottc.actionPerformed(arg0);
+			
+		}
+	});
 		
 	
 	menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
@@ -412,6 +608,7 @@ public class Principal extends JFrame {
 		}
 	
 	});
+	
 	barraMenu.add(menuFuncionario);
 	menuBackup.addMouseListener(new MouseAdapter() {
 		@Override
@@ -428,6 +625,79 @@ public class Principal extends JFrame {
 			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 		}
 	});
+	menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu1.png")));
+	
+	
+	menuRelatorio.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			if(menuRelatorio.isEnabled()==false){
+			}else{	
+			if(janelaRelatorio.isFocusable()==true){
+				janelaRelatorio.carregarTabelanome();
+				desktop_1.add(janelaRelatorio);
+				janelaRelatorio.setVisible(true);
+			//	menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+				//menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu1.png")));
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+				menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu3.png")));
+				janelaLixeira.dispose();
+				janelaRoupa.dispose();
+				janelaAluguel.dispose();
+				janelaRegistro.dispose();
+				janelaCliente.dispose();
+				janelaFuncionario.limparFields();
+				
+			}
+			try {
+				janelaRelatorio.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+			
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			if(janelaRelatorio.isShowing()==false){
+				menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu2.png")));
+				}if(janelaRegistro.isShowing()==true){
+					menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu3.png")));
+				}
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			if(janelaRelatorio.isShowing()==false){
+				menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu1.png")));
+			}if(janelaRelatorio.isShowing()==true){
+				menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu1.png")));
+			}
+		}
+	
+	});
+	barraMenu.add(menuFuncionario);
+	menuBackup.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao3.png")));
+		}
+		public void mouseEntered(MouseEvent e) {
+			
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao2.png")));
+				
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
+		}
+	});
+	barraMenu.add(menuRelatorio);
 	menuBackup.setIcon(new ImageIcon(Principal.class.getResource("/imagens/backupbotao1.png")));
 	
 	barraMenu.add(menuBackup);
@@ -484,6 +754,50 @@ public class Principal extends JFrame {
 			    } catch (URISyntaxException | IOException | InterruptedException | HeadlessException ex) {
 		            JOptionPane.showMessageDialog(null, "Error at Restoredbfromsql" + ex.getMessage());
 		        }
+		}
+	});
+	ActionListener menuRelatoriottc = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(menuRelatorio.isEnabled()==false){
+			}else{	
+			if(janelaRelatorio.isFocusable()==true){
+				janelaRelatorio.carregarTabelanome();
+				desktop_1.add(janelaRelatorio);
+				janelaRelatorio.setVisible(true);
+			//	menuCliente.setIcon(new ImageIcon(Principal.class.getResource("/imagens/iconemenu.png")));
+				//menuFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/imagens/funcimenu1.png")));
+				menuRegistro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/Registrolmenu.png")));
+				menuAluguel.setIcon(new ImageIcon(Principal.class.getResource("/imagens/aluguelmenu1.png")));
+				menuRoupa.setIcon(new ImageIcon(Principal.class.getResource("/imagens/roupamenu1.png")));
+				menuLixeiro.setIcon(new ImageIcon(Principal.class.getResource("/imagens/lixeiramenu.png")));
+				menuRelatorio.setIcon(new ImageIcon(Principal.class.getResource("/imagens/relatoriolmenu3.png")));
+				janelaLixeira.dispose();
+				janelaRoupa.dispose();
+				janelaAluguel.dispose();
+				janelaRegistro.dispose();
+				janelaCliente.dispose();
+				janelaFuncionario.limparFields();
+				
+			}
+			try {
+				janelaRelatorio.setMaximum(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			}
+		}
+	};
+	menuRelatorio.addActionListener(menuRelatoriottc);
+	menuRelatorio.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F6"), "teste6");	
+	menuRelatorio.getActionMap().put("teste", new AbstractAction("teste6") {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			menuRelatoriottc.actionPerformed(arg0);
+			
 		}
 	});
 	
@@ -593,18 +907,6 @@ public class Principal extends JFrame {
 	
 	barraMenu.add(menuLixeiro);
 	
-	
-	menuRelatorio.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			janelaRelatorio.carregarTabelanome();
-			desktop_1.add(janelaRelatorio);
-			janelaRelatorio.setVisible(true);
-			
-		}
-	});
-	barraMenu.add(menuRelatorio);
-	
 	textField = new JTextField();
 	textField.setHorizontalAlignment(SwingConstants.CENTER);
 	textField.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -619,7 +921,7 @@ public class Principal extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/imagens/sairpmenu3.png")));
-				LoginFunc lg = new LoginFunc();
+				LoginFunc2 lg = new LoginFunc2();
 				lg.setVisible(true);
 				dispose();
 				

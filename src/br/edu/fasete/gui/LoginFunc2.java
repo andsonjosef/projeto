@@ -25,7 +25,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class LoginFunc extends JFrame {
+public class LoginFunc2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField loginField;
@@ -52,12 +52,40 @@ public class LoginFunc extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginFunc() {
+	public LoginFunc2() {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+				
+				Funcionario fu = new Funcionario();
+
+				
+				f.setLogin(loginField.getText());
+				f.setSenha(senhaField.getText());
+				
+				fu =Fachada.getInstancia().buscarLogin(f);
+				
+				if(fu.getLogin() == null|| fu.getSenha() == null){
+					JOptionPane.showMessageDialog(null, "Erro. O Login e/ou a senha estão errados.");
+					
+				}else{
+					
+					Principal janela = new Principal();
+					janela.textField.setText(f.getLogin());
+					janela.setVisible(true);
+					janela.menuFuncionario.setEnabled(false);
+					dispose();
+				}
+				}
+			}
+		});
 		setTitle("Entrar como funcion\u00E1rio");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginFunc.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 751, 271);
 		contentPane = new JPanel();
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][457.00,grow]", "[50][30][50][30][50][30]"));
@@ -94,8 +122,8 @@ public class LoginFunc extends JFrame {
 						
 						Principal janela = new Principal();
 						janela.textField.setText(f.getLogin());
-						janela.menuFuncionario.setEnabled(false);
 						janela.setVisible(true);
+						janela.menuFuncionario.setEnabled(false);
 						dispose();
 					}
 			}
@@ -111,6 +139,8 @@ public class LoginFunc extends JFrame {
 				lblbtnConfirmar.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/etrar1.png")));
 			}
 		});
+		
+
 		
 		JLabel label = new JLabel("");
 		label.addMouseListener(new MouseAdapter() {
@@ -181,15 +211,24 @@ public class LoginFunc extends JFrame {
 		contentPane.add(lblSenha, "cell 0 2,aligny bottom");
 		
 		senhaField = new JPasswordField();
+		senhaField.setForeground(Color.WHITE);
+		senhaField.setFont(new Font("Dialog", Font.PLAIN, 15));
+		contentPane.add(senhaField, "cell 0 3 2 1,grow");
+		label.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/restaurar1.png")));
+		contentPane.add(label, "flowx,cell 0 5,alignx left");
+		lblbtnConfirmar.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/etrar1.png")));
+		contentPane.add(lblbtnConfirmar, "cell 1 5,alignx right");
+		
 		senhaField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					Funcionario fu = new Funcionario();
 
 					
 					f.setLogin(loginField.getText());
-					f.setSenha(senhaField.getText());
+					String senha = new String(senhaField.getPassword());
+					f.setSenha(senha);
 					
 					fu =Fachada.getInstancia().buscarLogin(f);
 					
@@ -200,27 +239,19 @@ public class LoginFunc extends JFrame {
 						
 						Principal janela = new Principal();
 						janela.textField.setText(f.getLogin());
-						janela.menuFuncionario.setEnabled(false);
 						janela.setVisible(true);
+						janela.menuFuncionario.setEnabled(false);
 						dispose();
 					}
-					
 				}
 			}
 		});
-		senhaField.setForeground(Color.WHITE);
-		senhaField.setFont(new Font("Dialog", Font.PLAIN, 15));
-		contentPane.add(senhaField, "cell 0 3 2 1,grow");
-		label.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/restaurar1.png")));
-		contentPane.add(label, "flowx,cell 0 5,alignx left");
-		lblbtnConfirmar.setIcon(new ImageIcon(LoginFunc.class.getResource("/imagens/etrar1.png")));
-		contentPane.add(lblbtnConfirmar, "cell 1 5,alignx right");
 		
 		JLabel label_1 = new JLabel("");
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				LoginAdm la = new LoginAdm();
+				LoginAdm2 la = new LoginAdm2();
 				la.setVisible(true);
 				dispose();
 			}

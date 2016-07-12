@@ -21,7 +21,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class LoginAdm extends JFrame {
+public class LoginAdm2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField loginField;
@@ -47,7 +47,7 @@ public class LoginAdm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginAdm() {
+	public LoginAdm2() {
 		setTitle("Entrar como administrador");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginAdm.class.getResource("/imagens/iconcloset.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,26 +116,26 @@ public class LoginAdm extends JFrame {
 		senhaField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER){
-				
-				Funcionario fu = new Funcionario();
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					Funcionario fu = new Funcionario();
 
-				
-				f.setLogin(loginField.getText());
-				f.setSenha(senhaField.getText());
-				
-				fu =Fachada.getInstancia().buscarLoginRoot(f);
-				
-				if(fu.getLogin() == null|| fu.getSenha() == null){
-					JOptionPane.showMessageDialog(null, "Erro. O Login e/ou a senha estão errados.");
-				}else{
 					
-					Principal janela = new Principal();
-					janela.textField.setText(f.getLogin());
-					janela.menuFuncionario.setEnabled(true);
-					janela.setVisible(true);
-					dispose();
-				}
+					f.setLogin(loginField.getText());
+					String senha = new String(senhaField.getPassword());
+					f.setSenha(senha);
+					
+					fu =Fachada.getInstancia().buscarLoginRoot(f);
+					
+					if(fu.getLogin() == null|| fu.getSenha() == null){
+						JOptionPane.showMessageDialog(null, "Erro. O Login e/ou a senha estão errados.");
+					}else{
+						
+						Principal janela = new Principal();
+						janela.textField.setText(f.getLogin());
+						janela.menuFuncionario.setEnabled(true);
+						janela.setVisible(true);
+						dispose();
+					}
 				}
 			}
 		});
@@ -194,6 +194,7 @@ public class LoginAdm extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				LoginFunc lf = new LoginFunc();
 				lf.setVisible(true);
+				lf.getContentPane().setBackground(Color.darkGray);
 				dispose();
 			}
 			public void mouseEntered(MouseEvent arg0) {
