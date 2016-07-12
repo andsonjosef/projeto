@@ -1583,7 +1583,7 @@ public void mouseClicked(MouseEvent e) {
 											}
 											}
 											
-											
+										p.setPagamento((String) comboBox.getSelectedItem());
 										String cliente="";
 										p.setCodCliente(c.getCodCliente());
 										Fachada.getInstancia().pagamentoTotal(p);

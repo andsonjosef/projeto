@@ -305,6 +305,7 @@ public class JRegistro2 extends JInternalFrame {
 				}
 			}
 		});
+		JComboBox pagaBox = new JComboBox();
 		status1box.setForeground(Color.WHITE);
 		status1box.setFont(new Font("Dialog", Font.PLAIN, 15));
 		status1box.setModel(new DefaultComboBoxModel(new String[] {"Pendente", "Pago"}));
@@ -691,12 +692,13 @@ public class JRegistro2 extends JInternalFrame {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 String pesq = "";
-							
+							precopagField.setText(precoFieldal.getText());
 							p.setCodCliente(c.getCodCliente());
 							Fachada.getInstancia().BuscarPagamento(p, pesq);
 							tabbedPane.setSelectedIndex(3);
 							status1box.setSelectedItem(p.getStatus1());
 							status2box.setSelectedItem(p.getStatus2());
+							pagaBox.setSelectedItem(p.getPagamento());
 							dataPag2Field.setText(p.getDataPago2());
 							dataPago1Field.setText(p.getDataPago1());
 							dataVenc1Field.setText(p.getDataVenc1());
@@ -1110,10 +1112,10 @@ String pesq = "";
 					JLabel lblSegundaParcela = new JLabel("Segunda parcela");
 					JLabel lblPagementoEfetuado2 = new JLabel("Data em que o pagamento foi efetuado");
 					JLabel lblDataDeVencimento_1 = new JLabel("Data de vencimento");
-					JComboBox comboBox = new JComboBox();
-					comboBox.addItemListener(new ItemListener() {
+					
+					pagaBox.addItemListener(new ItemListener() {
 						public void itemStateChanged(ItemEvent arg0) {
-							String escolha = (String) comboBox.getSelectedItem();
+							String escolha = (String) pagaBox.getSelectedItem();
 							
 							
 						if(escolha=="2 vezes"){
@@ -1153,16 +1155,16 @@ String pesq = "";
 						}
 					});
 					
-						comboBox.addPropertyChangeListener(new PropertyChangeListener() {
+						pagaBox.addPropertyChangeListener(new PropertyChangeListener() {
 							public void propertyChange(PropertyChangeEvent evt) {
 							
 							
 							}
 						});
-						comboBox.setBounds(705, 22, 82, 26);
-						panel.add(comboBox);
-						comboBox.setFont(new Font("Dialog", Font.PLAIN, 15));
-						comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
+						pagaBox.setBounds(705, 22, 82, 26);
+						panel.add(pagaBox);
+						pagaBox.setFont(new Font("Dialog", Font.PLAIN, 15));
+						pagaBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
 						
 						JLabel lblStatus = new JLabel("Status");
 						lblStatus.setForeground(Color.WHITE);
@@ -1433,7 +1435,7 @@ String pesq = "";
 								p.setValorPago1(Float.parseFloat(valorPago1Field.getText()));
 								p.setDataPago1(dataPago1Field.getText());
 								}
-								if(comboBox.getSelectedItem()=="2 vezes"){
+								if(pagaBox.getSelectedItem()=="2 vezes"){
 								p.setValorParc2(Float.parseFloat(valorParc2Field.getText()));
 								p.setDataVenc2(dataVenc2Field.getText());
 								p.setStatus2((String) status2box.getSelectedItem());
@@ -1443,7 +1445,7 @@ String pesq = "";
 								p.setDataPago2(dataPag2Field.getText());
 								}
 								}
-								
+								p.setPagamento((String) pagaBox.getSelectedItem());
 								
 							String cliente="";
 							p.setCodCliente(c.getCodCliente());

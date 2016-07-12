@@ -17,7 +17,7 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 
 		  try {
 			  PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =?, precoTotal=? where codCliente = ?");
+					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =?, precoTotal=?, pagamento = ? where codCliente = ?");
 		 
 			   stmt.setFloat(1,p.getValorParc1());
 			   stmt.setString(2,p.getDataVenc1());
@@ -28,12 +28,12 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 			   stmt.setString(7,p.getDataVenc2());
 			   stmt.setString(8,p.getStatus2());
 			   stmt.setFloat(9,p.getValorPago2());
-			   stmt.setString(10, p.getDataPago2());
-			  
+			   stmt.setString(10, p.getDataPago2()); 
 			   stmt.setFloat(11, p.getPreco());
 			   stmt.setFloat(12,p.getPrecoFinal());
 			   stmt.setFloat(13, p.getPrecoTotal());
 			   stmt.setInt(14,p.getCodCliente());
+			   stmt.setString(15,p.getPagamento());
 		   
 		   stmt.executeUpdate();
 			 JOptionPane.showMessageDialog(null,"Pagamento salvo!");
@@ -67,6 +67,7 @@ ResultSet rs = stmt.executeQuery();
  p.setDataPago2(rs.getString("dataPago2"));
  p.setCliente(rs.getString("cliente"));
  p.setFuncionario(rs.getString("funcionario"));
+ p.setPagamento(rs.getString("pagamento"));
  }
 
 
