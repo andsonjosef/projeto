@@ -14,10 +14,30 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 	
 	
 	public void AtualizarPagamento(Pagamento p, String cliente) {
+		
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+						 .prepareStatement("SELECT codAluguel FROM loja.aluguel WHERE codCliente like ?");
+			   stmt.setInt(1,p.getCodCliente());
+		ResultSet rs = stmt.executeQuery();
 
+		while(rs.next())
+		{
+		p.setCodAluguel(rs.getInt("codAluguel"));
+
+		}
+
+
+		}catch(Exception e){
+			 
+			
+			 JOptionPane.showMessageDialog(null,"pagamento não encontrado");
+
+		}
 		  try {
 			  PreparedStatement  stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =?, precoTotal=?, pagamento = ? where codCliente = ?");
+					    .prepareStatement("update loja.pagamento set valorParc1 = ?, dataVenc1 = ?, status1 = ?,valorPago1 = ?, dataPago1 = ?,valorParc2 = ?,dataVenc2 = ?,status2 = ?,valorPago2 = ?,dataPago2 = ?, preco = ?, precoFinal =?, precoTotal=?, pagamento = ? where codAluguel = ?");
 		 
 			   stmt.setFloat(1,p.getValorParc1());
 			   stmt.setString(2,p.getDataVenc1());
@@ -32,8 +52,8 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 			   stmt.setFloat(11, p.getPreco());
 			   stmt.setFloat(12,p.getPrecoFinal());
 			   stmt.setFloat(13, p.getPrecoTotal());
-			   stmt.setInt(14,p.getCodCliente());
-			   stmt.setString(15,p.getPagamento());
+			   stmt.setString(14,p.getPagamento());
+			   stmt.setInt(15,p.getCodAluguel());
 		   
 		   stmt.executeUpdate();
 			 JOptionPane.showMessageDialog(null,"Pagamento salvo!");
@@ -45,12 +65,32 @@ public class PagamentoDaoJdbc implements PagamentoDao {
 	
 	}
 	public void BuscarPagamento(Pagamento p, String pesq) {
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+						 .prepareStatement("SELECT codAluguel FROM loja.aluguel WHERE codCliente like ?");
+			   stmt.setInt(1,p.getCodCliente());
+		ResultSet rs = stmt.executeQuery();
+
+		while(rs.next())
+		{
+		p.setCodAluguel(rs.getInt("codAluguel"));
+
+		}
+
+
+		}catch(Exception e){
+			 
+			
+			 JOptionPane.showMessageDialog(null,"pagamento não encontrado");
+
+		}
 		
 		  try {
 		    
 		PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-				 .prepareStatement("SELECT * FROM loja.pagamento WHERE codCliente like ?");
-	   stmt.setInt(1,p.getCodCliente());
+				 .prepareStatement("SELECT * FROM loja.pagamento WHERE codAluguel like ?");
+	   stmt.setInt(1,p.getCodAluguel());
 ResultSet rs = stmt.executeQuery();
 
  while(rs.next())
@@ -78,8 +118,6 @@ ResultSet rs = stmt.executeQuery();
 
 } 
 		  
-		  ////
-
 		  
 	}
 	public void ExcluirPagamento(Pagamento p) {
@@ -98,10 +136,32 @@ ResultSet rs = stmt.executeQuery();
 		
 	}
 	public void InserirPagamento(Pagamento p) {	
+
+		  try {
+		    
+		PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+				 .prepareStatement("SELECT codAluguel FROM loja.aluguel WHERE codCliente like ?");
+	   stmt.setInt(1,p.getCodCliente());
+ResultSet rs = stmt.executeQuery();
+
+while(rs.next())
+{
+p.setCodAluguel(rs.getInt("codAluguel"));
+
+}
+
+
+}catch(Exception e){
+	 
+	
+	 JOptionPane.showMessageDialog(null,"pagamento não encontrado");
+
+} 
+		
 		  try {
 			  PreparedStatement stmt;
 			    stmt =  (PreparedStatement) Conexao.getConnection()
-			    .prepareStatement("insert into loja.Pagamento  (valorParc1,dataVenc1,status1,valorPago1,dataPago1,valorParc2,dataVenc2,status2,valorPago2,dataPago2,cliente,funcionario,codCliente,preco,precoFinal,precoTotal) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)") ;
+			    .prepareStatement("insert into loja.Pagamento  (valorParc1,dataVenc1,status1,valorPago1,dataPago1,valorParc2,dataVenc2,status2,valorPago2,dataPago2,cliente,funcionario,codCliente,preco,precoFinal,precoTotal,codAluguel) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)") ;
 			   stmt.setFloat(1,p.getValorParc1());
 			   stmt.setString(2,p.getDataVenc1());
 			   stmt.setString(3,p.getStatus1());
@@ -118,6 +178,7 @@ ResultSet rs = stmt.executeQuery();
 			   stmt.setFloat(14, p.getPreco());
 			   stmt.setFloat(15,p.getPrecoFinal());
 			   stmt.setFloat(16, p.getPrecoTotal());
+			   stmt.setInt(17, p.getCodAluguel());
 			   stmt.executeUpdate();
 			   	 	  
 			
@@ -185,13 +246,33 @@ ResultSet rs = stmt.executeQuery();
 		return lista;
 	}
 	public void pagamentoTotal(Pagamento p){
+		  try {
+			    
+				PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
+						 .prepareStatement("SELECT codAluguel FROM loja.aluguel WHERE codCliente like ?");
+			   stmt.setInt(1,p.getCodCliente());
+		ResultSet rs = stmt.executeQuery();
+
+		while(rs.next())
+		{
+		p.setCodAluguel(rs.getInt("codAluguel"));
+
+		}
+
+
+		}catch(Exception e){
+			 
+			
+			 JOptionPane.showMessageDialog(null,"pagamento não encontrado");
+
+		}
 		
 		try {
 			   PreparedStatement stmt =  (PreparedStatement) Conexao.getConnection()
-					    .prepareStatement("select SUM(? + ?) as total from loja.pagamento where codCliente = ?");
+					    .prepareStatement("select SUM(? + ?) as total from loja.pagamento where codAluguel = ?");
 			   stmt.setFloat(1,p.getValorPago1());
 			   stmt.setFloat(2,p.getValorPago2());
-			    stmt.setInt(3,p.getCodCliente());
+			    stmt.setInt(3,p.getCodAluguel());
 						ResultSet rs = stmt.executeQuery();
 						while(rs.next()) {
 							
