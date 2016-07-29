@@ -276,6 +276,15 @@ public class JRegistro2 extends JInternalFrame {
 		labelnome.setFont(new Font("Dialog", Font.PLAIN, 15));
 		cadast.add(labelnome, "cell 0 2,alignx left,aligny bottom");
 		JComboBox status1box = new JComboBox();
+		status1box.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				calevenc1.setVisible(false);
+				calevenc2.setVisible(false);
+				calepag2.setVisible(false);
+				calepagef1.setVisible(false);
+			}
+		});
 		status1box.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(status1box.getSelectedItem()=="Pendente"){
@@ -292,6 +301,15 @@ public class JRegistro2 extends JInternalFrame {
 			}
 		});
 		JComboBox status2box = new JComboBox();
+		status2box.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				calevenc1.setVisible(false);
+				calevenc2.setVisible(false);
+				calepag2.setVisible(false);
+				calepagef1.setVisible(false);
+			}
+		});
 		status2box.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(status2box.getSelectedItem()=="Pendente"){
@@ -306,6 +324,15 @@ public class JRegistro2 extends JInternalFrame {
 			}
 		});
 		JComboBox pagaBox = new JComboBox();
+		pagaBox.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				calevenc1.setVisible(false);
+				calevenc2.setVisible(false);
+				calepag2.setVisible(false);
+				calepagef1.setVisible(false);
+			}
+		});
 		status1box.setForeground(Color.WHITE);
 		status1box.setFont(new Font("Dialog", Font.PLAIN, 15));
 		status1box.setModel(new DefaultComboBoxModel(new String[] {"Pendente", "Pago"}));
@@ -691,7 +718,12 @@ public class JRegistro2 extends JInternalFrame {
 					lblbtnPagar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-String pesq = "";
+							
+							calevenc1.setVisible(false);
+							calevenc2.setVisible(false);
+							calepag2.setVisible(false);
+							calepagef1.setVisible(false);
+							String pesq = "";
 							precopagField.setText(precoFieldal.getText());
 							p.setCodCliente(c.getCodCliente());
 							Fachada.getInstancia().BuscarPagamento(p, pesq);
@@ -1082,6 +1114,15 @@ String pesq = "";
 					lblValorPago_1.setFont(new Font("Dialog", Font.PLAIN, 15));
 					pagamento.add(lblValorPago_1, "cell 6 5,alignx left,aligny bottom");
 					precopagField = new JTextField();
+					precopagField.addFocusListener(new FocusAdapter() {
+						@Override
+						public void focusGained(FocusEvent arg0) {
+							calevenc1.setVisible(false);
+							calevenc2.setVisible(false);
+							calepag2.setVisible(false);
+							calepagef1.setVisible(false);
+						}
+					});
 					precopagField.setBounds(10, 22, 209, 26);
 					panel.add(precopagField);
 					precopagField.setForeground(Color.WHITE);
@@ -1089,6 +1130,15 @@ String pesq = "";
 					precopagField.setColumns(10);
 					
 					precofimpagField = new JTextField();
+					precofimpagField.addFocusListener(new FocusAdapter() {
+						@Override
+						public void focusGained(FocusEvent e) {
+							calevenc1.setVisible(false);
+							calevenc2.setVisible(false);
+							calepag2.setVisible(false);
+							calepagef1.setVisible(false);
+						}
+					});
 					precofimpagField.setBounds(316, 22, 214, 26);
 					panel.add(precofimpagField);
 					precofimpagField.setForeground(Color.WHITE);
@@ -1180,6 +1230,10 @@ String pesq = "";
 						valorParc1Field.addFocusListener(new FocusAdapter() {
 							@Override
 							public void focusGained(FocusEvent arg0) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
 							}
 							
 							
@@ -1225,6 +1279,10 @@ String pesq = "";
 							@Override
 							public void focusGained(FocusEvent arg0) {
 								
+								
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
 								calevenc1.setVisible(true);
 								SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 								String data = spd.format(calevenc1.getDate());
@@ -1244,6 +1302,10 @@ String pesq = "";
 						dataPago1Field.addFocusListener(new FocusAdapter() {
 							@Override
 							public void focusGained(FocusEvent arg0) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+						
 								calepagef1.setVisible(true);
 								SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 								String data = spd.format(calepagef1.getDate());
@@ -1266,6 +1328,15 @@ String pesq = "";
 						pagamento.add(status1box, "cell 4 3,grow");
 						
 						valorPago1Field = new JTextField();
+						valorPago1Field.addFocusListener(new FocusAdapter() {
+							@Override
+							public void focusGained(FocusEvent e) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
+							}
+						});
 						valorPago1Field.setForeground(Color.WHITE);
 						valorPago1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 						pagamento.add(valorPago1Field, "cell 6 3,grow");
@@ -1293,6 +1364,15 @@ String pesq = "";
 						
 						
 						valorParc2Field = new JTextField();
+						valorParc2Field.addFocusListener(new FocusAdapter() {
+							@Override
+							public void focusGained(FocusEvent e) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
+							}
+						});
 						valorParc2Field.setForeground(Color.WHITE);
 						valorParc2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 						pagamento.add(valorParc2Field, "cell 0 6,growx,aligny top");
@@ -1302,6 +1382,10 @@ String pesq = "";
 						dataVenc2Field.addFocusListener(new FocusAdapter() {
 							@Override
 							public void focusGained(FocusEvent e) {
+								calevenc1.setVisible(false);
+								
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
 								calevenc2.setVisible(true);
 								SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 								String data = spd.format(calevenc2.getDate());
@@ -1352,6 +1436,10 @@ String pesq = "";
 						dataPag2Field.addFocusListener(new FocusAdapter() {
 							@Override
 							public void focusGained(FocusEvent e) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								
+								calepagef1.setVisible(false);
 								calepag2.setVisible(true);
 								SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 								String data = spd.format(calepag2.getDate());
@@ -1375,6 +1463,15 @@ String pesq = "";
 						pagamento.add(status2box, "cell 4 6,grow");
 						
 						valorPago2Field = new JTextField();
+						valorPago2Field.addFocusListener(new FocusAdapter() {
+							@Override
+							public void focusGained(FocusEvent e) {
+								calevenc1.setVisible(false);
+								calevenc2.setVisible(false);
+								calepag2.setVisible(false);
+								calepagef1.setVisible(false);
+							}
+						});
 						valorPago2Field.setForeground(Color.WHITE);
 						valorPago2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 						pagamento.add(valorPago2Field, "cell 6 6,growx,aligny center");

@@ -746,7 +746,8 @@ public class JAluguel2 extends JInternalFrame {
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										
-									
+										calendarDevo.setVisible(false);
+										calendarLoca.setVisible(false);
 										
 										if(tabelaRoupasele.getRowCount()==0){
 											JOptionPane.showMessageDialog(null, "Selecione alguma roupa.");
@@ -905,19 +906,7 @@ public void mouseClicked(MouseEvent e) {
 			});
 			editPanel.setBackground(Color.DARK_GRAY);
 			tabbedPane.addTab("Concluir Aluguel", null, editPanel, null);
-			
-			///
-			tabelaRoupaAluguel = new JTable(new RoupaTableModel());
-			tabelaRoupaAluguel.addMouseListener(new MouseAdapter() {
-				public void mouseReleased(MouseEvent arg0) {
-					srow = tabelaRoupaAluguel.getSelectedRow();
-					
-					svaluecoder = (int) tabelaRoupaAluguel.getValueAt(srow, 0);
-					
-				}
-				
-			});
-			editPanel.setLayout(new MigLayout("", "[115px,grow][30px][115px,grow][30px][250][30px][250,grow][79.00][250][400px]", "[14px][30.00px][][27.00][-41.00][][85.00][465.00px,grow][20px]"));
+			editPanel.setLayout(new MigLayout("", "[115px,grow][115px,grow][250][250,grow][250][400px]", "[14px][30.00px][][27.00][][465.00px,grow][20px]"));
 			
 			JLabel lblDataDeLocao = new JLabel("Data de loca\u00E7\u00E3o");
 			lblDataDeLocao.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -928,17 +917,17 @@ public void mouseClicked(MouseEvent e) {
 				JLabel lblDataDeDevoluo = new JLabel("Data de Devolu\u00E7\u00E3o");
 				lblDataDeDevoluo.setFont(new Font("Dialog", Font.PLAIN, 15));
 				lblDataDeDevoluo.setForeground(Color.WHITE);
-				editPanel.add(lblDataDeDevoluo, "cell 4 2,alignx left,aligny bottom");
+				editPanel.add(lblDataDeDevoluo, "cell 2 2,alignx left,aligny bottom");
 				
 				JLabel lblPreo_1 = new JLabel("Pre\u00E7o");
 				lblPreo_1.setForeground(Color.WHITE);
 				lblPreo_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-				editPanel.add(lblPreo_1, "cell 8 2,alignx center,aligny top");
+				editPanel.add(lblPreo_1, "cell 4 2,alignx center,aligny top");
 				
 				JLabel lblFuncionrio = new JLabel("Funcion\u00E1rio");
 				lblFuncionrio.setForeground(Color.WHITE);
 				lblFuncionrio.setFont(new Font("Dialog", Font.PLAIN, 15));
-				editPanel.add(lblFuncionrio, "flowx,cell 9 2,aligny bottom");
+				editPanel.add(lblFuncionrio, "flowx,cell 5 2,aligny bottom");
 				
 				
 				calendarLoca.addPropertyChangeListener(new PropertyChangeListener() {
@@ -951,7 +940,7 @@ public void mouseClicked(MouseEvent e) {
 							}
 					}
 				});
-				editPanel.add(calendarLoca, "cell 2 3 1 3,grow");
+				editPanel.add(calendarLoca, "cell 1 3 1 2,grow");
 				dataDevo = new JTextField();
 				dataDevo.addFocusListener(new FocusAdapter() {
 					@Override
@@ -967,6 +956,8 @@ public void mouseClicked(MouseEvent e) {
 				dataDevo.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+					
+						calendarLoca.setVisible(false);
 						calendarDevo.setVisible(true);
 						if(dataDevo.isFocusOwner()==true||calendarDevo.isVisible()==true){
 							SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
@@ -976,7 +967,7 @@ public void mouseClicked(MouseEvent e) {
 					}
 				});
 				dataDevo.setFont(new Font("Dialog", Font.PLAIN, 15));
-				editPanel.add(dataDevo, "cell 4 3,grow");
+				editPanel.add(dataDevo, "cell 2 3,grow");
 				dataDevo.setColumns(10);
 				calendarDevo.addPropertyChangeListener(new PropertyChangeListener() {
 					public void propertyChange(PropertyChangeEvent evt) {
@@ -990,32 +981,48 @@ public void mouseClicked(MouseEvent e) {
 				});
 				
 				
-				editPanel.add(calendarDevo, "cell 6 3 1 3,grow");
+				editPanel.add(calendarDevo, "cell 3 3 1 2,grow");
 				
 				
 				precoFieldal = new JTextField();
 				precoFieldal.setFont(new Font("Dialog", Font.PLAIN, 15));
 				precoFieldal.setEditable(false);
-				editPanel.add(precoFieldal, "cell 8 3,grow");
+				editPanel.add(precoFieldal, "cell 4 3,grow");
 				precoFieldal.setColumns(10);
 				
 				funcioField = new JTextField();
 				funcioField.setFont(new Font("Dialog", Font.PLAIN, 15));
 				funcioField.setEditable(false);
-				editPanel.add(funcioField, "cell 9 3,grow");
+				editPanel.add(funcioField, "cell 5 3,grow");
 				funcioField.setColumns(10);
 				
 				JLabel lblRoupasSelecionadas_1 = new JLabel("Roupas Selecionadas");
 				lblRoupasSelecionadas_1.setForeground(Color.WHITE);
 				lblRoupasSelecionadas_1.setFont(new Font("Dialog", Font.PLAIN, 15));
-				editPanel.add(lblRoupasSelecionadas_1, "cell 0 5,aligny bottom");
+				editPanel.add(lblRoupasSelecionadas_1, "cell 0 4,aligny bottom");
+				
+				JPanel panel = new JPanel();
+				editPanel.add(panel, "cell 0 5 6 1,grow");
+				panel.setLayout(new MigLayout("", "[115px,grow][30px][115px,grow][30px][250][30px][250,grow][79.00][250][400px]", "[465.00px,grow]"));
+				
+				///
+				tabelaRoupaAluguel = new JTable(new RoupaTableModel());
+				tabelaRoupaAluguel.addMouseListener(new MouseAdapter() {
+					public void mouseReleased(MouseEvent arg0) {
+						srow = tabelaRoupaAluguel.getSelectedRow();
+						
+						svaluecoder = (int) tabelaRoupaAluguel.getValueAt(srow, 0);
+						
+					}
+					
+				});
 				
 				
 				
 				
 				tabelaRoupaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				JScrollPane scrollPaneRoupasele = new JScrollPane(tabelaRoupaAluguel);
-				editPanel.add(scrollPaneRoupasele, "cell 0 7 10 1,grow");
+				panel.add(scrollPaneRoupasele, "cell 0 0 10 1,grow");
 				scrollPaneRoupasele.addMouseListener(new MouseAdapter() {
 				});
 				
@@ -1029,7 +1036,7 @@ public void mouseClicked(MouseEvent e) {
 				nomeField2 = new JTextField();
 				nomeField2.setEditable(false);
 				nomeField2.setColumns(10);
-				editPanel.add(nomeField2, "cell 0 1 10 1,grow");
+				editPanel.add(nomeField2, "cell 0 1 6 1,grow");
 				
 							
 				
@@ -1054,7 +1061,7 @@ public void mouseClicked(MouseEvent e) {
 					}
 				});
 				lblbtnVoltar2.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/VOLTAR1.png")));
-				editPanel.add(lblbtnVoltar2, "flowx,cell 9 8,alignx right");
+				editPanel.add(lblbtnVoltar2, "flowx,cell 5 6,alignx right");
 				
 				JLabel lblbtnsalvar = new JLabel("");
 				lblbtnsalvar.addMouseListener(new MouseAdapter() {
@@ -1120,7 +1127,7 @@ public void mouseClicked(MouseEvent e) {
 					}
 				});
 				lblbtnsalvar.setIcon(new ImageIcon(JAluguel2.class.getResource("/imagens/salvar1.png")));
-				editPanel.add(lblbtnsalvar, "cell 9 8,alignx right");
+				editPanel.add(lblbtnsalvar, "cell 5 6,alignx right");
 				dataLoca = new JTextField();
 				dataLoca.addFocusListener(new FocusAdapter() {
 					@Override
@@ -1136,6 +1143,8 @@ public void mouseClicked(MouseEvent e) {
 				dataLoca.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
+						calendarDevo.setVisible(false);
+						
 						calendarLoca.setVisible(true);
 						if(dataLoca.isFocusOwner()==true||calendarLoca.isVisible()==true){
 							SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
@@ -1170,11 +1179,31 @@ public void mouseClicked(MouseEvent e) {
 								precoSomaField.setColumns(10);
 								
 								precofimpagField = new JTextField();
+								precofimpagField.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent arg0) {
+										calevenc1.setVisible(false);
+										calevenc2.setVisible(false);
+										calepag2.setVisible(false);
+										calepagef1.setVisible(false);
+										
+									}
+								});
 								pagamento.add(precofimpagField, "cell 2 1,aligny bottom");
 								precofimpagField.setForeground(Color.WHITE);
 								precofimpagField.setFont(new Font("Dialog", Font.PLAIN, 15));
 								precofimpagField.setColumns(10);
 								JComboBox comboBox = new JComboBox();
+								comboBox.addMouseListener(new MouseAdapter() {
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										calevenc1.setVisible(false);
+										calevenc2.setVisible(false);
+										calepag2.setVisible(false);
+										calepagef1.setVisible(false);
+										
+									}
+								});
 								comboBox.setForeground(Color.WHITE);
 								pagamento.add(comboBox, "cell 4 1");
 								
@@ -1205,6 +1234,16 @@ public void mouseClicked(MouseEvent e) {
 								lblPagamentoEfetuado.setFont(new Font("Dialog", Font.PLAIN, 15));
 								pagamento.add(lblPagamentoEfetuado, "cell 8 3,grow");
 								JComboBox status2box = new JComboBox();
+								status2box.addFocusListener(new FocusAdapter() {
+									@Override
+									public void focusGained(FocusEvent e) {
+										calevenc1.setVisible(false);
+										calevenc2.setVisible(false);
+										calepag2.setVisible(false);
+										calepagef1.setVisible(false);
+										
+									}
+								});
 								status2box.addItemListener(new ItemListener() {
 									public void itemStateChanged(ItemEvent e) {
 										if(status2box.getSelectedItem()=="Pendente"){
@@ -1236,6 +1275,11 @@ public void mouseClicked(MouseEvent e) {
 									valorParc1Field.addFocusListener(new FocusAdapter() {
 										@Override
 										public void focusGained(FocusEvent arg0) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
 										}
 										
 										
@@ -1286,6 +1330,10 @@ public void mouseClicked(MouseEvent e) {
 											String data = spd.format(calevenc1.getDate());
 											dataPago1Field.setText(data);
 											
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
 										}
 										
 										@Override
@@ -1300,6 +1348,11 @@ public void mouseClicked(MouseEvent e) {
 									dataPago1Field.addFocusListener(new FocusAdapter() {
 										@Override
 										public void focusGained(FocusEvent arg0) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											
+											
 											calepagef1.setVisible(true);
 											SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 											String data = spd.format(calepagef1.getDate());
@@ -1321,6 +1374,16 @@ public void mouseClicked(MouseEvent e) {
 									});
 									
 									JComboBox status1box = new JComboBox();
+									status1box.addFocusListener(new FocusAdapter() {
+										@Override
+										public void focusGained(FocusEvent arg0) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
+										}
+									});
 									status1box.addItemListener(new ItemListener() {
 										public void itemStateChanged(ItemEvent e) {
 											if(status1box.getSelectedItem()=="Pendente"){
@@ -1342,6 +1405,16 @@ public void mouseClicked(MouseEvent e) {
 									pagamento.add(status1box, "cell 4 4,grow");
 									
 									valorPago1Field = new JTextField();
+									valorPago1Field.addFocusListener(new FocusAdapter() {
+										@Override
+										public void focusGained(FocusEvent e) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
+										}
+									});
 									valorPago1Field.setForeground(Color.WHITE);
 									valorPago1Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 									pagamento.add(valorPago1Field, "cell 6 4,grow");
@@ -1369,6 +1442,16 @@ public void mouseClicked(MouseEvent e) {
 									
 									
 									valorParc2Field = new JTextField();
+									valorParc2Field.addFocusListener(new FocusAdapter() {
+										@Override
+										public void focusGained(FocusEvent e) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
+										}
+									});
 									valorParc2Field.setForeground(Color.WHITE);
 									valorParc2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 									pagamento.add(valorParc2Field, "cell 0 7,growx,aligny top");
@@ -1378,6 +1461,11 @@ public void mouseClicked(MouseEvent e) {
 									dataVenc2Field.addFocusListener(new FocusAdapter() {
 										@Override
 										public void focusGained(FocusEvent e) {
+											calevenc1.setVisible(false);
+											
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
 											calevenc2.setVisible(true);
 											SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
 											String data = spd.format(calevenc2.getDate());
@@ -1436,6 +1524,10 @@ public void mouseClicked(MouseEvent e) {
 									dataPag2Field.addFocusListener(new FocusAdapter() {
 										@Override
 										public void focusGained(FocusEvent e) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											
+											calepagef1.setVisible(false);
 											
 											calepag2.setVisible(true);
 											SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
@@ -1462,6 +1554,16 @@ public void mouseClicked(MouseEvent e) {
 									pagamento.add(status2box, "cell 4 7,grow");
 									
 									valorPago2Field = new JTextField();
+									valorPago2Field.addFocusListener(new FocusAdapter() {
+										@Override
+										public void focusGained(FocusEvent e) {
+											calevenc1.setVisible(false);
+											calevenc2.setVisible(false);
+											calepag2.setVisible(false);
+											calepagef1.setVisible(false);
+											
+										}
+									});
 									valorPago2Field.setForeground(Color.WHITE);
 									valorPago2Field.setFont(new Font("Dialog", Font.PLAIN, 15));
 									pagamento.add(valorPago2Field, "cell 6 7,growx,aligny center");
