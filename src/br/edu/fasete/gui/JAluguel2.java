@@ -23,15 +23,27 @@ import br.edu.fasete.principais.Aluguel;
 import br.edu.fasete.principais.Cliente;
 import br.edu.fasete.principais.Funcionario;
 import br.edu.fasete.principais.Roupa;
+import comprovanteRela.Comprovante;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import net.miginfocom.swing.MigLayout;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JComboBox;
@@ -41,6 +53,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.sql.Connection;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -1215,6 +1231,31 @@ public void mouseClicked(MouseEvent e) {
 									});
 									comboBox.setFont(new Font("Dialog", Font.PLAIN, 15));
 									comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u00C0 vista", "2 vezes"}));
+								
+								JButton btnImprimir = new JButton("Imprimir");
+								btnImprimir.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+									Pagamento pg = new Pagamento();
+									Comprovante cp = new Comprovante();
+									List<Pagamento> listPG = new ArrayList<Pagamento>();
+									pg.setValorPago1(Float.parseFloat((valorPago1Field.getText())));
+									pg.setValorParc1(Float.parseFloat((valorParc1Field.getText())));
+									pg.setDataPago1(dataPago1Field.getText());
+									pg.setDataVenc1(dataVenc1Field.getText());
+									listPG.add(pg);
+									try {
+										cp.gerarComprovante(listPG);
+									} catch (JRException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									}
+								});
+								
+								
+								
+								
+								pagamento.add(btnImprimir, "cell 10 4");
 								JLabel lblStatus_1 = new JLabel("Status");
 								lblStatus_1.setForeground(Color.WHITE);
 								lblStatus_1.setFont(new Font("Dialog", Font.PLAIN, 15));

@@ -11,5 +11,16 @@
 	<classpathentry kind="lib" path="C:/Users/JOSEPH/Downloads/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JOSEPH/Downloads/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JOSEPH/Downloads/jcalendar-1.4/lib/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/commons-beanutils-1.9.0.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/groovy-all-2.4.3.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/itext-2.1.7.js4.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jasperreports-6.2.0.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jasperreports-6.3.0.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jasperreports-fonts-6.2.0.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jasperreports-fonts-6.3.0.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jasperreports-javaflow-6.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

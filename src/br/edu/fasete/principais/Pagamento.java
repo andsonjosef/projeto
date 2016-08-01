@@ -154,6 +154,8 @@ public class Pagamento {
 		this.dataPago2 = dataPago2;
 	}
 	
-	
+	public String toString(){
+		return dataVenc1 + "-" + valorParc1 + "-"  + dataPago1 + "-" + valorPago1 + "\n\n";		
+	}
 	
 }
