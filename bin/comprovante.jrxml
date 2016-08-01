@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="6592dc4b-451a-416b-8b20-92bf653310af">
-	<property name="ireport.zoom" value="0.5131581182307073"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="6592dc4b-451a-416b-8b20-92bf653310af">
+	<property name="ireport.zoom" value="0.4240976183724851"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="valorParc1" class="java.lang.String"/>
@@ -8,7 +8,11 @@
 	<field name="valorPago1" class="java.lang.String"/>
 	<field name="dataPago1" class="java.lang.String"/>
 	<detail>
-		<band height="555" splitType="Stretch">
+		<band height="510" splitType="Stretch">
+			<image>
+				<reportElement x="-56" y="-55" width="1061" height="621" uuid="7a363eb7-731c-46e0-8812-6c72578f0d38"/>
+				<imageExpression><![CDATA["C:\\Users\\JOSEPH\\Desktop\\2165.png"]]></imageExpression>
+			</image>
 			<rectangle>
 				<reportElement x="38" y="323" width="100" height="20" uuid="40369de7-a932-4d11-87b7-9da1ecf9be95"/>
 			</rectangle>
